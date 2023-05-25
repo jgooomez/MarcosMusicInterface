@@ -49,5 +49,11 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setVisible(true);
             }
         });
+        departamentoButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 }
