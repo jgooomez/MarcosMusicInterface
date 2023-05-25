@@ -7,8 +7,8 @@ public class Suscripciones extends JDialog {
     private JButton tipo1Button;
     private JButton tipo3Button;
     private JButton tipo2Button;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField tipoSubscripcionOutput;
+    private JTextField precioSubscripcionOutput;
     private JButton buttonCancel;
 
     public Suscripciones() {
