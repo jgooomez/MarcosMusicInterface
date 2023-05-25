@@ -11,4 +11,11 @@ public class verEmpelado {
     private JLabel txIdEmpleado;
     private JLabel txtNacionalidad;
     private JLabel txtNombre;
+    private JLabel txtEdad;
+    private JLabel txtDepartamento;
+    private JLabel txtFechaIncor;
+    private JPanel inputs;
+    private JPanel outputs;
+    private JPanel btn;
+    private JButton button1;
 }
