@@ -6,11 +6,11 @@ public class AnyadirTarjeta extends JDialog {
     private JButton confirmarButton;
     private JRadioButton visaRadio;
     private JRadioButton mastercardRadio;
-    private JTextField NumTarjetaInput;
-    private JTextField TelefonoInput;
-    private JTextField TitularInput;
+    private JTextField numTarjetaInput;
+    private JTextField telefonoInput;
+    private JTextField titularInput;
     private JTextField CVVInput;
-    private JTextField CaducidadInput;
+    private JTextField caducidadInput;
     private JButton volverButton;
     private JButton buttonCancel;
 
