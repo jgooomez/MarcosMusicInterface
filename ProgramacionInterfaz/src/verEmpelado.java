@@ -13,6 +13,7 @@ public class verEmpelado {
     private JLabel txtNombre;
     private JLabel txtEdad;
     private JLabel txtDepartamento;
+    private JLabel txtFechaIncorp;
     private JLabel txtFechaIncor;
     private JPanel inputs;
     private JPanel outputs;
