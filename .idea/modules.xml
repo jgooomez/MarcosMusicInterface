@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EjecutablesInterfaz/EjecutablesInterfaz.iml" filepath="$PROJECT_DIR$/EjecutablesInterfaz/EjecutablesInterfaz.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/MarcosMusicInterface.iml" filepath="$PROJECT_DIR$/.idea/MarcosMusicInterface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProgramacionInterfaz/ProgramacionInterfaz.iml" filepath="$PROJECT_DIR$/ProgramacionInterfaz/ProgramacionInterfaz.iml" />
     </modules>
   </component>
 </project>
