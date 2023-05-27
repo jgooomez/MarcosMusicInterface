@@ -1,34 +1,54 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class VerUsu extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
+    private JButton buttonBuscar;
     private JButton buttonCancel;
-    private JTextField idUsuarioInput;
-    private JTextField nacionalidadUsuarioOutput;
-    private JTextField nombreUsuarioOutput;
-    private JTextField edadUsuarioOutput;
-    private JTextField numSeguidoresUsuarioOutput;
-    private JPanel fotoPerfilUsuarioOutput;
+    private JTextField textFieldIdUsu;
+    private JTextField textFieldNacionalidad;
+    private JTextField textFieldNombre;
+    private JTextField textFieldEdad;
+    private JTextField textFieldSeguidores;
+    private JButton agregarUsuarioButton;
 
     public VerUsu() {
+        // Desactivar el JTextField al inicio
+        textFieldIdUsu.setEnabled(false);
+
+        // Agregar el MouseListener al JTextField
+        textFieldIdUsu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                textFieldIdUsu.setEnabled(true); // Habilitar el JTextField al hacer clic
+            }
+        });
+        // Establecer el texto de pista y el color inicial del JTextField
+        String textoPista = "Introduce el ID";
+        textFieldIdUsu.setText(textoPista);
+        textFieldIdUsu.setForeground(Color.GRAY);
+        textFieldIdUsu.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (textFieldIdUsu.getText().equals(textoPista)) {
+                    textFieldIdUsu.setText("");
+                    textFieldIdUsu.setForeground(Color.BLACK);
+                }
+            }
+            
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (textFieldIdUsu.getText().isEmpty()) {
+                    textFieldIdUsu.setText(textoPista);
+                    textFieldIdUsu.setForeground(Color.GRAY);
+                }
+            }
+        });
+
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
+        getRootPane().setDefaultButton(buttonBuscar);
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -43,7 +63,7 @@ public class VerUsu extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonOK.addActionListener(new ActionListener() {
+        buttonBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Añadimos codigo para que cuando pongamos el id se rellene los campos del usuario.
@@ -55,6 +75,16 @@ public class VerUsu extends JDialog {
                 dispose();
             }
         });
+        agregarUsuarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            JDialog dialog = new AgregarUsuario();
+                dialog.setTitle("Agregar Usuario");
+                dialog.setSize(300,500);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
     }
 
     private void onOK() {
@@ -63,7 +93,7 @@ public class VerUsu extends JDialog {
     }
 
     private void onCancel() {
-        // add your code here if necessary
+
         dispose();
     }
 

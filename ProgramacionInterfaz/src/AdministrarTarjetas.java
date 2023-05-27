@@ -5,9 +5,9 @@ public class AdministrarTarjetas extends JDialog {
     private JPanel contentPane;
     private JButton borrarButton;
     private JButton anyadirButton;
-    private JTextField idUsuarioInput;
-    private JTextField nombreUsuarioOutput;
-    private JTextField numTarjetaOutput;
+    private JTextField textFieldIdUsu;
+    private JTextField textFieldNombre;
+    private JTextField textFieldNumTarjeta;
     private JButton volverButton;
 
     public AdministrarTarjetas() {

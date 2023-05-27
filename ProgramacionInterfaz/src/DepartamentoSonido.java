@@ -1,17 +1,17 @@
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Suscripciones extends JDialog {
+public class DepartamentoSonido extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
-    private JButton tipo1Button;
-    private JButton tipo3Button;
-    private JButton tipo2Button;
-    private JTextField textFieldTipo;
-    private JTextField textFieldPrecio;
-    private JButton buttonCancel;
+    private JTextField textFieldNombre;
+    private JTextField textFieldFechaCreacion;
+    private JTextField textFieldNombreEncargado;
+    private JTextField textFieldNumTrabajadores;
+    private JTextField textFieldNumSubDepartamentos;
+    private JTextField textFieldIDDepartamento;
 
-    public Suscripciones() {
+    public DepartamentoSonido() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -35,24 +35,6 @@ public class Suscripciones extends JDialog {
                 dispose();
             }
         });
-        tipo1Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Meter los datos de la suscripcion tipo1 para que se muestren en los textField.
-            }
-        });
-        tipo2Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Meter los datos de la suscripcion tipo2 para que se muestren en los textField.
-            }
-        });
-        tipo3Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //Meter los datos de la suscripcion tipo3 para que se muestren en los textField.
-            }
-        });
     }
 
     private void onOK() {
@@ -66,7 +48,7 @@ public class Suscripciones extends JDialog {
     }
 
     public static void main(String[] args) {
-        Suscripciones dialog = new Suscripciones();
+        DepartamentoSonido dialog = new DepartamentoSonido();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

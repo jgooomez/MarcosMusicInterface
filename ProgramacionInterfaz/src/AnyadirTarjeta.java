@@ -3,14 +3,14 @@ import java.awt.event.*;
 
 public class AnyadirTarjeta extends JDialog {
     private JPanel contentPane;
-    private JButton confirmarButton;
-    private JRadioButton visaRadio;
-    private JRadioButton mastercardRadio;
-    private JTextField numTarjetaInput;
-    private JTextField telefonoInput;
-    private JTextField titularInput;
-    private JTextField CVVInput;
-    private JTextField caducidadInput;
+    private JButton buttonConfirmar;
+    private JRadioButton radioButton1;
+    private JRadioButton radioButton2;
+    private JTextField textFieldNumTarjeta;
+    private JTextField textFieldTelefono;
+    private JTextField textFieldNombreTitular;
+    private JTextField textFieldCVV;
+    private JTextField textFieldCaducidad;
     private JButton volverButton;
     private JButton buttonCancel;
 
@@ -18,7 +18,7 @@ public class AnyadirTarjeta extends JDialog {
     public AnyadirTarjeta() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(confirmarButton);
+        getRootPane().setDefaultButton(buttonConfirmar);
         // call onCancel() when cross is clicked
 
         volverButton.addActionListener(new ActionListener() {
@@ -27,7 +27,7 @@ public class AnyadirTarjeta extends JDialog {
                 dispose();
             }
         });
-        confirmarButton.addActionListener(new ActionListener() {
+        buttonConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

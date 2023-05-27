@@ -10,8 +10,9 @@ public class MarcosMusic extends JFrame {
     private JButton tarjetasButton;
     private JButton empleadosButton;
     static JFrame frame = new JFrame("MarcosMusic");
-    public static void main(String[] args) {
 
+
+    public static void main(String[] args) {
         frame.setContentPane(new MarcosMusic().principal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,400);
@@ -19,6 +20,21 @@ public class MarcosMusic extends JFrame {
         frame.setVisible(true);
     }
     public MarcosMusic() {
+        configurarBotones();
+
+    }
+    private void configurarImagenDeFondo() {
+        // Crear un JLabel para contener la imagen de fondo
+        JLabel fondo = new JLabel(new ImageIcon("ruta/a/la/imagen/fondo.jpg"));
+
+        // Establecer el tamaño y la posición del JLabel
+        fondo.setBounds(0, 0, getWidth(), getHeight());
+
+        // Agregar el JLabel al panel principal
+        principal.add(fondo);
+    }
+
+    private void configurarBotones(){
         verUsuariosButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -52,7 +68,22 @@ public class MarcosMusic extends JFrame {
         departamentoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                JDialog dialogo2 = new Departamentos();
+                dialogo2.setTitle("Departamentos");
+                dialogo2.setSize(400,400);
+                dialogo2.setLocationRelativeTo(null);
+                dialogo2.setVisible(true);
+            }
+        });
 
+        empleadosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialogo2 = new Empleados();
+                dialogo2.setTitle("Ver Empleados");
+                dialogo2.setSize(400,400);
+                dialogo2.setLocationRelativeTo(null);
+                dialogo2.setVisible(true);
             }
         });
     }
