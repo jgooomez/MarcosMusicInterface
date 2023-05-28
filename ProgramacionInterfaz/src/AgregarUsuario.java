@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class AgregarUsuario extends JDialog {
@@ -7,7 +8,6 @@ public class AgregarUsuario extends JDialog {
     private JButton buttonCancelar;
     private JLabel Icono;
     private JLabel Titulo;
-    private JLabel labelIdUsuario;
     private JLabel LabelNacionalidad;
     private JLabel LabelNombre;
     private JLabel LabelEdad;
@@ -16,7 +16,6 @@ public class AgregarUsuario extends JDialog {
     private JTextField textFieldNombre;
     private JTextField textFieldEdad;
     private JTextField textFieldSeguidores;
-    private JTextField textFieldIdUsuario;
     private JTextField textFieldNacionalidad;
 
     public AgregarUsuario() {
@@ -26,7 +25,10 @@ public class AgregarUsuario extends JDialog {
 
         buttonAgregar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                //onOK();
+                if (compruebaUsuario(textFieldNombre, textFieldEdad, textFieldNacionalidad, textFieldSeguidores)) {
+                    //Hacer el insert en la BBDD
+                }
             }
         });
 
@@ -50,6 +52,22 @@ public class AgregarUsuario extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    public static boolean compruebaUsuario(JTextField textFieldNombre, JTextField textFieldEdad, JTextField textFieldSeguidores, JTextField textFieldNacionalidad) {
+        boolean isValid = true;
+
+        if (textFieldNacionalidad.getText().length() == 0 || textFieldNombre.getText().length() == 0
+            || textFieldEdad.getText().length() == 0 || textFieldSeguidores.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben ser rellenados.");
+            isValid = false;
+        } else if (Integer.parseInt(textFieldEdad.getText()) < 12) {
+            JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de 18 años.");
+            textFieldEdad.setText("");
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     private void onOK() {
