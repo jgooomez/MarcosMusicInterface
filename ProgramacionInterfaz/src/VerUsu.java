@@ -4,51 +4,36 @@ import java.awt.event.*;
 
 public class VerUsu extends JDialog {
     private JPanel contentPane;
-    private JButton buttonBuscar;
-    private JButton buttonCancel;
-    private JTextField textFieldIdUsu;
-    private JTextField textFieldNacionalidad;
-    private JTextField textFieldNombre;
-    private JTextField textFieldEdad;
-    private JTextField textFieldSeguidores;
-    private JButton agregarUsuarioButton;
+    private JButton btnBuscar;
+    private JButton btnCancel;
+    private JTextField inpIdUsr;
+    private JTextField outpNacionalidad;
+    private JTextField outpNombre;
+    private JTextField outpEdad;
+    private JTextField outpNumSeguidores;
+    private JButton btnAddUser;
+    private JLabel txtVerUsuario;
+    public Font fontTitle = new Font("Calibri", Font.BOLD, 45);
 
     public VerUsu() {
+        styles();
         // Desactivar el JTextField al inicio
-        textFieldIdUsu.setEnabled(false);
+        inpIdUsr.setEnabled(false);
+        btnBuscar.setEnabled(false);
 
         // Agregar el MouseListener al JTextField
-        textFieldIdUsu.addMouseListener(new MouseAdapter() {
+        inpIdUsr.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                textFieldIdUsu.setEnabled(true); // Habilitar el JTextField al hacer clic
+                inpIdUsr.setEnabled(true);      // Habilitar el JTextField al hacer click
             }
         });
         // Establecer el texto de pista y el color inicial del JTextField
-        String textoPista = "Introduce el ID";
-        textFieldIdUsu.setText(textoPista);
-        textFieldIdUsu.setForeground(Color.GRAY);
-        textFieldIdUsu.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (textFieldIdUsu.getText().equals(textoPista)) {
-                    textFieldIdUsu.setText("");
-                    textFieldIdUsu.setForeground(Color.BLACK);
-                }
-            }
-            
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (textFieldIdUsu.getText().isEmpty()) {
-                    textFieldIdUsu.setText(textoPista);
-                    textFieldIdUsu.setForeground(Color.GRAY);
-                }
-            }
-        });
+        setTextInToInpIdUsr();
 
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonBuscar);
+        getRootPane().setDefaultButton(btnBuscar);
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -63,26 +48,72 @@ public class VerUsu extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonBuscar.addActionListener(new ActionListener() {
+
+        // Añadir la funcionalidad de cada botón
+        setListenersBtns();
+    }
+
+    private void styles() {
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        txtVerUsuario.setFont(MarcosMusic.getFontTitle());
+
+        btnBuscar.setFocusable(false);
+        btnBuscar.setBackground(MarcosMusic.getBtnColor());
+        btnBuscar.setCursor(cursor);
+
+        btnAddUser.setFocusable(false);
+        btnAddUser.setBackground(MarcosMusic.getBtnColor());
+        btnAddUser.setCursor(cursor);
+
+        btnCancel.setFocusable(false);
+        btnCancel.setBackground(MarcosMusic.getBtnColor());
+        btnCancel.setCursor(cursor);
+    }
+
+    private void setListenersBtns() {
+        btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Añadimos codigo para que cuando pongamos el id se rellene los campos del usuario.
+                // Añadimos código para que cuando pongamos el Id se rellene los campos del usuario.
             }
         });
-        buttonCancel.addActionListener(new ActionListener() {
+        btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-        agregarUsuarioButton.addActionListener(new ActionListener() {
+        btnAddUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            JDialog dialog = new AgregarUsuario();
+                JDialog dialog = new AgregarUsuario();
                 dialog.setTitle("Agregar Usuario");
                 dialog.setSize(300,500);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
+            }
+        });
+    }
+
+    private void setTextInToInpIdUsr() {
+        String textoPista = "Introduzca el ID";
+        inpIdUsr.setText(textoPista);
+        inpIdUsr.setForeground(Color.GRAY);
+        inpIdUsr.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (inpIdUsr.getText().equals(textoPista)) {
+                    inpIdUsr.setText("");
+                    inpIdUsr.setForeground(Color.BLACK);
+                    btnBuscar.setEnabled(true);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (inpIdUsr.getText().isEmpty()) {
+                    inpIdUsr.setText(textoPista);
+                    inpIdUsr.setForeground(Color.GRAY);
+                }
             }
         });
     }

@@ -24,7 +24,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="e7465" class="javax.swing.JButton" binding="buttonBuscar">
+              <component id="e7465" class="javax.swing.JButton" binding="btnBuscar">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -34,18 +34,18 @@
                   <verticalAlignment value="0"/>
                 </properties>
               </component>
-              <component id="5723f" class="javax.swing.JButton" binding="buttonCancel">
+              <component id="5723f" class="javax.swing.JButton" binding="btnCancel">
                 <constraints>
-                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="iconos/atras.png"/>
                   <text value="Volver"/>
                 </properties>
               </component>
-              <component id="a4424" class="javax.swing.JButton" binding="agregarUsuarioButton" default-binding="true">
+              <component id="a4424" class="javax.swing.JButton" binding="btnAddUser" default-binding="true">
                 <constraints>
-                  <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <icon value="iconos/agregar-usuario (2).png"/>
@@ -88,7 +88,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="e1c30" class="javax.swing.JTextField" binding="textFieldSeguidores">
+                      <component id="e1c30" class="javax.swing.JTextField" binding="outpNumSeguidores">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -174,7 +174,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="2a5ca" class="javax.swing.JTextField" binding="textFieldEdad">
+                      <component id="2a5ca" class="javax.swing.JTextField" binding="outpEdad">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -223,7 +223,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="58446" class="javax.swing.JTextField" binding="textFieldNombre">
+                      <component id="58446" class="javax.swing.JTextField" binding="outpNombre">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -272,7 +272,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="c096e" class="javax.swing.JTextField" binding="textFieldNacionalidad">
+                      <component id="c096e" class="javax.swing.JTextField" binding="outpNacionalidad">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -321,7 +321,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="54d00" class="javax.swing.JTextField" binding="textFieldIdUsu">
+                      <component id="54d00" class="javax.swing.JTextField" binding="inpIdUsr">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -367,7 +367,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="eda5f" class="javax.swing.JLabel">
+                      <component id="eda5f" class="javax.swing.JLabel" binding="txtVerUsuario">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>

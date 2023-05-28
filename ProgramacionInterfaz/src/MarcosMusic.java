@@ -1,14 +1,18 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MarcosMusic extends JFrame {
     private JPanel principal;
-    private JButton suscripcionButton;
-    private JButton verUsuariosButton;
-    private JButton departamentoButton;
-    private JButton tarjetasButton;
-    private JButton empleadosButton;
+    private JButton btnSuscripciones;
+    private JButton btnVerUsuarios;
+    private JButton btnDepartamento;
+    private JButton btnTarjetas;
+    private JButton btnEmpleados;
+    private JLabel txtTituloPantallaPrincipal;
+    private JPanel panelGeneral;
     static JFrame frame = new JFrame("MarcosMusic");
 
 
@@ -20,9 +24,11 @@ public class MarcosMusic extends JFrame {
         frame.setVisible(true);
     }
     public MarcosMusic() {
+        styles();
         configurarBotones();
 
     }
+
     private void configurarImagenDeFondo() {
         // Crear un JLabel para contener la imagen de fondo
         JLabel fondo = new JLabel(new ImageIcon("ruta/a/la/imagen/fondo.jpg"));
@@ -35,7 +41,7 @@ public class MarcosMusic extends JFrame {
     }
 
     private void configurarBotones(){
-        verUsuariosButton.addActionListener(new ActionListener() {
+        btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new VerUsu();
@@ -45,7 +51,7 @@ public class MarcosMusic extends JFrame {
                 dialogo1.setVisible(true);
             }
         });
-        tarjetasButton.addActionListener(new ActionListener() {
+        btnTarjetas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new AdministrarTarjetas();
@@ -55,7 +61,7 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setVisible(true);
             }
         });
-        suscripcionButton.addActionListener(new ActionListener() {
+        btnSuscripciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Suscripciones();
@@ -65,7 +71,7 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setVisible(true);
             }
         });
-        departamentoButton.addActionListener(new ActionListener() {
+        btnDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Departamentos();
@@ -76,7 +82,7 @@ public class MarcosMusic extends JFrame {
             }
         });
 
-        empleadosButton.addActionListener(new ActionListener() {
+        btnEmpleados.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Empleados();
@@ -86,5 +92,34 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setVisible(true);
             }
         });
+    }
+
+    private void styles() {
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        txtTituloPantallaPrincipal.setFont(getFontTitle());
+
+        btnVerUsuarios.setFocusable(false);
+        btnVerUsuarios.setBackground(getBtnColor());
+        btnVerUsuarios.setCursor(cursor);
+        btnSuscripciones.setFocusable(false);
+        btnSuscripciones.setBackground(getBtnColor());
+        btnSuscripciones.setCursor(cursor);
+        btnTarjetas.setFocusable(false);
+        btnTarjetas.setBackground(getBtnColor());
+        btnTarjetas.setCursor(cursor);
+        btnDepartamento.setFocusable(false);
+        btnDepartamento.setBackground(getBtnColor());
+        btnDepartamento.setCursor(cursor);
+        btnEmpleados.setFocusable(false);
+        btnEmpleados.setBackground(getBtnColor());
+        btnEmpleados.setCursor(cursor);
+    }
+
+    public static Font getFontTitle() {
+        return new Font("Calibri", Font.BOLD, 45);
+    }
+
+    public static Color getBtnColor() {
+        return new Color(200, 220, 250);
     }
 }
