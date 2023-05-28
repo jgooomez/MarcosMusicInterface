@@ -20,7 +20,6 @@ public class AnyadirTarjeta extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonConfirmar);
-        // call onCancel() when cross is clicked
 
         volverButton.addActionListener(new ActionListener() {
             @Override
@@ -46,18 +45,18 @@ public class AnyadirTarjeta extends JDialog {
             JOptionPane.showMessageDialog(null, "El numero de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.");
             textFieldNumTarjeta.setText("");
             isValid = false;
-        } else if (!(String.valueOf(CVVInput).length() == 3)) {
-            JOptionPane.showMessageDialog(null, "El CVV debe tener exactamente 3 digitos.");
-            CVVInput.setText("");
+        } else if (!(mastercardRadioButton.isSelected() || visaRadioButton.isSelected())) {
+            JOptionPane.showMessageDialog(null, "Seleccione un metodo de pago.");
             isValid = false;
         } else if (textFieldNombreTitular.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "Nombre de titular no valido, debe tener minimo tres caracteres.");
             isValid = false;
+        } else if ((String.valueOf(CVVInput.getText()).length() != 3)) {
+            JOptionPane.showMessageDialog(null, "El CVV debe tener exactamente 3 digitos.");
+            CVVInput.setText("");
+            isValid = false;
         } else if (!(textFieldCaducidad.getText().matches("^(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[01])$"))) {
             JOptionPane.showMessageDialog(null, "Fecha caducidad incorrecta, formato correcto MM/DD");
-            isValid = false;
-        } else if (!(mastercardRadioButton.isSelected() || visaRadioButton.isSelected())) {
-            JOptionPane.showMessageDialog(null, "Seleccione un metodo de pago.");
             isValid = false;
         }
 
