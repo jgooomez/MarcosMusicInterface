@@ -4,38 +4,60 @@ import java.awt.event.*;
 
 public class AnyadirTarjeta extends JDialog {
     private JPanel contentPane;
-    private JButton buttonConfirmar;
-    private JRadioButton visaRadioButton;
-    private JRadioButton mastercardRadioButton;
-    private JTextField textFieldNumTarjeta;
-    private JTextField textFieldTelefono;
-    private JTextField textFieldNombreTitular;
-    private JTextField CVVInput;
-    private JTextField textFieldCaducidad;
-    private JButton volverButton;
-    private JButton buttonCancel;
+    private JButton btnConfirmar;
+    private JRadioButton btnVisaRadio;
+    private JRadioButton btnMartercardRadio;
+    private JTextField inpNumTarjeta;
+    private JTextField inpTlf;
+    private JTextField inpNombreTitular;
+    private JTextField inpCVV;
+    private JTextField inpCaducidad;
+    private JButton btnReturn;
+    private JLabel txtAgregarTarjetaCredito;
 
-
+    public static void main(String[] args) {
+        AnyadirTarjeta dialog = new AnyadirTarjeta();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
+    }
     public AnyadirTarjeta() {
+        styles();
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonConfirmar);
+        getRootPane().setDefaultButton(btnConfirmar);
 
-        volverButton.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-        buttonConfirmar.addActionListener(new ActionListener() {
+        btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (compruebaTarjeta(textFieldNumTarjeta, CVVInput, textFieldNombreTitular, textFieldCaducidad, visaRadioButton, mastercardRadioButton)) {
+                if (compruebaTarjeta(inpNumTarjeta, inpCVV, inpNombreTitular, inpCaducidad, btnVisaRadio, btnMartercardRadio)) {
                     //Hacer el insert en la BBDD.
                 }
             }
         });
 
+    }
+
+    private void styles() {
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        txtAgregarTarjetaCredito.setFont(new Font("Calibri", Font.BOLD, 25));
+
+        btnVisaRadio.setFocusable(false);
+        btnVisaRadio.setCursor(cursor);
+        btnMartercardRadio.setFocusable(false);
+        btnMartercardRadio.setCursor(cursor);
+        btnConfirmar.setFocusable(false);
+        btnConfirmar.setBackground(MarcosMusic.getBtnColor());
+        btnConfirmar.setCursor(cursor);
+        btnReturn.setFocusable(false);
+        btnReturn.setBackground(MarcosMusic.getBtnColor());
+        btnReturn.setCursor(cursor);
     }
 
     public static boolean compruebaTarjeta(JTextField textFieldNumTarjeta, JTextField CVVInput, JTextField textFieldNombreTitular,
@@ -59,16 +81,6 @@ public class AnyadirTarjeta extends JDialog {
             JOptionPane.showMessageDialog(null, "Fecha caducidad incorrecta, formato correcto MM/DD");
             isValid = false;
         }
-
         return isValid;
-    }
-
-
-
-    public static void main(String[] args) {
-        AnyadirTarjeta dialog = new AnyadirTarjeta();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }

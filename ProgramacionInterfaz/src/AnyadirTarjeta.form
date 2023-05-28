@@ -24,7 +24,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="e7465" class="javax.swing.JButton" binding="buttonConfirmar">
+              <component id="e7465" class="javax.swing.JButton" binding="btnConfirmar">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -33,7 +33,7 @@
                   <text value="Confirmar"/>
                 </properties>
               </component>
-              <component id="2697a" class="javax.swing.JButton" binding="volverButton" default-binding="true">
+              <component id="2697a" class="javax.swing.JButton" binding="btnReturn" default-binding="true">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -78,7 +78,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="3796a" class="javax.swing.JTextField" binding="CVVInput">
+                      <component id="3796a" class="javax.swing.JTextField" binding="inpCVV">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -124,7 +124,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="ff7df" class="javax.swing.JTextField" binding="textFieldCaducidad">
+                      <component id="ff7df" class="javax.swing.JTextField" binding="inpCaducidad">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -170,7 +170,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="796dd" class="javax.swing.JTextField" binding="textFieldNombreTitular">
+                      <component id="796dd" class="javax.swing.JTextField" binding="inpNombreTitular">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -216,7 +216,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="d190b" class="javax.swing.JRadioButton" binding="visaRadioButton">
+                      <component id="d190b" class="javax.swing.JRadioButton" binding="btnVisaRadio">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -224,7 +224,7 @@
                           <text value=""/>
                         </properties>
                       </component>
-                      <component id="8b677" class="javax.swing.JRadioButton" binding="mastercardRadioButton">
+                      <component id="8b677" class="javax.swing.JRadioButton" binding="btnMartercardRadio">
                         <constraints>
                           <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
@@ -286,7 +286,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="233b6" class="javax.swing.JTextField" binding="textFieldTelefono">
+                      <component id="233b6" class="javax.swing.JTextField" binding="inpTlf">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -332,7 +332,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="2f609" class="javax.swing.JTextField" binding="textFieldNumTarjeta">
+                      <component id="2f609" class="javax.swing.JTextField" binding="inpNumTarjeta">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                             <preferred-size width="150" height="-1"/>
@@ -378,7 +378,7 @@
                     <properties/>
                     <border type="none"/>
                     <children>
-                      <component id="1a109" class="javax.swing.JLabel">
+                      <component id="1a109" class="javax.swing.JLabel" binding="txtAgregarTarjetaCredito">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
