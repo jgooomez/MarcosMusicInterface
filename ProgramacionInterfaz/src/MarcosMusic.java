@@ -66,7 +66,8 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Suscripciones();
                 dialogo2.setTitle("Tipo de suscripciones");
-                dialogo2.setSize(400,400);
+                dialogo2.setSize(800,400);
+                dialogo2.pack();
                 dialogo2.setLocationRelativeTo(null);
                 dialogo2.setVisible(true);
             }

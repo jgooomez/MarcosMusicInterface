@@ -24,7 +24,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="e7465" class="javax.swing.JButton" binding="borrarButton">
+              <component id="e7465" class="javax.swing.JButton" binding="btnDelete">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -33,7 +33,7 @@
                   <text value="Borrar"/>
                 </properties>
               </component>
-              <component id="5723f" class="javax.swing.JButton" binding="anyadirButton">
+              <component id="5723f" class="javax.swing.JButton" binding="btnAdd">
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -42,7 +42,7 @@
                   <text value="Añadir"/>
                 </properties>
               </component>
-              <component id="2cf75" class="javax.swing.JButton" binding="volverButton" default-binding="true">
+              <component id="2cf75" class="javax.swing.JButton" binding="btnReturn" default-binding="true">
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -222,7 +222,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="4a83b" class="javax.swing.JLabel">
+                  <component id="4a83b" class="javax.swing.JLabel" binding="txtAdminTarjetas">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>

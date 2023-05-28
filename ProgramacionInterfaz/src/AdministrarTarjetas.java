@@ -1,27 +1,30 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class AdministrarTarjetas extends JDialog {
     private JPanel contentPane;
-    private JButton borrarButton;
-    private JButton anyadirButton;
+    private JButton btnDelete;
+    private JButton btnAdd;
     private JTextField textFieldIdUsu;
     private JTextField textFieldNombre;
     private JTextField textFieldNumTarjeta;
-    private JButton volverButton;
+    private JButton btnReturn;
+    private JLabel txtAdminTarjetas;
 
     public AdministrarTarjetas() {
+        styles();
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(borrarButton);
+        getRootPane().setDefaultButton(btnDelete);
 
-        borrarButton.addActionListener(new ActionListener() {
+        btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        anyadirButton.addActionListener(new ActionListener() {
+        btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -41,19 +44,13 @@ public class AdministrarTarjetas extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        anyadirButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-        volverButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        anyadirButton.addActionListener(new ActionListener() {
+        // Añadir la funcionalidad de cada botón
+        setListenersBtns();
+    }
+
+    private void setListenersBtns() {
+        btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo = new AnyadirTarjeta();
@@ -63,7 +60,13 @@ public class AdministrarTarjetas extends JDialog {
                 dialogo.setVisible(true);
             }
         });
-        borrarButton.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar la tarjeta con número (se muestra el numero de la tarjeta)", "Confirmar",
@@ -79,6 +82,21 @@ public class AdministrarTarjetas extends JDialog {
                 }
             }
         });
+    }
+
+    private void styles() {
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
+
+        btnAdd.setFocusable(false);
+        btnAdd.setBackground(MarcosMusic.getBtnColor());
+        btnAdd.setCursor(cursor);
+        btnDelete.setFocusable(false);
+        btnDelete.setBackground(MarcosMusic.getBtnColor());
+        btnDelete.setCursor(cursor);
+        btnReturn.setFocusable(false);
+        btnReturn.setBackground(MarcosMusic.getBtnColor());
+        btnReturn.setCursor(cursor);
     }
 
     private void onOK() {

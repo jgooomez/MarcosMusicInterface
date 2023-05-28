@@ -1,20 +1,22 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Suscripciones extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton tipo1Button;
-    private JButton tipo3Button;
-    private JButton tipo2Button;
-    private JTextField textFieldTipo;
-    private JTextField textFieldPrecio;
-    private JButton buttonCancel;
+    private JButton btnOK;
+    private JButton btnType1;
+    private JButton btnType3;
+    private JButton btnType2;
+    private JTextField outpTipo;
+    private JTextField outpPrecio;
+    private JLabel txtTiposSuscrip;
 
     public Suscripciones() {
+        styles();
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(btnOK);
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -29,25 +31,52 @@ public class Suscripciones extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonOK.addActionListener(new ActionListener() {
+        btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-        tipo1Button.addActionListener(new ActionListener() {
+
+        // Añadir la funcionalidad de cada botón
+        setListenersBtns();
+    }
+
+    private void styles() {
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        txtTiposSuscrip.setFont(MarcosMusic.getFontTitle());
+
+        btnOK.setFocusable(false);
+        btnOK.setBackground(MarcosMusic.getBtnColor());
+        btnOK.setCursor(cursor);
+
+        btnType1.setFocusable(false);
+        btnType1.setBackground(MarcosMusic.getBtnColor());
+        btnType1.setCursor(cursor);
+
+        btnType2.setFocusable(false);
+        btnType2.setBackground(MarcosMusic.getBtnColor());
+        btnType2.setCursor(cursor);
+
+        btnType3.setFocusable(false);
+        btnType3.setBackground(MarcosMusic.getBtnColor());
+        btnType3.setCursor(cursor);
+    }
+
+    private void setListenersBtns() {
+        btnType1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Meter los datos de la suscripcion tipo1 para que se muestren en los textField.
             }
         });
-        tipo2Button.addActionListener(new ActionListener() {
+        btnType2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Meter los datos de la suscripcion tipo2 para que se muestren en los textField.
             }
         });
-        tipo3Button.addActionListener(new ActionListener() {
+        btnType3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Meter los datos de la suscripcion tipo3 para que se muestren en los textField.

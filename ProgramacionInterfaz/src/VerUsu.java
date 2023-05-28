@@ -13,7 +13,6 @@ public class VerUsu extends JDialog {
     private JTextField outpNumSeguidores;
     private JButton btnAddUser;
     private JLabel txtVerUsuario;
-    public Font fontTitle = new Font("Calibri", Font.BOLD, 45);
 
     public VerUsu() {
         styles();
