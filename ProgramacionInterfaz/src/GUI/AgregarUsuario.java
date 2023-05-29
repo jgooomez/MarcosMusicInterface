@@ -1,39 +1,58 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class AgregarUsuario extends JDialog {
-    private JPanel contentPane;
-    private JButton buttonAgregar;
-    private JButton buttonCancelar;
-    private JLabel Icono;
-    private JLabel Titulo;
-    private JLabel LabelNacionalidad;
-    private JLabel LabelNombre;
-    private JLabel LabelEdad;
-    private JLabel LabelSeguidores;
-    private JLabel LabelFoto;
-    private JTextField textFieldNombre;
-    private JTextField textFieldEdad;
-    private JTextField textFieldSeguidores;
-    private JTextField textFieldNacionalidad;
+    private JPanel winAddUsr;
+    private JTextField inpNombre;
+    private JTextField inpEdad;
+    private JTextField inpNacionalidad;
+    private JTextField inpNumSeguidores;
+    private JButton btnAddUsr;
+    private JButton btnCancel;
+    private JLabel tittleAddUsr;
+    private JLabel txtNombre;
+    private JLabel txtEdad;
+    private JLabel txtNacionalidad;
+    private JLabel txtNumSeguidores;
+    private JPanel box_botones;
+    private JPanel box_top;
+    private JPanel box_inputs;
 
     public AgregarUsuario() {
-        setContentPane(contentPane);
+        setContentPane(winAddUsr);
+        styles();
         setModal(true);
-        getRootPane().setDefaultButton(buttonAgregar);
+        getRootPane().setDefaultButton(btnAddUsr);
+        setListenersBtns();
+    }
 
-        buttonAgregar.addActionListener(new ActionListener() {
+    private void styles() {
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        tittleAddUsr.setFont(MarcosMusic.getFontTitle());
+
+        btnAddUsr.setFocusable(false);
+        btnAddUsr.setBackground(MarcosMusic.getBtnColor());
+        btnAddUsr.setCursor(cursor);
+
+        btnCancel.setFocusable(false);
+        btnCancel.setBackground(MarcosMusic.getBtnColor());
+        btnCancel.setCursor(cursor);
+    }
+
+    private void setListenersBtns() {
+        btnAddUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //onOK();
-                if (compruebaUsuario(textFieldNombre, textFieldEdad, textFieldNacionalidad, textFieldSeguidores)) {
+                if (compruebaUsuario()) {
                     //Hacer el insert en la BBDD
                 }
             }
         });
 
-        buttonCancelar.addActionListener(new ActionListener() {
+        btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -48,23 +67,23 @@ public class AgregarUsuario extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        winAddUsr.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    public static boolean compruebaUsuario(JTextField textFieldNombre, JTextField textFieldEdad, JTextField textFieldSeguidores, JTextField textFieldNacionalidad) {
+    public boolean compruebaUsuario() {
         boolean isValid = true;
 
-        if (textFieldNacionalidad.getText().length() == 0 || textFieldNombre.getText().length() == 0
-            || textFieldEdad.getText().length() == 0 || textFieldSeguidores.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Todos los campos deben ser rellenados.");
+        if (inpNacionalidad.getText().length() == 0 || inpNombre.getText().length() == 0
+            || inpEdad.getText().length() == 0 || inpNumSeguidores.getText().length() == 0) {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben ser rellenados.", "Error", JOptionPane.ERROR_MESSAGE);
             isValid = false;
-        } else if (Integer.parseInt(textFieldEdad.getText()) < 12) {
-            JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de 18 años.");
-            textFieldEdad.setText("");
+        } else if (Integer.parseInt(inpEdad.getText()) < 12) {
+            JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de 18 años.", "Error", JOptionPane.ERROR_MESSAGE);
+            inpEdad.setText("");
             isValid = false;
         }
 

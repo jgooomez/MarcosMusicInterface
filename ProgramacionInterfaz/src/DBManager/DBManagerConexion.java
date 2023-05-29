@@ -9,7 +9,7 @@ public class DBManagerConexion {
     public static Connection conn = null;
 
     // Configuración de la conexión a la base de datos
-    private static final String DB_HOST = "local\\SQLEXPRESS";
+    private static final String DB_HOST = "localhost";
     private static final String DB_PORT = "1433";
     private static final String DB_NAME = "MARCOSMUSIC";
     private static final String DB_URL = "jdbc:sqlserver://"+DB_HOST+":"+DB_PORT+";databaseName="+DB_NAME+";TrustServerCertificate=True;";

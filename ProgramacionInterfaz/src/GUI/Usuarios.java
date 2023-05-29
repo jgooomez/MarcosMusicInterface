@@ -89,7 +89,7 @@ public class Usuarios extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new AgregarUsuario();
                 dialog.setTitle("Agregar Usuario");
-                dialog.setSize(300,500);
+                dialog.setSize(300,300);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }

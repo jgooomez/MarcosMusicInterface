@@ -120,7 +120,7 @@
                           </grid>
                         </constraints>
                         <properties>
-                          <text value="Ver Usuarios"/>
+                          <text value="Usuarios"/>
                         </properties>
                       </component>
                     </children>
