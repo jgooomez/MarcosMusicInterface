@@ -1,5 +1,6 @@
+import DBManager.DBManagerConexion;
+
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,7 @@ public class MarcosMusic extends JFrame {
     public MarcosMusic() {
         styles();
         configurarBotones();
-
+        DBManagerConexion.connect();
     }
 
     private void configurarImagenDeFondo() {

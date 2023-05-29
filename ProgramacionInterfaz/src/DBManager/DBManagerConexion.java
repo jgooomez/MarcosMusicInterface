@@ -1,10 +1,12 @@
+package DBManager;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DBManager {
+public class DBManagerConexion {
     // Conexión a la base de datos
-    private static Connection conn = null;
+    public static Connection conn = null;
 
     // Configuración de la conexión a la base de datos
     private static final String DB_HOST = "DESKTOP-00LQ1SJ\\SQLEXPRESS";
@@ -45,8 +47,29 @@ public class DBManager {
         }
     }
 
-    public static void main(String[] args) {
+    //Esto se llama desde el main al arrancar el programa.
+    /*public static void main(String[] args) {
         connect();
         close();
+    }*/
+
+    /**
+     * Intenta cargar el JDBC driver.
+     * @return true si pudo cargar el driver, false en caso contrario
+     */
+    public static boolean loadDriver() {
+        try {
+            System.out.print("Cargando Driver...");
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            System.out.println("OK!");
+            return true;
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+            return false;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
+
 }
