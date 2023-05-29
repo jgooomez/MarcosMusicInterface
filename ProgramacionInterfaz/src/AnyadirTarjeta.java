@@ -6,7 +6,7 @@ public class AnyadirTarjeta extends JDialog {
     private JPanel contentPane;
     private JButton btnConfirmar;
     private JRadioButton btnVisaRadio;
-    private JRadioButton btnMartercardRadio;
+    private JRadioButton btnMastercardRadio;
     private JTextField inpNumTarjeta;
     private JTextField inpTlf;
     private JTextField inpNombreTitular;
@@ -36,7 +36,7 @@ public class AnyadirTarjeta extends JDialog {
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (compruebaTarjeta(inpNumTarjeta, inpCVV, inpNombreTitular, inpCaducidad, btnVisaRadio, btnMartercardRadio)) {
+                if (compruebaTarjeta()) {
                     //Hacer el insert en la BBDD.
                 }
             }
@@ -50,8 +50,8 @@ public class AnyadirTarjeta extends JDialog {
 
         btnVisaRadio.setFocusable(false);
         btnVisaRadio.setCursor(cursor);
-        btnMartercardRadio.setFocusable(false);
-        btnMartercardRadio.setCursor(cursor);
+        btnMastercardRadio.setFocusable(false);
+        btnMastercardRadio.setCursor(cursor);
         btnConfirmar.setFocusable(false);
         btnConfirmar.setBackground(MarcosMusic.getBtnColor());
         btnConfirmar.setCursor(cursor);
@@ -60,24 +60,23 @@ public class AnyadirTarjeta extends JDialog {
         btnReturn.setCursor(cursor);
     }
 
-    public static boolean compruebaTarjeta(JTextField textFieldNumTarjeta, JTextField CVVInput, JTextField textFieldNombreTitular,
-                                           JTextField textFieldCaducidad, JRadioButton visaRadioButton, JRadioButton mastercardRadioButton ) {
+    public boolean compruebaTarjeta() {
         boolean isValid = true;
-        if (!(textFieldNumTarjeta.getText().matches("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$"))) {
-            JOptionPane.showMessageDialog(null, "El numero de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.");
-            textFieldNumTarjeta.setText("");
+        if (!(inpNumTarjeta.getText().matches("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$"))) {
+            JOptionPane.showMessageDialog(null, "El numero de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.", "Error en el formato", JOptionPane.ERROR_MESSAGE);
+            inpNumTarjeta.setText("");
             isValid = false;
-        } else if (!(mastercardRadioButton.isSelected() || visaRadioButton.isSelected())) {
+        } else if (!(btnMastercardRadio.isSelected() || btnVisaRadio.isSelected())) {
             JOptionPane.showMessageDialog(null, "Seleccione un metodo de pago.");
             isValid = false;
-        } else if (textFieldNombreTitular.getText().length() < 3) {
+        } else if (inpNombreTitular.getText().length() < 3) {
             JOptionPane.showMessageDialog(null, "Nombre de titular no valido, debe tener minimo tres caracteres.");
             isValid = false;
-        } else if ((String.valueOf(CVVInput.getText()).length() != 3)) {
+        } else if ((String.valueOf(inpCVV.getText()).length() != 3)) {
             JOptionPane.showMessageDialog(null, "El CVV debe tener exactamente 3 digitos.");
-            CVVInput.setText("");
+            inpCVV.setText("");
             isValid = false;
-        } else if (!(textFieldCaducidad.getText().matches("^(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[01])$"))) {
+        } else if (!(inpCaducidad.getText().matches("^(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[01])$"))) {
             JOptionPane.showMessageDialog(null, "Fecha caducidad incorrecta, formato correcto MM/DD");
             isValid = false;
         }
