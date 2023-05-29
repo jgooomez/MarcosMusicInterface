@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class AgregarUsuario extends JDialog {
@@ -16,12 +17,29 @@ public class AgregarUsuario extends JDialog {
     private JPanel box_botones;
     private JPanel box_top;
     private JPanel box_inputs;
+    private JLabel tittleAddUser;
 
     public AgregarUsuario() {
         setContentPane(winAddUsr);
         setModal(true);
         getRootPane().setDefaultButton(btnAddUsr);
+        setListenersBtns();
+    }
 
+    private void styles() {
+        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
+        tittleAddUser.setFont(MarcosMusic.getFontTitle());
+
+        btnAddUsr.setFocusable(false);
+        btnAddUsr.setBackground(MarcosMusic.getBtnColor());
+        btnAddUsr.setCursor(cursor);
+
+        btnCancel.setFocusable(false);
+        btnCancel.setBackground(MarcosMusic.getBtnColor());
+        btnCancel.setCursor(cursor);
+    }
+
+    private void setListenersBtns() {
         btnAddUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //onOK();
@@ -58,10 +76,10 @@ public class AgregarUsuario extends JDialog {
 
         if (inpNacionalidad.getText().length() == 0 || inpNombre.getText().length() == 0
             || inpEdad.getText().length() == 0 || inpNumSeguidores.getText().length() == 0) {
-            JOptionPane.showMessageDialog(null, "Todos los campos deben ser rellenados.");
+            JOptionPane.showMessageDialog(null, "Todos los campos deben ser rellenados.", "Error", JOptionPane.ERROR_MESSAGE);
             isValid = false;
         } else if (Integer.parseInt(inpEdad.getText()) < 12) {
-            JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de 18 años.");
+            JOptionPane.showMessageDialog(null, "El usuario debe ser mayor de 18 años.", "Error", JOptionPane.ERROR_MESSAGE);
             inpEdad.setText("");
             isValid = false;
         }
