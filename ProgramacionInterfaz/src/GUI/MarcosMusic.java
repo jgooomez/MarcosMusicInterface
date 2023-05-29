@@ -29,6 +29,7 @@ public class MarcosMusic extends JFrame {
     public MarcosMusic() {
         styles();
         configurarBotones();
+        DBManagerConexion.loadDriver();
         DBManagerConexion.connect();
     }
 
@@ -120,7 +121,7 @@ public class MarcosMusic extends JFrame {
     }
 
     public static Font getFontTitle() {
-        return new Font("Calibri", Font.BOLD, 45);
+        return new Font("Calibri", Font.BOLD, 30);
     }
 
     public static Color getBtnColor() {
