@@ -45,7 +45,7 @@ public class MarcosMusic extends JFrame {
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo1 = new VerUsu();
+                JDialog dialogo1 = new Usuarios();
                 dialogo1.setTitle("Vista de usuarios");
                 dialogo1.setSize(400,700);
                 dialogo1.setLocationRelativeTo(null);

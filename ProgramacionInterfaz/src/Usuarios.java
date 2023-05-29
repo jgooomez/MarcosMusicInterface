@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class VerUsu extends JDialog {
+public class Usuarios extends JDialog {
     private JPanel contentPane;
     private JButton btnBuscar;
     private JButton btnCancel;
@@ -14,7 +14,7 @@ public class VerUsu extends JDialog {
     private JButton btnAddUser;
     private JLabel txtVerUsuario;
 
-    public VerUsu() {
+    public Usuarios() {
         styles();
         // Desactivar el JTextField al inicio
         inpIdUsr.setEnabled(false);
@@ -128,7 +128,7 @@ public class VerUsu extends JDialog {
     }
 
     public static void main(String[] args) {
-        VerUsu dialog = new VerUsu();
+        Usuarios dialog = new Usuarios();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
