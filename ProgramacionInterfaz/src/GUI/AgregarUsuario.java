@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class AgregarUsuario extends JDialog {
@@ -11,6 +12,7 @@ public class AgregarUsuario extends JDialog {
     private JTextField inpNumSeguidores;
     private JButton btnAddUsr;
     private JButton btnCancel;
+    private JLabel tittleAddUsr;
     private JLabel txtNombre;
     private JLabel txtEdad;
     private JLabel txtNacionalidad;
@@ -18,10 +20,10 @@ public class AgregarUsuario extends JDialog {
     private JPanel box_botones;
     private JPanel box_top;
     private JPanel box_inputs;
-    private JLabel tittleAddUser;
 
     public AgregarUsuario() {
         setContentPane(winAddUsr);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnAddUsr);
         setListenersBtns();
@@ -29,7 +31,7 @@ public class AgregarUsuario extends JDialog {
 
     private void styles() {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        tittleAddUser.setFont(MarcosMusic.getFontTitle());
+        tittleAddUsr.setFont(MarcosMusic.getFontTitle());
 
         btnAddUsr.setFocusable(false);
         btnAddUsr.setBackground(MarcosMusic.getBtnColor());
