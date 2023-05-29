@@ -4,20 +4,21 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class DepartamentoVideo extends JDialog {
-    private JPanel contentPane;
+    private JPanel WinVideo;
+    private JButton btnReturn;
+    private JTextField inpNombre;
+    private JTextField inpFechaCreacion;
+    private JTextField inpNombreEncargado;
+    private JTextField inpNumTrabajadores;
+    private JTextField inpNumDeSubDepar;
+    private JTextField inpIDDepartamento;
     private JButton buttonOK;
-    private JTextField textFieldNombre;
-    private JTextField textFieldFechaCreacion;
-    private JTextField textFieldNombreEncargado;
-    private JTextField textFieldNumTrabajadores;
-    private JTextField textFieldNumSubDepartamentos;
-    private JTextField textFieldIDDepartamento;
     private JButton buttonCancel;
 
     public DepartamentoVideo() {
-        setContentPane(contentPane);
+        setContentPane(WinVideo);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(btnReturn);
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -27,12 +28,12 @@ public class DepartamentoVideo extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinVideo.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonOK.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();

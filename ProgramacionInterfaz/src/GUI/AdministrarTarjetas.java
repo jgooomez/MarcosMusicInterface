@@ -5,18 +5,20 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class AdministrarTarjetas extends JDialog {
-    private JPanel contentPane;
+    private JPanel WinAdminTarjetas;
+    private JPanel box_botones;
+    private JPanel box_inputs;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
     private JButton btnDelete;
     private JButton btnAdd;
-    private JTextField textFieldIdUsu;
-    private JTextField textFieldNombre;
-    private JTextField textFieldNumTarjeta;
     private JButton btnReturn;
     private JLabel txtAdminTarjetas;
 
     public AdministrarTarjetas() {
+        setContentPane(WinAdminTarjetas);
         styles();
-        setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(btnDelete);
 
@@ -41,7 +43,7 @@ public class AdministrarTarjetas extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinAdminTarjetas.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }

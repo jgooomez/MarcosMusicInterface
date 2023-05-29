@@ -5,16 +5,19 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Usuarios extends JDialog {
-    private JPanel contentPane;
+    private JPanel WinUsuarios;
+    private JPanel box_botones;
+    private JPanel box_top;
+    private JTextField inpNacionalidad;
+    private JTextField inpNombre;
+    private JTextField inpEdad;
+    private JTextField inpNumSeguidores;
     private JButton btnBuscar;
     private JButton btnCancel;
     private JTextField inpIdUsr;
-    private JTextField outpNacionalidad;
-    private JTextField outpNombre;
-    private JTextField outpEdad;
-    private JTextField outpNumSeguidores;
     private JButton btnAddUser;
     private JLabel txtVerUsuario;
+    private JButton btnDeleteUsr;
 
     public Usuarios() {
         styles();
@@ -32,7 +35,7 @@ public class Usuarios extends JDialog {
         // Establecer el texto de pista y el color inicial del JTextField
         setTextInToInpIdUsr();
 
-        setContentPane(contentPane);
+        setContentPane(WinUsuarios);
         setModal(true);
         getRootPane().setDefaultButton(btnBuscar);
         // call onCancel() when cross is clicked
@@ -44,7 +47,7 @@ public class Usuarios extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinUsuarios.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -52,6 +55,7 @@ public class Usuarios extends JDialog {
 
         // Añadir la funcionalidad de cada botón
         setListenersBtns();
+
     }
 
     private void styles() {
@@ -89,7 +93,17 @@ public class Usuarios extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new AgregarUsuario();
                 dialog.setTitle("Agregar Usuario");
-                dialog.setSize(300,300);
+                dialog.setSize(400,300);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+        btnDeleteUsr.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new BorrarUsuario();
+                dialog.setTitle("Borrar usuario");
+                dialog.setSize(400,300);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }

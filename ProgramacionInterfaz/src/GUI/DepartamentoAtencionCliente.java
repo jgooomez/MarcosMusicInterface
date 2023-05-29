@@ -4,20 +4,23 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class DepartamentoAtencionCliente extends JDialog {
-    private JPanel contentPane;
+    private JPanel WinAtencionCliente;
+    private JPanel box_botones;
+    private JPanel box_top;
+    private JButton btnReturn;
+    private JTextField inpNombre;
+    private JTextField inpFechaCreacion;
+    private JTextField inpNombreEncargado;
+    private JTextField inpNumTrabajadores;
+    private JTextField inpNumDeSubDepar;
+    private JTextField inpIDDepartamento;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textFieldNombre;
-    private JTextField textFieldFechaCreacion;
-    private JTextField textFieldNombreEncargado;
-    private JTextField textFieldNumTrabajadores;
-    private JTextField textFieldNumSubDepartamentos;
-    private JTextField textFieldIDDepartamento;
 
     public DepartamentoAtencionCliente() {
-        setContentPane(contentPane);
+        setContentPane(WinAtencionCliente);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(btnReturn);
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -27,12 +30,12 @@ public class DepartamentoAtencionCliente extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinAtencionCliente.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonOK.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();

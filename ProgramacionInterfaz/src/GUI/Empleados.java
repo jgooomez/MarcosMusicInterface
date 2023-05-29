@@ -4,35 +4,32 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class Empleados extends JDialog {
-    private JPanel contentPane;
+    private JPanel WinEmpleados;
+    private JButton btnBuscar;
+    private JButton btnReturn;
+    private JPanel box_botones;
+    private JPanel box_top;
+    private JTextField inpIDEmpleado;
+    private JTextField inpNacionalidad;
+    private JTextField inpNombre;
+    private JTextField inpEdad;
+    private JTextField inpDepartamento;
+    private JTextField inpFechaIncorporacion;
     private JButton buttonBuscar;
     private JButton buttonVolver;
-    private JLabel labelIdEmpleado;
-    private JLabel LabelNacionalidad;
-    private JLabel LabelNombre;
-    private JLabel LabelEdad;
-    private JLabel LabelDepartamento;
-    private JLabel LabelFecha;
-    private JLabel LabelBuscarEmpleado;
-    private JTextField textFieldIdEmpleado;
-    private JTextField textFieldNacionalidad;
-    private JTextField textFieldNombre;
-    private JTextField textFieldEdad;
-    private JTextField textFieldDepartamento;
-    private JTextField textFieldFecha;
 
     public Empleados() {
-        setContentPane(contentPane);
+        setContentPane(WinEmpleados);
         setModal(true);
-        getRootPane().setDefaultButton(buttonBuscar);
+        getRootPane().setDefaultButton(btnBuscar);
 
-        buttonBuscar.addActionListener(new ActionListener() {
+        btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
         });
 
-        buttonVolver.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -47,7 +44,7 @@ public class Empleados extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinEmpleados.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }

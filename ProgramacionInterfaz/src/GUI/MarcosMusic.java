@@ -49,7 +49,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new Usuarios();
                 dialogo1.setTitle("Vista de usuarios");
-                dialogo1.setSize(400,700);
+                dialogo1.setSize(600,700);
                 dialogo1.setLocationRelativeTo(null);
                 dialogo1.setVisible(true);
             }
@@ -67,33 +67,33 @@ public class MarcosMusic extends JFrame {
         btnSuscripciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo2 = new Suscripciones();
-                dialogo2.setTitle("Tipo de suscripciones");
-                dialogo2.setSize(800,400);
-                dialogo2.pack();
-                dialogo2.setLocationRelativeTo(null);
-                dialogo2.setVisible(true);
+                JDialog dialogo3 = new Suscripciones();
+                dialogo3.setTitle("Tipo de suscripciones");
+                dialogo3.setSize(800,400);
+                dialogo3.pack();
+                dialogo3.setLocationRelativeTo(null);
+                dialogo3.setVisible(true);
             }
         });
         btnDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo2 = new Departamentos();
-                dialogo2.setTitle("Departamentos");
-                dialogo2.setSize(400,400);
-                dialogo2.setLocationRelativeTo(null);
-                dialogo2.setVisible(true);
+                JDialog dialogo4 = new Departamentos();
+                dialogo4.setTitle("Departamentos");
+                dialogo4.setSize(400,400);
+                dialogo4.setLocationRelativeTo(null);
+                dialogo4.setVisible(true);
             }
         });
 
         btnEmpleados.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo2 = new Empleados();
-                dialogo2.setTitle("Ver Empleados");
-                dialogo2.setSize(400,400);
-                dialogo2.setLocationRelativeTo(null);
-                dialogo2.setVisible(true);
+                JDialog dialogo5 = new Empleados();
+                dialogo5.setTitle("Ver Empleados");
+                dialogo5.setSize(400,400);
+                dialogo5.setLocationRelativeTo(null);
+                dialogo5.setVisible(true);
             }
         });
     }
