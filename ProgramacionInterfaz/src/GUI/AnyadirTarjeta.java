@@ -16,6 +16,8 @@ public class AnyadirTarjeta extends JDialog {
     private JTextField inpCaducidad;
     private JButton btnReturn;
     private JLabel txtAgregarTarjetaCredito;
+    private JTextField inpIDUsuario;
+    private JLabel idUsuario;
 
     public static void main(String[] args) {
         AnyadirTarjeta dialog = new AnyadirTarjeta();
