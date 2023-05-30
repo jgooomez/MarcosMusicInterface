@@ -29,8 +29,8 @@ public class MarcosMusic extends JFrame {
     public MarcosMusic() {
         styles();
         configurarBotones();
-        DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
+//        DBManagerConexion.loadDriver();
+//        DBManagerConexion.connect();
     }
 
     private void configurarImagenDeFondo() {

@@ -1,8 +1,12 @@
 package GUI;
 
+import DBManager.DBManagerUsuarios;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Usuarios extends JDialog {
     private JPanel contentPane;
@@ -76,6 +80,29 @@ public class Usuarios extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Añadimos código para que cuando pongamos el Id se rellene los campos del usuario.
+                ResultSet rs = DBManagerUsuarios.getUsuario(Integer.parseInt(inpIdUsr.getText()));
+
+                try {
+                    if (rs != null && rs.first()) {
+                        // El usuario existe en la base de datos, obtén los datos
+                        String nacionalidad = DBManagerUsuarios.getNacionalidad(rs);
+                        String nombre = DBManagerUsuarios.getNombre(rs);
+                        int edad = DBManagerUsuarios.getEdad(rs);
+                        int numSeguidores = DBManagerUsuarios.getNumSeguidores(rs);
+
+
+                        // Rellena los campos del formulario con los datos del usuario
+                        outpNacionalidad.setText(nacionalidad);
+                        outpNombre.setText(nombre);
+                        outpEdad.setText(Integer.toString(edad));
+                        outpNumSeguidores.setText(Integer.toString(numSeguidores));
+                    } else {
+                        // El usuario no existe en la base de datos, muestra un mensaje de error
+                        System.out.println("El usuario con ID " + inpIdUsr.getText() + " no existe.");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         btnCancel.addActionListener(new ActionListener() {
@@ -89,7 +116,7 @@ public class Usuarios extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new AgregarUsuario();
                 dialog.setTitle("Agregar Usuario");
-                dialog.setSize(300,300);
+                dialog.setSize(300, 300);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
@@ -109,6 +136,7 @@ public class Usuarios extends JDialog {
                     btnBuscar.setEnabled(true);
                 }
             }
+
             @Override
             public void focusLost(FocusEvent e) {
                 if (inpIdUsr.getText().isEmpty()) {

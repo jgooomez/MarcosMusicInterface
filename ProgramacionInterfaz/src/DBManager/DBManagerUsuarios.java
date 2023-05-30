@@ -236,5 +236,26 @@ public class DBManagerUsuarios {
         }
     }
 
+    //Getters para coger de la base de datos
+    public static String getNacionalidad(ResultSet rs) throws SQLException {
+        return rs.getString(DB_US_NAC);
+    }
+
+    public static String getNombre(ResultSet rs) throws SQLException {
+        return rs.getString(DB_US_NOM);
+    }
+
+    public static int getEdad(ResultSet rs) throws SQLException {
+        return rs.getInt(DB_US_ED);
+    }
+
+    public static int getNumSeguidores(ResultSet rs) throws SQLException {
+        return rs.getInt(DB_US_NUMSEG);
+    }
+
+    public static String getFotoPerfil(ResultSet rs) throws SQLException {
+        return rs.getString(DB_US_FOTO);
+    }
+
 }
 
