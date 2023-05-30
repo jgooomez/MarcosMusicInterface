@@ -166,13 +166,13 @@ public class DBManagerTarjetas {
      * @param idUsuario      id del usuario asociado a la tarjeta
      * @return verdadero si pudo insertarlo, falso en caso contrario
      */
-    public static boolean insertTarjeta(int numeroTarjeta, int telefono, String tipo, String nombreTitular, int cvv, String caducidad, int idUsuario) {
+    public static boolean insertTarjeta(String numeroTarjeta, int telefono, String tipo, String nombreTitular, int cvv, String caducidad, int idUsuario) {
         try {
             System.out.print("Insertando tarjeta " + numeroTarjeta + "...");
             ResultSet rs = getTablaTarjeta(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 
             rs.moveToInsertRow();
-            rs.updateInt(DB_TARJETA_NUMERO, numeroTarjeta);
+            rs.updateString(DB_TARJETA_NUMERO, numeroTarjeta);
             rs.updateInt(DB_TARJETA_TELEFONO, telefono);
             rs.updateString(DB_TARJETA_TIPO, tipo);
             rs.updateString(DB_TARJETA_NOMBRE, nombreTitular);
