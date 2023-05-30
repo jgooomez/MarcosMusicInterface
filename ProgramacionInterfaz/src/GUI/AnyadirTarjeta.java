@@ -1,5 +1,7 @@
 package GUI;
 
+import DBManager.DBManagerTarjetas;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -38,11 +40,25 @@ public class AnyadirTarjeta extends JDialog {
         btnConfirmar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String tipo = "";
+
+                if (btnMastercardRadio.isSelected()) {
+                    tipo = "Mastercard";
+                } else {
+                    tipo = "Visa";
+                }
+
                 if (compruebaTarjeta()) {
-                    //Hacer el insert en la BBDD.
+                    int numTarjetaParseado = Integer.parseInt(inpNumTarjeta.getText().replace("-", ""));
+                    if (DBManagerTarjetas.insertTarjeta(numTarjetaParseado, Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()), inpCaducidad.getText())) {
+                        JOptionPane.showMessageDialog(null, "Insert realizado correctamente.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error al realizar el insert.");
+                    }
                 }
             }
         });
+
 
     }
 
