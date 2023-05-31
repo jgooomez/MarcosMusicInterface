@@ -1,14 +1,17 @@
 package DBManager;
 
+import ClasePOJO.Usuario;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import static DBManager.DBManagerConexion.conn;
 
 public class DBManagerUsuarios {
     // Configuración de la tabla usuarios
-    private static final String DB_US = "usuarios";
+    private static final String DB_US = "usuario";
     private static final String DB_US_SELECT = "SELECT * FROM " + DB_US;
     private static final String DB_US_ID = "idUsuario";
     private static final String DB_US_NAC= "nacionalidad";
@@ -236,26 +239,33 @@ public class DBManagerUsuarios {
         }
     }
 
-    //Getters para coger de la base de datos
-    public static String getNacionalidad(ResultSet rs) throws SQLException {
-        return rs.getString(DB_US_NAC);
+    public static ArrayList<Usuario> obtenerUsuarios() {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+
+        try {
+            ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+            while (rs.next()) {
+                int id = rs.getInt(DB_US_ID);
+                String nacionalidad = rs.getString(DB_US_NAC);
+                String nombre = rs.getString(DB_US_NOM);
+                int edad = rs.getInt(DB_US_ED);
+                int numSeguidores = rs.getInt(DB_US_NUMSEG);
+                String fotoPerfil = rs.getString(DB_US_FOTO);
+
+                Usuario usuario = new Usuario(id, nacionalidad, nombre, edad, numSeguidores);
+                usuarios.add(usuario);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return usuarios;
     }
 
-    public static String getNombre(ResultSet rs) throws SQLException {
-        return rs.getString(DB_US_NOM);
-    }
 
-    public static int getEdad(ResultSet rs) throws SQLException {
-        return rs.getInt(DB_US_ED);
-    }
-
-    public static int getNumSeguidores(ResultSet rs) throws SQLException {
-        return rs.getInt(DB_US_NUMSEG);
-    }
-
-    public static String getFotoPerfil(ResultSet rs) throws SQLException {
-        return rs.getString(DB_US_FOTO);
-    }
 
 }
 

@@ -1,12 +1,14 @@
 package GUI;
 
 import DBManager.DBManagerUsuarios;
+import ClasePOJO.Usuario;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Usuarios extends JDialog {
     private JPanel contentPane;
@@ -79,30 +81,52 @@ public class Usuarios extends JDialog {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Añadimos código para que cuando pongamos el Id se rellene los campos del usuario.
-                ResultSet rs = DBManagerUsuarios.getUsuario(Integer.parseInt(inpIdUsr.getText()));
+                ArrayList<Usuario> usuarios = DBManagerUsuarios.obtenerUsuarios();
 
-                try {
-                    if (rs != null && rs.first()) {
-                        // El usuario existe en la base de datos, obtén los datos
-                        String nacionalidad = DBManagerUsuarios.getNacionalidad(rs);
-                        String nombre = DBManagerUsuarios.getNombre(rs);
-                        int edad = DBManagerUsuarios.getEdad(rs);
-                        int numSeguidores = DBManagerUsuarios.getNumSeguidores(rs);
+                // Buscar usuario por ID
+                Usuario usuarioBuscado = null;
 
-
-                        // Rellena los campos del formulario con los datos del usuario
-                        outpNacionalidad.setText(nacionalidad);
-                        outpNombre.setText(nombre);
-                        outpEdad.setText(Integer.toString(edad));
-                        outpNumSeguidores.setText(Integer.toString(numSeguidores));
-                    } else {
-                        // El usuario no existe en la base de datos, muestra un mensaje de error
-                        System.out.println("El usuario con ID " + inpIdUsr.getText() + " no existe.");
+                for (Usuario usuario : usuarios) {
+                    if (usuario.getId() == Integer.parseInt(inpIdUsr.getText())) {
+                        usuarioBuscado = usuario;
+                        break;
                     }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
                 }
+
+                if (usuarioBuscado != null) {
+                    // Mostrar los datos del usuario
+                    outpNacionalidad.setText(usuarioBuscado.getNacionalidad());
+                    outpNombre.setText(usuarioBuscado.getNombre());
+                    outpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
+                    outpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
+                } else {
+                    System.out.println("No se encontró ningún usuario con el ID: " + inpIdUsr);
+                }
+
+//                // Añadimos código para que cuando pongamos el Id se rellene los campos del usuario.
+//                ResultSet rs = DBManagerUsuarios.getUsuario(Integer.parseInt(inpIdUsr.getText()));
+//
+//                try {
+//                    if (rs != null && rs.first()) {
+//                        // El usuario existe en la base de datos, obtén los datos
+//                        String nacionalidad = DBManagerUsuarios.getNacionalidad(rs);
+//                        String nombre = DBManagerUsuarios.getNombre(rs);
+//                        int edad = DBManagerUsuarios.getEdad(rs);
+//                        int numSeguidores = DBManagerUsuarios.getNumSeguidores(rs);
+//
+//
+//                        // Rellena los campos del formulario con los datos del usuario
+//                        outpNacionalidad.setText(nacionalidad);
+//                        outpNombre.setText(nombre);
+//                        outpEdad.setText(Integer.toString(edad));
+//                        outpNumSeguidores.setText(Integer.toString(numSeguidores));
+//                    } else {
+//                        // El usuario no existe en la base de datos, muestra un mensaje de error
+//                        System.out.println("El usuario con ID " + inpIdUsr.getText() + " no existe.");
+//                    }
+//                } catch (SQLException ex) {
+//                    ex.printStackTrace();
+//                }
             }
         });
         btnCancel.addActionListener(new ActionListener() {

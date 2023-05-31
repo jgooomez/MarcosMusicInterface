@@ -22,15 +22,16 @@ public class MarcosMusic extends JFrame {
     public static void main(String[] args) {
         frame.setContentPane(new MarcosMusic().principal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,400);
+        frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
     public MarcosMusic() {
         styles();
         configurarBotones();
-//        DBManagerConexion.loadDriver();
-//        DBManagerConexion.connect();
+        DBManagerConexion.loadDriver();
+        DBManagerConexion.connect();
     }
 
     private void configurarImagenDeFondo() {
@@ -44,13 +45,13 @@ public class MarcosMusic extends JFrame {
         principal.add(fondo);
     }
 
-    private void configurarBotones(){
+    private void configurarBotones() {
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new Usuarios();
                 dialogo1.setTitle("Vista de usuarios");
-                dialogo1.setSize(400,700);
+                dialogo1.setSize(400, 700);
                 dialogo1.setLocationRelativeTo(null);
                 dialogo1.setVisible(true);
             }
@@ -60,7 +61,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new AdministrarTarjetas();
                 dialogo2.setTitle("Administracion de tarjetas");
-                dialogo2.setSize(400,400);
+                dialogo2.setSize(400, 400);
                 dialogo2.setLocationRelativeTo(null);
                 dialogo2.setVisible(true);
             }
@@ -70,7 +71,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Suscripciones();
                 dialogo2.setTitle("Tipo de suscripciones");
-                dialogo2.setSize(800,400);
+                dialogo2.setSize(800, 400);
                 dialogo2.pack();
                 dialogo2.setLocationRelativeTo(null);
                 dialogo2.setVisible(true);
@@ -81,7 +82,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Departamentos();
                 dialogo2.setTitle("Departamentos");
-                dialogo2.setSize(400,400);
+                dialogo2.setSize(400, 400);
                 dialogo2.setLocationRelativeTo(null);
                 dialogo2.setVisible(true);
             }
@@ -92,7 +93,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Empleados();
                 dialogo2.setTitle("Ver Empleados");
-                dialogo2.setSize(400,400);
+                dialogo2.setSize(400, 400);
                 dialogo2.setLocationRelativeTo(null);
                 dialogo2.setVisible(true);
             }
