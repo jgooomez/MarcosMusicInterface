@@ -1,7 +1,12 @@
 package GUI;
 
+import ClasePOJO.Departamento;
+import DBManager.DBManagerDepartamento;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class DepartamentoAtencionCliente extends JDialog {
     private JPanel WinAtencionCliente;
@@ -21,6 +26,8 @@ public class DepartamentoAtencionCliente extends JDialog {
         setContentPane(WinAtencionCliente);
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
+        //rellena los textfild con datos de Atencion al cliente
+        setAtClientData();
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -42,7 +49,27 @@ public class DepartamentoAtencionCliente extends JDialog {
             }
         });
     }
+private void setAtClientData(){
+    ArrayList<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento();
+    Departamento departamentoActual = null;
 
+    for (Departamento departamento : departamentos){
+        if (departamento.getIdDepartamento() == 1) {
+            departamentoActual = departamento;
+            break;
+        }
+    }
+    if (departamentoActual != null){
+        // Mostrar los datos del departamento
+        inpIDDepartamento.setText(String.valueOf(departamentoActual.getIdDepartamento()));
+        inpNombre.setText(departamentoActual.getNombre());
+        inpFechaCreacion.setText(departamentoActual.getFechaCreacion());
+        inpNombreEncargado.setText(departamentoActual.getNombreEncargado());
+        inpNumTrabajadores.setText(String.valueOf(departamentoActual.getNumTrabajadores()));
+        inpNumDeSubDepar.setText(departamentoActual.getNumSubDpto());
+    }
+
+}
     private void onOK() {
         // add your code here
         dispose();

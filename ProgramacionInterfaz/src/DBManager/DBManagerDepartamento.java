@@ -1,8 +1,12 @@
 package DBManager;
 
+import ClasePOJO.Departamento;
+import ClasePOJO.Usuario;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import static DBManager.DBManagerConexion.conn;
 
@@ -216,5 +220,30 @@ public class DBManagerDepartamento {
             ex.printStackTrace();
             return false;
         }
+    }
+    public static ArrayList<Departamento> obtenerDatosDepartamento(){
+        ArrayList<Departamento> departamentos = new ArrayList<>();
+
+        try {
+            ResultSet rs = getTablaDepartamento(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+            while (rs.next()) {
+                int id = rs.getInt(DB_DEPARTAMENTO_ID);
+                String nombreDto = rs.getString(DB_DEPARTAMENTO_NOMBRE);
+                String nombreEncargado = rs.getString(DB_DEPARTAMENTO_NOMBRE_ENCARGADO);
+                String fechaCreacion = rs.getString(DB_DEPARTAMENTO_FECHA_CREACION);
+                String numTrabajadores = rs.getString(DB_DEPARTAMENTO_NUM_TRABAJADORES);
+                String subDto = rs.getString(DB_DEPARTAMENTO_NUM_SUBDPTO);
+
+                Departamento departamento = new Departamento(id, nombreDto, fechaCreacion,nombreEncargado,numTrabajadores,subDto);
+                departamentos.add(departamento);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return departamentos;
     }
 }
