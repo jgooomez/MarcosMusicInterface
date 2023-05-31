@@ -5,6 +5,11 @@ import java.sql.*;
 public class DBManagerConexion {
     public static Connection conn = null;
 
+    public static Connection getConexion() {
+        Connection FinalConection = conn;
+        return FinalConection;
+    }
+
     //CONEXIÓN
     private static final String DB_HOST = "192.168.7.213";
     //private static final String DB_HOST = "localhost";
