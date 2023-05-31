@@ -1,5 +1,7 @@
 package GUI;
 
+import DBManager.DBManagerUsuarios;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -47,7 +49,11 @@ public class AgregarUsuario extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 //onOK();
                 if (compruebaUsuario()) {
-                    //Hacer el insert en la BBDD
+                   if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
+                       JOptionPane.showMessageDialog(null, "El insert se realizo correctamente.");
+                   } else {
+                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar el insert", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         });

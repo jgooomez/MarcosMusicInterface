@@ -1,13 +1,10 @@
 package DBManager;
-
 import ClasePOJO.Usuario;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static DBManager.DBManagerConexion.conn;
 
 public class DBManagerUsuarios {
     // Configuración de la tabla usuarios
@@ -29,7 +26,7 @@ public class DBManagerUsuarios {
 
     public static ResultSet getTablaUsuarios(int resultSetType, int resultSetConcurrency) {
         try {
-            Statement stmt = conn.createStatement(resultSetType, resultSetConcurrency);
+            Statement stmt = DBManagerConexion.getConexion().createStatement(resultSetType, resultSetConcurrency);
             ResultSet rs = stmt.executeQuery(DB_US_SELECT);
             //stmt.close();
             return rs;
@@ -83,7 +80,7 @@ public class DBManagerUsuarios {
     public static ResultSet getUsuario(int idUsuario) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = DBManagerConexion.getConexion().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idUsuario + "';";
             //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
@@ -173,10 +170,10 @@ public class DBManagerUsuarios {
          * @param nacionalidad nacionalidad del usuario
          * @param edad edad del usuario
          * @param numSeguidores numero de seguidores del usuario
-         * @param fotoPerfil ruta d ela foto de perfil del usuario
+         //* @param fotoPerfil ruta d ela foto de perfil del usuario
          * @return verdadero si pudo insertarlo, false en caso contrario
          */
-        public static boolean insertUsuario(String nacionalidad, String nombre, int edad, int numSeguidores, String fotoPerfil){
+        public static boolean insertUsuario(String nacionalidad, String nombre, int edad, int numSeguidores){
             try {
                 // Obtenemos la tabla usuarios
                 System.out.print("Insertando usuario " + nombre + "...");
@@ -188,7 +185,7 @@ public class DBManagerUsuarios {
                 rs.updateString(DB_US_NAC, nacionalidad);
                 rs.updateInt(DB_US_ED, edad);
                 rs.updateInt(DB_US_NUMSEG, numSeguidores);
-                rs.updateString(DB_US_FOTO, fotoPerfil);
+                //rs.updateString(DB_US_FOTO, fotoPerfil);
 
                 rs.insertRow();
 
