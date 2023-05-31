@@ -6,8 +6,8 @@ public class DBManagerConexion {
     public static Connection conn = null;
 
     //CONEXIÓN
-//    private static final String DB_HOST = "192.168.1.40";
-    private static final String DB_HOST = "localhost";
+    private static final String DB_HOST = "192.168.7.213";
+    //private static final String DB_HOST = "localhost";
     private static final String DB_PORT = "1433";
     private static final String DB_NAME = "MARCOSMUSIC";
     private static final String DB_URL = "jdbc:sqlserver://" + DB_HOST + ":" + DB_PORT + ";encrypt=false;databaseName=" + DB_NAME + ";TrustServerCertificate=True;";
