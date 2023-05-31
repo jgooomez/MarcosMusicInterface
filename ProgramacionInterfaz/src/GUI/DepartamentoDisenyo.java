@@ -3,21 +3,24 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class DepartamentoDiseño extends JDialog {
-    private JPanel contentPane;
+public class DepartamentoDisenyo extends JDialog {
+    private JPanel WinDisenyo;
+    private JButton btnReturn;
+    private JTextField inpNombre;
+    private JTextField inpFechaCreacion;
+    private JTextField inpNombreEncar;
+    private JTextField inpNumTrabaja;
+    private JTextField inpNumSubDepar;
+    private JTextField inpIDDelDepartamento;
+    private JPanel box_top;
+    private JPanel box_botones;
     private JButton buttonOK;
-    private JTextField textFieldNombre;
-    private JTextField textFieldFechaCreacion;
-    private JTextField textFieldNombreEncargado;
-    private JTextField textFieldNumTrabajadores;
-    private JTextField textFieldNumSubDepartamentos;
-    private JTextField textFieldIDDepartamento;
     private JButton buttonCancel;
 
-    public DepartamentoDiseño() {
-        setContentPane(contentPane);
+    public DepartamentoDisenyo() {
+        setContentPane(WinDisenyo);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(btnReturn);
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -28,12 +31,12 @@ public class DepartamentoDiseño extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinDisenyo.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonOK.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -52,7 +55,7 @@ public class DepartamentoDiseño extends JDialog {
     }
 
     public static void main(String[] args) {
-        DepartamentoDiseño dialog = new DepartamentoDiseño();
+        DepartamentoDisenyo dialog = new DepartamentoDisenyo();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

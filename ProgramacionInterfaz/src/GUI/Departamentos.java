@@ -4,21 +4,22 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class Departamentos extends JDialog {
-    private JPanel contentPane;
+    private JPanel WinDepartamentos;
+    private JButton btnReturn;
+    private JPanel box_top;
+    private JPanel box_botones;
     private JButton buttonAtras;
-    private JButton atencionAlClienteButton;
-    private JButton sonidoButton;
-    private JButton videoButton;
-    private JButton redesSocialesButton;
-    private JButton diseñoButton;
-    private JLabel LabelDepartamento;
-    private JLabel Icono;
+    private JButton btnAtencionCliente;
+    private JButton btnSonido;
+    private JButton btnVideo;
+    private JButton btnRSS;
+    private JButton btnDiseño;
     private JButton buttonCancel;
 
     public Departamentos() {
-        setContentPane(contentPane);
+        setContentPane(WinDepartamentos);
         setModal(true);
-        getRootPane().setDefaultButton(buttonAtras);
+        getRootPane().setDefaultButton(btnReturn);
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -28,18 +29,18 @@ public class Departamentos extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinDepartamentos.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        buttonAtras.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-        atencionAlClienteButton.addActionListener(new ActionListener() {
+        btnAtencionCliente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new DepartamentoAtencionCliente();
@@ -49,7 +50,7 @@ public class Departamentos extends JDialog {
                 dialog.setVisible(true);
             }
         });
-        sonidoButton.addActionListener(new ActionListener() {
+        btnSonido.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new DepartamentoSonido();
@@ -59,7 +60,7 @@ public class Departamentos extends JDialog {
                 dialog.setVisible(true);
             }
         });
-        videoButton.addActionListener(new ActionListener() {
+        btnVideo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new DepartamentoVideo();
@@ -69,7 +70,7 @@ public class Departamentos extends JDialog {
                 dialog.setVisible(true);
             }
         });
-        redesSocialesButton.addActionListener(new ActionListener() {
+        btnRSS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new DepartamentoRSS();
@@ -79,10 +80,10 @@ public class Departamentos extends JDialog {
                 dialog.setVisible(true);
             }
         });
-        diseñoButton.addActionListener(new ActionListener() {
+        btnDiseño.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoDiseño();
+                JDialog dialog = new DepartamentoDisenyo();
                 dialog.setTitle("Redes Sociales");
                 dialog.setSize(350,500);
                 dialog.setLocationRelativeTo(null);

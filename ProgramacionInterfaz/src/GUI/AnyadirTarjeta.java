@@ -7,12 +7,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class AnyadirTarjeta extends JDialog {
-    private JPanel contentPane;
+    private JPanel principal;
+    private JPanel box_botones;
+    private JPanel box_top;
+    private JTextField inpTlf;
     private JButton btnConfirmar;
     private JRadioButton btnVisaRadio;
     private JRadioButton btnMastercardRadio;
     private JTextField inpNumTarjeta;
-    private JTextField inpTlf;
     private JTextField inpNombreTitular;
     private JTextField inpCVV;
     private JTextField inpCaducidad;
@@ -29,7 +31,7 @@ public class AnyadirTarjeta extends JDialog {
     }
     public AnyadirTarjeta() {
         styles();
-        setContentPane(contentPane);
+        setContentPane(principal);
         setModal(true);
         getRootPane().setDefaultButton(btnConfirmar);
 

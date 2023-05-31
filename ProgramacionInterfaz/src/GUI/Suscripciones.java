@@ -5,20 +5,22 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Suscripciones extends JDialog {
-    private JPanel contentPane;
-    private JButton btnOK;
+    private JPanel WinSuscripciones;
+    private JTextField inpTipoSus;
+    private JTextField inpPrecio;
+    private JButton btnReturn;
+    private JPanel box_top;
+    private JPanel box_botones;
     private JButton btnType1;
     private JButton btnType3;
     private JButton btnType2;
-    private JTextField outpTipo;
-    private JTextField outpPrecio;
     private JLabel txtTiposSuscrip;
 
     public Suscripciones() {
         styles();
-        setContentPane(contentPane);
+        setContentPane(WinSuscripciones);
         setModal(true);
-        getRootPane().setDefaultButton(btnOK);
+        getRootPane().setDefaultButton(btnReturn);
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -28,12 +30,12 @@ public class Suscripciones extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
+        WinSuscripciones.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        btnOK.addActionListener(new ActionListener() {
+        btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -48,9 +50,9 @@ public class Suscripciones extends JDialog {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         txtTiposSuscrip.setFont(MarcosMusic.getFontTitle());
 
-        btnOK.setFocusable(false);
-        btnOK.setBackground(MarcosMusic.getBtnColor());
-        btnOK.setCursor(cursor);
+        btnReturn.setFocusable(false);
+        btnReturn.setBackground(MarcosMusic.getBtnColor());
+        btnReturn.setCursor(cursor);
 
         btnType1.setFocusable(false);
         btnType1.setBackground(MarcosMusic.getBtnColor());
