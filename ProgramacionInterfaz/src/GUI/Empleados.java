@@ -1,7 +1,11 @@
 package GUI;
 
+import ClasePOJO.Usuario;
+import DBManager.DBManagerUsuarios;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Empleados extends JDialog {
     private JPanel WinEmpleados;
@@ -25,7 +29,27 @@ public class Empleados extends JDialog {
 
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                ArrayList<Usuario> usuarios = DBManagerUsuarios.obtenerUsuarios();
+
+                // Buscar usuario por ID
+                Usuario empleadoBuscado = null;
+
+                for (Usuario usuario : usuarios) {
+                    if (usuario.getId() == Integer.parseInt(inpIDEmpleado.getText())) {
+                        empleadoBuscado = usuario;
+                        break;
+                    }
+                }
+
+                if (empleadoBuscado != null) {
+                    // Mostrar los datos del usuario
+                    inpNacionalidad.setText(empleadoBuscado.getNacionalidad());
+                    inpNombre.setText(empleadoBuscado.getNombre());
+                    inpEdad.setText(Integer.toString(empleadoBuscado.getEdad()));
+                    inpDepartamento.setText(Integer.toString(empleadoBuscado.getNumSeguidores()));
+                } else {
+                    System.out.println("No se encontró ningún usuario con el ID: " + inpIDEmpleado);
+                }
             }
         });
 

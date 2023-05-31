@@ -1,8 +1,13 @@
 package DBManager;
 
+import ClasePOJO.Empleado;
+import ClasePOJO.Usuario;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static DBManager.DBManagerConexion.conn;
 
@@ -231,4 +236,31 @@ public class DBManagerEmpleado {
             return false;
         }
     }
+
+    public static ArrayList<Empleado> obtenerEmpleados() {
+        ArrayList<Empleado> empleados = new ArrayList<>();
+
+        try {
+            ResultSet rs = getTablaEmpleado(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+            while (rs.next()) {
+                int id = rs.getInt("idEmpleado");
+                String nombre = rs.getString("nombre");
+                int edad = rs.getInt("edad");
+                String nacionalidad = rs.getString("nacionalidad");
+                Date fechaIncorporacion = rs.getDate("fechaIncorporacion");
+                String departamento = rs.getString("departamento");
+
+                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, fechaIncorporacion, departamento);
+                empleados.add(empleado);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return empleados;
+    }
+
 }

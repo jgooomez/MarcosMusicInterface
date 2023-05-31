@@ -106,31 +106,6 @@ public class Usuarios extends JDialog {
                 } else {
                     System.out.println("No se encontró ningún usuario con el ID: " + inpIdUsr);
                 }
-
-//                // Añadimos código para que cuando pongamos el Id se rellene los campos del usuario.
-//                ResultSet rs = DBManagerUsuarios.getUsuario(Integer.parseInt(inpIdUsr.getText()));
-//
-//                try {
-//                    if (rs != null && rs.first()) {
-//                        // El usuario existe en la base de datos, obtén los datos
-//                        String nacionalidad = DBManagerUsuarios.getNacionalidad(rs);
-//                        String nombre = DBManagerUsuarios.getNombre(rs);
-//                        int edad = DBManagerUsuarios.getEdad(rs);
-//                        int numSeguidores = DBManagerUsuarios.getNumSeguidores(rs);
-//
-//
-//                        // Rellena los campos del formulario con los datos del usuario
-//                        inpNacionalidad.setText(nacionalidad);
-//                        inpNombre.setText(nombre);
-//                        inpEdad.setText(Integer.toString(edad));
-//                        inpNumSeguidores.setText(Integer.toString(numSeguidores));
-//                    } else {
-//                        // El usuario no existe en la base de datos, muestra un mensaje de error
-//                        System.out.println("El usuario con ID " + inpIdUsr.getText() + " no existe.");
-//                    }
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
             }
         });
         btnCancel.addActionListener(new ActionListener() {
