@@ -104,7 +104,8 @@ public class Usuarios extends JDialog {
                     inpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
                     inpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
                 } else {
-                    System.out.println("No se encontró ningún usuario con el ID: " + inpIdUsr);
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningun usuario con ese ID enla BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
+                    inpIdUsr.setText("");
                 }
             }
         });

@@ -50,7 +50,8 @@ public class Empleados extends JDialog {
                     inpDepartamento.setText(Integer.toString(empleadoBuscado.getIdDepartamento()));
                     inpFechaIncorporacion.setText(empleadoBuscado.getFechaINC());
                 } else {
-                    System.out.println("No se encontró ningún usuario con el ID: " + inpIDEmpleado);
+                    JOptionPane.showMessageDialog(null,"No se encuentra ningun empleado con ese ID en la BBDD", "Error id", JOptionPane.ERROR_MESSAGE);
+                    inpIDEmpleado.setText("");
                 }
             }
         });
