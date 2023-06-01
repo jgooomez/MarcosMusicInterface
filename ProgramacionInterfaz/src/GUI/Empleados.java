@@ -22,6 +22,14 @@ public class Empleados extends JDialog {
     private JTextField inpFechaIncorporacion;
     private JButton buttonBuscar;
     private JButton buttonVolver;
+    private JLabel txtDepartamento;
+    private JLabel txtFechaCreacion;
+    private JLabel txtEdad;
+    private JLabel txtNombre;
+    private JLabel txtNacionalidad;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtIdEmpleado;
 
     public Empleados() {
         setContentPane(WinEmpleados);
