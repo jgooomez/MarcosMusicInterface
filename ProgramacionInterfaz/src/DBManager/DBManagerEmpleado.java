@@ -1,7 +1,6 @@
 package DBManager;
 
 import ClasePOJO.Empleado;
-import ClasePOJO.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -249,9 +248,9 @@ public class DBManagerEmpleado {
                 int edad = rs.getInt("edad");
                 String nacionalidad = rs.getString("nacionalidad");
                 Date fechaIncorporacion = rs.getDate("fechaIncorporacion");
-                String departamento = rs.getString("departamento");
+                int departamento = rs.getInt("idDepartamento");
 
-                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, fechaIncorporacion, departamento);
+                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, String.valueOf(fechaIncorporacion), departamento);
                 empleados.add(empleado);
             }
 

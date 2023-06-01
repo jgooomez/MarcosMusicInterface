@@ -8,15 +8,15 @@ public class Empleado {
     private int edad;
     private String nacionalidad;
     private String fechaINC;
-    private String departamento;
+    private int idDepartamento;
 
-    public Empleado(int idEmpleado, String nombre, int edad, String nacionalidad, Date fechaINC, String departamento) {
+    public Empleado(int idEmpleado, String nombre, int edad, String nacionalidad, String fechaINC, int idDepartamento) {
         this.idEmpleado = idEmpleado;
         this.nombre = nombre;
         this.edad = edad;
         this.nacionalidad = nacionalidad;
-        this.fechaINC = String.valueOf(fechaINC);
-        this.departamento = departamento;
+        this.fechaINC = fechaINC;
+        this.idDepartamento = idDepartamento;
     }
 
     public int getIdEmpleado() {
@@ -59,11 +59,11 @@ public class Empleado {
         this.fechaINC = fechaINC;
     }
 
-    public String getDepartamento() {
-        return departamento;
+    public int getIdDepartamento() {
+        return idDepartamento;
     }
 
-    public void setDepartamento(String departamento) {
-        this.departamento = departamento;
+    public void setDepartamento(int departamento) {
+        this.idDepartamento = departamento;
     }
 }

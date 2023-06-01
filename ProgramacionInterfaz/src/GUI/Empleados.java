@@ -1,6 +1,7 @@
 package GUI;
 
-import ClasePOJO.Usuario;
+import ClasePOJO.Empleado;
+import DBManager.DBManagerEmpleado;
 import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
@@ -29,14 +30,14 @@ public class Empleados extends JDialog {
 
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ArrayList<Usuario> usuarios = DBManagerUsuarios.obtenerUsuarios();
+                ArrayList<Empleado> empleados = DBManagerEmpleado.obtenerEmpleados();
 
-                // Buscar usuario por ID
-                Usuario empleadoBuscado = null;
+                // Buscar empleado por ID
+                Empleado empleadoBuscado = null;
 
-                for (Usuario usuario : usuarios) {
-                    if (usuario.getId() == Integer.parseInt(inpIDEmpleado.getText())) {
-                        empleadoBuscado = usuario;
+                for (Empleado emple : empleados) {
+                    if (emple.getIdEmpleado() == Integer.parseInt(inpIDEmpleado.getText())) {
+                        empleadoBuscado = emple;
                         break;
                     }
                 }
@@ -46,7 +47,8 @@ public class Empleados extends JDialog {
                     inpNacionalidad.setText(empleadoBuscado.getNacionalidad());
                     inpNombre.setText(empleadoBuscado.getNombre());
                     inpEdad.setText(Integer.toString(empleadoBuscado.getEdad()));
-                    inpDepartamento.setText(Integer.toString(empleadoBuscado.getNumSeguidores()));
+                    inpDepartamento.setText(Integer.toString(empleadoBuscado.getIdDepartamento()));
+                    inpFechaIncorporacion.setText(empleadoBuscado.getFechaINC());
                 } else {
                     System.out.println("No se encontró ningún usuario con el ID: " + inpIDEmpleado);
                 }

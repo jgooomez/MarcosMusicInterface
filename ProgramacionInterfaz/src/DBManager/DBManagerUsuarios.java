@@ -1,7 +1,7 @@
 package DBManager;
-import ClasePOJO.Usuario;
+
 import java.sql.ResultSet;
-import java.sql.SQLException;
+import java. sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -236,8 +236,8 @@ public class DBManagerUsuarios {
         }
     }
 
-    public static ArrayList<Usuario> obtenerUsuarios() {
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+    public static ArrayList<ClasePOJO.Usuario> obtenerUsuarios() {
+        ArrayList<ClasePOJO.Usuario> usuarios = new ArrayList<>();
 
         try {
             ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
@@ -250,7 +250,7 @@ public class DBManagerUsuarios {
                 int numSeguidores = rs.getInt(DB_US_NUMSEG);
                 String fotoPerfil = rs.getString(DB_US_FOTO);
 
-                Usuario usuario = new Usuario(id, nacionalidad, nombre, edad, numSeguidores);
+                ClasePOJO.Usuario usuario = new ClasePOJO.Usuario(id, nacionalidad, nombre, edad, numSeguidores);
                 usuarios.add(usuario);
             }
 
