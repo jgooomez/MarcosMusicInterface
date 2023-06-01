@@ -80,7 +80,7 @@ public class DBManagerUsuarios {
     public static ResultSet getUsuario(int idUsuario) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = DBManagerConexion.getConexion().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = DBManagerConexion.conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idUsuario + "';";
             //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);

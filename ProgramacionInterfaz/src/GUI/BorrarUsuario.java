@@ -1,5 +1,7 @@
 package GUI;
 
+import DBManager.DBManagerUsuarios;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -54,8 +56,13 @@ public class BorrarUsuario {
                         new String[]{"Confirmar", "Cancelar"}, "Confirmar");
 
                 if (opcion == JOptionPane.YES_OPTION) {
-                    // Realizar acciones si se selecciona "Confirmar"
-                    System.out.println("Confirmar");
+                    if (DBManagerUsuarios.existsUsuario(Integer.parseInt(inpIdUsr.getText()))) {
+                        if (DBManagerUsuarios.deleteUsuario(Integer.parseInt(inpIdUsr.getText()))) {
+                            JOptionPane.showConfirmDialog(null, "Se ha borrado el usuario: " + inpIdUsr.getText() + "correctamente");
+                        }
+                    } else {
+                        JOptionPane.showConfirmDialog(null, "No se ha encontrado el usuario: " + inpIdUsr.getText());
+                    }
                 } else if (opcion == JOptionPane.NO_OPTION) {
                     // Realizar acciones si se selecciona "Salir"
                     System.out.println("Cancelar");
