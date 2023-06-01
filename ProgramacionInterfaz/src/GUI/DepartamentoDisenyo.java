@@ -1,7 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class DepartamentoDisenyo extends JDialog {
     private JPanel WinDisenyo;
@@ -15,7 +18,7 @@ public class DepartamentoDisenyo extends JDialog {
     private JPanel box_top;
     private JPanel box_botones;
     private JLabel icono;
-    private JLabel txtDptoDisenyo;
+    private JLabel txtTittle;
     private JLabel txtNumDpto;
     private JLabel txtIdDpto;
     private JLabel txtNumTrabajadores;
@@ -25,6 +28,7 @@ public class DepartamentoDisenyo extends JDialog {
 
     public DepartamentoDisenyo() {
         setContentPane(WinDisenyo);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
 
@@ -48,6 +52,12 @@ public class DepartamentoDisenyo extends JDialog {
                 dispose();
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnReturn);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void onOK() {

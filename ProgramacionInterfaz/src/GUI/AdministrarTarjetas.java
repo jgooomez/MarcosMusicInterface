@@ -1,16 +1,10 @@
 package GUI;
 
-import ClasePOJO.Tarjeta;
-import ClasePOJO.Usuario;
-import DBManager.DBManagerTarjetas;
-import DBManager.DBManagerUsuarios;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AdministrarTarjetas extends JDialog {
     private JPanel WinAdminTarjetas;
@@ -27,15 +21,12 @@ public class AdministrarTarjetas extends JDialog {
     private JLabel txtNumTarjeta;
     private JLabel txtIdUsr;
     private JLabel icon;
-    private JButton buscarButton;
 
     public AdministrarTarjetas() {
         setContentPane(WinAdminTarjetas);
         styles();
         setModal(true);
         getRootPane().setDefaultButton(btnDelete);
-        inpNombre.setEnabled(false);
-        inpNumTarjeta.setEnabled(false);
 
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -66,12 +57,6 @@ public class AdministrarTarjetas extends JDialog {
 
         // Añadir la funcionalidad de cada botón
         setListenersBtns();
-        buscarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buscarTarjetaPorID(Integer.parseInt(inpIdUsr.getText()));
-            }
-        });
     }
 
     private void setListenersBtns() {
@@ -80,7 +65,7 @@ public class AdministrarTarjetas extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo = new AnyadirTarjeta();
                 dialogo.setTitle("Añadir tarjeta");
-                dialogo.setSize(400,700);
+                dialogo.setSize(500,400);
                 dialogo.setLocationRelativeTo(null);
                 dialogo.setVisible(true);
             }
@@ -110,18 +95,9 @@ public class AdministrarTarjetas extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
-
-        btnAdd.setFocusable(false);
-        btnAdd.setBackground(MarcosMusic.getBtnColor());
-        btnAdd.setCursor(cursor);
-        btnDelete.setFocusable(false);
-        btnDelete.setBackground(MarcosMusic.getBtnColor());
-        btnDelete.setCursor(cursor);
-        btnReturn.setFocusable(false);
-        btnReturn.setBackground(MarcosMusic.getBtnColor());
-        btnReturn.setCursor(cursor);
+        List<JButton> listaBtns = Arrays.asList(btnAdd, btnDelete, btnReturn);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void onOK() {
@@ -139,27 +115,5 @@ public class AdministrarTarjetas extends JDialog {
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
-    }
-
-    private void buscarTarjetaPorID(int idUsuario) {
-        ArrayList<Tarjeta> tarjetas = DBManagerTarjetas.obtenerTarjeta();
-
-        // Buscar usuario por ID
-        Tarjeta tarjetabuscada = null;
-
-        for (Tarjeta tarjeta : tarjetas) {
-            if (tarjeta.getIdUsuario() == Integer.parseInt(inpIdUsr.getText())) {
-                tarjetabuscada = tarjeta;
-                break;
-            }
-        }
-
-        if (tarjetabuscada != null) {
-            // Mostrar los datos del usuario
-            inpNumTarjeta.setText(String.valueOf(tarjetabuscada.getNumeroTarjeta()));
-            inpNombre.setText(tarjetabuscada.getNombreTitular());
-        } else {
-            System.out.println("No se encontró ningún usuario con el ID: " + inpIdUsr);
-        }
     }
 }

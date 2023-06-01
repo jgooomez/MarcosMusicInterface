@@ -5,6 +5,8 @@ import DBManager.DBManagerUsuarios;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class AgregarUsuario extends JDialog {
     private JPanel winAddUsr;
@@ -32,16 +34,9 @@ public class AgregarUsuario extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        tittleAddUsr.setFont(MarcosMusic.getFontTitle());
-
-        btnAddUsr.setFocusable(false);
-        btnAddUsr.setBackground(MarcosMusic.getBtnColor());
-        btnAddUsr.setCursor(cursor);
-
-        btnCancel.setFocusable(false);
-        btnCancel.setBackground(MarcosMusic.getBtnColor());
-        btnCancel.setCursor(cursor);
+        tittleAddUsr.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnAddUsr, btnCancel);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void setListenersBtns() {

@@ -3,13 +3,14 @@ package GUI;
 import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
-
-import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import java.util.Arrays;
+import java.util.List;
 
 public class BorrarUsuario {
     private JPanel WinBorrarUsr;
-    private JButton bntDeleteUsr;
+    private JButton btnDeleteUsr;
     private JButton btnVolver;
     private JPanel box_botones;
     private JPanel box_top;
@@ -29,15 +30,22 @@ public class BorrarUsuario {
         dialogo.setResizable(false);
         dialogo.setLocationRelativeTo(null);
         dialogo.setContentPane(WinBorrarUsr);
+        styles();
         dialogo.setModal(true);
         setListenersBtns();
         dialogo.setVisible(true);
-        dialogo.getRootPane().setDefaultButton(bntDeleteUsr);
+        dialogo.getRootPane().setDefaultButton(btnDeleteUsr);
         dialogo.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnVolver, btnDeleteUsr);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void setListenersBtns() {
@@ -48,7 +56,7 @@ public class BorrarUsuario {
                 dialogo.dispose();
             }
         });
-        bntDeleteUsr.addActionListener(new ActionListener() {
+        btnDeleteUsr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar el usuario con nombre: (se muestra el numero de la tarjeta)", "Confirmar",

@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Suscripciones extends JDialog {
     private JPanel WinSuscripciones;
@@ -50,24 +52,9 @@ public class Suscripciones extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtTittle.setFont(MarcosMusic.getFontTitle());
-
-        btnReturn.setFocusable(false);
-        btnReturn.setBackground(MarcosMusic.getBtnColor());
-        btnReturn.setCursor(cursor);
-
-        btnType1.setFocusable(false);
-        btnType1.setBackground(MarcosMusic.getBtnColor());
-        btnType1.setCursor(cursor);
-
-        btnType2.setFocusable(false);
-        btnType2.setBackground(MarcosMusic.getBtnColor());
-        btnType2.setCursor(cursor);
-
-        btnType3.setFocusable(false);
-        btnType3.setBackground(MarcosMusic.getBtnColor());
-        btnType3.setCursor(cursor);
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnReturn, btnType1, btnType2, btnType3);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void setListenersBtns() {

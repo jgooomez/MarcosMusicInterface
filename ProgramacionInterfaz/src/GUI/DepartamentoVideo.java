@@ -1,7 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class DepartamentoVideo extends JDialog {
     private JPanel WinVideo;
@@ -25,6 +28,7 @@ public class DepartamentoVideo extends JDialog {
 
     public DepartamentoVideo() {
         setContentPane(WinVideo);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
         // call onCancel() when cross is clicked
@@ -47,6 +51,12 @@ public class DepartamentoVideo extends JDialog {
                 dispose();
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnReturn);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void onOK() {

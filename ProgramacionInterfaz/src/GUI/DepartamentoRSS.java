@@ -1,7 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class DepartamentoRSS extends JDialog {
     private JPanel WinRSS;
@@ -25,6 +28,7 @@ public class DepartamentoRSS extends JDialog {
 
     public DepartamentoRSS() {
         setContentPane(WinRSS);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
 
@@ -48,6 +52,12 @@ public class DepartamentoRSS extends JDialog {
                 dispose();
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnReturn);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void onOK() {

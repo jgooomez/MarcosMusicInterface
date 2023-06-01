@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
 
 public class MarcosMusic extends JFrame {
     private JPanel principal;
@@ -17,6 +19,7 @@ public class MarcosMusic extends JFrame {
     private JLabel txtTituloPantallaPrincipal;
     private JPanel panelGeneral;
     static JFrame frame = new JFrame("MarcosMusic");
+    private List<JButton> listaBtns;
 
 
     public static void main(String[] args) {
@@ -28,7 +31,9 @@ public class MarcosMusic extends JFrame {
     }
 
     public MarcosMusic() {
-        styles();
+        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
+        stylesBtns(listaBtns);
+        txtTituloPantallaPrincipal.setFont(getFontTitle());
         configurarBotones();
         DBManagerConexion.loadDriver();
         DBManagerConexion.connect();
@@ -100,25 +105,15 @@ public class MarcosMusic extends JFrame {
         });
     }
 
-    private void styles() {
+    public static void stylesBtns(List<JButton> listaBotones) {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtTituloPantallaPrincipal.setFont(getFontTitle());
 
-        btnVerUsuarios.setFocusable(false);
-        btnVerUsuarios.setBackground(getBtnColor());
-        btnVerUsuarios.setCursor(cursor);
-        btnSuscripciones.setFocusable(false);
-        btnSuscripciones.setBackground(getBtnColor());
-        btnSuscripciones.setCursor(cursor);
-        btnTarjetas.setFocusable(false);
-        btnTarjetas.setBackground(getBtnColor());
-        btnTarjetas.setCursor(cursor);
-        btnDepartamento.setFocusable(false);
-        btnDepartamento.setBackground(getBtnColor());
-        btnDepartamento.setCursor(cursor);
-        btnEmpleados.setFocusable(false);
-        btnEmpleados.setBackground(getBtnColor());
-        btnEmpleados.setCursor(cursor);
+        for (JButton btn:
+             listaBotones) {
+            btn.setFocusable(false);
+            btn.setBackground(getBtnColor());
+            btn.setCursor(cursor);
+        }
     }
 
     public static Font getFontTitle() {
