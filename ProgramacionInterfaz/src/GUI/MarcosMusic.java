@@ -51,7 +51,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new Usuarios();
                 dialogo1.setTitle("Vista de usuarios");
-                dialogo1.setSize(400, 700);
+                dialogo1.setSize(700, 400);
                 dialogo1.setLocationRelativeTo(null);
                 dialogo1.setVisible(true);
             }

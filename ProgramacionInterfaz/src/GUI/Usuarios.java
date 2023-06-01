@@ -104,6 +104,13 @@ public class Usuarios extends JDialog {
                 dialog.setVisible(true);
             }
         });
+
+        btnDeleteUsr.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new BorrarUsuario();
+            }
+        });
     }
 
     private void listenerBtnBuscar() {
@@ -165,7 +172,6 @@ public class Usuarios extends JDialog {
     }
 
     private void onCancel() {
-
         dispose();
     }
 
