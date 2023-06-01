@@ -9,7 +9,8 @@ public class BorrarUsuario extends JDialog {
     private JButton btnVolver;
     private JPanel box_botones;
     private JPanel box_top;
-    private JTextField textField2;
+    private JTextField inpIdUsr;
+    private JLabel icono;
 
     public BorrarUsuario() {
         setContentPane(WinBorrarUsr);

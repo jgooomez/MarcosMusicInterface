@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class DBManagerConexion {
 
-    //CHÚPALA
     public static Connection conn = null;
 
     public static Connection getConexion() {
