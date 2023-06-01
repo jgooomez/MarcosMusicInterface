@@ -54,7 +54,7 @@ public class DepartamentoVideo extends JDialog {
     }
 
     private void styles() {
-        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 20));
         List<JButton> listaBtns = Arrays.asList(btnReturn);
         MarcosMusic.stylesBtns(listaBtns);
     }
