@@ -21,6 +21,7 @@ public class AdministrarTarjetas extends JDialog {
     private JLabel txtNumTarjeta;
     private JLabel txtIdUsr;
     private JLabel icon;
+    private JButton btnBuscar;
 
     public AdministrarTarjetas() {
         setContentPane(WinAdminTarjetas);
@@ -96,7 +97,7 @@ public class AdministrarTarjetas extends JDialog {
 
     private void styles() {
         txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JButton> listaBtns = Arrays.asList(btnAdd, btnDelete, btnReturn);
+        List<JButton> listaBtns = Arrays.asList(btnAdd, btnDelete, btnReturn, btnBuscar);
         MarcosMusic.stylesBtns(listaBtns);
     }
 

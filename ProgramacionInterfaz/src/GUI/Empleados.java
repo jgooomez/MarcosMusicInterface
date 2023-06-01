@@ -31,6 +31,7 @@ public class Empleados extends JDialog {
     private JLabel txtIdEmpleado;
     private JLabel icono;
     private JLabel txtTittle;
+    private JLabel txtDepartamento;
 
     public Empleados() {
         setContentPane(WinEmpleados);

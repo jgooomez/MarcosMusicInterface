@@ -73,7 +73,7 @@ public class Usuarios extends JDialog {
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel);
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr);
         MarcosMusic.stylesBtns(listaBtns);
     }
 

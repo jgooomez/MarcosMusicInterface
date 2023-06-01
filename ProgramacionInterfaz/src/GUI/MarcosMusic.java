@@ -66,7 +66,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new AdministrarTarjetas();
                 dialogo2.setTitle("Administracion de tarjetas");
-                dialogo2.setSize(400, 400);
+                dialogo2.setSize(500, 400);
                 dialogo2.setLocationRelativeTo(null);
                 dialogo2.setVisible(true);
             }

@@ -55,7 +55,7 @@ public class Departamentos extends JDialog {
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JButton> listaBtns = Arrays.asList(btnReturn);
+        List<JButton> listaBtns = Arrays.asList(btnReturn, btnDisenyo, btnAtencionCliente, btnRSS, btnSonido, btnVideo);
         MarcosMusic.stylesBtns(listaBtns);
     }
 
