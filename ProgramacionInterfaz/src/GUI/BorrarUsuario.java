@@ -16,9 +16,7 @@ public class BorrarUsuario extends JDialog {
         setContentPane(WinBorrarUsr);
         setModal(true);
         getRootPane().setDefaultButton(bntDeleteUsr);
-
         setListenersBtns();
-
     }
 
     private void setListenersBtns() {
