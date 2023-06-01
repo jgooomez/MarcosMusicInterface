@@ -1,8 +1,16 @@
 package GUI;
 
+import ClasePOJO.Tarjeta;
+import ClasePOJO.Usuario;
+import DBManager.DBManagerTarjetas;
+import DBManager.DBManagerUsuarios;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AdministrarTarjetas extends JDialog {
     private JPanel WinAdminTarjetas;
@@ -19,12 +27,15 @@ public class AdministrarTarjetas extends JDialog {
     private JLabel txtNumTarjeta;
     private JLabel txtIdUsr;
     private JLabel icon;
+    private JButton buscarButton;
 
     public AdministrarTarjetas() {
         setContentPane(WinAdminTarjetas);
         styles();
         setModal(true);
         getRootPane().setDefaultButton(btnDelete);
+        inpNombre.setEnabled(false);
+        inpNumTarjeta.setEnabled(false);
 
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +66,12 @@ public class AdministrarTarjetas extends JDialog {
 
         // Añadir la funcionalidad de cada botón
         setListenersBtns();
+        buscarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarTarjetaPorID(Integer.parseInt(inpIdUsr.getText()));
+            }
+        });
     }
 
     private void setListenersBtns() {
@@ -122,5 +139,27 @@ public class AdministrarTarjetas extends JDialog {
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
+    }
+
+    private void buscarTarjetaPorID(int idUsuario) {
+        ArrayList<Tarjeta> tarjetas = DBManagerTarjetas.obtenerTarjeta();
+
+        // Buscar usuario por ID
+        Tarjeta tarjetabuscada = null;
+
+        for (Tarjeta tarjeta : tarjetas) {
+            if (tarjeta.getIdUsuario() == Integer.parseInt(inpIdUsr.getText())) {
+                tarjetabuscada = tarjeta;
+                break;
+            }
+        }
+
+        if (tarjetabuscada != null) {
+            // Mostrar los datos del usuario
+            inpNumTarjeta.setText(String.valueOf(tarjetabuscada.getNumeroTarjeta()));
+            inpNombre.setText(tarjetabuscada.getNombreTitular());
+        } else {
+            System.out.println("No se encontró ningún usuario con el ID: " + inpIdUsr);
+        }
     }
 }
