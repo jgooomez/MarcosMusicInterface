@@ -27,7 +27,7 @@ public class DepartamentoAtencionCliente extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
         //rellena los textfild con datos de Atencion al cliente
-        setAtClientData();
+        atClientData();
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -49,26 +49,16 @@ public class DepartamentoAtencionCliente extends JDialog {
             }
         });
     }
-private void setAtClientData(){
-    ArrayList<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento();
-    Departamento departamentoActual = null;
-
-    for (Departamento departamento : departamentos){
-        if (departamento.getIdDepartamento() == 1) {
-            departamentoActual = departamento;
-            break;
-        }
-    }
-    if (departamentoActual != null){
+private void atClientData(){
+    if (DBManagerDepartamento.setAtClientData(1) != null){
         // Mostrar los datos del departamento
-        inpIDDepartamento.setText(String.valueOf(departamentoActual.getIdDepartamento()));
-        inpNombre.setText(departamentoActual.getNombre());
-        inpFechaCreacion.setText(departamentoActual.getFechaCreacion());
-        inpNombreEncargado.setText(departamentoActual.getNombreEncargado());
-        inpNumTrabajadores.setText(String.valueOf(departamentoActual.getNumTrabajadores()));
-        inpNumDeSubDepar.setText(departamentoActual.getNumSubDpto());
+        inpIDDepartamento.setText(String.valueOf(DBManagerDepartamento.setAtClientData(1).getIdDepartamento()));
+        inpNombre.setText(DBManagerDepartamento.setAtClientData(1).getNombre());
+        inpFechaCreacion.setText(DBManagerDepartamento.setAtClientData(1).getFechaCreacion());
+        inpNombreEncargado.setText(DBManagerDepartamento.setAtClientData(1).getNombreEncargado());
+        inpNumTrabajadores.setText(String.valueOf(DBManagerDepartamento.setAtClientData(1).getNumTrabajadores()));
+        inpNumDeSubDepar.setText(DBManagerDepartamento.setAtClientData(1).getNumSubDpto());
     }
-
 }
     private void onOK() {
         // add your code here

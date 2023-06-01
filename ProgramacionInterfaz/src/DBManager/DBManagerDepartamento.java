@@ -220,6 +220,25 @@ public class DBManagerDepartamento {
             return false;
         }
     }
+    /**
+     * Solicita a la BD buscar el departamento correspondiente
+     *
+     * @param idDepartamento ID del departamento a sacar datos
+     * @return Clase.POJO.Departamento
+     */
+    public static Departamento setAtClientData(int idDepartamento){
+        ArrayList<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento();
+        Departamento departamentoActual = null;
+
+        for (Departamento departamento : departamentos){
+            if (departamento.getIdDepartamento() == idDepartamento) {
+                departamentoActual = departamento;
+                break;
+            }
+        }
+        return departamentoActual;
+
+    }
     public static ArrayList<Departamento> obtenerDatosDepartamento(){
         ArrayList<Departamento> departamentos = new ArrayList<>();
         DBManagerConexion.connect();
