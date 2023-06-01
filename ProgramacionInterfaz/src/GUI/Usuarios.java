@@ -87,6 +87,26 @@ public class Usuarios extends JDialog {
     }
 
     private void setListenersBtns() {
+        listenerBtnBuscar();
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnAddUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new AgregarUsuario();
+                dialog.setTitle("Agregar Usuario");
+                dialog.setSize(300, 300);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    private void listenerBtnBuscar() {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -111,22 +131,6 @@ public class Usuarios extends JDialog {
                 } else {
                     System.out.println("No se encontró ningún usuario con el ID: " + inpIdUsr);
                 }
-            }
-        });
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        btnAddUser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new AgregarUsuario();
-                dialog.setTitle("Agregar Usuario");
-                dialog.setSize(300, 300);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
             }
         });
     }
