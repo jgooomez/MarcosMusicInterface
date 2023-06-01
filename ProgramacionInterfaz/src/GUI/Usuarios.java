@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Usuarios extends JDialog {
     private JPanel WinUsuarios;
@@ -70,20 +72,9 @@ public class Usuarios extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtTittle.setFont(MarcosMusic.getFontTitle());
-
-        btnBuscar.setFocusable(false);
-        btnBuscar.setBackground(MarcosMusic.getBtnColor());
-        btnBuscar.setCursor(cursor);
-
-        btnAddUser.setFocusable(false);
-        btnAddUser.setBackground(MarcosMusic.getBtnColor());
-        btnAddUser.setCursor(cursor);
-
-        btnCancel.setFocusable(false);
-        btnCancel.setBackground(MarcosMusic.getBtnColor());
-        btnCancel.setCursor(cursor);
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void setListenersBtns() {
