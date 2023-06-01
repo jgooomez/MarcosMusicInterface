@@ -14,8 +14,14 @@ public class DepartamentoDisenyo extends JDialog {
     private JTextField inpIDDelDepartamento;
     private JPanel box_top;
     private JPanel box_botones;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JLabel icono;
+    private JLabel txtDptoDisenyo;
+    private JLabel txtNumDpto;
+    private JLabel txtIdDpto;
+    private JLabel txtNumTrabajadores;
+    private JLabel txtNombreEncargado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombre;
 
     public DepartamentoDisenyo() {
         setContentPane(WinDisenyo);

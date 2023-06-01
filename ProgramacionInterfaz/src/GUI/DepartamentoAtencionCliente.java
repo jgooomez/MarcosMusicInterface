@@ -12,8 +12,16 @@ public class DepartamentoAtencionCliente extends JDialog {
     private JTextField inpFechaCreacion;
     private JTextField inpNombreEncargado;
     private JTextField inpNumTrabajadores;
-    private JTextField inpNumDeSubDepar;
+    private JTextField inpNumSubDepar;
     private JTextField inpIDDepartamento;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtNumSubDpto;
+    private JLabel txtIdDpto;
+    private JLabel txtNumTrabajadores;
+    private JLabel txtNombreEncargado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombre;
     private JButton buttonOK;
     private JButton buttonCancel;
 

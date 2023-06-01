@@ -11,10 +11,17 @@ public class DepartamentoSonido extends JDialog {
     private JTextField inpNombreEncargado;
     private JTextField inpNumTrabajadores;
     private JTextField inpNumDeSubDepar;
-    private JTextField inpIDDepartamento;
+    private JTextField inpIdDepartamento;
     private JPanel box_botones;
     private JPanel box_top;
-    private JButton buttonOK;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtNumSubDpto;
+    private JLabel txtIdDpto;
+    private JLabel txtNumTrabajadores;
+    private JLabel txtNombreEncargado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombre;
 
     public DepartamentoSonido() {
         setContentPane(WinSonido);

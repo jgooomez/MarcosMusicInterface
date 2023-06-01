@@ -11,14 +11,16 @@ public class BorrarUsuario extends JDialog {
     private JPanel box_top;
     private JTextField inpIdUsr;
     private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtIdUsr;
+    private JPanel box_input;
+    private JPanel box_btns;
 
     public BorrarUsuario() {
         setContentPane(WinBorrarUsr);
         setModal(true);
         getRootPane().setDefaultButton(bntDeleteUsr);
-
         setListenersBtns();
-
     }
 
     private void setListenersBtns() {
