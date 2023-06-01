@@ -19,39 +19,21 @@ public class Empleados extends JDialog {
     private JTextField inpEdad;
     private JTextField inpDepartamento;
     private JTextField inpFechaIncorporacion;
-    private JButton buttonBuscar;
-    private JButton buttonVolver;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtDepartamiento;
+    private JLabel txtFechaCreacion;
+    private JLabel txtEdad;
+    private JLabel txtNombre;
+    private JLabel txtNacionalidad;
+    private JLabel txtIdEmpleado;
 
     public Empleados() {
         setContentPane(WinEmpleados);
         setModal(true);
         getRootPane().setDefaultButton(btnBuscar);
 
-        btnBuscar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ArrayList<Usuario> usuarios = DBManagerUsuarios.obtenerUsuarios();
-
-                // Buscar usuario por ID
-                Usuario empleadoBuscado = null;
-
-                for (Usuario usuario : usuarios) {
-                    if (usuario.getId() == Integer.parseInt(inpIDEmpleado.getText())) {
-                        empleadoBuscado = usuario;
-                        break;
-                    }
-                }
-
-                if (empleadoBuscado != null) {
-                    // Mostrar los datos del usuario
-                    inpNacionalidad.setText(empleadoBuscado.getNacionalidad());
-                    inpNombre.setText(empleadoBuscado.getNombre());
-                    inpEdad.setText(Integer.toString(empleadoBuscado.getEdad()));
-                    inpDepartamento.setText(Integer.toString(empleadoBuscado.getNumSeguidores()));
-                } else {
-                    System.out.println("No se encontró ningún usuario con el ID: " + inpIDEmpleado);
-                }
-            }
-        });
+        listenerBtnBuscar();
 
         btnReturn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -73,6 +55,32 @@ public class Empleados extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void listenerBtnBuscar() {
+        btnBuscar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Usuario> usuarios = DBManagerUsuarios.obtenerUsuarios();
+                Usuario empleadoBuscado = null;
+
+                for (Usuario usuario : usuarios) {
+                    if (usuario.getId() == Integer.parseInt(inpIDEmpleado.getText())) {
+                        empleadoBuscado = usuario;
+                        break;
+                    }
+                }
+
+                if (empleadoBuscado != null) {
+                    // Mostrar los datos del usuario
+                    inpNacionalidad.setText(empleadoBuscado.getNacionalidad());
+                    inpNombre.setText(empleadoBuscado.getNombre());
+                    inpEdad.setText(Integer.toString(empleadoBuscado.getEdad()));
+                    inpDepartamento.setText(Integer.toString(empleadoBuscado.getNumSeguidores()));
+                } else {
+                    System.out.println("No se encontró ningún usuario con el ID: " + inpIDEmpleado);
+                }
+            }
+        });
     }
 
     private void onOK() {

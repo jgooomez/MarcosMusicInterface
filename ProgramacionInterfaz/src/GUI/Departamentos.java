@@ -13,8 +13,10 @@ public class Departamentos extends JDialog {
     private JButton btnSonido;
     private JButton btnVideo;
     private JButton btnRSS;
-    private JButton btnDiseño;
-    private JButton buttonCancel;
+    private JButton btnDisenyo;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JPanel box_content;
 
     public Departamentos() {
         setContentPane(WinDepartamentos);
@@ -40,36 +42,27 @@ public class Departamentos extends JDialog {
                 dispose();
             }
         });
-        btnAtencionCliente.addActionListener(new ActionListener() {
+        listenerAtencionCliente();
+        listenerSonido();
+        listenerVideo();
+        listenerRSS();
+        listenerDisenyo();
+    }
+
+    private void listenerDisenyo() {
+        btnDisenyo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoAtencionCliente();
-                dialog.setTitle("Atencion al Cliente");
+                JDialog dialog = new DepartamentoDisenyo();
+                dialog.setTitle("Redes Sociales");
                 dialog.setSize(350,500);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
-        btnSonido.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoSonido();
-                dialog.setTitle("Sonido");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-        btnVideo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoVideo();
-                dialog.setTitle("Video");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
+    }
+
+    private void listenerRSS() {
         btnRSS.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,11 +73,40 @@ public class Departamentos extends JDialog {
                 dialog.setVisible(true);
             }
         });
-        btnDiseño.addActionListener(new ActionListener() {
+    }
+
+    private void listenerVideo() {
+        btnVideo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoDisenyo();
-                dialog.setTitle("Redes Sociales");
+                JDialog dialog = new DepartamentoVideo();
+                dialog.setTitle("Video");
+                dialog.setSize(350,500);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    private void listenerSonido() {
+        btnSonido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new DepartamentoSonido();
+                dialog.setTitle("Sonido");
+                dialog.setSize(350,500);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+    }
+
+    private void listenerAtencionCliente() {
+        btnAtencionCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new DepartamentoAtencionCliente();
+                dialog.setTitle("Atencion al Cliente");
                 dialog.setSize(350,500);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);

@@ -14,7 +14,10 @@ public class Suscripciones extends JDialog {
     private JButton btnType1;
     private JButton btnType3;
     private JButton btnType2;
-    private JLabel txtTiposSuscrip;
+    private JLabel txtTittle;
+    private JLabel icono;
+    private JLabel txtTipo;
+    private JLabel txtPrecio;
 
     public Suscripciones() {
         styles();
@@ -48,7 +51,7 @@ public class Suscripciones extends JDialog {
 
     private void styles() {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtTiposSuscrip.setFont(MarcosMusic.getFontTitle());
+        txtTittle.setFont(MarcosMusic.getFontTitle());
 
         btnReturn.setFocusable(false);
         btnReturn.setBackground(MarcosMusic.getBtnColor());

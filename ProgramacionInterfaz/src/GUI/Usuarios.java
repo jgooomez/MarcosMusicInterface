@@ -6,8 +6,6 @@ import ClasePOJO.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Usuarios extends JDialog {
@@ -15,16 +13,23 @@ public class Usuarios extends JDialog {
     private JButton btnBuscar;
     private JButton btnCancel;
     private JTextField inpIdUsr;
-    private JTextField inpNacionalidad;
-    private JTextField inpNombre;
-    private JTextField inpEdad;
-    private JTextField inpNumSeguidores;
+    private JTextField outpNacionalidad;
+    private JTextField outpNombre;
+    private JTextField outpEdad;
+    private JTextField outpNumSeguidores;
     private JButton btnAddUser;
-    private JLabel txtVerUsuario;
+    private JLabel txtTittle;
 
     private JPanel box_botones;
     private JPanel box_top;
     private JButton btnDeleteUsr;
+    private JLabel icono;
+    private JLabel txtNumSeguidores;
+    private JLabel txtFotoPerfil;
+    private JLabel txtEdad;
+    private JLabel txtNombre;
+    private JLabel txtNacionalidad;
+    private JLabel txtIdUsr;
 
     public Usuarios() {
         styles();
@@ -66,7 +71,7 @@ public class Usuarios extends JDialog {
 
     private void styles() {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtVerUsuario.setFont(MarcosMusic.getFontTitle());
+        txtTittle.setFont(MarcosMusic.getFontTitle());
 
         btnBuscar.setFocusable(false);
         btnBuscar.setBackground(MarcosMusic.getBtnColor());
@@ -99,10 +104,10 @@ public class Usuarios extends JDialog {
 
                 if (usuarioBuscado != null) {
                     // Mostrar los datos del usuario
-                    inpNacionalidad.setText(usuarioBuscado.getNacionalidad());
-                    inpNombre.setText(usuarioBuscado.getNombre());
-                    inpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
-                    inpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
+                    outpNacionalidad.setText(usuarioBuscado.getNacionalidad());
+                    outpNombre.setText(usuarioBuscado.getNombre());
+                    outpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
+                    outpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
                 } else {
                     System.out.println("No se encontró ningún usuario con el ID: " + inpIdUsr);
                 }
