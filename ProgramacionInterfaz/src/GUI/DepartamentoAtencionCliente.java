@@ -1,12 +1,9 @@
 package GUI;
 
-import ClasePOJO.Departamento;
 import DBManager.DBManagerDepartamento;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 
 public class DepartamentoAtencionCliente extends JDialog {
     private JPanel WinAtencionCliente;
@@ -49,15 +46,21 @@ public class DepartamentoAtencionCliente extends JDialog {
             }
         });
     }
+    //Este método llama a otro método de DBManagerDepartamento
+    //Se le pasa por variable el id del departamento que corresponde y con el otro método lo busca en la BBDD
+    //Si el return de setDepartamentoData es null aparecera una ventana emergente con el error
+    //Si el return tiene el objeto mostrara en el Form los datos del objeto
 private void atClientData(){
-    if (DBManagerDepartamento.setAtClientData(1) != null){
+    if (DBManagerDepartamento.setDepartamentoData(6) != null){
         // Mostrar los datos del departamento
-        inpIDDepartamento.setText(String.valueOf(DBManagerDepartamento.setAtClientData(1).getIdDepartamento()));
-        inpNombre.setText(DBManagerDepartamento.setAtClientData(1).getNombre());
-        inpFechaCreacion.setText(DBManagerDepartamento.setAtClientData(1).getFechaCreacion());
-        inpNombreEncargado.setText(DBManagerDepartamento.setAtClientData(1).getNombreEncargado());
-        inpNumTrabajadores.setText(String.valueOf(DBManagerDepartamento.setAtClientData(1).getNumTrabajadores()));
-        inpNumDeSubDepar.setText(DBManagerDepartamento.setAtClientData(1).getNumSubDpto());
+        inpIDDepartamento.setText(String.valueOf(DBManagerDepartamento.setDepartamentoData(6).getIdDepartamento()));
+        inpNombre.setText(DBManagerDepartamento.setDepartamentoData(6).getNombre());
+        inpFechaCreacion.setText(DBManagerDepartamento.setDepartamentoData(6).getFechaCreacion());
+        inpNombreEncargado.setText(DBManagerDepartamento.setDepartamentoData(6).getNombreEncargado());
+        inpNumTrabajadores.setText(String.valueOf(DBManagerDepartamento.setDepartamentoData(6).getNumTrabajadores()));
+        inpNumDeSubDepar.setText(DBManagerDepartamento.setDepartamentoData(6).getNumSubDpto());
+    }else {
+        JOptionPane.showMessageDialog(WinAtencionCliente,"No se encuentra el departamento en la base de datos","Fallo en la busqueda",JOptionPane.ERROR_MESSAGE);
     }
 }
     private void onOK() {

@@ -226,7 +226,7 @@ public class DBManagerDepartamento {
      * @param idDepartamento ID del departamento a sacar datos
      * @return Clase.POJO.Departamento
      */
-    public static Departamento setAtClientData(int idDepartamento){
+    public static Departamento setDepartamentoData(int idDepartamento){
         ArrayList<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento();
         Departamento departamentoActual = null;
 
@@ -239,6 +239,8 @@ public class DBManagerDepartamento {
         return departamentoActual;
 
     }
+    //Crea un arraylist de los Objetos POJO Departamento
+    //Este metodo se usa en setDepartamentoData para sacar los datos posteriormente en sus FORMS
     public static ArrayList<Departamento> obtenerDatosDepartamento(){
         ArrayList<Departamento> departamentos = new ArrayList<>();
         DBManagerConexion.connect();

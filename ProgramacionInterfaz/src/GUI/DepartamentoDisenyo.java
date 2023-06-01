@@ -1,5 +1,7 @@
 package GUI;
 
+import DBManager.DBManagerDepartamento;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -8,10 +10,10 @@ public class DepartamentoDisenyo extends JDialog {
     private JButton btnReturn;
     private JTextField inpNombre;
     private JTextField inpFechaCreacion;
-    private JTextField inpNombreEncar;
-    private JTextField inpNumTrabaja;
-    private JTextField inpNumSubDepar;
-    private JTextField inpIDDelDepartamento;
+    private JTextField inpNombreEncargado;
+    private JTextField inpNumTrabajadores;
+    private JTextField inpNumDeSubDepar;
+    private JTextField inpIDDepartamento;
     private JPanel box_top;
     private JPanel box_botones;
     private JButton buttonOK;
@@ -21,6 +23,7 @@ public class DepartamentoDisenyo extends JDialog {
         setContentPane(WinDisenyo);
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
+        departamentoDisenyoData();
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -43,7 +46,17 @@ public class DepartamentoDisenyo extends JDialog {
             }
         });
     }
-
+    private void departamentoDisenyoData(){
+        if (DBManagerDepartamento.setDepartamentoData(2) != null){
+            // Mostrar los datos del departamento
+            inpIDDepartamento.setText(String.valueOf(DBManagerDepartamento.setDepartamentoData(2).getIdDepartamento()));
+            inpNombre.setText(DBManagerDepartamento.setDepartamentoData(2).getNombre());
+            inpFechaCreacion.setText(DBManagerDepartamento.setDepartamentoData(2).getFechaCreacion());
+            inpNombreEncargado.setText(DBManagerDepartamento.setDepartamentoData(2).getNombreEncargado());
+            inpNumTrabajadores.setText(String.valueOf(DBManagerDepartamento.setDepartamentoData(2).getNumTrabajadores()));
+            inpNumDeSubDepar.setText(DBManagerDepartamento.setDepartamentoData(2).getNumSubDpto());
+        }
+    }
     private void onOK() {
         // add your code here
         dispose();
