@@ -3,7 +3,9 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class BorrarUsuario extends JDialog {
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+
+public class BorrarUsuario {
     private JPanel WinBorrarUsr;
     private JButton bntDeleteUsr;
     private JButton btnVolver;
@@ -15,19 +17,33 @@ public class BorrarUsuario extends JDialog {
     private JLabel txtIdUsr;
     private JPanel box_input;
     private JPanel box_btns;
+    private final JDialog dialogo;
 
     public BorrarUsuario() {
-        setContentPane(WinBorrarUsr);
-        setModal(true);
-        getRootPane().setDefaultButton(bntDeleteUsr);
+        dialogo = new JDialog();
+        dialogo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        dialogo.setTitle("Borrar Usuario");
+        dialogo.setSize(500, 300);
+        dialogo.setResizable(false);
+        dialogo.setLocationRelativeTo(null);
+        dialogo.setContentPane(WinBorrarUsr);
+        dialogo.setModal(true);
         setListenersBtns();
+        dialogo.setVisible(true);
+        dialogo.getRootPane().setDefaultButton(bntDeleteUsr);
+        dialogo.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
     }
 
     private void setListenersBtns() {
         btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                System.out.println("LLEGA");
+                dialogo.dispose();
             }
         });
         bntDeleteUsr.addActionListener(new ActionListener() {
@@ -48,10 +64,7 @@ public class BorrarUsuario extends JDialog {
         });
     }
 
-    public static void main(String[] args) {
-        BorrarUsuario dialog = new BorrarUsuario();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    private void onCancel() {
+        dialogo.dispose();
     }
 }
