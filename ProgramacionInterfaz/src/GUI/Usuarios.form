@@ -62,7 +62,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="d6e9a" class="javax.swing.JLabel">
+          <component id="d6e9a" class="javax.swing.JLabel" binding="txtNumSeguidores">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -70,7 +70,7 @@
               <text value="Nº Seguidores:"/>
             </properties>
           </component>
-          <component id="aa148" class="javax.swing.JLabel">
+          <component id="aa148" class="javax.swing.JLabel" binding="txtFotoPerfil">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -78,7 +78,7 @@
               <text value="Foto de perfil:"/>
             </properties>
           </component>
-          <component id="67b58" class="javax.swing.JLabel">
+          <component id="67b58" class="javax.swing.JLabel" binding="txtEdad">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -86,7 +86,7 @@
               <text value="Edad:"/>
             </properties>
           </component>
-          <component id="bda57" class="javax.swing.JLabel">
+          <component id="bda57" class="javax.swing.JLabel" binding="txtNombre">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -94,7 +94,7 @@
               <text value="Nombre:"/>
             </properties>
           </component>
-          <component id="5b964" class="javax.swing.JLabel">
+          <component id="5b964" class="javax.swing.JLabel" binding="txtNacionalidad">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -102,7 +102,7 @@
               <text value="Nacionalidad:"/>
             </properties>
           </component>
-          <component id="6c748" class="javax.swing.JLabel">
+          <component id="6c748" class="javax.swing.JLabel" binding="txtIdUsr">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -118,7 +118,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="10282" class="javax.swing.JTextField" binding="inpNacionalidad">
+          <component id="10282" class="javax.swing.JTextField" binding="outpNacionalidad">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -129,7 +129,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="cd07d" class="javax.swing.JTextField" binding="inpNombre">
+          <component id="cd07d" class="javax.swing.JTextField" binding="outpNombre">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -140,7 +140,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="ca316" class="javax.swing.JTextField" binding="inpEdad">
+          <component id="ca316" class="javax.swing.JTextField" binding="outpEdad">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -151,7 +151,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="41a39" class="javax.swing.JTextField" binding="inpNumSeguidores">
+          <component id="41a39" class="javax.swing.JTextField" binding="outpNumSeguidores">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -164,7 +164,7 @@
           </component>
         </children>
       </grid>
-      <component id="7a1f5" class="javax.swing.JLabel">
+      <component id="7a1f5" class="javax.swing.JLabel" binding="icono">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -173,7 +173,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="9351b" class="javax.swing.JLabel" binding="txtVerUsuario">
+      <component id="9351b" class="javax.swing.JLabel" binding="txtTittle">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

@@ -35,7 +35,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="4ed71" class="javax.swing.JLabel">
+          <component id="4ed71" class="javax.swing.JLabel" binding="txtNumSubDpto">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -43,7 +43,7 @@
               <text value="Nº de SubDepartamentos:"/>
             </properties>
           </component>
-          <component id="659ae" class="javax.swing.JLabel">
+          <component id="659ae" class="javax.swing.JLabel" binding="txtIdDpto">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -51,7 +51,7 @@
               <text value="ID del departamento:"/>
             </properties>
           </component>
-          <component id="48c6a" class="javax.swing.JLabel">
+          <component id="48c6a" class="javax.swing.JLabel" binding="txtNumTrabajadores">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -59,7 +59,7 @@
               <text value="Nº de trabajadores:"/>
             </properties>
           </component>
-          <component id="e67bd" class="javax.swing.JLabel">
+          <component id="e67bd" class="javax.swing.JLabel" binding="txtNombreEncargado">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -67,7 +67,7 @@
               <text value="Nombre del encargado:"/>
             </properties>
           </component>
-          <component id="5478c" class="javax.swing.JLabel">
+          <component id="5478c" class="javax.swing.JLabel" binding="txtFechaCreacion">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -75,7 +75,7 @@
               <text value="Fecha de creacion:"/>
             </properties>
           </component>
-          <component id="2ac00" class="javax.swing.JLabel">
+          <component id="2ac00" class="javax.swing.JLabel" binding="txtNombre">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -145,16 +145,16 @@
           </component>
         </children>
       </grid>
-      <component id="c145" class="javax.swing.JLabel">
+      <component id="c145" class="javax.swing.JLabel" binding="icono">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <icon value="iconos/redes-sociales.png"/>
           <text value=""/>
         </properties>
       </component>
-      <component id="1a7d8" class="javax.swing.JLabel">
+      <component id="1a7d8" class="javax.swing.JLabel" binding="txtTittle">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

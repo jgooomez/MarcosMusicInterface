@@ -14,8 +14,14 @@ public class DepartamentoRSS extends JDialog {
     private JTextField inpNumTrabajadores;
     private JTextField inpNumDeSubDepar;
     private JTextField inpIDDepartamento;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtNumSubDpto;
+    private JLabel txtIdDpto;
+    private JLabel txtNumTrabajadores;
+    private JLabel txtNombreEncargado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombre;
 
     public DepartamentoRSS() {
         setContentPane(WinRSS);
