@@ -1,7 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class DepartamentoSonido extends JDialog {
     private JPanel WinSonido;
@@ -11,13 +14,21 @@ public class DepartamentoSonido extends JDialog {
     private JTextField inpNombreEncargado;
     private JTextField inpNumTrabajadores;
     private JTextField inpNumDeSubDepar;
-    private JTextField inpIDDepartamento;
+    private JTextField inpIdDepartamento;
     private JPanel box_botones;
     private JPanel box_top;
-    private JButton buttonOK;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtNumSubDpto;
+    private JLabel txtIdDpto;
+    private JLabel txtNumTrabajadores;
+    private JLabel txtNombreEncargado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombre;
 
     public DepartamentoSonido() {
         setContentPane(WinSonido);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
         // call onCancel() when cross is clicked
@@ -40,6 +51,12 @@ public class DepartamentoSonido extends JDialog {
                 dispose();
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 20));
+        List<JButton> listaBtns = Arrays.asList(btnReturn);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void onOK() {

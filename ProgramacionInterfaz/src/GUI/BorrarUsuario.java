@@ -1,34 +1,62 @@
 package GUI;
 
-import javax.swing.*;
-import java.awt.event.*;
+import DBManager.DBManagerUsuarios;
 
-public class BorrarUsuario extends JDialog {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
+
+public class BorrarUsuario {
     private JPanel WinBorrarUsr;
-    private JButton bntDeleteUsr;
+    private JButton btnDeleteUsr;
     private JButton btnVolver;
     private JPanel box_botones;
     private JPanel box_top;
     private JTextField inpIdUsr;
     private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtIdUsr;
+    private JPanel box_input;
+    private JPanel box_btns;
+    private final JDialog dialogo;
 
     public BorrarUsuario() {
-        setContentPane(WinBorrarUsr);
-        setModal(true);
-        getRootPane().setDefaultButton(bntDeleteUsr);
-
+        dialogo = new JDialog();
+        dialogo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        dialogo.setTitle("Borrar Usuario");
+        dialogo.setSize(500, 300);
+        dialogo.setResizable(false);
+        dialogo.setLocationRelativeTo(null);
+        dialogo.setContentPane(WinBorrarUsr);
+        styles();
+        dialogo.setModal(true);
         setListenersBtns();
+        dialogo.setVisible(true);
+        dialogo.getRootPane().setDefaultButton(btnDeleteUsr);
+        dialogo.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
+    }
 
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnVolver, btnDeleteUsr);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void setListenersBtns() {
         btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                System.out.println("LLEGA");
+                dialogo.dispose();
             }
         });
-        bntDeleteUsr.addActionListener(new ActionListener() {
+        btnDeleteUsr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar el usuario con nombre: (se muestra el numero de la tarjeta)", "Confirmar",
@@ -36,8 +64,13 @@ public class BorrarUsuario extends JDialog {
                         new String[]{"Confirmar", "Cancelar"}, "Confirmar");
 
                 if (opcion == JOptionPane.YES_OPTION) {
-                    // Realizar acciones si se selecciona "Confirmar"
-                    System.out.println("Confirmar");
+                    if (DBManagerUsuarios.existsUsuario(Integer.parseInt(inpIdUsr.getText()))) {
+                        if (DBManagerUsuarios.deleteUsuario(Integer.parseInt(inpIdUsr.getText()))) {
+                            JOptionPane.showConfirmDialog(null, "Se ha borrado el usuario: " + inpIdUsr.getText() + "correctamente");
+                        }
+                    } else {
+                        JOptionPane.showConfirmDialog(null, "No se ha encontrado el usuario: " + inpIdUsr.getText());
+                    }
                 } else if (opcion == JOptionPane.NO_OPTION) {
                     // Realizar acciones si se selecciona "Salir"
                     System.out.println("Cancelar");
@@ -46,10 +79,7 @@ public class BorrarUsuario extends JDialog {
         });
     }
 
-    public static void main(String[] args) {
-        BorrarUsuario dialog = new BorrarUsuario();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    private void onCancel() {
+        dialogo.dispose();
     }
 }

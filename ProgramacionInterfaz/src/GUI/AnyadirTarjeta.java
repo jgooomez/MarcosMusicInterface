@@ -5,6 +5,8 @@ import DBManager.DBManagerTarjetas;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class AnyadirTarjeta extends JDialog {
     private JPanel principal;
@@ -12,16 +14,19 @@ public class AnyadirTarjeta extends JDialog {
     private JPanel box_top;
     private JTextField inpTlf;
     private JButton btnConfirmar;
-    private JRadioButton btnVisaRadio;
-    private JRadioButton btnMastercardRadio;
+    private JRadioButton rbtnVisaRadio;
+    private JRadioButton rbtnMastercardRadio;
     private JTextField inpNumTarjeta;
     private JTextField inpNombreTitular;
     private JTextField inpCVV;
     private JTextField inpCaducidad;
     private JButton btnReturn;
-    private JLabel txtAgregarTarjetaCredito;
+    private JLabel txtTittle;
     private JTextField inpIDUsuario;
     private JLabel idUsuario;
+    private JLabel icono;
+    private JPanel box_btns;
+    private JPanel box_inputs;
 
     public static void main(String[] args) {
         AnyadirTarjeta dialog = new AnyadirTarjeta();
@@ -46,7 +51,7 @@ public class AnyadirTarjeta extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 String tipo = "";
 
-                if (btnMastercardRadio.isSelected()) {
+                if (rbtnMastercardRadio.isSelected()) {
                     tipo = "Mastercard";
                 } else {
                     tipo = "Visa";
@@ -67,19 +72,9 @@ public class AnyadirTarjeta extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtAgregarTarjetaCredito.setFont(new Font("Calibri", Font.BOLD, 25));
-
-        btnVisaRadio.setFocusable(false);
-        btnVisaRadio.setCursor(cursor);
-        btnMastercardRadio.setFocusable(false);
-        btnMastercardRadio.setCursor(cursor);
-        btnConfirmar.setFocusable(false);
-        btnConfirmar.setBackground(MarcosMusic.getBtnColor());
-        btnConfirmar.setCursor(cursor);
-        btnReturn.setFocusable(false);
-        btnReturn.setBackground(MarcosMusic.getBtnColor());
-        btnReturn.setCursor(cursor);
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnConfirmar, btnReturn);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     public boolean compruebaTarjeta() {
@@ -88,7 +83,7 @@ public class AnyadirTarjeta extends JDialog {
             JOptionPane.showMessageDialog(null, "El numero de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.", "Error en el formato", JOptionPane.ERROR_MESSAGE);
             inpNumTarjeta.setText("");
             isValid = false;
-        } else if (!(btnMastercardRadio.isSelected() || btnVisaRadio.isSelected())) {
+        } else if (!(rbtnMastercardRadio.isSelected() || rbtnVisaRadio.isSelected())) {
             JOptionPane.showMessageDialog(null, "Seleccione un metodo de pago.");
             isValid = false;
         } else if (inpNombreTitular.getText().length() < 3) {

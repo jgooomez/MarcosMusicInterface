@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class AdministrarTarjetas extends JDialog {
     private JPanel WinAdminTarjetas;
@@ -19,6 +21,7 @@ public class AdministrarTarjetas extends JDialog {
     private JLabel txtNumTarjeta;
     private JLabel txtIdUsr;
     private JLabel icon;
+    private JButton btnBuscar;
 
     public AdministrarTarjetas() {
         setContentPane(WinAdminTarjetas);
@@ -63,7 +66,7 @@ public class AdministrarTarjetas extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo = new AnyadirTarjeta();
                 dialogo.setTitle("Añadir tarjeta");
-                dialogo.setSize(400,700);
+                dialogo.setSize(500,400);
                 dialogo.setLocationRelativeTo(null);
                 dialogo.setVisible(true);
             }
@@ -93,18 +96,9 @@ public class AdministrarTarjetas extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
         txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
-
-        btnAdd.setFocusable(false);
-        btnAdd.setBackground(MarcosMusic.getBtnColor());
-        btnAdd.setCursor(cursor);
-        btnDelete.setFocusable(false);
-        btnDelete.setBackground(MarcosMusic.getBtnColor());
-        btnDelete.setCursor(cursor);
-        btnReturn.setFocusable(false);
-        btnReturn.setBackground(MarcosMusic.getBtnColor());
-        btnReturn.setCursor(cursor);
+        List<JButton> listaBtns = Arrays.asList(btnAdd, btnDelete, btnReturn, btnBuscar);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void onOK() {

@@ -5,8 +5,11 @@ import DBManager.DBManagerEmpleado;
 import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Empleados extends JDialog {
     private JPanel WinEmpleados;
@@ -20,11 +23,19 @@ public class Empleados extends JDialog {
     private JTextField inpEdad;
     private JTextField inpDepartamento;
     private JTextField inpFechaIncorporacion;
-    private JButton buttonBuscar;
-    private JButton buttonVolver;
+    private JLabel txtDepartamiento;
+    private JLabel txtFechaCreacion;
+    private JLabel txtEdad;
+    private JLabel txtNombre;
+    private JLabel txtNacionalidad;
+    private JLabel txtIdEmpleado;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtDepartamento;
 
     public Empleados() {
         setContentPane(WinEmpleados);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnBuscar);
 
@@ -76,6 +87,12 @@ public class Empleados extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void onOK() {

@@ -6,25 +6,32 @@ import ClasePOJO.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Usuarios extends JDialog {
     private JPanel WinUsuarios;
     private JButton btnBuscar;
     private JButton btnCancel;
     private JTextField inpIdUsr;
-    private JTextField inpNacionalidad;
-    private JTextField inpNombre;
-    private JTextField inpEdad;
-    private JTextField inpNumSeguidores;
+    private JTextField outpNacionalidad;
+    private JTextField outpNombre;
+    private JTextField outpEdad;
+    private JTextField outpNumSeguidores;
     private JButton btnAddUser;
-    private JLabel txtVerUsuario;
+    private JLabel txtTittle;
 
     private JPanel box_botones;
     private JPanel box_top;
     private JButton btnDeleteUsr;
+    private JLabel icono;
+    private JLabel txtNumSeguidores;
+    private JLabel txtFotoPerfil;
+    private JLabel txtEdad;
+    private JLabel txtNombre;
+    private JLabel txtNacionalidad;
+    private JLabel txtIdUsr;
 
     public Usuarios() {
         styles();
@@ -65,23 +72,39 @@ public class Usuarios extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtVerUsuario.setFont(MarcosMusic.getFontTitle());
-
-        btnBuscar.setFocusable(false);
-        btnBuscar.setBackground(MarcosMusic.getBtnColor());
-        btnBuscar.setCursor(cursor);
-
-        btnAddUser.setFocusable(false);
-        btnAddUser.setBackground(MarcosMusic.getBtnColor());
-        btnAddUser.setCursor(cursor);
-
-        btnCancel.setFocusable(false);
-        btnCancel.setBackground(MarcosMusic.getBtnColor());
-        btnCancel.setCursor(cursor);
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr);
+        MarcosMusic.stylesBtns(listaBtns);
     }
 
     private void setListenersBtns() {
+        listenerBtnBuscar();
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnAddUser.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new AgregarUsuario();
+                dialog.setTitle("Agregar Usuario");
+                dialog.setSize(300, 300);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+
+        btnDeleteUsr.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new BorrarUsuario();
+            }
+        });
+    }
+
+    private void listenerBtnBuscar() {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,30 +122,14 @@ public class Usuarios extends JDialog {
 
                 if (usuarioBuscado != null) {
                     // Mostrar los datos del usuario
-                    inpNacionalidad.setText(usuarioBuscado.getNacionalidad());
-                    inpNombre.setText(usuarioBuscado.getNombre());
-                    inpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
-                    inpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
+                    outpNacionalidad.setText(usuarioBuscado.getNacionalidad());
+                    outpNombre.setText(usuarioBuscado.getNombre());
+                    outpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
+                    outpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha encontrado ningun usuario con ese ID enla BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
                     inpIdUsr.setText("");
                 }
-            }
-        });
-        btnCancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-        btnAddUser.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new AgregarUsuario();
-                dialog.setTitle("Agregar Usuario");
-                dialog.setSize(300, 300);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
             }
         });
     }
@@ -157,7 +164,6 @@ public class Usuarios extends JDialog {
     }
 
     private void onCancel() {
-
         dispose();
     }
 

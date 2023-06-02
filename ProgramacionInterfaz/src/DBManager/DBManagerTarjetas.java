@@ -1,8 +1,13 @@
 package DBManager;
 
+import ClasePOJO.Tarjeta;
+import ClasePOJO.Usuario;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static DBManager.DBManagerConexion.conn;
 
@@ -76,16 +81,16 @@ public class DBManagerTarjetas {
     /**
      * Solicita a la BD la tarjeta con el número de tarjeta indicado
      *
-     * @param numeroTarjeta número de tarjeta
+     * @param idUsuario número de tarjeta
      * @return ResultSet con el resultado de la consulta, null en caso de error
      */
-    public static ResultSet getTarjeta(int numeroTarjeta) {
+    public static ResultSet getTarjeta(int idUsuario) {
         try {
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql = DB_TARJETA_SELECT + " WHERE " + DB_TARJETA_NUMERO + "='" + numeroTarjeta + "';";
+            Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String sql = DB_TARJETA_SELECT + " WHERE " + DB_TARJETA_IDUSUARIO + " = " + idUsuario + ";";
             ResultSet rs = stmt.executeQuery(sql);
 
-            if (!rs.first()) {
+            if (!rs.next()) {
                 return null;
             }
 
@@ -96,6 +101,7 @@ public class DBManagerTarjetas {
             return null;
         }
     }
+
 
     /**
      * Comprueba si en la BD existe la tarjeta con el número de tarjeta indicado
@@ -224,4 +230,32 @@ public class DBManagerTarjetas {
             return false;
         }
     }
+
+    public static ArrayList<Tarjeta> obtenerTarjeta() {
+        ArrayList<ClasePOJO.Tarjeta> tarjetas = new ArrayList<>();
+
+        try {
+            ResultSet rs = getTablaTarjeta(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+            while (rs.next()) {
+                String numero = rs.getString(DB_TARJETA_NUMERO);
+                String nombre = rs.getString(DB_TARJETA_NOMBRE);
+                String telefono = rs.getString(DB_TARJETA_TELEFONO);
+                String tipo = rs.getString(DB_TARJETA_TIPO);
+                int cvv = rs.getInt(DB_TARJETA_CVV);
+                Date caducidad = rs.getDate(DB_TARJETA_CADUCIDAD);
+                int idUsuario = rs.getInt(DB_TARJETA_IDUSUARIO);
+
+                ClasePOJO.Tarjeta tarjeta = new ClasePOJO.Tarjeta(numero, telefono, tipo, nombre, cvv, caducidad, idUsuario);
+                tarjetas.add(tarjeta);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return tarjetas;
+    }
+
 }

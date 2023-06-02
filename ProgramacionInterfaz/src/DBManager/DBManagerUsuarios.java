@@ -1,9 +1,12 @@
 package DBManager;
 
 import java.sql.ResultSet;
-import java. sql.SQLException;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import DBManager.DBManagerConexion;
+
+import static DBManager.DBManagerConexion.conn;
 
 
 public class DBManagerUsuarios {
@@ -80,11 +83,9 @@ public class DBManagerUsuarios {
     public static ResultSet getUsuario(int idUsuario) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = DBManagerConexion.getConexion().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = DBManagerConexion.getConexion().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idUsuario + "';";
-            //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
-            //stmt.close();
 
             // Si no hay primer registro entonces no existe el usuario.
             if (!rs.first()) {
