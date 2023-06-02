@@ -58,6 +58,12 @@ public class AdministrarTarjetas extends JDialog {
 
         // Añadir la funcionalidad de cada botón
         setListenersBtns();
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     private void setListenersBtns() {

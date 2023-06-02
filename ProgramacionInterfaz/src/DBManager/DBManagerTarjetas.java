@@ -258,4 +258,28 @@ public class DBManagerTarjetas {
         return tarjetas;
     }
 
+    public static boolean deleteTarjetasUsuario(int idUsuario) {
+        try {
+            // Creamos la consulta SQL para eliminar las tarjetas del usuario
+            String sql = "DELETE FROM Tarjeta WHERE idUsuario = " + idUsuario;
+
+            // Creamos y ejecutamos la sentencia SQL
+            Statement stmt = conn.createStatement();
+            int rowsAffected = stmt.executeUpdate(sql);
+
+            // Verificamos si se eliminaron filas
+            if (rowsAffected > 0) {
+                System.out.println("Se eliminaron " + rowsAffected + " tarjetas del usuario " + idUsuario);
+                return true;
+            } else {
+                System.out.println("No se encontraron tarjetas del usuario " + idUsuario);
+                return false;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

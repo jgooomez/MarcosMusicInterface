@@ -1,6 +1,6 @@
 package GUI;
 
-import DBManager.DBManagerUsuarios;
+import DBManager.*;
 import ClasePOJO.Usuario;
 
 import javax.swing.*;
@@ -99,7 +99,19 @@ public class Usuarios extends JDialog {
         btnDeleteUsr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new BorrarUsuario();
+                boolean borraReproduccion = DBManagerReproduccion.deleteReproduccionesUsuario(Integer.parseInt(inpIdUsr.getText()));
+                boolean borraTarjeta = DBManagerTarjetas.deleteTarjetasUsuario(Integer.parseInt(inpIdUsr.getText()));
+                boolean borraSuscripcion = DBManagerSubscripcion.deleteSubscripcionesUsuario(Integer.parseInt(inpIdUsr.getText()));
+                boolean borraCuentaPrincipal = DBManagerCuentaPrincipal.deleteCuentasPrincipalesUsuario(Integer.parseInt(inpIdUsr.getText()));
+                boolean borraUsuario = DBManagerUsuarios.deleteUsuario(Integer.parseInt(inpIdUsr.getText()));
+
+                if (DBManagerUsuarios.existsUsuario(Integer.parseInt(inpIdUsr.getText()))) {
+                    if (borraReproduccion && borraTarjeta && borraSuscripcion && borraCuentaPrincipal && borraUsuario) {
+                        JOptionPane.showConfirmDialog(null, "Se ha borrado el usuario: " + inpIdUsr.getText() + "correctamente");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado el usuario: " + inpIdUsr.getText());
+                }
             }
         });
     }
