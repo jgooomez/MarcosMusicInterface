@@ -238,4 +238,25 @@ public class DBManagerCuentaPrincipal {
         }
     }
 
+    public static boolean existsUsuarioEnCuentaPrincipal(int idUsuario) {
+        try {
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT COUNT(*) FROM CuentaPrincipal WHERE idUsuario = " + idUsuario;
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+
+            rs.close();
+            return false;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

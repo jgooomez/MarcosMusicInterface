@@ -263,6 +263,57 @@ public class DBManagerUsuarios {
         return usuarios;
     }
 
+    public static boolean borraTodoUsuarios(int idUsuario) {
+        try {
+            // Verificar existencia del usuario en todas las tablas
+            boolean existeEnTarjeta = DBManagerTarjetas.existsUserInTarjeta(idUsuario);
+            boolean existeEnReproduccion = DBManagerReproduccion.existsUsuarioEnReproduccion(idUsuario);
+            boolean existeEnSubscripcion = DBManagerSubscripcion.existsUsuarioEnSubscripcion(idUsuario);
+            boolean existeEnCuentaPrincipal = DBManagerCuentaPrincipal.existsUsuarioEnCuentaPrincipal(idUsuario);
+            boolean existeEnUsuario = existsUsuario(idUsuario);
+
+            // Si el usuario existe en todas las tablas, proceder con el borrado
+            if (existeEnTarjeta && existeEnReproduccion && existeEnSubscripcion && existeEnCuentaPrincipal && existeEnUsuario) {
+                conn.setAutoCommit(false); // Iniciar transacción
+
+                try {
+                    Statement stmt = conn.createStatement();
+
+                    // Borra los registros de la tabla Tarjeta
+                    String deleteTarjeta = "DELETE FROM Tarjeta WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteTarjeta);
+
+                    // Borra los registros de la tabla Reproduccion
+                    String deleteReproduccion = "DELETE FROM Reproduccion WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteReproduccion);
+
+                    // Borra los registros de la tabla SubscripcionUsuario
+                    String deleteSubscripcion = "DELETE FROM SubscripcionUsuario WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteSubscripcion);
+
+                    // Borra los registros de la tabla CuentaPrincipal
+                    String deleteCuentaPrincipal = "DELETE FROM CuentaPrincipal WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteCuentaPrincipal);
+
+                    // Borra el registro de la tabla Usuario
+                    String deleteUsuario = "DELETE FROM Usuario WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteUsuario);
+
+                    conn.commit(); // Confirmar transacción
+                    conn.setAutoCommit(true); // Restaurar el modo de autocommit
+
+                    return true; // Borrado exitoso
+                } catch (SQLException e) {
+                    conn.rollback(); // Deshacer transacción en caso de error
+                    throw new RuntimeException(e);
+                }
+            } else {
+                return false; // El usuario no existe en todas las tablas, no se puede borrar
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 }
