@@ -109,29 +109,6 @@ public class Usuarios extends JDialog {
         });
     }
 
-//    private void borraUsuario() {
-//        if (DBManagerUsuarios.existsUsuario(Integer.parseInt(inpIdUsr.getText()))) {
-//            boolean borraReproduccion = DBManagerReproduccion.deleteReproduccionesUsuario(Integer.parseInt(inpIdUsr.getText()));
-//            if (borraReproduccion) {
-//                boolean borraTarjeta = DBManagerTarjetas.deleteTarjetasUsuario(Integer.parseInt(inpIdUsr.getText()));
-//                if (borraTarjeta) {
-//                    boolean borraSuscripcion = DBManagerSubscripcion.deleteSubscripcionesUsuario(Integer.parseInt(inpIdUsr.getText()));
-//                    if (borraSuscripcion) {
-//                        boolean borraCuentaPrincipal = DBManagerCuentaPrincipal.deleteCuentasPrincipalesUsuario(Integer.parseInt(inpIdUsr.getText()));
-//                        if (borraCuentaPrincipal) {
-//                            boolean borraUsuario = DBManagerUsuarios.deleteUsuario(Integer.parseInt(inpIdUsr.getText()));
-//                            if (borraUsuario) {
-//                                JOptionPane.showMessageDialog(null, "Se ha borrado el usuario: " + inpIdUsr.getText() + "correctamente" , "Borrado correcto", JOptionPane.INFORMATION_MESSAGE);
-//                            } else {
-//                                JOptionPane.showMessageDialog(null, "No se ha podido borrar el usuario: " + inpIdUsr.getText(), "Error borrado", JOptionPane.ERROR_MESSAGE);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     private void listenerBtnBuscar() {
         btnBuscar.addActionListener(new ActionListener() {
             @Override

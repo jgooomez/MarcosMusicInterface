@@ -1,8 +1,14 @@
 package GUI;
 
+import ClasePOJO.Tarjeta;
+import ClasePOJO.Usuario;
+import DBManager.DBManagerTarjetas;
+import DBManager.DBManagerUsuarios;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +34,8 @@ public class AdministrarTarjetas extends JDialog {
         styles();
         setModal(true);
         getRootPane().setDefaultButton(btnDelete);
+        inpNombre.setEnabled(false);
+        inpNumTarjeta.setEnabled(false);
 
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -61,7 +69,26 @@ public class AdministrarTarjetas extends JDialog {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                ArrayList<Tarjeta> tarjetas = DBManagerTarjetas.obtenerTarjeta();
 
+                // Buscar usuario por ID
+                Tarjeta tarjetaBuscada = null;
+
+                for (Tarjeta tarjeta : tarjetas) {
+                    if (tarjeta.getIdUsuario() == Integer.parseInt(inpIdUsr.getText())) {
+                        tarjetaBuscada = tarjeta;
+                        break;
+                    }
+                }
+
+                if (tarjetaBuscada != null) {
+                    // Mostrar los datos del usuario
+                    inpNombre.setText(tarjetaBuscada.getNombreTitular());
+                    inpNumTarjeta.setText(tarjetaBuscada.getNumeroTarjeta());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID enla BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
+                    inpIdUsr.setText("");
+                }
             }
         });
     }
