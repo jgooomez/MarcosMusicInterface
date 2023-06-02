@@ -1,19 +1,23 @@
 package GUI;
 
+import DBManager.DBManagerDepartamento;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class Departamentos extends JDialog {
     private JPanel WinDepartamentos;
     private JButton btnReturn;
     private JPanel box_top;
     private JPanel box_botones;
+    private JTable tableDepartamentos;
+    private JScrollPane scrollDepartamentos;
+    private JButton btnAnyadirDepartamento;
+    private JButton btnEditarDepartamento;
     private JButton buttonAtras;
-    private JButton btnAtencionCliente;
-    private JButton btnSonido;
-    private JButton btnVideo;
-    private JButton btnRSS;
-    private JButton btnDiseño;
     private JButton buttonCancel;
 
     public Departamentos() {
@@ -40,56 +44,25 @@ public class Departamentos extends JDialog {
                 dispose();
             }
         });
-        btnAtencionCliente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoAtencionCliente();
-                dialog.setTitle("Atencion al Cliente");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-        btnSonido.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoSonido();
-                dialog.setTitle("Sonido");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-        btnVideo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoVideo();
-                dialog.setTitle("Video");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-        btnRSS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoRSS();
-                dialog.setTitle("Redes Sociales");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-        btnDiseño.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoDisenyo();
-                dialog.setTitle("Redes Sociales");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
+
+        // Obtener los nombres de las columnas de la base de datos
+        List<String> columnNames = defineColumnName();
+
+        // Crear el modelo de tabla con los nombres de las columnas
+        DefaultTableModel model = new DefaultTableModel();
+        for (String columnName : columnNames) {
+            model.addColumn(columnName);
+        }
+
+        // Crear la tabla con el modelo y añadirla al JScrollPane
+        tableDepartamentos = new JTable(model);
+        scrollDepartamentos.setViewportView(tableDepartamentos);
+    }
+
+    // Método para obtener los nombres de las columnas desde la base de datos
+    private List<String> defineColumnName() {
+
+        return DBManagerDepartamento.defineColumnName(); // Reemplaza por tu lógica para obtener los nombres de las columnas
     }
 
     private void onOK() {
@@ -109,3 +82,4 @@ public class Departamentos extends JDialog {
         System.exit(0);
     }
 }
+

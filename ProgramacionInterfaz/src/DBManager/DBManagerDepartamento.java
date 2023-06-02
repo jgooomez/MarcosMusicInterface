@@ -3,9 +3,11 @@ package DBManager;
 import ClasePOJO.Departamento;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import static DBManager.DBManagerConexion.conn;
 
@@ -267,5 +269,21 @@ public class DBManagerDepartamento {
         }
         DBManagerConexion.close();
         return departamentos;
+    }
+    //Método para añadir el numero de columnas de una tabla y el nomrbe de cada una
+    public static List<String> defineColumnName() {
+        List<String> columnNames = new ArrayList<>();
+        try {
+            ResultSet rs = conn.createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
+            ResultSetMetaData rsMetaData = rs.getMetaData();
+            int numCol = rsMetaData.getColumnCount();
+            System.out.println(numCol);
+            for (int col = 1; col <= numCol; col++) {
+                columnNames.add(rsMetaData.getColumnName(col));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return columnNames;
     }
 }
