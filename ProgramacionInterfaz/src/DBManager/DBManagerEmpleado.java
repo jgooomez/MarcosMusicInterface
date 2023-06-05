@@ -19,7 +19,7 @@ public class DBManagerEmpleado {
     private static final String DB_US_NOM = "nombre";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_FINC = "fechaIncorporacion";
-    private static final String DB_US_DEP = "departamento";
+    private static final String DB_US_DEP = "idDepartamento";
 
     /**
      * Obtiene toda la tabla Empleado de la base de datos
@@ -173,7 +173,7 @@ public class DBManagerEmpleado {
      * @param departamento       departamento del Empleado
      * @return verdadero si pudo insertarlo, false en caso contrario
      */
-    public static boolean insertEmpleado(String nacionalidad, String nombre, int edad, String fechaIncorporacion, String departamento) {
+    public static boolean insertEmpleado(String nacionalidad, String nombre, int edad, String fechaIncorporacion, int departamento) {
         try {
             // Obtenemos la tabla Empleado
             System.out.print("Insertando Empleado " + nombre + "...");
@@ -185,7 +185,7 @@ public class DBManagerEmpleado {
             rs.updateString(DB_US_NAC, nacionalidad);
             rs.updateInt(DB_US_ED, edad);
             rs.updateString(DB_US_FINC, fechaIncorporacion);
-            rs.updateString(DB_US_DEP, departamento);
+            rs.updateInt(DB_US_DEP, departamento);
 
             rs.insertRow();
 

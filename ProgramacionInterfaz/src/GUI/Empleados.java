@@ -90,15 +90,11 @@ public class Empleados extends JDialog {
         btnAnyadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (inpNombre.getText().length() < 2) {
-                    JOptionPane.showMessageDialog(null, "El nombre debe tener tres caracteres mínimo.");
-                } else if (Integer.parseInt(inpEdad.getText()) < 18) {
-                    JOptionPane.showMessageDialog(null, "La edad debe ser mayor a 18 años.");
-                } else {
-                    if (DBManagerEmpleado.insertEmpleado(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), inpFechaIncorporacion.getText(), inpDepartamento.getText())) {
-                        JOptionPane.showMessageDialog(null, "El empleado se ha insertado correctamente.");
-                    }
-                }               
+                JDialog dialog = new AnyadirEmpleado();
+                dialog.setTitle("Anyadir empleado");
+                dialog.setSize(600, 500);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
             }
         });
     }

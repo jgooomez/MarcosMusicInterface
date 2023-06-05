@@ -46,6 +46,7 @@ public class AgregarUsuario extends JDialog {
                 if (compruebaUsuario()) {
                    if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
                        JOptionPane.showMessageDialog(null, "El insert se realizo correctamente.");
+                       dispose();
                    } else {
                         JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar el insert", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                     }
@@ -55,7 +56,7 @@ public class AgregarUsuario extends JDialog {
 
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onCancel();
+               dispose();
             }
         });
 
@@ -63,7 +64,7 @@ public class AgregarUsuario extends JDialog {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                dispose();
             }
         });
 

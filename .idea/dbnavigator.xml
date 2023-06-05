@@ -39,9 +39,10 @@
           <config-type value="CUSTOM" />
           <database-version value="15.0" />
           <driver-source value="EXTERNAL" />
-          <driver-library value="C:\Users\dam_gdj\Desktop\OneDrive - Conselleria d'Educació\ProyectoFinalProgramacion\driver\sqljdbc_12.2\enu\mssql-jdbc-12.2.0.jre11.jar" />
+          <driver-library value="C:\Users\javie\Desktop\OneDrive - Conselleria d'Educació\ProyectoFinalProgramacion\driver\sqljdbc_12.2\enu\mssql-jdbc-12.2.0.jre11.jar" />
           <driver value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-          <url value="jdbc:sqlserver://192.168.7.213:1433;databaseName=MARCOSMUSIC;TrustServerCertificate=True;" />
+          <url-type value="CUSTOM" />
+          <url value="jdbc:sqlserver://192.168.1.126 :1433;databaseName=MARCOSMUSIC;TrustServerCertificate=True;" />
           <type value="USER_PASSWORD" />
           <user value="ADMIN" />
           <deprecated-pwd value="MTIzNA==" />
