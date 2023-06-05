@@ -87,6 +87,20 @@ public class Empleados extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        btnAnyadir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (inpNombre.getText().length() < 2) {
+                    JOptionPane.showMessageDialog(null, "El nombre debe tener tres caracteres mínimo.");
+                } else if (Integer.parseInt(inpEdad.getText()) < 18) {
+                    JOptionPane.showMessageDialog(null, "La edad debe ser mayor a 18 años.");
+                } else {
+                    if (DBManagerEmpleado.insertEmpleado(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), inpFechaIncorporacion.getText(), inpDepartamento.getText())) {
+                        JOptionPane.showMessageDialog(null, "El empleado se ha insertado correctamente.");
+                    }
+                }
+            }
+        });
     }
 
     private void styles() {
