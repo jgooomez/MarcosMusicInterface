@@ -2,6 +2,7 @@ package GUI;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class AnyadirDepartamento extends JDialog {
     private JPanel contentPane;
@@ -45,7 +46,6 @@ public class AnyadirDepartamento extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
-
     private void onOK() {
         // add your code here
         dispose();
@@ -60,6 +60,6 @@ public class AnyadirDepartamento extends JDialog {
         AnyadirDepartamento dialog = new AnyadirDepartamento();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
     }
 }

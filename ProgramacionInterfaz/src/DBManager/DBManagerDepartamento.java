@@ -14,7 +14,7 @@ import static DBManager.DBManagerConexion.conn;
 public class DBManagerDepartamento {
     // Configuración de la tabla Departamento
     private static final String DB_DEPARTAMENTO = "Departamento";
-    private static final String DB_DEPARTAMENTO_SELECT = "SELECT * FROM " + DB_DEPARTAMENTO;
+    public static final String DB_DEPARTAMENTO_SELECT = "SELECT * FROM " + DB_DEPARTAMENTO;
     private static final String DB_DEPARTAMENTO_ID = "idDepartamento";
     private static final String DB_DEPARTAMENTO_NOMBRE = "nombre";
     private static final String DB_DEPARTAMENTO_FECHA_CREACION = "fechaCreacion";
@@ -274,7 +274,7 @@ public class DBManagerDepartamento {
     public static List<String> defineColumnName() {
         List<String> columnNames = new ArrayList<>();
         try {
-            ResultSet rs = conn.createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
+            ResultSet rs = DBManagerConexion.getConexion().createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
             ResultSetMetaData rsMetaData = rs.getMetaData();
             int numCol = rsMetaData.getColumnCount();
             System.out.println(numCol);
@@ -285,5 +285,24 @@ public class DBManagerDepartamento {
             throw new RuntimeException(e);
         }
         return columnNames;
+    }
+    public static Object[] defineColumnData() {
+        try{
+            ResultSet rs = DBManagerConexion.getConexion().createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
+            Object[] row = new Object[6];
+            while (rs.next()) {
+
+                row[0] = rs.getInt("idDepartamento");
+                row[1] = rs.getString("nombre");
+                row[2] = rs.getDate("fechaCreacion");
+                row[3] = rs.getString("nombreEncargado");
+                row[4] = rs.getInt("numTrabajadores");
+                row[5] = rs.getInt("numSubDpto");
+
+            }
+            return row;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
