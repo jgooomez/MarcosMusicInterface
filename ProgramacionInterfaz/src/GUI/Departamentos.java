@@ -44,7 +44,15 @@ public class Departamentos extends JDialog {
                 dispose();
             }
         });
-
+        btnAnyadirDepartamento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AnyadirDepartamento dialog = new AnyadirDepartamento();
+                dialog.pack();
+                dialog.setVisible(true);
+                System.exit(0);
+            }
+        });
         // Obtener los nombres de las columnas de la base de datos
         List<String> columnNames = defineColumnName();
 
@@ -62,7 +70,7 @@ public class Departamentos extends JDialog {
     // Método para obtener los nombres de las columnas desde la base de datos
     private List<String> defineColumnName() {
 
-        return DBManagerDepartamento.defineColumnName(); // Reemplaza por tu lógica para obtener los nombres de las columnas
+        return DBManagerDepartamento.defineColumnName();
     }
 
     private void onOK() {
