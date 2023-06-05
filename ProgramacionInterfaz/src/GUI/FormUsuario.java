@@ -76,15 +76,6 @@ public class FormUsuario extends JDialog {
 
         btnAddUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //onOK();
-                if (compruebaUsuario()) {
-                    if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
-                        JOptionPane.showMessageDialog(null, "El insert se realizo correctamente.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar el insert", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-
                 String tipo = "";
                 if (rbtnMastercardRadio.isSelected()) {
                     tipo = "Mastercard";
@@ -92,12 +83,11 @@ public class FormUsuario extends JDialog {
                     tipo = "Visa";
                 }
 
-                if (compruebaTarjeta()) {
-                    String numTarjetaParseado = (inpNumTarjeta.getText().replace("-", ""));
-                    if (DBManagerTarjetas.insertTarjeta(numTarjetaParseado, Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()), inpCaducidad.getText())) {
-                        JOptionPane.showMessageDialog(null, "Insert realizado correctamente.");
+                if (compruebaUsuario() && compruebaTarjeta()) {
+                    if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
+                        JOptionPane.showMessageDialog(null, "El insert se realizo correctamente.");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Error al realizar el insert.");
+                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar el insert", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }

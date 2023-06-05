@@ -2,7 +2,6 @@ package GUI;
 
 import ClasePOJO.Empleado;
 import DBManager.DBManagerEmpleado;
-import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +31,7 @@ public class Empleados extends JDialog {
     private JLabel icono;
     private JLabel txtTittle;
     private JLabel txtDepartamento;
+    private JButton btnAnyadir;
 
     public Empleados() {
         setContentPane(WinEmpleados);
@@ -91,7 +91,7 @@ public class Empleados extends JDialog {
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn);
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn, btnAnyadir);
         MarcosMusic.stylesBtns(listaBtns);
     }
 

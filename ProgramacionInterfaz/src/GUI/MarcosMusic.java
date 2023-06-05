@@ -38,9 +38,9 @@ public class MarcosMusic extends JFrame {
         configurarBotones();
         DBManagerConexion.loadDriver();
         DBManagerConexion.connect();
-        panelGeneral.setBackground(getBackgroundColor());
+        /*panelGeneral.setBackground(getBackgroundColor());
         principal.setBackground(getBackgroundColor());
-        principal.setBackground(getBackgroundColor());
+        principal.setBackground(getBackgroundColor());*/
     }
 
     private void configurarImagenDeFondo() {
@@ -125,7 +125,7 @@ public class MarcosMusic extends JFrame {
     }
 
     public static Color getBtnColor() {
-        return new Color(1, 101, 255);
+        return new Color(30, 215, 96);
     }
 
     public static Color getBackgroundColor() {
