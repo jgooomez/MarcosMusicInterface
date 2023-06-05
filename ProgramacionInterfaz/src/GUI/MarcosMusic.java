@@ -35,9 +35,9 @@ public class MarcosMusic extends JFrame {
         listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
         stylesBtns(listaBtns);
         txtTituloPantallaPrincipal.setFont(getFontTitle());
-        configurarBotones();
+        configurarBotones();/*
         DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
+        DBManagerConexion.connect();*/
     }
 
     private void configurarImagenDeFondo() {

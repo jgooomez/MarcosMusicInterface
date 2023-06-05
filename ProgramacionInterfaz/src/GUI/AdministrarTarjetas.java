@@ -43,12 +43,6 @@ public class AdministrarTarjetas extends JDialog {
             }
         });
 
-        btnAdd.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -94,16 +88,6 @@ public class AdministrarTarjetas extends JDialog {
     }
 
     private void setListenersBtns() {
-        btnAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialogo = new AnyadirTarjeta();
-                dialogo.setTitle("Añadir tarjeta");
-                dialogo.setSize(500,400);
-                dialogo.setLocationRelativeTo(null);
-                dialogo.setVisible(true);
-            }
-        });
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -130,7 +114,7 @@ public class AdministrarTarjetas extends JDialog {
 
     private void styles() {
         txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JButton> listaBtns = Arrays.asList(btnAdd, btnDelete, btnReturn, btnBuscar);
+        List<JButton> listaBtns = Arrays.asList(btnDelete, btnReturn, btnBuscar);
         MarcosMusic.stylesBtns(listaBtns);
     }
 
