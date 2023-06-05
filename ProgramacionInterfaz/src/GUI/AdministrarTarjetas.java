@@ -97,16 +97,18 @@ public class AdministrarTarjetas extends JDialog {
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar la tarjeta con número (se muestra el numero de la tarjeta)", "Confirmar",
+                int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar la tarjeta con número: " + inpNumTarjeta.getText(), "Confirmar",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                         new String[]{"Confirmar", "Cancelar"}, "Confirmar");
 
                 if (opcion == JOptionPane.YES_OPTION) {
-                    // Realizar acciones si se selecciona "Confirmar"
-                    System.out.println("Confirmar");
+                    if (DBManagerTarjetas.deleteTarjetasUsuario(Integer.parseInt(inpIdUsr.getText()))) {
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado la tarjeta con exito.", "Operacion completada", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID enla BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else if (opcion == JOptionPane.NO_OPTION) {
-                    // Realizar acciones si se selecciona "Salir"
-                    System.out.println("Cancelar");
+                    dispose();
                 }
             }
         });
