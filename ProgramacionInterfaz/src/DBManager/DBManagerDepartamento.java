@@ -286,23 +286,4 @@ public class DBManagerDepartamento {
         }
         return columnNames;
     }
-    public static Object[] defineColumnData() {
-        try{
-            ResultSet rs = DBManagerConexion.getConexion().createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
-            Object[] row = new Object[6];
-            while (rs.next()) {
-
-                row[0] = rs.getInt("idDepartamento");
-                row[1] = rs.getString("nombre");
-                row[2] = rs.getDate("fechaCreacion");
-                row[3] = rs.getString("nombreEncargado");
-                row[4] = rs.getInt("numTrabajadores");
-                row[5] = rs.getInt("numSubDpto");
-
-            }
-            return row;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
