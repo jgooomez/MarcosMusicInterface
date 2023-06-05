@@ -35,9 +35,12 @@ public class MarcosMusic extends JFrame {
         listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
         stylesBtns(listaBtns);
         txtTituloPantallaPrincipal.setFont(getFontTitle());
-        configurarBotones();/*
+        configurarBotones();
         DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();*/
+        DBManagerConexion.connect();
+        panelGeneral.setBackground(getBackgroundColor());
+        principal.setBackground(getBackgroundColor());
+        principal.setBackground(getBackgroundColor());
     }
 
     private void configurarImagenDeFondo() {
@@ -122,6 +125,10 @@ public class MarcosMusic extends JFrame {
     }
 
     public static Color getBtnColor() {
-        return new Color(200, 220, 250);
+        return new Color(1, 101, 255);
+    }
+
+    public static Color getBackgroundColor() {
+        return new Color(0, 0, 0);
     }
 }
