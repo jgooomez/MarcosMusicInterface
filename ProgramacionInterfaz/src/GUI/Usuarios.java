@@ -88,9 +88,9 @@ public class Usuarios extends JDialog {
         btnAddUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new AgregarUsuario();
+                JDialog dialog = new FormUsuario();
                 dialog.setTitle("Agregar Usuario");
-                dialog.setSize(300, 300);
+                dialog.setSize(600, 500);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }

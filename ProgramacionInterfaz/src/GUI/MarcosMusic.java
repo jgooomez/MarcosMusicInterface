@@ -28,15 +28,16 @@ public class MarcosMusic extends JFrame {
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        new Login();
     }
 
     public MarcosMusic() {
         listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
         stylesBtns(listaBtns);
         txtTituloPantallaPrincipal.setFont(getFontTitle());
-        configurarBotones();
+        configurarBotones();/*
         DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
+        DBManagerConexion.connect();*/
     }
 
     private void configurarImagenDeFondo() {

@@ -59,7 +59,7 @@ public class AnyadirTarjeta extends JDialog {
 
                 if (compruebaTarjeta()) {
                     String numTarjetaParseado = (inpNumTarjeta.getText().replace("-", ""));
-                    if (DBManagerTarjetas.insertTarjeta(numTarjetaParseado, Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()), inpCaducidad.getText(), Integer.parseInt(inpIDUsuario.getText()))) {
+                    if (DBManagerTarjetas.insertTarjeta(numTarjetaParseado, Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()), inpCaducidad.getText())) {
                         JOptionPane.showMessageDialog(null, "Insert realizado correctamente.");
                     } else {
                         JOptionPane.showMessageDialog(null, "Error al realizar el insert.");
