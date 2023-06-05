@@ -161,7 +161,7 @@ public class FormUsuario extends JDialog {
 
     private void onCancel() {
         // add your code here if necessary
-        dispose();
+        MarcosMusic.frame.setVisible(false);
     }
 
     public static void main(String[] args) {
