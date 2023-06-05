@@ -91,7 +91,7 @@ public class AdministrarTarjetas extends JDialog {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
         btnDelete.addActionListener(new ActionListener() {
@@ -114,8 +114,14 @@ public class AdministrarTarjetas extends JDialog {
 
     private void styles() {
         txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
+        txtAdminTarjetas.setForeground(Color.WHITE);
+        txtNombre.setForeground(Color.WHITE);
+        txtIdUsr.setForeground(Color.WHITE);
+        txtNumTarjeta.setForeground(Color.WHITE);
         List<JButton> listaBtns = Arrays.asList(btnDelete, btnReturn, btnBuscar);
+        List<JPanel> listaPaneles = Arrays.asList(WinAdminTarjetas, box_botones, box_inputs);
         MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
     }
 
     private void onOK() {
@@ -125,6 +131,8 @@ public class AdministrarTarjetas extends JDialog {
 
     private void onCancel() {
         // add your code here if necessary
+        this.setVisible(false);
+        MarcosMusic.frame.setVisible(true);
         dispose();
     }
 

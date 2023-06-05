@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,8 +20,12 @@ public class MarcosMusic extends JFrame {
     private JButton btnEmpleados;
     private JLabel txtTituloPantallaPrincipal;
     private JPanel panelGeneral;
+    private JPanel box_tittle;
+    private JPanel box_btns;
+    private JPanel emptyBox;
     static JFrame frame = new JFrame("MarcosMusic");
     private List<JButton> listaBtns;
+    private List<JPanel> listaPaneles;
 
 
     public static void main(String[] args) {
@@ -33,14 +39,23 @@ public class MarcosMusic extends JFrame {
 
     public MarcosMusic() {
         listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
+        listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
         stylesBtns(listaBtns);
+        stylesPanels(listaPaneles);
         txtTituloPantallaPrincipal.setFont(getFontTitle());
-        configurarBotones();
+        ImageIcon iconSpotify = new ImageIcon("iconos/Spotify_icon.png");
+        frame.setIconImage(iconSpotify.getImage());
+        /*
+        try {
+            URL pathSpotifyIcon = new URL("iconos/Spotify_icon.png");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("iconos/Spotify_icon.png"));*/
+
+        configurarBotones();/*
         DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
-        /*panelGeneral.setBackground(getBackgroundColor());
-        principal.setBackground(getBackgroundColor());
-        principal.setBackground(getBackgroundColor());*/
+        DBManagerConexion.connect();*/
     }
 
     private void configurarImagenDeFondo() {
@@ -72,6 +87,7 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setTitle("Administracion de tarjetas");
                 dialogo2.setSize(500, 400);
                 dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
                 dialogo2.setVisible(true);
             }
         });
@@ -114,12 +130,19 @@ public class MarcosMusic extends JFrame {
 
         for (JButton btn:
              listaBotones) {
+            btn.setBorder(BorderFactory.createBevelBorder(1, Color.white, Color.white));
             btn.setFocusable(false);
             btn.setBackground(getBtnColor());
             btn.setCursor(cursor);
         }
     }
 
+    public static void stylesPanels(List<JPanel> listaPaneles) {
+        for (JPanel panel:
+             listaPaneles) {
+            panel.setBackground(getBackgroundColor());
+        }
+    }
     public static Font getFontTitle() {
         return new Font("Calibri", Font.BOLD, 30);
     }
@@ -129,6 +152,6 @@ public class MarcosMusic extends JFrame {
     }
 
     public static Color getBackgroundColor() {
-        return new Color(0, 0, 0);
+        return new Color(40, 40, 40);
     }
 }
