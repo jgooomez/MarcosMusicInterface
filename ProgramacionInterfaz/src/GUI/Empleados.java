@@ -98,7 +98,7 @@ public class Empleados extends JDialog {
                     if (DBManagerEmpleado.insertEmpleado(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), inpFechaIncorporacion.getText(), inpDepartamento.getText())) {
                         JOptionPane.showMessageDialog(null, "El empleado se ha insertado correctamente.");
                     }
-                }
+                }               
             }
         });
     }
