@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +20,9 @@ public class MarcosMusic extends JFrame {
     private JButton btnEmpleados;
     private JLabel txtTituloPantallaPrincipal;
     private JPanel panelGeneral;
+    private JPanel box_tittle;
+    private JPanel box_btns;
+    private JPanel emptyBox;
     static JFrame frame = new JFrame("MarcosMusic");
     private List<JButton> listaBtns;
 
@@ -35,12 +40,24 @@ public class MarcosMusic extends JFrame {
         listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
         stylesBtns(listaBtns);
         txtTituloPantallaPrincipal.setFont(getFontTitle());
+        ImageIcon iconSpotify = new ImageIcon("iconos/Spotify_icon.png");
+        frame.setIconImage(iconSpotify.getImage());
+        /*
+        try {
+            URL pathSpotifyIcon = new URL("iconos/Spotify_icon.png");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("iconos/Spotify_icon.png"));*/
+
         configurarBotones();
         DBManagerConexion.loadDriver();
         DBManagerConexion.connect();
-        /*panelGeneral.setBackground(getBackgroundColor());
+        panelGeneral.setBackground(getBackgroundColor());
         principal.setBackground(getBackgroundColor());
-        principal.setBackground(getBackgroundColor());*/
+        box_btns.setBackground(getBackgroundColor());
+        box_tittle.setBackground(getBackgroundColor());
+        emptyBox.setBackground(getBackgroundColor());
     }
 
     private void configurarImagenDeFondo() {
