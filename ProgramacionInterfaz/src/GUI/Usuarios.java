@@ -72,9 +72,18 @@ public class Usuarios extends JDialog {
     }
 
     private void styles() {
+        txtTittle.setForeground(Color.WHITE);
+        txtNombre.setForeground(Color.WHITE);
+        txtEdad.setForeground(Color.WHITE);
+        txtIdUsr.setForeground(Color.WHITE);
+        txtNacionalidad.setForeground(Color.WHITE);
+        txtFotoPerfil.setForeground(Color.WHITE);
+        txtNumSeguidores.setForeground(Color.WHITE);
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr);
+        List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinUsuarios);
         MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
     }
 
     private void setListenersBtns() {
@@ -82,7 +91,7 @@ public class Usuarios extends JDialog {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
         btnAddUser.addActionListener(new ActionListener() {
@@ -169,6 +178,8 @@ public class Usuarios extends JDialog {
     }
 
     private void onCancel() {
+        this.setVisible(false);
+        MarcosMusic.frame.setVisible(true);
         dispose();
     }
 
