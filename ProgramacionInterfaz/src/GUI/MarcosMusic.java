@@ -77,6 +77,7 @@ public class MarcosMusic extends JFrame {
                 dialogo1.setTitle("Vista de usuarios");
                 dialogo1.setSize(700, 400);
                 dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
                 dialogo1.setVisible(true);
             }
         });
@@ -99,6 +100,7 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setSize(800, 400);
                 dialogo2.pack();
                 dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
                 dialogo2.setVisible(true);
             }
         });
@@ -109,6 +111,7 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setTitle("Departamentos");
                 dialogo2.setSize(400, 400);
                 dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
                 dialogo2.setVisible(true);
             }
         });
@@ -120,6 +123,7 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setTitle("Ver Empleados");
                 dialogo2.setSize(400, 400);
                 dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
                 dialogo2.setVisible(true);
             }
         });
