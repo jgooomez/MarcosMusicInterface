@@ -102,7 +102,11 @@ public class Empleados extends JDialog {
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn, btnAnyadir);
+        List<JPanel> listaPaneles = Arrays.asList(box_top, box_botones, WinEmpleados);
+        List<JLabel> listaTexto = Arrays.asList(txtDepartamento, txtEdad, txtIdEmpleado, txtNacionalidad, txtFechaCreacion, txtNombre, txtTittle);
         MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void onOK() {
@@ -112,6 +116,8 @@ public class Empleados extends JDialog {
 
     private void onCancel() {
         // add your code here if necessary
+        this.setVisible(false);
+        MarcosMusic.frame.setVisible(true);
         dispose();
     }
 

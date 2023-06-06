@@ -57,7 +57,11 @@ public class DepartamentoDisenyo extends JDialog {
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 20));
         List<JButton> listaBtns = Arrays.asList(btnReturn);
+        List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinDisenyo);
+        List<JLabel> listaTexto = Arrays.asList(txtFechaCreacion, txtTittle, txtIdDpto, txtNombre,txtNombreEncargado, txtNumDpto, txtNumTrabajadores);
         MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void onOK() {
