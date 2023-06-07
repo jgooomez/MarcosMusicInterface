@@ -8,19 +8,16 @@ import java.util.List;
 
 public class Suscripciones extends JDialog {
     private JPanel WinSuscripciones;
-    private JTextField inpTipoSus;
-    private JTextField inpPrecio;
     private JButton btnReturn;
-    private JPanel box_top;
     private JPanel box_botones;
-    private JButton btnType1;
-    private JButton btnType3;
-    private JButton btnType2;
+    private JButton btnBasica;
+    private JButton btnDuo;
+    private JButton btnIndividual;
     private JLabel txtTittle;
     private JLabel icono;
-    private JLabel txtTipo;
-    private JLabel txtPrecio;
     private JPanel box_btns_tipos;
+    private JButton btnFamily;
+    private JButton btnStudent;
 
     public Suscripciones() {
         styles();
@@ -54,28 +51,28 @@ public class Suscripciones extends JDialog {
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JButton> listaBtns = Arrays.asList(btnReturn, btnType1, btnType2, btnType3);
-        List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, box_btns_tipos, WinSuscripciones);
-        List<JLabel> listaTexto = Arrays.asList(txtPrecio, txtTittle, txtTipo);
+        List<JButton> listaBtns = Arrays.asList(btnReturn, btnBasica, btnIndividual, btnDuo, btnFamily, btnStudent);
+        List<JPanel> listaPaneles = Arrays.asList(box_botones, box_btns_tipos, WinSuscripciones);
+        List<JLabel> listaTexto = Arrays.asList(txtTittle);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void setListenersBtns() {
-        btnType1.addActionListener(new ActionListener() {
+        btnBasica.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Meter los datos de la suscripcion tipo1 para que se muestren en los textField.
             }
         });
-        btnType2.addActionListener(new ActionListener() {
+        btnIndividual.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Meter los datos de la suscripcion tipo2 para que se muestren en los textField.
             }
         });
-        btnType3.addActionListener(new ActionListener() {
+        btnDuo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Meter los datos de la suscripcion tipo3 para que se muestren en los textField.
