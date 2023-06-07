@@ -1,7 +1,6 @@
 package GUI;
 
 import DBManager.DBManagerTarjetas;
-import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +21,7 @@ public class AnyadirTarjeta extends JDialog {
     private JLabel txtVisa;
     private JLabel txtMastercard;
     private JLabel txtNumTarjeta;
-    private JLabel txtTarjeta;
+    private JLabel txtTittle;
     private JLabel txtCad;
     private JTextField inpCaducidad;
     private JLabel txtTlf;
@@ -105,7 +104,7 @@ public class AnyadirTarjeta extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        winFormUsr.registerKeyboardAction(new ActionListener() {
+        winAddTarjeta.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -115,7 +114,7 @@ public class AnyadirTarjeta extends JDialog {
     private int getIdUser() {
 
         String sql = "select TOP 1 idUsuario from Usuario order by idUsuario ASC";
-
+        return 3;
     }
 
     public boolean compruebaTarjeta() {
@@ -146,10 +145,25 @@ public class AnyadirTarjeta extends JDialog {
         rbtnVisaRadio.setBackground(new Color(40, 40, 40));
         rbtnMastercardRadio.setBackground(new Color(40, 40, 40));
         java.util.List<JButton> listaBtns = Arrays.asList(btnReturn, btnAddTarjeta);
-        java.util.List<JPanel> listaPaneles = Arrays.asList(box_btns, box_tittle, box_inputsUsr, box_datosUsr, box_datosTarjeta, winFormUsr);
-        List<JLabel> listaTexto = Arrays.asList(txtCad, txtCVV, txtTlf, txtNombreTitular, txtTipo, txtVisa, txtMastercard, txtNumTarjeta, txtEdad, txtTarjeta, txtDatosPersonales, txtNumSeguidores, txtNacionalidad, txtNombre, txtTittle, txtDNI);
+        java.util.List<JPanel> listaPaneles = Arrays.asList(winAddTarjeta, box_btns, box_datosTarjeta);
+        List<JLabel> listaTexto = Arrays.asList(txtCad, txtCVV, txtTlf, txtNombreTitular, txtTipo, txtVisa, txtMastercard, txtNumTarjeta, txtTittle);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
+    }
+
+    private void onOK() {
+        dispose();
+    }
+
+    private void onCancel() {
+        dispose();
+    }
+
+    public static void main(String[] args) {
+        AnyadirTarjeta dialog = new AnyadirTarjeta();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
 }

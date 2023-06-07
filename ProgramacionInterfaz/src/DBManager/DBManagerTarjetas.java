@@ -103,7 +103,7 @@ public class DBManagerTarjetas {
 
     public static int getIdUserTarjeta() {
         try {
-            int id;
+            int id = 0;
             Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
             String sql = "SELECT TOP 1 " + DB_TARJETA_IDUSUARIO + " FROM " + DB_TARJETA + " ORDER BY " + DB_TARJETA_IDUSUARIO + " ASC";
             ResultSet rs = stmt.executeQuery(sql);
@@ -113,10 +113,9 @@ public class DBManagerTarjetas {
             }
 
             return id;
-
         } catch (SQLException ex) {
             ex.printStackTrace();
-            return null;
+            return 0;
         }
     }
 
