@@ -3,33 +3,35 @@ package DBManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import DBManager.DBManagerConexion;
 
 import static DBManager.DBManagerConexion.conn;
 
+
 public class DBManagerUsuarios {
     // Configuración de la tabla usuarios
-    private static final String DB_US = "Usuario";
+    private static final String DB_US = "usuario";
     private static final String DB_US_SELECT = "SELECT * FROM " + DB_US;
     private static final String DB_US_ID = "idUsuario";
-    private static final String DB_US_NAC = "nacionalidad";
+    private static final String DB_US_NAC= "nacionalidad";
     private static final String DB_US_NOM = "nombre";
-    private static final String DB_US_USERNAME = "userName";
-    private static final String DB_US_PASSWORD = "password";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_NUMSEG = "numSeguidores";
+    private static final String DB_US_FOTO = "fotoPerfil";
 
     /**
      * Obtiene toda la tabla usuarios de la base de datos
-     *
-     * @param resultSetType        Tipo de ResultSet
+     * @param resultSetType Tipo de ResultSet
      * @param resultSetConcurrency Concurrencia del ResultSet
      * @return ResultSet (del tipo indicado) con la tabla, null en caso de error
      */
 
     public static ResultSet getTablaUsuarios(int resultSetType, int resultSetConcurrency) {
         try {
-            Statement stmt = conn.createStatement(resultSetType, resultSetConcurrency);
+            Statement stmt = DBManagerConexion.getConexion().createStatement(resultSetType, resultSetConcurrency);
             ResultSet rs = stmt.executeQuery(DB_US_SELECT);
+            //stmt.close();
             return rs;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -56,12 +58,11 @@ public class DBManagerUsuarios {
                 int id = rs.getInt(DB_US_ID);
                 String nacionalidad = rs.getString(DB_US_NAC);
                 String nombre = rs.getString(DB_US_NOM);
-                String userName = rs.getString(DB_US_USERNAME);
-                String password = rs.getString(DB_US_PASSWORD);
                 int edad = rs.getInt(DB_US_ED);
                 int numSeguidores = rs.getInt(DB_US_NUMSEG);
+                String fotoPerfil = rs.getString(DB_US_FOTO);
 
-                System.out.println(id + "\t" + nacionalidad + "\t" + nombre + "\t" + userName + "\t" + password + "\t" + edad + "\t" + numSeguidores);
+                System.out.println(id + "\t" + nacionalidad + "\t" + nombre + "\t" + edad + "\t" + numSeguidores + "\t" + fotoPerfil);
             }
             rs.close();
         } catch (SQLException ex) {
@@ -76,14 +77,13 @@ public class DBManagerUsuarios {
 
     /**
      * Solicita a la BD el usuario con id indicado
-     *
      * @param idUsuario id del usuario
      * @return ResultSet con el resultado de la consulta, null en caso de error
      */
     public static ResultSet getUsuario(int idUsuario) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idUsuario + "';";
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -139,23 +139,24 @@ public class DBManagerUsuarios {
      * @param id id del usuario
      */
     public static void printUsuario(int id) {
+        String nacionalidad;
         try {
             // Obtenemos el usuario
             ResultSet rs = getUsuario(id);
             if (rs == null || !rs.first()) {
-                System.out.println("Usuario " + id + " NO EXISTE");
+                System.out.println("usuario " + id + " NO EXISTE");
                 return;
             }
 
             int idUsuario = rs.getInt(DB_US_ID);
-            String nacionalidad = rs.getString(DB_US_NAC);
+            nacionalidad = rs.getString(DB_US_NAC);
             String nombre = rs.getString(DB_US_NOM);
-            String userName = rs.getString(DB_US_USERNAME);
-            String password = rs.getString(DB_US_PASSWORD);
             int edad = rs.getInt(DB_US_ED);
             int numSeguidores = rs.getInt(DB_US_NUMSEG);
+            String fotoPerfil = rs.getString(DB_US_FOTO);
 
-            System.out.println(idUsuario + "\t" + nacionalidad + "\t" + nombre + "\t" + userName + "\t" + password + "\t" + edad + "\t" + numSeguidores);
+            System.out.println(idUsuario + "\t" + nacionalidad + "\t" + nombre + "\t" + edad
+                    + "\t" + numSeguidores + "\t" + fotoPerfil);
 
         } catch (SQLException ex) {
             System.out.println("Error al solicitar usuario " + id);
@@ -163,41 +164,42 @@ public class DBManagerUsuarios {
         }
     }
 
-    /**
-     * Solicita a la BD insertar un nuevo registro de usuario
-     *
-     * @param nacionalidad   nacionalidad del usuario
-     * @param nombre         nombre del usuario
-     * @param userName       nombre de usuario
-     * @param password       contraseña
-     * @param edad           edad del usuario
-     * @param numSeguidores  número de seguidores del usuario
-     * @return verdadero si pudo insertarlo, false en caso contrario
-     */
-    public static boolean insertUsuario(String nacionalidad, String nombre, String userName, String password, int edad, int numSeguidores) {
-        try {
-            System.out.print("Insertando usuario " + nombre + "...");
-            ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+        /**
+         * Solicita a la BD insertar un nuevo registro usuario
+         *
+         * @param nombre nombre del usuario
+         * @param nacionalidad nacionalidad del usuario
+         * @param edad edad del usuario
+         * @param numSeguidores numero de seguidores del usuario
+         //* @param fotoPerfil ruta d ela foto de perfil del usuario
+         * @return verdadero si pudo insertarlo, false en caso contrario
+         */
+        public static boolean insertUsuario(String nacionalidad, String nombre, int edad, int numSeguidores){
+            try {
+                // Obtenemos la tabla usuarios
+                System.out.print("Insertando usuario " + nombre + "...");
+                ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 
-            rs.moveToInsertRow();
-            rs.updateString(DB_US_NOM, nombre);
-            rs.updateString(DB_US_NAC, nacionalidad);
-            rs.updateString(DB_US_USERNAME, userName);
-            rs.updateString(DB_US_PASSWORD, password);
-            rs.updateInt(DB_US_ED, edad);
-            rs.updateInt(DB_US_NUMSEG, numSeguidores);
+                // Insertamos el nuevo registro
+                rs.moveToInsertRow();
+                rs.updateString(DB_US_NOM, nombre);
+                rs.updateString(DB_US_NAC, nacionalidad);
+                rs.updateInt(DB_US_ED, edad);
+                rs.updateInt(DB_US_NUMSEG, numSeguidores);
+                //rs.updateString(DB_US_FOTO, fotoPerfil);
 
-            rs.insertRow();
+                rs.insertRow();
 
-            rs.close();
-            System.out.println("OK!");
-            return true;
+                // Todo bien, cerramos ResultSet y devolvemos true
+                rs.close();
+                System.out.println("OK!");
+                return true;
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                return false;
+            }
         }
-    }
 
     /**
      * Solicita a la BD eliminar un usuario
@@ -207,25 +209,112 @@ public class DBManagerUsuarios {
      */
     public static boolean deleteUsuario(int idUsuario) {
         try {
-            System.out.print("Eliminando usuario " + idUsuario + "...");
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idUsuario + "';";
-            ResultSet rs = stmt.executeQuery(sql);
+            System.out.print("Eliminando usuario " + idUsuario + "... ");
 
-            if (!rs.first()) {
-                System.out.println("Usuario " + idUsuario + " NO EXISTE");
-                rs.close();
+            // Obtenemos el usuario
+            ResultSet rs = getUsuario(idUsuario);
+
+            // Si no existe el Resultset
+            if (rs == null) {
+                System.out.println("ERROR. ResultSet null.");
                 return false;
             }
 
-            rs.deleteRow();
-            rs.close();
-            System.out.println("OK!");
-            return true;
+            // Si existe y tiene primer registro, lo eliminamos
+            if (rs.first()) {
+                rs.deleteRow();
+                rs.close();
+                System.out.println("OK!");
+                return true;
+            } else {
+                System.out.println("ERROR. ResultSet vacío.");
+                return false;
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
     }
+
+    public static ArrayList<ClasePOJO.Usuario> obtenerUsuarios() {
+        ArrayList<ClasePOJO.Usuario> usuarios = new ArrayList<>();
+
+        try {
+            ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+            while (rs.next()) {
+                int id = rs.getInt(DB_US_ID);
+                String nacionalidad = rs.getString(DB_US_NAC);
+                String nombre = rs.getString(DB_US_NOM);
+                int edad = rs.getInt(DB_US_ED);
+                int numSeguidores = rs.getInt(DB_US_NUMSEG);
+                String fotoPerfil = rs.getString(DB_US_FOTO);
+
+                ClasePOJO.Usuario usuario = new ClasePOJO.Usuario(id, nacionalidad, nombre, edad, numSeguidores);
+                usuarios.add(usuario);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return usuarios;
+    }
+
+    public static boolean borraTodoUsuarios(int idUsuario) {
+        try {
+            // Verificar existencia del usuario en todas las tablas
+            boolean existeEnTarjeta = DBManagerTarjetas.existsUserInTarjeta(idUsuario);
+            boolean existeEnReproduccion = DBManagerReproduccion.existsUsuarioEnReproduccion(idUsuario);
+            boolean existeEnSubscripcion = DBManagerSubscripcion.existsUsuarioEnSubscripcion(idUsuario);
+            boolean existeEnCuentaPrincipal = DBManagerCuentaPrincipal.existsUsuarioEnCuentaPrincipal(idUsuario);
+            boolean existeEnUsuario = existsUsuario(idUsuario);
+
+            // Si el usuario existe en todas las tablas, proceder con el borrado
+            if (existeEnTarjeta && existeEnReproduccion && existeEnSubscripcion && existeEnCuentaPrincipal && existeEnUsuario) {
+                conn.setAutoCommit(false); // Iniciar transacción
+
+                try {
+                    Statement stmt = conn.createStatement();
+
+                    // Borra los registros de la tabla Tarjeta
+                    String deleteTarjeta = "DELETE FROM Tarjeta WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteTarjeta);
+
+                    // Borra los registros de la tabla Reproduccion
+                    String deleteReproduccion = "DELETE FROM Reproduccion WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteReproduccion);
+
+                    // Borra los registros de la tabla SubscripcionUsuario
+                    String deleteSubscripcion = "DELETE FROM SubscripcionUsuario WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteSubscripcion);
+
+                    // Borra los registros de la tabla CuentaPrincipal
+                    String deleteCuentaPrincipal = "DELETE FROM CuentaPrincipal WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteCuentaPrincipal);
+
+                    // Borra el registro de la tabla Usuario
+                    String deleteUsuario = "DELETE FROM Usuario WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteUsuario);
+
+                    conn.commit(); // Confirmar transacción
+                    conn.setAutoCommit(true); // Restaurar el modo de autocommit
+
+                    return true; // Borrado exitoso
+                } catch (SQLException e) {
+                    conn.rollback(); // Deshacer transacción en caso de error
+                    throw new RuntimeException(e);
+                }
+            } else {
+                return false; // El usuario no existe en todas las tablas, no se puede borrar
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
+

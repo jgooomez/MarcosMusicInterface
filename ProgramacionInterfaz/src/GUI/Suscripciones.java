@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Suscripciones extends JDialog {
     private JPanel WinSuscripciones;
@@ -14,7 +16,11 @@ public class Suscripciones extends JDialog {
     private JButton btnType1;
     private JButton btnType3;
     private JButton btnType2;
-    private JLabel txtTiposSuscrip;
+    private JLabel txtTittle;
+    private JLabel icono;
+    private JLabel txtTipo;
+    private JLabel txtPrecio;
+    private JPanel box_btns_tipos;
 
     public Suscripciones() {
         styles();
@@ -38,7 +44,7 @@ public class Suscripciones extends JDialog {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
 
@@ -47,24 +53,13 @@ public class Suscripciones extends JDialog {
     }
 
     private void styles() {
-        Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtTiposSuscrip.setFont(MarcosMusic.getFontTitle());
-
-        btnReturn.setFocusable(false);
-        btnReturn.setBackground(MarcosMusic.getBtnColor());
-        btnReturn.setCursor(cursor);
-
-        btnType1.setFocusable(false);
-        btnType1.setBackground(MarcosMusic.getBtnColor());
-        btnType1.setCursor(cursor);
-
-        btnType2.setFocusable(false);
-        btnType2.setBackground(MarcosMusic.getBtnColor());
-        btnType2.setCursor(cursor);
-
-        btnType3.setFocusable(false);
-        btnType3.setBackground(MarcosMusic.getBtnColor());
-        btnType3.setCursor(cursor);
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JButton> listaBtns = Arrays.asList(btnReturn, btnType1, btnType2, btnType3);
+        List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, box_btns_tipos, WinSuscripciones);
+        List<JLabel> listaTexto = Arrays.asList(txtPrecio, txtTittle, txtTipo);
+        MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void setListenersBtns() {
@@ -95,6 +90,8 @@ public class Suscripciones extends JDialog {
 
     private void onCancel() {
         // add your code here if necessary
+        this.setVisible(false);
+        MarcosMusic.frame.setVisible(true);
         dispose();
     }
 

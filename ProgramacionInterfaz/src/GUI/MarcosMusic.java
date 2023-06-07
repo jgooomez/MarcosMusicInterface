@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 public class MarcosMusic extends JFrame {
     private JPanel principal;
@@ -16,114 +20,162 @@ public class MarcosMusic extends JFrame {
     private JButton btnEmpleados;
     private JLabel txtTituloPantallaPrincipal;
     private JPanel panelGeneral;
+    private JPanel box_tittle;
+    private JPanel box_btns;
+    private JPanel emptyBox;
     static JFrame frame = new JFrame("MarcosMusic");
-
+    private List<JButton> listaBtns;
+    private List<JPanel> listaPaneles;
 
     public static void main(String[] args) {
         frame.setContentPane(new MarcosMusic().principal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,400);
+        frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        new Login();
     }
+
+    /**
+     * Crea una instancia de la clase MarcosMusic.
+     * Esta clase representa la ventana principal de la aplicación.
+     * Inicializa los componentes gráficos, aplica estilos y configura los listeners de los botones.
+     */
     public MarcosMusic() {
-        styles();
+        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
+        listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
+        stylesBtns(listaBtns);
+        stylesPanels(listaPaneles);
+        txtTituloPantallaPrincipal.setFont(getFontTitle());
+        ImageIcon iconSpotify = new ImageIcon("iconos/Spotify_icon.png");
+        frame.setIconImage(iconSpotify.getImage());
+
         configurarBotones();
-        DBManagerConexion.connect();
+        /*DBManagerConexion.loadDriver();
+        DBManagerConexion.connect();*/
     }
 
-    private void configurarImagenDeFondo() {
-        // Crear un JLabel para contener la imagen de fondo
-        JLabel fondo = new JLabel(new ImageIcon("ruta/a/la/imagen/fondo.jpg"));
-
-        // Establecer el tamaño y la posición del JLabel
-        fondo.setBounds(0, 0, getWidth(), getHeight());
-
-        // Agregar el JLabel al panel principal
-        principal.add(fondo);
-    }
-
-    private void configurarBotones(){
+    /**
+     * Configura los listeners de los botones.
+     */
+    private void configurarBotones() {
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new Usuarios();
                 dialogo1.setTitle("Vista de usuarios");
-                dialogo1.setSize(600,700);
+                dialogo1.setSize(700, 500);
                 dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
                 dialogo1.setVisible(true);
             }
         });
+
         btnTarjetas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new AdministrarTarjetas();
-                dialogo2.setTitle("Administracion de tarjetas");
-                dialogo2.setSize(400,400);
+                dialogo2.setTitle("Administración de tarjetas");
+                dialogo2.setSize(500, 400);
                 dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
                 dialogo2.setVisible(true);
             }
         });
+
         btnSuscripciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo3 = new Suscripciones();
-                dialogo3.setTitle("Tipo de suscripciones");
-                dialogo3.setSize(800,400);
-                dialogo3.pack();
-                dialogo3.setLocationRelativeTo(null);
-                dialogo3.setVisible(true);
+                JDialog dialogo2 = new Suscripciones();
+                dialogo2.setTitle("Tipo de suscripciones");
+                dialogo2.setSize(400, 300);
+                dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo2.setVisible(true);
             }
         });
+
         btnDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo4 = new Departamentos();
-                dialogo4.setTitle("Departamentos");
-                dialogo4.setSize(400,400);
-                dialogo4.setLocationRelativeTo(null);
-                dialogo4.setVisible(true);
+                JDialog dialogo2 = new Departamentos();
+                dialogo2.setTitle("Departamentos");
+                dialogo2.setSize(400, 400);
+                dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo2.setVisible(true);
             }
         });
 
         btnEmpleados.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo5 = new Empleados();
-                dialogo5.setTitle("Ver Empleados");
-                dialogo5.setSize(400,400);
-                dialogo5.setLocationRelativeTo(null);
-                dialogo5.setVisible(true);
+                JDialog dialogo2 = new Empleados();
+                dialogo2.setTitle("Ver Empleados");
+                dialogo2.setSize(400, 400);
+                dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo2.setVisible(true);
             }
         });
     }
 
-    private void styles() {
+    /**
+     * Aplica estilos a los botones de la lista especificada.
+     * @param listaBotones Lista de botones a los que se les aplicarán los estilos.
+     */
+    public static void stylesBtns(List<JButton> listaBotones) {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
-        txtTituloPantallaPrincipal.setFont(getFontTitle());
 
-        btnVerUsuarios.setFocusable(false);
-        btnVerUsuarios.setBackground(getBtnColor());
-        btnVerUsuarios.setCursor(cursor);
-        btnSuscripciones.setFocusable(false);
-        btnSuscripciones.setBackground(getBtnColor());
-        btnSuscripciones.setCursor(cursor);
-        btnTarjetas.setFocusable(false);
-        btnTarjetas.setBackground(getBtnColor());
-        btnTarjetas.setCursor(cursor);
-        btnDepartamento.setFocusable(false);
-        btnDepartamento.setBackground(getBtnColor());
-        btnDepartamento.setCursor(cursor);
-        btnEmpleados.setFocusable(false);
-        btnEmpleados.setBackground(getBtnColor());
-        btnEmpleados.setCursor(cursor);
+        for (JButton btn : listaBotones) {
+            btn.setBorder(BorderFactory.createBevelBorder(1, Color.white, Color.white));
+            btn.setFocusable(false);
+            btn.setBackground(getBtnColor());
+            btn.setCursor(cursor);
+        }
     }
 
+    /**
+     * Aplica estilos a los paneles de la lista especificada.
+     * @param listaPaneles Lista de paneles a los que se les aplicarán los estilos.
+     */
+    public static void stylesPanels(List<JPanel> listaPaneles) {
+        for (JPanel panel : listaPaneles) {
+            panel.setBackground(getBackgroundColor());
+        }
+    }
+
+    /**
+     * Aplica estilos a los textos de la lista especificada.
+     * @param listaTexto Lista de etiquetas de texto a las que se les aplicarán los estilos.
+     */
+    public static void stylesTexts(List<JLabel> listaTexto) {
+        for (JLabel txt : listaTexto) {
+            txt.setForeground(Color.WHITE);
+        }
+    }
+
+    /**
+     * Obtiene la fuente de título utilizada en la interfaz gráfica.
+     * @return La fuente de título.
+     */
     public static Font getFontTitle() {
-        return new Font("Calibri", Font.BOLD, 45);
+        return new Font("Calibri", Font.BOLD, 30);
     }
 
+    /**
+     * Obtiene el color de los botones.
+     * @return El color de los botones.
+     */
     public static Color getBtnColor() {
-        return new Color(200, 220, 250);
+        return new Color(30, 215, 96);
+    }
+
+    /**
+     * Obtiene el color de fondo utilizado en la interfaz gráfica.
+     * @return El color de fondo.
+     */
+    public static Color getBackgroundColor() {
+        return new Color(40, 40, 40);
     }
 }

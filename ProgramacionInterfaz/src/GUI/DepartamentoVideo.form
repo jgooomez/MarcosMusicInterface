@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="b3cec" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="b3cec" binding="box_btn" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -26,7 +26,7 @@
           </component>
         </children>
       </grid>
-      <grid id="7df5c" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="7df5c" binding="box_inputs" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -34,49 +34,49 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="56b2" class="javax.swing.JLabel">
+          <component id="56b2" class="javax.swing.JLabel" binding="txtNumSubDpto">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Nº de SubDepartamentos:"/>
             </properties>
           </component>
-          <component id="865d8" class="javax.swing.JLabel">
+          <component id="865d8" class="javax.swing.JLabel" binding="txtIdDpto">
             <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="ID del departamento:"/>
             </properties>
           </component>
-          <component id="7d5a9" class="javax.swing.JLabel">
+          <component id="7d5a9" class="javax.swing.JLabel" binding="txtNumTrabajadores">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Nº de trabajadores:"/>
             </properties>
           </component>
-          <component id="5c47b" class="javax.swing.JLabel">
+          <component id="5c47b" class="javax.swing.JLabel" binding="txtNombreEcanrgado">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Nombre del encargado:"/>
             </properties>
           </component>
-          <component id="fa65a" class="javax.swing.JLabel">
+          <component id="fa65a" class="javax.swing.JLabel" binding="txtFechaCreacion">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Fecha de creacion:"/>
             </properties>
           </component>
-          <component id="367cd" class="javax.swing.JLabel">
+          <component id="367cd" class="javax.swing.JLabel" binding="txtNombre">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Nombre:"/>
@@ -144,7 +144,7 @@
           </component>
         </children>
       </grid>
-      <component id="be066" class="javax.swing.JLabel">
+      <component id="be066" class="javax.swing.JLabel" binding="icono">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -153,7 +153,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="9e3c5" class="javax.swing.JLabel">
+      <component id="9e3c5" class="javax.swing.JLabel" binding="txtTittle">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

@@ -1,7 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class DepartamentoVideo extends JDialog {
     private JPanel WinVideo;
@@ -12,11 +15,20 @@ public class DepartamentoVideo extends JDialog {
     private JTextField inpNumTrabajadores;
     private JTextField inpNumDeSubDepar;
     private JTextField inpIDDepartamento;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JPanel box_btn;
+    private JPanel box_inputs;
+    private JLabel txtNumSubDpto;
+    private JLabel txtIdDpto;
+    private JLabel txtNumTrabajadores;
+    private JLabel txtNombreEcanrgado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombre;
 
     public DepartamentoVideo() {
         setContentPane(WinVideo);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
         // call onCancel() when cross is clicked
@@ -39,6 +51,16 @@ public class DepartamentoVideo extends JDialog {
                 dispose();
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 20));
+        List<JButton> listaBtns = Arrays.asList(btnReturn);
+        List<JPanel> listaPaneles = Arrays.asList(box_btn, box_inputs, WinVideo);
+        List<JLabel> listaTexto = Arrays.asList(txtFechaCreacion, txtTittle, txtIdDpto, txtNombre, txtNombreEcanrgado, txtNumSubDpto, txtNumTrabajadores);
+        MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void onOK() {

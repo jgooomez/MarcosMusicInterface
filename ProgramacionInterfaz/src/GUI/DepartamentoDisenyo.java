@@ -1,7 +1,10 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class DepartamentoDisenyo extends JDialog {
     private JPanel WinDisenyo;
@@ -14,11 +17,18 @@ public class DepartamentoDisenyo extends JDialog {
     private JTextField inpIDDelDepartamento;
     private JPanel box_top;
     private JPanel box_botones;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JLabel icono;
+    private JLabel txtTittle;
+    private JLabel txtNumDpto;
+    private JLabel txtIdDpto;
+    private JLabel txtNumTrabajadores;
+    private JLabel txtNombreEncargado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombre;
 
     public DepartamentoDisenyo() {
         setContentPane(WinDisenyo);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(btnReturn);
 
@@ -42,6 +52,16 @@ public class DepartamentoDisenyo extends JDialog {
                 dispose();
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 20));
+        List<JButton> listaBtns = Arrays.asList(btnReturn);
+        List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinDisenyo);
+        List<JLabel> listaTexto = Arrays.asList(txtFechaCreacion, txtTittle, txtIdDpto, txtNombre,txtNombreEncargado, txtNumDpto, txtNumTrabajadores);
+        MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void onOK() {
