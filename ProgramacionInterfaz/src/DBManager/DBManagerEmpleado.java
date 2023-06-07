@@ -19,7 +19,7 @@ public class DBManagerEmpleado {
     private static final String DB_US_NOM = "nombre";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_FINC = "fechaIncorporacion";
-    private static final String DB_US_DEP = "idDepartamento";
+    private static final String DB_US_DEP = "departamento";
 
     /**
      * Obtiene toda la tabla Empleado de la base de datos
@@ -250,7 +250,7 @@ public class DBManagerEmpleado {
                 Date fechaIncorporacion = rs.getDate("fechaIncorporacion");
                 int departamento = rs.getInt("idDepartamento");
 
-                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, String.valueOf(fechaIncorporacion), departamento);
+                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, fechaIncorporacion, departamento);
                 empleados.add(empleado);
             }
 
