@@ -24,7 +24,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="e7465" class="javax.swing.JButton" binding="buttonOK">
+              <component id="e7465" class="javax.swing.JButton" binding="btnModificar">
                 <constraints>
                   <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -44,7 +44,7 @@
           </grid>
         </children>
       </grid>
-      <grid id="e3588" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="e3588" binding="numEmpleadosDptoLabel" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -52,7 +52,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="c6626" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+          <component id="c6626" class="javax.swing.JComboBox" binding="editarDepartamentoComboBox">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -60,7 +60,7 @@
               <model/>
             </properties>
           </component>
-          <component id="5eecb" class="javax.swing.JLabel">
+          <component id="5eecb" class="javax.swing.JLabel" binding="idDptoLabel">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -68,7 +68,7 @@
               <text value="Id Departamento :"/>
             </properties>
           </component>
-          <component id="c7537" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="c7537" class="javax.swing.JTextField" binding="idDepartamentoTextField">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -76,7 +76,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="51b3b" class="javax.swing.JLabel">
+          <component id="51b3b" class="javax.swing.JLabel" binding="nombreDptoLabel">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -84,7 +84,7 @@
               <text value="Nombre :"/>
             </properties>
           </component>
-          <component id="3168e" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+          <component id="3168e" class="javax.swing.JTextField" binding="nombreDepartamentotextField">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -92,7 +92,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="e2b6" class="javax.swing.JLabel">
+          <component id="e2b6" class="javax.swing.JLabel" binding="fechaDptoLabel">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -100,7 +100,7 @@
               <text value="Fecha creación : "/>
             </properties>
           </component>
-          <component id="6c038" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+          <component id="6c038" class="javax.swing.JTextField" binding="fechaDepartamentoTextField">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -108,7 +108,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="45bb3" class="javax.swing.JLabel">
+          <component id="45bb3" class="javax.swing.JLabel" binding="jefeDptoLabel">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -116,7 +116,7 @@
               <text value="Jefe Departamento :"/>
             </properties>
           </component>
-          <component id="5f7b0" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+          <component id="5f7b0" class="javax.swing.JTextField" binding="jefeDepTextField">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -132,7 +132,7 @@
               <text value="Num empleados :"/>
             </properties>
           </component>
-          <component id="6f335" class="javax.swing.JTextField" binding="textField5" default-binding="true">
+          <component id="6f335" class="javax.swing.JTextField" binding="numEmpleadosTextField">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -140,7 +140,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="849e1" class="javax.swing.JLabel">
+          <component id="849e1" class="javax.swing.JLabel" binding="numSubDptoLabel">
             <constraints>
               <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -148,7 +148,7 @@
               <text value="Num subdepartamento :"/>
             </properties>
           </component>
-          <component id="4e274" class="javax.swing.JTextField" binding="textField6" default-binding="true">
+          <component id="4e274" class="javax.swing.JTextField" binding="numSubDptoTextField">
             <constraints>
               <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>

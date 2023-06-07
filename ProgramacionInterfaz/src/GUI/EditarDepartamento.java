@@ -1,26 +1,36 @@
 package GUI;
 
+import ClasePOJO.Departamento;
+import DBManager.DBManagerDepartamento;
+
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.List;
 
 public class EditarDepartamento extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
+    private JButton btnModificar;
     private JButton buttonCancel;
-    private JComboBox comboBox1;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
+    private JComboBox editarDepartamentoComboBox;
+    private JTextField idDepartamentoTextField;
+    private JTextField nombreDepartamentotextField;
+    private JTextField fechaDepartamentoTextField;
+    private JTextField jefeDepTextField;
+    private JTextField numEmpleadosTextField;
+    private JTextField numSubDptoTextField;
+    private JLabel numSubDptoLabel;
+    private JPanel numEmpleadosDptoLabel;
+    private JLabel jefeDptoLabel;
+    private JLabel fechaDptoLabel;
+    private JLabel nombreDptoLabel;
+    private JLabel idDptoLabel;
 
     public EditarDepartamento() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
-
-        buttonOK.addActionListener(new ActionListener() {
+        getRootPane().setDefaultButton(btnModificar);
+        loadDepartamentos();
+        btnModificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onOK();
             }
@@ -31,7 +41,23 @@ public class EditarDepartamento extends JDialog {
                 onCancel();
             }
         });
+        editarDepartamentoComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtener el departamento seleccionado del JComboBox
+                String selectedItem = (String) editarDepartamentoComboBox.getSelectedItem();
+                if (selectedItem != null) {
+                    // Obtener el ID del departamento seleccionado
+                    int selectedId = getIdFromSelectedItem(selectedItem);
 
+                    // Obtener los datos del departamento seleccionado
+                    Departamento departamento = getDepartamentoById(selectedId);
+
+                    // Actualizar los JTextField con los datos del departamento
+                    updateTextFields(departamento);
+                }
+            }
+        });
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -47,7 +73,26 @@ public class EditarDepartamento extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
-
+    //Coger el id del item comboBox seleccionado
+    private int getIdFromSelectedItem(String selectedItem) {
+        // Extraer el ID del departamento seleccionado del texto en el JComboBox
+        String[] parts = selectedItem.split(" - ");
+        return Integer.parseInt(parts[0]);
+    }
+    //Saca los datos del departamento por ID con el DBManagerDepartamento
+    private Departamento getDepartamentoById(int id) {
+        DBManagerDepartamento dbManager = new DBManagerDepartamento();
+        return dbManager.getDepartamentoById(id);
+    }
+    private void updateTextFields(Departamento departamento) {
+        // Actualizar los JTextField con los datos del departamento
+        idDepartamentoTextField.setText(String.valueOf(departamento.getIdDepartamento()));
+        nombreDepartamentotextField.setText(departamento.getNombre());
+        fechaDepartamentoTextField.setText(departamento.getFechaCreacion());
+        jefeDepTextField.setText(departamento.getNombreEncargado());
+        numEmpleadosTextField.setText(String.valueOf(departamento.getNumTrabajadores()));
+        numSubDptoTextField.setText(String.valueOf(departamento.getNumSubDpto()));
+    }
     private void onOK() {
         // add your code here
         dispose();
@@ -57,7 +102,18 @@ public class EditarDepartamento extends JDialog {
         // add your code here if necessary
         dispose();
     }
+    private void loadDepartamentos() {
 
+        List<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento(); // Reemplaza por tu lógica para obtener los departamentos
+
+        // Limpiar el JComboBox
+        editarDepartamentoComboBox.removeAllItems();
+
+        // Agregar los departamentos al JComboBox
+        for (Departamento departamento : departamentos) {
+            editarDepartamentoComboBox.addItem(departamento.getIdDepartamento() + " - " + departamento.getNombre());
+        }
+    }
     public static void main(String[] args) {
         EditarDepartamento dialog = new EditarDepartamento();
         dialog.pack();

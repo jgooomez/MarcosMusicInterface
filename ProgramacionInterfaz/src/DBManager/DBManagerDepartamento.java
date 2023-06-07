@@ -2,10 +2,7 @@ package DBManager;
 
 import ClasePOJO.Departamento;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -285,5 +282,30 @@ public class DBManagerDepartamento {
             throw new RuntimeException(e);
         }
         return columnNames;
+    }
+
+    public Departamento getDepartamentoById(int id) {
+        String query = "SELECT * FROM departamento WHERE idDepartamento = ?";
+        try (Connection conn = DBManagerConexion.getConexion();
+             PreparedStatement statement = conn.prepareStatement(query)) {
+
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+                int idDepartamento = rs.getInt("idDepartamento");
+                String nombre = rs.getString("nombre");
+                String fechaCreacion = rs.getString("fechaCreacion");
+                String nombreEncargado = rs.getString("nombreEncargado");
+                int numTrabajadores = rs.getInt("numTrabajadores");
+                int numSubDpto = rs.getInt("numSubDpto");
+
+                return new Departamento(idDepartamento, nombre, fechaCreacion, nombreEncargado, String.valueOf(numTrabajadores), String.valueOf(numSubDpto));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null; // Si no se encuentra el departamento, devuelve null o lanza una excepción según tus necesidades
     }
 }

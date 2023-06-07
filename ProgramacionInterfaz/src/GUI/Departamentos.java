@@ -50,6 +50,14 @@ public class Departamentos extends JDialog {
                 dispose();
             }
         });
+        btnEditarDepartamento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditarDepartamento dialog = new EditarDepartamento();
+                dialog.pack();
+                dialog.setVisible(true);
+            }
+        });
         btnAnyadirDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,9 +96,9 @@ public class Departamentos extends JDialog {
         scrollDepartamentos.setViewportView(tableDepartamentos);
     }
 
-    private Object[] defineColumnData() {
-        return  DBManagerDepartamento.defineColumnData();
-    }
+    //private Object[] defineColumnData() {
+    //    return  DBManagerDepartamento.defineColumnData();
+    //}
 
     // Método para obtener los nombres de las columnas desde la base de datos
     private List<String> defineColumnName() {
