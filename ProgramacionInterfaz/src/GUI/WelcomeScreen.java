@@ -36,23 +36,13 @@ public class WelcomeScreen extends JFrame {
         btnAdmin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login dialog = new Login();
-                dialog.setTitle("Agregar Usuario");
-                dialog.setSize(400, 300);
-                dialog.setLocationRelativeTo(null);
-                frame.setVisible(false);
-                dialog.setVisible(true);
+                new Login(frame);
             }
         });
         btnUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new Login();
-                dialog.setTitle("Agregar Usuario");
-                dialog.setSize(400, 300);
-                dialog.setLocationRelativeTo(null);
-                frame.setVisible(false);
-                dialog.setVisible(true);
+                new Login(frame);
             }
         });
     }

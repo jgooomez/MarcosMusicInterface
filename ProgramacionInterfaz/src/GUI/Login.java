@@ -6,8 +6,8 @@ import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class Login extends JDialog {
-    private JPanel winLogin;
+public class Login {
+    public JPanel winLogin;
     private JPanel box_inputs;
     private JTextField inpUserName;
     private JTextField inpPassword;
@@ -15,18 +15,23 @@ public class Login extends JDialog {
     private JLabel txtTittle;
     private JLabel txtUser;
     private JLabel txtPsswd;
-    private JButton buttonOK;
-    private JButton buttonCancel;
+    private JDialog dialogo;
 
-    public Login() {
-        setContentPane(winLogin);
+    public Login(JFrame frame) {
         styles();
-        setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        dialogo = new JDialog();
+        dialogo.setTitle("Log In");
+        dialogo.setContentPane(winLogin);
+        dialogo.getRootPane().setDefaultButton(btnLogin);
+        dialogo.setSize(400, 300);
+        dialogo.setEnabled(true);
+        dialogo.setLocationRelativeTo(null);
+        frame.setVisible(false);
+        dialogo.setVisible(true);
 
         // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
+        dialogo.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        dialogo.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 onCancel();
             }
@@ -42,12 +47,7 @@ public class Login extends JDialog {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new MarcosMusic();
-                frame.setTitle("Bienvenido a Marcos Music");
-                frame.setEnabled(true);
-                frame.setSize(600, 500);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                new MarcosMusic(dialogo);
             }
         });
     }
@@ -63,19 +63,10 @@ public class Login extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        dialogo.dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
-
-    public static void main(String[] args) {
-        Login dialog = new Login();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+        dialogo.dispose();
     }
 }
