@@ -27,6 +27,7 @@ public class Departamentos extends JDialog {
     private JLabel txtTittle;
     private JLabel icono;
     private JPanel box_content;
+    private JButton btnEliminarDepartamento;
     private JButton buttonAtras;
     private JButton buttonCancel;
 

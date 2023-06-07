@@ -1,5 +1,7 @@
 package GUI;
 
+import DBManager.DBManagerUsuarios;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,6 +19,7 @@ public class Login extends JDialog {
     private JLabel txtPsswd;
     private JButton buttonOK;
     private JButton buttonCancel;
+
 
     public Login() {
         setContentPane(winLogin);
@@ -42,15 +45,46 @@ public class Login extends JDialog {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = new MarcosMusic();
-                frame.setTitle("Bienvenido a Marcos Music");
-                frame.setEnabled(true);
-                frame.setSize(600, 500);
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                if (DBManagerUsuarios.verificarCredenciales(inpUserName.getText(), inpPassword.getText())) {
+                    JFrame frame = new MarcosMusic();
+                    frame.setTitle("Bienvenido a Marcos Music");
+                    frame.setEnabled(true);
+                    frame.setSize(600, 500);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                    //Bloquear algunas funciones
+                } else if (inpUserName.getText().equals("ADMIN") && Integer.parseInt(inpPassword.getText()) == 1234) {
+                    JFrame frame = new MarcosMusic();
+                    frame.setTitle("Bienvenido a Marcos Music");
+                    frame.setEnabled(true);
+                    frame.setSize(600, 500);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                }
             }
         });
     }
+
+
+    public static void bloquearBotones(boolean isAdmin, JButton... botones) {
+        for (JButton boton : botones) {
+            if (isAdmin) {
+                // Si es admin, todos los botones están habilitados
+                boton.setEnabled(true);
+            } else {
+                // Si no es admin, bloquear ciertos botones específicos
+                String nombreBoton = boton.getName();
+                if (nombreBoton.equals("botonAdmin")) {
+                    // Bloquear el botón "Admin"
+                    boton.setEnabled(false);
+                } else {
+                    // Habilitar los demás botones
+                    boton.setEnabled(true);
+                }
+            }
+        }
+    }
+
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
