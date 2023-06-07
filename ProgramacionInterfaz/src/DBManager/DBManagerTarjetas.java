@@ -1,7 +1,6 @@
 package DBManager;
 
 import ClasePOJO.Tarjeta;
-import ClasePOJO.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -102,6 +101,24 @@ public class DBManagerTarjetas {
         }
     }
 
+    public static int getIdUserTarjeta() {
+        try {
+            int id = 0;
+            Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String sql = "SELECT TOP 1 " + DB_TARJETA_IDUSUARIO + " FROM " + DB_TARJETA + " ORDER BY " + DB_TARJETA_IDUSUARIO + " ASC";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if(rs.next()) {
+                id = rs.getInt(DB_TARJETA_IDUSUARIO);
+            }
+
+            return id;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
+
 
     /**
      * Comprueba si en la BD existe la tarjeta con el número de tarjeta indicado
@@ -163,15 +180,15 @@ public class DBManagerTarjetas {
     /**
      * Solicita a la BD insertar un nuevo registro de tarjeta
      *
-     * @param numeroTarjeta  número de tarjeta
-     * @param telefono       teléfono
-     * @param tipo           tipo de tarjeta
-     * @param nombreTitular  nombre del titular
-     * @param cvv            CVV
-     * @param caducidad      fecha de caducidad
+     * @param numeroTarjeta número de tarjeta
+     * @param telefono      teléfono
+     * @param tipo          tipo de tarjeta
+     * @param nombreTitular nombre del titular
+     * @param cvv           CVV
+     * @param caducidad     fecha de caducidad
      * @return verdadero si pudo insertarlo, falso en caso contrario
      */
-    public static boolean insertTarjeta(String numeroTarjeta, int telefono, String tipo, String nombreTitular, int cvv, String caducidad) {
+    public static boolean insertTarjeta(String numeroTarjeta, int telefono, String tipo, String nombreTitular, int cvv, String caducidad, int idUser) {
         try {
             System.out.print("Insertando tarjeta " + numeroTarjeta + "...");
             ResultSet rs = getTablaTarjeta(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
@@ -183,6 +200,7 @@ public class DBManagerTarjetas {
             rs.updateString(DB_TARJETA_NOMBRE, nombreTitular);
             rs.updateInt(DB_TARJETA_CVV, cvv);
             rs.updateString(DB_TARJETA_CADUCIDAD, caducidad);
+            rs.updateInt(DB_TARJETA_IDUSUARIO, idUser);
 
             rs.insertRow();
 
