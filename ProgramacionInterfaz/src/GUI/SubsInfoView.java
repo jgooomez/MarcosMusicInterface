@@ -8,18 +8,18 @@ import java.util.List;
 
 public class SubsInfoView extends JDialog {
     private JPanel viewInfoBase;
-    private JLabel txtTittle;
+    private JLabel txtTitle;
     private JButton btnReturn;
     private JTextField outPrecio;
-    private JTextArea uotDescripcion;
     private JLabel txtDescripcion;
     private JLabel txtPrecio;
+    private JTextArea outDescripcion;
 
     private void onCancel() {
         dispose();
     }
 
-    public SubsInfoView(String tipo, double precio, String descripcion:) {
+    public SubsInfoView(String tipo, double precio, String descripcion) {
         styles();
         setContentPane(viewInfoBase);
         setModal(true);
@@ -32,9 +32,9 @@ public class SubsInfoView extends JDialog {
             }
         });
 
-        txtTittle.setText(tipo);
-        txtDescripcion.setText(descripcion);
-        txtPrecio.setText(String.valueOf(precio));
+        txtTitle.setText(tipo);
+        outDescripcion.setText(descripcion);
+        outPrecio.setText(String.valueOf(precio) + "€");
 
         // call onCancel() on ESCAPE
         viewInfoBase.registerKeyboardAction(new ActionListener() {
@@ -54,10 +54,12 @@ public class SubsInfoView extends JDialog {
     }
     private void setListenersBtns() {}
     private void styles() {
-        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        java.util.List<JButton> listaBtns = Arrays.asList();
+        txtTitle.setFont(new Font("Calibri", Font.BOLD, 30));
+        txtDescripcion.setForeground(Color.WHITE);
+        txtPrecio.setForeground(Color.WHITE);
+        java.util.List<JButton> listaBtns = Arrays.asList(btnReturn);
         java.util.List<JPanel> listaPaneles = Arrays.asList(viewInfoBase);
-        List<JLabel> listaTexto = Arrays.asList(txtTittle);
+        List<JLabel> listaTexto = Arrays.asList(txtTitle);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
@@ -65,7 +67,7 @@ public class SubsInfoView extends JDialog {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("SubsInfoView");
-        frame.setContentPane(new SubsInfoView("test", 0.1, "uwu").viewInfoBase);
+        frame.setContentPane(new SubsInfoView("test", 0.1, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nisi neque, bibendum et vulputate quis, sollicitudin eget eros. Nullam sed ex quis massa molestie sollicitudin. Aliquam vehicula, ex in elementum pulvinar, ipsum dolor tempus orci, vel viverra felis dolor eget nulla. Nulla pulvinar sollicitudin volutpat. Phasellus feugiat justo eu lectus molestie, sit amet scelerisque quam feugiat. Nam efficitur placerat quam a feugiat. Phasellus rutrum eget purus et posuere. Donec id elit consequat, vestibulum mi id, ullamcorper neque. Praesent varius erat a enim dictum euismod. Cras faucibus tempus porta.").viewInfoBase);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);

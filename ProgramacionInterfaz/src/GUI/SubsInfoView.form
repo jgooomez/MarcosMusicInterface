@@ -8,23 +8,15 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="7c550" class="javax.swing.JButton" binding="btnReturn">
+      <component id="623f6" class="javax.swing.JLabel" binding="txtTitle">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Volver"/>
+          <text value="Label"/>
         </properties>
       </component>
-      <component id="a666d" class="javax.swing.JLabel" binding="txtTittle">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="1" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="TITULO"/>
-        </properties>
-      </component>
-      <component id="cffe" class="javax.swing.JLabel" binding="txtPrecio">
+      <component id="9f269" class="javax.swing.JLabel" binding="txtPrecio">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -32,26 +24,33 @@
           <text value="PRECIO:"/>
         </properties>
       </component>
-      <component id="bf7b" class="javax.swing.JTextField" binding="outPrecio">
+      <component id="d41c0" class="javax.swing.JTextField" binding="outPrecio">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties>
           <editable value="false"/>
-          <enabled value="true"/>
         </properties>
       </component>
-      <component id="88a06" class="javax.swing.JLabel" binding="txtDescripcion">
+      <component id="62c43" class="javax.swing.JButton" binding="btnReturn">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Volver"/>
+        </properties>
+      </component>
+      <component id="a979f" class="javax.swing.JLabel" binding="txtDescripcion">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="DESCRIPCIÓN:"/>
+          <text value="DESCRIPCIÓN"/>
         </properties>
       </component>
-      <component id="e6321" class="javax.swing.JTextArea" binding="uotDescripcion">
+      <component id="f252c" class="javax.swing.JTextArea" binding="outDescripcion">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
@@ -59,7 +58,8 @@
         </constraints>
         <properties>
           <editable value="false"/>
-          <text value=""/>
+          <lineWrap value="true"/>
+          <wrapStyleWord value="true"/>
         </properties>
       </component>
     </children>

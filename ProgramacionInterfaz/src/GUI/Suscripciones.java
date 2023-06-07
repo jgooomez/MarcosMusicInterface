@@ -1,6 +1,7 @@
 package GUI;
 
 import ClasePOJO.Subscripcion;
+import DBManager.DBManagerConexion;
 import DBManager.DBManagerSubscripcion;
 
 import javax.swing.*;
@@ -22,9 +23,10 @@ public class Suscripciones extends JDialog {
     private JPanel box_btns_tipos;
     private JButton btnFamily;
     private JButton btnStudent;
-    private ArrayList<Subscripcion> subscripciones = DBManagerSubscripcion.printTablaSubscripcion();
+    private ArrayList<Subscripcion> subList;
 
     public Suscripciones() {
+        subList = DBManagerSubscripcion.printTablaSubscripcion();
         styles();
         setContentPane(WinSuscripciones);
         setModal(true);
@@ -68,17 +70,52 @@ public class Suscripciones extends JDialog {
         btnBasica.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Meter los datos de la suscripcion tipo1 para que se muestren en los textField.
+                String tipo = "";
+                double precio = 0;
+                String descripcion = "";
+
+                for (int i = 0; i < subList.size(); i++) {
+                    if (subList.get(i).getTIPO().equals(btnBasica.getText())) {
+                        tipo = subList.get(i).getTIPO();
+                        precio = subList.get(i).getPRECIO();
+                        descripcion = subList.get(i).getDESCRIPCION();
+                        break;
+                    }
+                }
+
+
+                JDialog subsInfoView = new SubsInfoView(tipo, precio, descripcion);
+
+                subsInfoView.setTitle("Información");
+                subsInfoView.pack();
+                subsInfoView.setSize(600, 300);
+                subsInfoView.setLocationRelativeTo(null);
+
+                subsInfoView.setVisible(true);
             }
         });
         btnIndividual.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //hacer bucle for i para buscar sub por nombre
-                JDialog subsInfoView = new SubsInfoView();
+                String tipo = "";
+                double precio = 0;
+                String descripcion = "";
+
+                for (int i = 0; i < subList.size(); i++) {
+                    if (subList.get(i).getTIPO().equals(btnIndividual.getText())) {
+                        tipo = subList.get(i).getTIPO();
+                        precio = subList.get(i).getPRECIO();
+                        descripcion = subList.get(i).getDESCRIPCION();
+                        break;
+                    }
+                }
+
+
+                JDialog subsInfoView = new SubsInfoView(tipo, precio, descripcion);
 
                 subsInfoView.setTitle("Información");
-                subsInfoView.setSize(700, 500);
+                subsInfoView.pack();
+                subsInfoView.setSize(600, 300);
                 subsInfoView.setLocationRelativeTo(null);
 
                 subsInfoView.setVisible(true);
@@ -87,10 +124,79 @@ public class Suscripciones extends JDialog {
         btnDuo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog subsInfoView = new SubsInfoView();
+                String tipo = "";
+                double precio = 0;
+                String descripcion = "";
+
+                for (int i = 0; i < subList.size(); i++) {
+                    if (subList.get(i).getTIPO().equals(btnDuo.getText())) {
+                        tipo = subList.get(i).getTIPO();
+                        precio = subList.get(i).getPRECIO();
+                        descripcion = subList.get(i).getDESCRIPCION();
+                        break;
+                    }
+                }
+
+
+                JDialog subsInfoView = new SubsInfoView(tipo, precio, descripcion);
 
                 subsInfoView.setTitle("Información");
-                subsInfoView.setSize(700, 500);
+                subsInfoView.pack();
+                subsInfoView.setSize(600, 300);
+                subsInfoView.setLocationRelativeTo(null);
+
+                subsInfoView.setVisible(true);
+            }
+        });
+        btnFamily.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo = "";
+                double precio = 0;
+                String descripcion = "";
+
+                for (int i = 0; i < subList.size(); i++) {
+                    if (subList.get(i).getTIPO().equals(btnFamily.getText())) {
+                        tipo = subList.get(i).getTIPO();
+                        precio = subList.get(i).getPRECIO();
+                        descripcion = subList.get(i).getDESCRIPCION();
+                        break;
+                    }
+                }
+
+
+                JDialog subsInfoView = new SubsInfoView(tipo, precio, descripcion);
+
+                subsInfoView.setTitle("Información");
+                subsInfoView.pack();
+                subsInfoView.setSize(600, 300);
+                subsInfoView.setLocationRelativeTo(null);
+
+                subsInfoView.setVisible(true);
+            }
+        });
+        btnStudent.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String tipo = "";
+                double precio = 0;
+                String descripcion = "";
+
+                for (int i = 0; i < subList.size(); i++) {
+                    if (subList.get(i).getTIPO().equals(btnStudent.getText())) {
+                        tipo = subList.get(i).getTIPO();
+                        precio = subList.get(i).getPRECIO();
+                        descripcion = subList.get(i).getDESCRIPCION();
+                        break;
+                    }
+                }
+
+
+                JDialog subsInfoView = new SubsInfoView(tipo, precio, descripcion);
+
+                subsInfoView.setTitle("Información");
+                subsInfoView.pack();
+                subsInfoView.setSize(600, 300);
                 subsInfoView.setLocationRelativeTo(null);
 
                 subsInfoView.setVisible(true);
@@ -111,6 +217,7 @@ public class Suscripciones extends JDialog {
     }
 
     public static void main(String[] args) {
+
         Suscripciones dialog = new Suscripciones();
         dialog.pack();
         dialog.setVisible(true);
