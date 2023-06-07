@@ -270,6 +270,7 @@ public class DBManagerDepartamento {
     //selecciona un departamento proporcionando un id y saca los datos de ese departamento
     public Departamento getDepartamentoById(int id) {
         String query = "SELECT * FROM departamento WHERE idDepartamento = ?";
+        DBManagerConexion.connect();
         try (Connection conn = DBManagerConexion.getConexion();
              PreparedStatement statement = conn.prepareStatement(query)) {
             System.out.println(id);
