@@ -11,8 +11,10 @@ public class Login extends JDialog {
     private JButton LOGINButton;
     private JButton buttonOK;
     private JButton buttonCancel;
+    private MarcosMusic frame;
 
-    public Login() {
+    public Login(MarcosMusic frame) {
+        this.frame = frame;
         setContentPane(principal);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -31,6 +33,18 @@ public class Login extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        LOGINButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame frame = new MarcosMusic();
+                frame.setTitle("Bienvenido a Marcos Music");
+                frame.setEnabled(true);
+                frame.setSize(600, 500);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
     }
 
     private void onOK() {
@@ -44,9 +58,17 @@ public class Login extends JDialog {
     }
 
     public static void main(String[] args) {
-        Login dialog = new Login();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+        MarcosMusic frame = new MarcosMusic();
+        frame.setTitle("Bienvenido a Marcos Music");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+
+        // Crear una instancia de Login
+        Login loginDialog = new Login(frame);  // Pasar la instancia de MarcosMusic como argumento
+
+        // Mostrar el diálogo de inicio de sesión
+        loginDialog.setVisible(true);
     }
+
 }
