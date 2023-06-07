@@ -5,12 +5,10 @@ import DBManager.DBManagerDepartamento;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Vector;
 
 import static DBManager.DBManagerDepartamento.DB_DEPARTAMENTO_SELECT;
 
@@ -23,13 +21,16 @@ public class Departamentos extends JDialog {
     private JScrollPane scrollDepartamentos;
     private JButton btnAnyadirDepartamento;
     private JButton btnEditarDepartamento;
+    private JButton btnActualizar;
     private JButton buttonAtras;
     private JButton buttonCancel;
 
     public Departamentos() {
         setContentPane(WinDepartamentos);
         setModal(true);
+        setSize(500,500);
         getRootPane().setDefaultButton(btnReturn);
+        defineDataRow();
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -50,11 +51,18 @@ public class Departamentos extends JDialog {
                 dispose();
             }
         });
+        btnActualizar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                defineDataRow();
+            }
+        });
         btnEditarDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditarDepartamento dialog = new EditarDepartamento();
                 dialog.pack();
+                dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
@@ -63,9 +71,12 @@ public class Departamentos extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 AnyadirDepartamento dialog = new AnyadirDepartamento();
                 dialog.pack();
+                dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
+    }
+    private void defineDataRow(){
         // Obtener los nombres de las columnas de la base de datos
         List<String> columnNames = defineColumnName();
 
@@ -75,30 +86,26 @@ public class Departamentos extends JDialog {
             model.addColumn(columnName);
         }
         try{
-        ResultSet rs = DBManagerConexion.getConexion().createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
-        Object[] row = new Object[6];
-        while (rs.next()) {
-            row[0] = rs.getInt("idDepartamento");
-            row[1] = rs.getString("nombre");
-            row[2] = rs.getDate("fechaCreacion");
-            row[3] = rs.getString("nombreEncargado");
-            row[4] = rs.getInt("numTrabajadores");
-            row[5] = rs.getInt("numSubDpto");
-            model.addRow(row);
+            ResultSet rs = DBManagerConexion.getConexion().createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
+            Object[] row = new Object[6];
+            while (rs.next()) {
+                row[0] = rs.getInt("idDepartamento");
+                row[1] = rs.getString("nombre");
+                row[2] = rs.getDate("fechaCreacion");
+                row[3] = rs.getString("nombreEncargado");
+                row[4] = rs.getInt("numTrabajadores");
+                row[5] = rs.getInt("numSubDpto");
+                model.addRow(row);
+            }
+        } catch (
+                SQLException e) {
+            throw new RuntimeException(e);
         }
-    } catch (
-    SQLException e) {
-        throw new RuntimeException(e);
-    }
 
 
         tableDepartamentos = new JTable(model);
         scrollDepartamentos.setViewportView(tableDepartamentos);
     }
-
-    //private Object[] defineColumnData() {
-    //    return  DBManagerDepartamento.defineColumnData();
-    //}
 
     // Método para obtener los nombres de las columnas desde la base de datos
     private List<String> defineColumnName() {
@@ -117,8 +124,9 @@ public class Departamentos extends JDialog {
     }
 
     public static void main(String[] args) {
+        DBManagerConexion.connect();
         Departamentos dialog = new Departamentos();
-        dialog.pack();
+        dialog.setSize(600,600);
         dialog.setVisible(true);
         dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
     }

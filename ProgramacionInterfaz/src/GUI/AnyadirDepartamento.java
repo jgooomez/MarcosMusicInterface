@@ -1,31 +1,40 @@
 package GUI;
 
+import ClasePOJO.Departamento;
+import DBManager.DBManagerDepartamento;
+
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class AnyadirDepartamento extends JDialog {
     private JPanel contentPane;
-    private JButton buttonOK;
-    private JButton buttonCancel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
+    private JButton btnAnyadir;
+    private JButton btnCancelar;
+    private JTextField idDepartamentoTextField;
+    private JTextField nombreDptoTextField;
+    private JTextField fechaCreacionTextField;
+    private JTextField jefeDptoTextField;
+    private JTextField numSubDptoTextField;
+    private JTextField numEmpleadosTextField;
+    private JLabel numSubDptoLabel;
+    private JLabel numEmpleadosLabel;
+    private JLabel nombreEncargadoLabel;
+    private JLabel fechaCreacionLabel;
+    private JLabel nombreDptoLabel;
+    private JLabel idDptoLabel;
 
     public AnyadirDepartamento() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(buttonOK);
+        getRootPane().setDefaultButton(btnAnyadir);
 
-        buttonOK.addActionListener(new ActionListener() {
+        btnAnyadir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                newDepartamento();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -46,6 +55,16 @@ public class AnyadirDepartamento extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
+    private void newDepartamento(){
+        Departamento departamento= new Departamento(Integer.parseInt(idDepartamentoTextField.getText()),
+                nombreDptoTextField.getText(), fechaCreacionTextField.getText(), jefeDptoTextField.getText(),
+                numEmpleadosTextField.getText(), numSubDptoTextField.getText());
+        if (DBManagerDepartamento.createDpto(departamento)){
+            JOptionPane.showMessageDialog(null, "Se ha añadido correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "Ocurrió un error", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     private void onOK() {
         // add your code here
         dispose();
@@ -62,4 +81,5 @@ public class AnyadirDepartamento extends JDialog {
         dialog.pack();
         dialog.setVisible(true);
     }
+
 }

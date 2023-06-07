@@ -28,12 +28,12 @@ public class EditarDepartamento extends JDialog {
     public EditarDepartamento() {
         setContentPane(contentPane);
         setModal(true);
+        idDepartamentoTextField.setEnabled(false);
         getRootPane().setDefaultButton(btnModificar);
         loadDepartamentos();
         btnModificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 modificarDepartamento();
-                onOK();
             }
         });
 
@@ -93,10 +93,6 @@ public class EditarDepartamento extends JDialog {
         jefeDepTextField.setText(departamento.getNombreEncargado());
         numEmpleadosTextField.setText(String.valueOf(departamento.getNumTrabajadores()));
         numSubDptoTextField.setText(String.valueOf(departamento.getNumSubDpto()));
-    }
-    private void onOK() {
-        // add your code here
-        dispose();
     }
 
     private void onCancel() {

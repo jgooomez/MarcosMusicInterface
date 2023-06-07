@@ -82,7 +82,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Departamentos();
                 dialogo2.setTitle("Departamentos");
-                dialogo2.setSize(400, 400);
+                dialogo2.setSize(600, 400);
                 dialogo2.setLocationRelativeTo(null);
                 dialogo2.setVisible(true);
             }
