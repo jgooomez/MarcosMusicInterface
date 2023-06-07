@@ -25,7 +25,6 @@ public class FormUsuario extends JDialog {
     private JTextField inpCVV;
     private JTextField inpCaducidad;
     private JTextField inpNombreTitular;
-    private JTextField inpTlf;
     private JTextField inpNumTarjeta;
     private JRadioButton rbtnVisaRadio;
     private JRadioButton rbtnMastercardRadio;
@@ -43,6 +42,8 @@ public class FormUsuario extends JDialog {
     private JLabel txtVisa;
     private JLabel txtMastercard;
     private JLabel txtNumTarjeta;
+    private JLabel txtDNI;
+    private JTextField inpDNI;
 
     /**
      * Crea una instancia de la clase FormUsuario.
@@ -67,7 +68,7 @@ public class FormUsuario extends JDialog {
         rbtnMastercardRadio.setBackground(new Color(40, 40, 40));
         List<JButton> listaBtns = Arrays.asList(btnCancel, btnAddUsr);
         List<JPanel> listaPaneles = Arrays.asList(box_btns, box_tittle, box_inputsUsr, box_datosUsr, box_datosTarjeta, winFormUsr);
-        List<JLabel> listaTexto = Arrays.asList(txtCad, txtCVV, txtTlf, txtNombreTitular, txtTipo, txtVisa, txtMastercard, txtNumTarjeta, txtEdad, txtTarjeta, txtDatosPersonales, txtNumSeguidores, txtNacionalidad, txtNombre, txtTittle);
+        List<JLabel> listaTexto = Arrays.asList(txtCad, txtCVV, txtTlf, txtNombreTitular, txtTipo, txtVisa, txtMastercard, txtNumTarjeta, txtEdad, txtTarjeta, txtDatosPersonales, txtNumSeguidores, txtNacionalidad, txtNombre, txtTittle, txtDNI);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
@@ -114,7 +115,7 @@ public class FormUsuario extends JDialog {
                     tipo = "Visa";
                 }
 
-                if (compruebaUsuario() && compruebaTarjeta()) {
+                if (compruebaUsuario()) {
                     if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
                         JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
                     } else {
@@ -152,6 +153,8 @@ public class FormUsuario extends JDialog {
      */
     public boolean compruebaUsuario() {
         boolean isValid = true;
+        String dni = inpDNI.getText();
+        dni = dni.replace(" ", "");
 
         if (inpNacionalidad.getText().length() == 0 || inpNombre.getText().length() == 0
                 || inpEdad.getText().length() == 0 || inpNumSeguidores.getText().length() == 0) {
@@ -163,33 +166,6 @@ public class FormUsuario extends JDialog {
             isValid = false;
         }
 
-        return isValid;
-    }
-
-    /**
-     * Verifica si los campos de la tarjeta son válidos.
-     * @return true si los campos son válidos, false en caso contrario.
-     */
-    public boolean compruebaTarjeta() {
-        boolean isValid = true;
-        if (!(inpNumTarjeta.getText().matches("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$"))) {
-            JOptionPane.showMessageDialog(null, "El número de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.", "Error en el formato", JOptionPane.ERROR_MESSAGE);
-            inpNumTarjeta.setText("");
-            isValid = false;
-        } else if (!(rbtnMastercardRadio.isSelected() || rbtnVisaRadio.isSelected())) {
-            JOptionPane.showMessageDialog(null, "Seleccione un método de pago.");
-            isValid = false;
-        } else if (inpNombreTitular.getText().length() < 3) {
-            JOptionPane.showMessageDialog(null, "Nombre de titular no válido, debe tener mínimo tres caracteres.");
-            isValid = false;
-        } else if ((String.valueOf(inpCVV.getText()).length() != 3)) {
-            JOptionPane.showMessageDialog(null, "El CVV debe tener exactamente 3 dígitos.");
-            inpCVV.setText("");
-            isValid = false;
-        } else if (!(inpCaducidad.getText().matches("^(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[01])$"))) {
-            JOptionPane.showMessageDialog(null, "Fecha de caducidad incorrecta, formato correcto MM/DD.");
-            isValid = false;
-        }
         return isValid;
     }
 
