@@ -33,6 +33,9 @@ public class Usuarios extends JDialog {
     private JLabel txtNombre;
     private JLabel txtNacionalidad;
     private JLabel txtIdUsr;
+    public JButton getBtnAddUser() {
+        return btnAddUser;
+    }
 
     /**
      * Crea una instancia de la clase Usuarios.

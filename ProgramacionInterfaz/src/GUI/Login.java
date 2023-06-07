@@ -1,5 +1,5 @@
 package GUI;
-
+import DBManager.DBManagerUsuarios;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -50,6 +50,25 @@ public class Login {
                 new MarcosMusic(dialogo);
             }
         });
+    }
+
+    public static void bloquearBotones(boolean isAdmin, JButton... botones) {
+        for (JButton boton : botones) {
+            if (isAdmin) {
+                // Si es admin, todos los botones están habilitados
+                boton.setEnabled(true);
+            } else {
+                // Si no es admin, bloquear ciertos botones específicos
+                String nombreBoton = boton.getName();
+                if (nombreBoton.equals("botonAdmin")) {
+                    // Bloquear el botón "Admin"
+                    boton.setEnabled(false);
+                } else {
+                    // Habilitar los demás botones
+                    boton.setEnabled(true);
+                }
+            }
+        }
     }
 
     private void styles() {
