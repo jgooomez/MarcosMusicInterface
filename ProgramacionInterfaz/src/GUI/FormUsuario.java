@@ -36,6 +36,11 @@ public class FormUsuario extends JDialog {
     private JPanel box_btns;
     private JPanel box_tittle;
 
+    /**
+     * Crea una instancia de la clase FormUsuario.
+     * Esta clase representa una ventana de diálogo para agregar usuarios.
+     * Inicializa los componentes gráficos, aplica estilos y configura los listeners.
+     */
     public FormUsuario() {
         setContentPane(winFormUsr);
         styles();
@@ -44,11 +49,18 @@ public class FormUsuario extends JDialog {
         setListenersBtns();
     }
 
+    /**
+     * Aplica estilos a los elementos visuales.
+     * Aplica estilos a los botones.
+     */
     private void styles() {
         List<JButton> listaBtns = Arrays.asList(btnAddUsr, btnCancel);
         MarcosMusic.stylesBtns(listaBtns);
     }
 
+    /**
+     * Configura los listeners de los botones y las opciones de pago.
+     */
     private void setListenersBtns() {
         rbtnVisaRadio.addActionListener(new ActionListener() {
             @Override
@@ -74,6 +86,10 @@ public class FormUsuario extends JDialog {
             }
         });
 
+        /**
+         * Método que tras comprobar que los datos del usuario sean válidos, inserta el usuario en la BBDD.
+         */
+
         btnAddUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String tipo = "";
@@ -85,9 +101,9 @@ public class FormUsuario extends JDialog {
 
                 if (compruebaUsuario() && compruebaTarjeta()) {
                     if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
-                        JOptionPane.showMessageDialog(null, "El insert se realizo correctamente.");
+                        JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
                     } else {
-                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar el insert", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -115,6 +131,10 @@ public class FormUsuario extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
+    /**
+     * Verifica si los campos de usuario son válidos.
+     * @return true si los campos son válidos, false en caso contrario.
+     */
     public boolean compruebaUsuario() {
         boolean isValid = true;
 
@@ -131,36 +151,38 @@ public class FormUsuario extends JDialog {
         return isValid;
     }
 
+    /**
+     * Verifica si los campos de la tarjeta son válidos.
+     * @return true si los campos son válidos, false en caso contrario.
+     */
     public boolean compruebaTarjeta() {
         boolean isValid = true;
         if (!(inpNumTarjeta.getText().matches("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$"))) {
-            JOptionPane.showMessageDialog(null, "El numero de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.", "Error en el formato", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El número de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.", "Error en el formato", JOptionPane.ERROR_MESSAGE);
             inpNumTarjeta.setText("");
             isValid = false;
         } else if (!(rbtnMastercardRadio.isSelected() || rbtnVisaRadio.isSelected())) {
-            JOptionPane.showMessageDialog(null, "Seleccione un metodo de pago.");
+            JOptionPane.showMessageDialog(null, "Seleccione un método de pago.");
             isValid = false;
         } else if (inpNombreTitular.getText().length() < 3) {
-            JOptionPane.showMessageDialog(null, "Nombre de titular no valido, debe tener minimo tres caracteres.");
+            JOptionPane.showMessageDialog(null, "Nombre de titular no válido, debe tener mínimo tres caracteres.");
             isValid = false;
         } else if ((String.valueOf(inpCVV.getText()).length() != 3)) {
-            JOptionPane.showMessageDialog(null, "El CVV debe tener exactamente 3 digitos.");
+            JOptionPane.showMessageDialog(null, "El CVV debe tener exactamente 3 dígitos.");
             inpCVV.setText("");
             isValid = false;
         } else if (!(inpCaducidad.getText().matches("^(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[01])$"))) {
-            JOptionPane.showMessageDialog(null, "Fecha caducidad incorrecta, formato correcto MM/DD");
+            JOptionPane.showMessageDialog(null, "Fecha de caducidad incorrecta, formato correcto MM/DD.");
             isValid = false;
         }
         return isValid;
     }
 
     private void onOK() {
-        // add your code here
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 

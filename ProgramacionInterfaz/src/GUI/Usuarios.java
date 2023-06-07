@@ -1,6 +1,6 @@
 package GUI;
 
-import DBManager.*;
+import DBManager.DBManagerUsuarios;
 import ClasePOJO.Usuario;
 
 import javax.swing.*;
@@ -33,8 +33,14 @@ public class Usuarios extends JDialog {
     private JLabel txtNacionalidad;
     private JLabel txtIdUsr;
 
+    /**
+     * Crea una instancia de la clase Usuarios.
+     * Esta clase representa una ventana de diálogo para la gestión de usuarios.
+     * Inicializa los componentes gráficos, aplica estilos y configura los listeners de los botones.
+     */
     public Usuarios() {
         styles();
+
         // Desactivar el JTextField al inicio
         inpIdUsr.setEnabled(false);
         btnBuscar.setEnabled(false);
@@ -46,13 +52,15 @@ public class Usuarios extends JDialog {
                 inpIdUsr.setEnabled(true);  // Habilitar el JTextField al hacer click
             }
         });
+
         // Establecer el texto de pista y el color inicial del JTextField
         setTextInToInpIdUsr();
 
         setContentPane(WinUsuarios);
         setModal(true);
         getRootPane().setDefaultButton(btnBuscar);
-        // call onCancel() when cross is clicked
+
+        // Call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -60,7 +68,7 @@ public class Usuarios extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
+        // Call onCancel() on ESCAPE
         WinUsuarios.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -71,6 +79,9 @@ public class Usuarios extends JDialog {
         setListenersBtns();
     }
 
+    /**
+     * Aplica estilos a los componentes gráficos de la ventana de diálogo.
+     */
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtEdad, txtIdUsr, txtNacionalidad, txtFotoPerfil, txtNumSeguidores);
@@ -81,14 +92,19 @@ public class Usuarios extends JDialog {
         MarcosMusic.stylesTexts(listaTexto);
     }
 
+    /**
+     * Configura los listeners de los botones.
+     */
     private void setListenersBtns() {
         listenerBtnBuscar();
+
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         });
+
         btnAddUser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,16 +119,19 @@ public class Usuarios extends JDialog {
         btnDeleteUsr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //borraUsuario();
                 if (DBManagerUsuarios.borraTodoUsuarios(Integer.parseInt(inpIdUsr.getText()))) {
                     JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente el usuario con id: " + inpIdUsr.getText(), "Eliminacion completada", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha podido eliminar el usuario con id: " + inpIdUsr.getText(), "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);
                 }
-           }
+            }
         });
     }
 
+    /**
+     * Configura el listener del botón de búsqueda.
+     * Realiza una búsqueda de un usuario por ID en la base de datos y muestra los datos si se encuentra.
+     */
     private void listenerBtnBuscar() {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
@@ -136,13 +155,16 @@ public class Usuarios extends JDialog {
                     outpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
                     outpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningun usuario con ese ID enla BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningún usuario con ese ID en la BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
                     inpIdUsr.setText("");
                 }
             }
         });
     }
 
+    /**
+     * Configura el texto de pista y el color inicial del JTextField de ID de usuario.
+     */
     private void setTextInToInpIdUsr() {
         String textoPista = "Introduzca el ID";
         inpIdUsr.setText(textoPista);
@@ -168,7 +190,6 @@ public class Usuarios extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
         dispose();
     }
 
