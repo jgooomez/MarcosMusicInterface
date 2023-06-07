@@ -80,7 +80,7 @@ public class DBManagerDepartamento {
      */
     public static ResultSet getDepartamento(int idDepartamento) {
         try {
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_DEPARTAMENTO_SELECT + " WHERE " + DB_DEPARTAMENTO_ID + "='" + idDepartamento + "';";
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -195,6 +195,7 @@ public class DBManagerDepartamento {
      */
     public static boolean deleteDepartamento(int idDepartamento) {
         try {
+            DBManagerConexion.connect();
             System.out.print("Eliminando departamento con ID " + idDepartamento + "... ");
 
             ResultSet rs = getDepartamento(idDepartamento);

@@ -22,6 +22,7 @@ public class Departamentos extends JDialog {
     private JButton btnAnyadirDepartamento;
     private JButton btnEditarDepartamento;
     private JButton btnActualizar;
+    private JButton btnEliminarDepartamento;
     private JButton buttonAtras;
     private JButton buttonCancel;
 
@@ -61,6 +62,15 @@ public class Departamentos extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 EditarDepartamento dialog = new EditarDepartamento();
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
+        btnEliminarDepartamento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EliminarDepartamento dialog = new EliminarDepartamento();
                 dialog.pack();
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
