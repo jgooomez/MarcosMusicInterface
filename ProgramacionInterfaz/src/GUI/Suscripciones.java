@@ -1,8 +1,12 @@
 package GUI;
 
+import ClasePOJO.Subscripcion;
+import DBManager.DBManagerSubscripcion;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,6 +22,7 @@ public class Suscripciones extends JDialog {
     private JPanel box_btns_tipos;
     private JButton btnFamily;
     private JButton btnStudent;
+    private ArrayList<Subscripcion> subscripciones = DBManagerSubscripcion.printTablaSubscripcion();
 
     public Suscripciones() {
         styles();
@@ -69,13 +74,26 @@ public class Suscripciones extends JDialog {
         btnIndividual.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Meter los datos de la suscripcion tipo2 para que se muestren en los textField.
+                //hacer bucle for i para buscar sub por nombre
+                JDialog subsInfoView = new SubsInfoView();
+
+                subsInfoView.setTitle("Información");
+                subsInfoView.setSize(700, 500);
+                subsInfoView.setLocationRelativeTo(null);
+
+                subsInfoView.setVisible(true);
             }
         });
         btnDuo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Meter los datos de la suscripcion tipo3 para que se muestren en los textField.
+                JDialog subsInfoView = new SubsInfoView();
+
+                subsInfoView.setTitle("Información");
+                subsInfoView.setSize(700, 500);
+                subsInfoView.setLocationRelativeTo(null);
+
+                subsInfoView.setVisible(true);
             }
         });
     }
