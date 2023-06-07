@@ -1,13 +1,9 @@
 package GUI;
 
-import DBManager.DBManagerConexion;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,6 +19,8 @@ public class MarcosMusic extends JFrame {
     private JPanel box_tittle;
     private JPanel box_btns;
     private JPanel emptyBox;
+    private JButton btnConciertos;
+    private JButton btnArtistas;
     static JFrame frame = new JFrame("MarcosMusic");
     private List<JButton> listaBtns;
     private List<JPanel> listaPaneles;
@@ -42,7 +40,7 @@ public class MarcosMusic extends JFrame {
      * Inicializa los componentes gráficos, aplica estilos y configura los listeners de los botones.
      */
     public MarcosMusic() {
-        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
+        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas, btnConciertos,btnArtistas);
         listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
         stylesBtns(listaBtns);
         stylesPanels(listaPaneles);
@@ -51,14 +49,38 @@ public class MarcosMusic extends JFrame {
         frame.setIconImage(iconSpotify.getImage());
 
         configurarBotones();
-        DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
+        //DBManagerConexion.loadDriver();
+        //DBManagerConexion.connect();
+
+
     }
 
     /**
      * Configura los listeners de los botones.
      */
     private void configurarBotones() {
+        btnArtistas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialogo1 = new Artista();
+                dialogo1.setTitle("Vista de conciertos");
+                dialogo1.setSize(500, 500);
+                dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo1.setVisible(true);
+            }
+        });
+        btnConciertos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialogo1 = new Conciertos();
+                dialogo1.setTitle("Vista de conciertos");
+                dialogo1.setSize(500, 500);
+                dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo1.setVisible(true);
+            }
+        });
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
