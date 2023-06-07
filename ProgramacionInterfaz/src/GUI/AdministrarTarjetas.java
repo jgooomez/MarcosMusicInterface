@@ -137,7 +137,7 @@ public class AdministrarTarjetas extends JDialog {
                         JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID en la BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
                     }
                 } else if (opcion == JOptionPane.NO_OPTION) {
-                    dispose();
+                    onCancel();
                 }
             }
         });

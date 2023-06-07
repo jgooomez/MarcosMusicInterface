@@ -18,7 +18,9 @@
         <children>
           <component id="dac94" class="javax.swing.JButton" binding="btnReturn">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="30"/>
+              </grid>
             </constraints>
             <properties>
               <icon value="iconos/atras.png"/>
@@ -111,7 +113,9 @@
         <children>
           <component id="9d483" class="javax.swing.JButton" binding="btnType1">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="30"/>
+              </grid>
             </constraints>
             <properties>
               <text value="Tipo 1"/>
@@ -119,7 +123,9 @@
           </component>
           <component id="18527" class="javax.swing.JButton" binding="btnType3">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="30"/>
+              </grid>
             </constraints>
             <properties>
               <text value="Tipo 3"/>
@@ -127,7 +133,9 @@
           </component>
           <component id="aebf4" class="javax.swing.JButton" binding="btnType2">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="30"/>
+              </grid>
             </constraints>
             <properties>
               <text value="Tipo 2"/>
