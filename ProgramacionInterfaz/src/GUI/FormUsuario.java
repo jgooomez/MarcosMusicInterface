@@ -11,7 +11,6 @@ import java.util.List;
 public class FormUsuario extends JDialog {
     private JPanel winFormUsr;
     private JPanel box_datosUsr;
-    private JLabel txtDatosPersonales;
     private JLabel txtNombre;
     private JLabel txtEdad;
     private JLabel txtNacionalidad;
@@ -20,28 +19,13 @@ public class FormUsuario extends JDialog {
     private JTextField inpEdad;
     private JTextField inpNacionalidad;
     private JTextField inpNumSeguidores;
-    private JPanel box_datosTarjeta;
-    private JLabel txtTarjeta;
-    private JTextField inpCVV;
-    private JTextField inpCaducidad;
-    private JTextField inpNombreTitular;
-    private JTextField inpNumTarjeta;
-    private JRadioButton rbtnVisaRadio;
-    private JRadioButton rbtnMastercardRadio;
+
     private JButton btnAddUsr;
     private JButton btnCancel;
     private JPanel box_inputsUsr;
     private JPanel box_btns;
     private JPanel box_tittle;
     private JLabel txtTittle;
-    private JLabel txtCVV;
-    private JLabel txtCad;
-    private JLabel txtNombreTitular;
-    private JLabel txtTlf;
-    private JLabel txtTipo;
-    private JLabel txtVisa;
-    private JLabel txtMastercard;
-    private JLabel txtNumTarjeta;
     private JLabel txtDNI;
     private JTextField inpDNI;
 
@@ -64,11 +48,9 @@ public class FormUsuario extends JDialog {
      */
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        rbtnVisaRadio.setBackground(new Color(40, 40, 40));
-        rbtnMastercardRadio.setBackground(new Color(40, 40, 40));
         List<JButton> listaBtns = Arrays.asList(btnCancel, btnAddUsr);
-        List<JPanel> listaPaneles = Arrays.asList(box_btns, box_tittle, box_inputsUsr, box_datosUsr, box_datosTarjeta, winFormUsr);
-        List<JLabel> listaTexto = Arrays.asList(txtCad, txtCVV, txtTlf, txtNombreTitular, txtTipo, txtVisa, txtMastercard, txtNumTarjeta, txtEdad, txtTarjeta, txtDatosPersonales, txtNumSeguidores, txtNacionalidad, txtNombre, txtTittle, txtDNI);
+        List<JPanel> listaPaneles = Arrays.asList(winFormUsr, box_datosUsr, box_tittle, box_inputsUsr, box_btns);
+        List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNacionalidad, txtNombre, txtEdad, txtDNI, txtNumSeguidores);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
@@ -78,46 +60,21 @@ public class FormUsuario extends JDialog {
      * Configura los listeners de los botones y las opciones de pago.
      */
     private void setListenersBtns() {
-        rbtnVisaRadio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!rbtnVisaRadio.isSelected()) {
-                    rbtnVisaRadio.setSelected(false);
-                }
-                if (rbtnMastercardRadio.isSelected()) {
-                    rbtnMastercardRadio.setSelected(false);
-                }
-            }
-        });
-
-        rbtnMastercardRadio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!rbtnMastercardRadio.isSelected()) {
-                    rbtnMastercardRadio.setSelected(false);
-                }
-                if (rbtnVisaRadio.isSelected()) {
-                    rbtnVisaRadio.setSelected(false);
-                }
-            }
-        });
-
         /**
          * Método que tras comprobar que los datos del usuario sean válidos, inserta el usuario en la BBDD.
          */
 
         btnAddUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String tipo = "";
-                if (rbtnMastercardRadio.isSelected()) {
-                    tipo = "Mastercard";
-                } else {
-                    tipo = "Visa";
-                }
-
                 if (compruebaUsuario()) {
                     if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
                         JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
+
+                        JDialog anyadirTarjeta = new AnyadirTarjeta();
+                        anyadirTarjeta.setTitle("Vista de usuarios");
+                        anyadirTarjeta.setSize(700, 500);
+                        anyadirTarjeta.setLocationRelativeTo(null);
+                        anyadirTarjeta.setVisible(true);
                     } else {
                         JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                     }

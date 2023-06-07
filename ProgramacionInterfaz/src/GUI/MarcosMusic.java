@@ -33,7 +33,6 @@ public class MarcosMusic extends JFrame {
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        new Login();
     }
 
     /**

@@ -5,9 +5,11 @@ import DBManager.DBManagerDepartamento;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 import static DBManager.DBManagerDepartamento.DB_DEPARTAMENTO_SELECT;
@@ -22,11 +24,15 @@ public class Departamentos extends JDialog {
     private JButton btnAnyadirDepartamento;
     private JButton btnEditarDepartamento;
     private JButton btnActualizar;
+    private JLabel txtTittle;
+    private JLabel icono;
+    private JPanel box_content;
     private JButton buttonAtras;
     private JButton buttonCancel;
 
     public Departamentos() {
         setContentPane(WinDepartamentos);
+        styles();
         setModal(true);
         setSize(500,500);
         getRootPane().setDefaultButton(btnReturn);
@@ -48,7 +54,7 @@ public class Departamentos extends JDialog {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
         btnActualizar.addActionListener(new ActionListener() {
@@ -76,6 +82,17 @@ public class Departamentos extends JDialog {
             }
         });
     }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JLabel> listaTexto = Arrays.asList(txtTittle);
+        List<JButton> listaBtns = Arrays.asList(btnActualizar, btnReturn, btnAnyadirDepartamento, btnEditarDepartamento);
+        List<JPanel> listaPaneles = Arrays.asList(WinDepartamentos, box_botones, box_top, box_content);
+        MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
+    }
+
     private void defineDataRow(){
         // Obtener los nombres de las columnas de la base de datos
         List<String> columnNames = defineColumnName();
@@ -114,12 +131,12 @@ public class Departamentos extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
+        this.setVisible(false);
+        MarcosMusic.frame.setVisible(true);
         dispose();
     }
 

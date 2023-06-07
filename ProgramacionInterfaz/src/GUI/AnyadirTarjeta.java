@@ -77,7 +77,7 @@ public class AnyadirTarjeta extends JDialog {
                     tipo = "Visa";
                 }
 
-                int idUser = getIdUser();
+                int idUser = DBManagerTarjetas.getIdUserTarjeta();
 
                 if (compruebaTarjeta()) {
                     if (DBManagerTarjetas.insertTarjeta(inpNumTarjeta.getText(), Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()), inpCaducidad.getText(), idUser)) {
@@ -109,12 +109,6 @@ public class AnyadirTarjeta extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-    }
-
-    private int getIdUser() {
-
-        String sql = "select TOP 1 idUsuario from Usuario order by idUsuario ASC";
-        return 3;
     }
 
     public boolean compruebaTarjeta() {

@@ -1,21 +1,26 @@
 package GUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Login extends JDialog {
-    private JPanel principal;
-    private JPanel panelCampos;
+    private JPanel winLogin;
+    private JPanel box_inputs;
     private JTextField inpUserName;
     private JTextField inpPassword;
-    private JButton LOGINButton;
+    private JButton btnLogin;
+    private JLabel txtTittle;
+    private JLabel txtUser;
+    private JLabel txtPsswd;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private MarcosMusic frame;
 
-    public Login(MarcosMusic frame) {
-        this.frame = frame;
-        setContentPane(principal);
+    public Login() {
+        setContentPane(winLogin);
+        styles();
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -28,13 +33,13 @@ public class Login extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        principal.registerKeyboardAction(new ActionListener() {
+        winLogin.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        LOGINButton.addActionListener(new ActionListener() {
+        btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new MarcosMusic();
@@ -45,6 +50,16 @@ public class Login extends JDialog {
                 frame.setVisible(true);
             }
         });
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        java.util.List<JLabel> listaTexto = Arrays.asList(txtTittle, txtPsswd, txtUser);
+        java.util.List<JButton> listaBtns = Arrays.asList(btnLogin);
+        List<JPanel> listaPaneles = Arrays.asList(winLogin, box_inputs);
+        MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void onOK() {
@@ -58,17 +73,9 @@ public class Login extends JDialog {
     }
 
     public static void main(String[] args) {
-        MarcosMusic frame = new MarcosMusic();
-        frame.setTitle("Bienvenido a Marcos Music");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setLocationRelativeTo(null);
-
-        // Crear una instancia de Login
-        Login loginDialog = new Login(frame);  // Pasar la instancia de MarcosMusic como argumento
-
-        // Mostrar el diálogo de inicio de sesión
-        loginDialog.setVisible(true);
+        Login dialog = new Login();
+        dialog.pack();
+        dialog.setVisible(true);
+        System.exit(0);
     }
-
 }
