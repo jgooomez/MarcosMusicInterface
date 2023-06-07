@@ -264,7 +264,6 @@ public class DBManagerDepartamento {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        DBManagerConexion.close();
         return departamentos;
     }
     //Método para añadir el numero de columnas de una tabla y el nomrbe de cada una
@@ -288,7 +287,7 @@ public class DBManagerDepartamento {
         String query = "SELECT * FROM departamento WHERE idDepartamento = ?";
         try (Connection conn = DBManagerConexion.getConexion();
              PreparedStatement statement = conn.prepareStatement(query)) {
-
+            System.out.println(id);
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
 
@@ -308,4 +307,43 @@ public class DBManagerDepartamento {
 
         return null; // Si no se encuentra el departamento, devuelve null o lanza una excepción según tus necesidades
     }
+    public boolean actualizarDepartamento(Departamento departamento) {
+        DBManagerConexion.connect();
+        boolean success = false;
+        PreparedStatement statement = null;
+
+        try {
+            // Preparar la sentencia SQL para actualizar el departamento
+            String query = "UPDATE departamento SET nombre = ?, fechaCreacion = ?, NombreEncargado = ?, numTrabajadores = ?, numSubdpto = ? WHERE idDepartamento = ?";
+            statement = DBManagerConexion.getConexion().prepareStatement(query);
+            statement.setString(1, departamento.getNombre());
+            statement.setString(2, departamento.getFechaCreacion());
+            statement.setString(3, departamento.getNombreEncargado());
+            statement.setInt(4, Integer.parseInt(departamento.getNumTrabajadores()));
+            statement.setInt(5, Integer.parseInt(departamento.getNumSubDpto()));
+            statement.setInt(6, departamento.getIdDepartamento());
+
+            // Ejecutar la sentencia SQL
+            int rowsAffected = statement.executeUpdate();
+
+            // Verificar si la actualización fue exitosa
+            if (rowsAffected > 0) {
+                success = true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Cerrar el PreparedStatement en caso de error o éxito
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return success;
+    }
+
 }

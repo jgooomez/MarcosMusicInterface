@@ -32,6 +32,7 @@ public class EditarDepartamento extends JDialog {
         loadDepartamentos();
         btnModificar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                modificarDepartamento();
                 onOK();
             }
         });
@@ -101,6 +102,30 @@ public class EditarDepartamento extends JDialog {
     private void onCancel() {
         // add your code here if necessary
         dispose();
+    }
+    private void modificarDepartamento() {
+        // Obtener los datos del departamento a modificar de los JTextField
+        int idDepartamento = Integer.parseInt(idDepartamentoTextField.getText());
+        String nombreDepartamento = nombreDepartamentotextField.getText();
+        String fechaCreacion = fechaDepartamentoTextField.getText();
+        String nombreEncargado = jefeDepTextField.getText();
+        int numTrabajadores = Integer.parseInt(numEmpleadosTextField.getText());
+        int numSubDpto = Integer.parseInt(numSubDptoTextField.getText());
+
+        // Crear un objeto Departamento con los datos actualizados
+        Departamento departamento = new Departamento(idDepartamento, nombreDepartamento, fechaCreacion, nombreEncargado, String.valueOf(numTrabajadores), String.valueOf(numSubDpto));
+
+        // Actualizar el departamento en la base de datos
+        DBManagerDepartamento dbManager = new DBManagerDepartamento();
+        boolean success = dbManager.actualizarDepartamento(departamento);
+
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Departamento modificado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Actualizar la lista de departamentos en el JComboBox
+            loadDepartamentos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al modificar el departamento", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     private void loadDepartamentos() {
 
