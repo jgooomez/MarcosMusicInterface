@@ -1,5 +1,6 @@
 package GUI;
 
+import DBManager.DBManagerReproduccion;
 import DBManager.DBManagerUsuarios;
 import ClasePOJO.Usuario;
 
@@ -119,10 +120,30 @@ public class Usuarios extends JDialog {
         btnDeleteUsr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (DBManagerUsuarios.deleteUsuario(Integer.parseInt(inpIdUsr.getText()))) {
-                    JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente el usuario con id: " + inpIdUsr.getText(), "Eliminacion completada", JOptionPane.INFORMATION_MESSAGE);
+                int idUsuario = Integer.parseInt(inpIdUsr.getText());
+                if (DBManagerUsuarios.existsUsuario(idUsuario)) {
+                    boolean existeUsuarioReproducciones = DBManagerReproduccion.existsUsuarioEnReproduccion(idUsuario);
+
+                    if (existeUsuarioReproducciones) {
+                        boolean eliminaReproduccionesUsuarios = DBManagerReproduccion.deleteReproduccionesUsuario(idUsuario);
+                        if (eliminaReproduccionesUsuarios) {
+                            if (DBManagerUsuarios.deleteUsuario(idUsuario)) {
+                                JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente el usuario con id: " + idUsuario, "Eliminacion completada", JOptionPane.INFORMATION_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No se ha podido eliminar el usuario con id: " + idUsuario, "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se ha podido eliminar las reproducciones del usuario con id: " + idUsuario, "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        if (DBManagerUsuarios.deleteUsuario(idUsuario)) {
+                            JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente el usuario con id: " + idUsuario, "Eliminacion completada", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "No se ha podido eliminar el usuario con id: " + idUsuario, "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se ha podido eliminar el usuario con id: " + inpIdUsr.getText(), "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado el usuario con id: " + idUsuario, "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
