@@ -27,7 +27,6 @@ public class MarcosMusic extends JFrame {
     private List<JButton> listaBtns;
     private List<JPanel> listaPaneles;
 
-
     public static void main(String[] args) {
         frame.setContentPane(new MarcosMusic().principal);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,6 +36,11 @@ public class MarcosMusic extends JFrame {
         new Login();
     }
 
+    /**
+     * Crea una instancia de la clase MarcosMusic.
+     * Esta clase representa la ventana principal de la aplicación.
+     * Inicializa los componentes gráficos, aplica estilos y configura los listeners de los botones.
+     */
     public MarcosMusic() {
         listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
         listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
@@ -45,30 +49,15 @@ public class MarcosMusic extends JFrame {
         txtTituloPantallaPrincipal.setFont(getFontTitle());
         ImageIcon iconSpotify = new ImageIcon("iconos/Spotify_icon.png");
         frame.setIconImage(iconSpotify.getImage());
-        /*
-        try {
-            URL pathSpotifyIcon = new URL("iconos/Spotify_icon.png");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        frame.setIconImage(Toolkit.getDefaultToolkit().getImage("iconos/Spotify_icon.png"));*/
 
         configurarBotones();
         /*DBManagerConexion.loadDriver();
         DBManagerConexion.connect();*/
     }
 
-    private void configurarImagenDeFondo() {
-        // Crear un JLabel para contener la imagen de fondo
-        JLabel fondo = new JLabel(new ImageIcon("ruta/a/la/imagen/fondo.jpg"));
-
-        // Establecer el tamaño y la posición del JLabel
-        fondo.setBounds(0, 0, getWidth(), getHeight());
-
-        // Agregar el JLabel al panel principal
-        principal.add(fondo);
-    }
-
+    /**
+     * Configura los listeners de los botones.
+     */
     private void configurarBotones() {
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
@@ -81,17 +70,19 @@ public class MarcosMusic extends JFrame {
                 dialogo1.setVisible(true);
             }
         });
+
         btnTarjetas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new AdministrarTarjetas();
-                dialogo2.setTitle("Administracion de tarjetas");
+                dialogo2.setTitle("Administración de tarjetas");
                 dialogo2.setSize(500, 400);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);
             }
         });
+
         btnSuscripciones.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,6 +94,7 @@ public class MarcosMusic extends JFrame {
                 dialogo2.setVisible(true);
             }
         });
+
         btnDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -128,11 +120,14 @@ public class MarcosMusic extends JFrame {
         });
     }
 
+    /**
+     * Aplica estilos a los botones de la lista especificada.
+     * @param listaBotones Lista de botones a los que se les aplicarán los estilos.
+     */
     public static void stylesBtns(List<JButton> listaBotones) {
         Cursor cursor = new Cursor(Cursor.HAND_CURSOR);
 
-        for (JButton btn:
-             listaBotones) {
+        for (JButton btn : listaBotones) {
             btn.setBorder(BorderFactory.createBevelBorder(1, Color.white, Color.white));
             btn.setFocusable(false);
             btn.setBackground(getBtnColor());
@@ -140,27 +135,46 @@ public class MarcosMusic extends JFrame {
         }
     }
 
+    /**
+     * Aplica estilos a los paneles de la lista especificada.
+     * @param listaPaneles Lista de paneles a los que se les aplicarán los estilos.
+     */
     public static void stylesPanels(List<JPanel> listaPaneles) {
-        for (JPanel panel:
-             listaPaneles) {
+        for (JPanel panel : listaPaneles) {
             panel.setBackground(getBackgroundColor());
         }
     }
 
+    /**
+     * Aplica estilos a los textos de la lista especificada.
+     * @param listaTexto Lista de etiquetas de texto a las que se les aplicarán los estilos.
+     */
     public static void stylesTexts(List<JLabel> listaTexto) {
-        for (JLabel txt:
-                listaTexto) {
+        for (JLabel txt : listaTexto) {
             txt.setForeground(Color.WHITE);
         }
     }
+
+    /**
+     * Obtiene la fuente de título utilizada en la interfaz gráfica.
+     * @return La fuente de título.
+     */
     public static Font getFontTitle() {
         return new Font("Calibri", Font.BOLD, 30);
     }
 
+    /**
+     * Obtiene el color de los botones.
+     * @return El color de los botones.
+     */
     public static Color getBtnColor() {
         return new Color(30, 215, 96);
     }
 
+    /**
+     * Obtiene el color de fondo utilizado en la interfaz gráfica.
+     * @return El color de fondo.
+     */
     public static Color getBackgroundColor() {
         return new Color(40, 40, 40);
     }

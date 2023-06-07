@@ -44,6 +44,11 @@ public class Empleados extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(btnBuscar);
 
+        /**
+         * Busca un empleado por id y rellena los campos con la información necesaria.
+         * @param idUsuario
+         */
+
         btnBuscar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 ArrayList<Empleado> empleados = DBManagerEmpleado.obtenerEmpleados();
@@ -90,6 +95,10 @@ public class Empleados extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        /**
+         * Boton que abre el dialog de anyadir empleado.
+         */
 
         btnAnyadir.addActionListener(new ActionListener() {
             @Override
