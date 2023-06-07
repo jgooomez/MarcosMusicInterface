@@ -1,6 +1,5 @@
 package GUI;
 
-import DBManager.DBManagerTarjetas;
 import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class FormUsuario extends JDialog {
     private JPanel winFormUsr;
-    private JPanel datosUsr;
+    private JPanel box_datosUsr;
     private JLabel txtDatosPersonales;
     private JLabel txtNombre;
     private JLabel txtEdad;
@@ -21,7 +20,7 @@ public class FormUsuario extends JDialog {
     private JTextField inpEdad;
     private JTextField inpNacionalidad;
     private JTextField inpNumSeguidores;
-    private JPanel datosTarjeta;
+    private JPanel box_datosTarjeta;
     private JLabel txtTarjeta;
     private JTextField inpCVV;
     private JTextField inpCaducidad;
@@ -35,6 +34,15 @@ public class FormUsuario extends JDialog {
     private JPanel box_inputsUsr;
     private JPanel box_btns;
     private JPanel box_tittle;
+    private JLabel txtTittle;
+    private JLabel txtCVV;
+    private JLabel txtCad;
+    private JLabel txtNombreTitular;
+    private JLabel txtTlf;
+    private JLabel txtTipo;
+    private JLabel txtVisa;
+    private JLabel txtMastercard;
+    private JLabel txtNumTarjeta;
 
     /**
      * Crea una instancia de la clase FormUsuario.
@@ -54,8 +62,15 @@ public class FormUsuario extends JDialog {
      * Aplica estilos a los botones.
      */
     private void styles() {
-        List<JButton> listaBtns = Arrays.asList(btnAddUsr, btnCancel);
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        rbtnVisaRadio.setBackground(new Color(40, 40, 40));
+        rbtnMastercardRadio.setBackground(new Color(40, 40, 40));
+        List<JButton> listaBtns = Arrays.asList(btnCancel, btnAddUsr);
+        List<JPanel> listaPaneles = Arrays.asList(box_btns, box_tittle, box_inputsUsr, box_datosUsr, box_datosTarjeta, winFormUsr);
+        List<JLabel> listaTexto = Arrays.asList(txtCad, txtCVV, txtTlf, txtNombreTitular, txtTipo, txtVisa, txtMastercard, txtNumTarjeta, txtEdad, txtTarjeta, txtDatosPersonales, txtNumSeguidores, txtNacionalidad, txtNombre, txtTittle);
         MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     /**

@@ -3,31 +3,41 @@ package GUI;
 import DBManager.DBManagerEmpleado;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class AnyadirEmpleado extends JDialog {
-    private JPanel panelPrincipal;
-    private JButton buttonAceptar;
-    private JButton buttonCancelar;
-    private JPanel panelCampos;
-    private JPanel panelBotones;
+    private JPanel winAddEmpleado;
+    private JButton btnAceptar;
+    private JButton btnCancelar;
+    private JPanel box_inputs;
+    private JPanel box_btns;
     private JTextField inpNombre;
     private JTextField inpNacionalidad;
     private JTextField inpEdad;
     private JTextField inpDepartamento;
     private JTextField inpFechaIncorporacion;
+    private JLabel txtTittle;
+    private JLabel txtNombre;
+    private JLabel txtNacionalidad;
+    private JLabel txtEdad;
+    private JLabel txtDepartamento;
+    private JLabel txtFechaIncorp;
 
     public AnyadirEmpleado() {
-        setContentPane(panelPrincipal);
+        setContentPane(winAddEmpleado);
+        styles();
         setModal(true);
-        getRootPane().setDefaultButton(buttonAceptar);
+        getRootPane().setDefaultButton(btnAceptar);
 
         /**
          * Configura el comportamiento del botón "Aceptar".
          * Realiza la validación de los campos de entrada y realiza la inserción del empleado en la base de datos.
          * Muestra mensajes de éxito o error según el resultado de la operación.
          */
-        buttonAceptar.addActionListener(new ActionListener() {
+        btnAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String nombre = inpNombre.getText();
                 int edad = Integer.parseInt(inpEdad.getText());
@@ -66,7 +76,7 @@ public class AnyadirEmpleado extends JDialog {
          * Configura el comportamiento del botón "Cancelar".
          * Cierra la ventana actual sin realizar ninguna acción.
          */
-        buttonCancelar.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
@@ -87,11 +97,21 @@ public class AnyadirEmpleado extends JDialog {
          * Configura el comportamiento al presionar la tecla ESCAPE.
          * Llama al método onCancel().
          */
-        panelPrincipal.registerKeyboardAction(new ActionListener() {
+        winAddEmpleado.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        java.util.List<JButton> listaBtns = Arrays.asList(btnAceptar, btnCancelar);
+        java.util.List<JPanel> listaPaneles = Arrays.asList(box_btns, box_inputs, winAddEmpleado);
+        List<JLabel> listaTexto = Arrays.asList(txtDepartamento, txtEdad, txtNacionalidad, txtNombre, txtFechaIncorp, txtTittle);
+        MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     /**

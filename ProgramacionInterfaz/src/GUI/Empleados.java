@@ -105,7 +105,7 @@ public class Empleados extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialog = new AnyadirEmpleado();
                 dialog.setTitle("Anyadir empleado");
-                dialog.setSize(600, 500);
+                dialog.setSize(500, 400);
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
