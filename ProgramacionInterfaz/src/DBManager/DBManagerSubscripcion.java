@@ -200,4 +200,49 @@ public class DBManagerSubscripcion {
             return false;
         }
     }
+
+    public static boolean deleteSubscripcionesUsuario(int idUsuario) {
+        try {
+            // Creamos la consulta SQL para eliminar las suscripciones del usuario
+            String sql = "DELETE FROM SubscripcionUsuario WHERE idUsuario = " + idUsuario;
+
+            // Creamos y ejecutamos la sentencia SQL
+            Statement stmt = conn.createStatement();
+            int rowsAffected = stmt.executeUpdate(sql);
+
+            // Verificamos si se eliminaron filas
+            if (rowsAffected > 0) {
+                System.out.println("Se eliminaron " + rowsAffected + " suscripciones del usuario " + idUsuario);
+                return true;
+            } else {
+                System.out.println("No se encontraron suscripciones del usuario " + idUsuario);
+                return false;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean existsUsuarioEnSubscripcion(int idUsuario) {
+        try {
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT COUNT(*) FROM SubscripcionUsuario WHERE idUsuario = " + idUsuario;
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+
+            rs.close();
+            return false;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

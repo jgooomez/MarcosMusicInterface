@@ -3,6 +3,7 @@ package DBManager;
 import java.sql.*;
 
 public class DBManagerConexion {
+
     public static Connection conn = null;
 
     public static Connection getConexion() {
@@ -11,13 +12,14 @@ public class DBManagerConexion {
     }
 
     //CONEXIÓN
-    private static final String DB_HOST = "192.168.18.177";
+    //private static final String DB_HOST = "192.168.7.213";
+    private static final String DB_HOST = "192.168.1.126";
     //private static final String DB_HOST = "localhost";
     private static final String DB_PORT = "1433";
     private static final String DB_NAME = "MARCOSMUSIC";
     private static final String DB_URL = "jdbc:sqlserver://" + DB_HOST + ":" + DB_PORT + ";encrypt=false;databaseName=" + DB_NAME + ";TrustServerCertificate=True;";
     private static final String DB_USER = "ADMIN";
-    private static final String DB_PASS = "ADMIN";
+    private static final String DB_PASS = "1234";
     private static final String DB_CONN_OK = "CONEXIÓN CORRECTA";
     private static final String DB_CONN_FAIL = "ERROR DE CONEXIÓN";
 

@@ -1,9 +1,12 @@
 package DBManager;
-import ClasePOJO.Usuario;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import DBManager.DBManagerConexion;
+
+import static DBManager.DBManagerConexion.conn;
 
 
 public class DBManagerUsuarios {
@@ -80,11 +83,9 @@ public class DBManagerUsuarios {
     public static ResultSet getUsuario(int idUsuario) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = DBManagerConexion.getConexion().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idUsuario + "';";
-            //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
-            //stmt.close();
 
             // Si no hay primer registro entonces no existe el usuario.
             if (!rs.first()) {
@@ -236,8 +237,8 @@ public class DBManagerUsuarios {
         }
     }
 
-    public static ArrayList<Usuario> obtenerUsuarios() {
-        ArrayList<Usuario> usuarios = new ArrayList<>();
+    public static ArrayList<ClasePOJO.Usuario> obtenerUsuarios() {
+        ArrayList<ClasePOJO.Usuario> usuarios = new ArrayList<>();
 
         try {
             ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
@@ -250,7 +251,7 @@ public class DBManagerUsuarios {
                 int numSeguidores = rs.getInt(DB_US_NUMSEG);
                 String fotoPerfil = rs.getString(DB_US_FOTO);
 
-                Usuario usuario = new Usuario(id, nacionalidad, nombre, edad, numSeguidores);
+                ClasePOJO.Usuario usuario = new ClasePOJO.Usuario(id, nacionalidad, nombre, edad, numSeguidores);
                 usuarios.add(usuario);
             }
 
@@ -262,7 +263,76 @@ public class DBManagerUsuarios {
         return usuarios;
     }
 
+    /*public static boolean borraTodoUsuarios(int idUsuario) {
+        try {
+            conn.setAutoCommit(false); // Iniciar transacción
 
+            try {
+                Statement stmt = conn.createStatement();
+
+                String eliminaTodoUsuario = "delete \n" +
+                        "FROM Tarjeta\n" +
+                        "JOIN SubscripcionUsuario ON Tarjeta.idUsuario = SubscripcionUsuario.idUsuario\n" +
+                        "JOIN CuentaPrincipal ON Tarjeta.idUsuario = CuentaPrincipal.idUsuario\n" +
+                        "JOIN Usuario ON Tarjeta.idUsuario = Usuario.idUsuario\n" +
+                        "JOIN Contenido ON Tarjeta.idUsuario = Contenido.idUsuario\n" +
+                        "JOIN Reproduccion ON Contenido.codigo = Reproduccion.codigoContenido\n" +
+                        "WHERE Tarjeta.idUsuario = " + idUsuario;
+
+                stmt.executeQuery(eliminaTodoUsuario);
+
+
+                // Borra los registros de la tabla Reproduccion si existe el usuario
+                if (DBManagerReproduccion.existsUsuarioEnReproduccion(idUsuario)) {
+                    // Primero, elimina los registros de Reproduccion que hacen referencia a Contenido
+                    String deleteReproduccion = "DELETE FROM Reproduccion WHERE codigoContenido IN (SELECT codigoContenido FROM Contenido WHERE idUsuario = " + idUsuario + ")";
+                    stmt.executeUpdate(deleteReproduccion);
+                }
+
+                // Borra los registros de la tabla Contenido si existe el usuario
+                if (DBManagerContenido.existsUsuarioEnContenido(idUsuario)) {
+                    String deleteContenido = "DELETE FROM Contenido WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteContenido);
+                }
+
+                // Borra los registros de las otras tablas en el orden adecuado
+
+                // Borra los registros de la tabla Tarjeta si existe el usuario
+                if (DBManagerTarjetas.existsUserInTarjeta(idUsuario)) {
+                    String deleteTarjeta = "DELETE FROM Tarjeta WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteTarjeta);
+                }
+
+                // Borra los registros de la tabla SubscripcionUsuario si existe el usuario
+                if (DBManagerSubscripcion.existsUsuarioEnSubscripcion(idUsuario)) {
+                    String deleteSubscripcion = "DELETE FROM SubscripcionUsuario WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteSubscripcion);
+                }
+
+                // Borra los registros de la tabla CuentaPrincipal si existe el usuario
+                if (DBManagerCuentaPrincipal.existsUsuarioEnCuentaPrincipal(idUsuario)) {
+                    String deleteCuentaPrincipal = "DELETE FROM CuentaPrincipal WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteCuentaPrincipal);
+                }
+
+                // Borra el registro de la tabla Usuario si existe el usuario
+                if (existsUsuario(idUsuario)) {
+                    String deleteUsuario = "DELETE FROM Usuario WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteUsuario);
+                }
+
+                conn.commit(); // Confirmar transacción
+                conn.setAutoCommit(true); // Restaurar el modo de autocommit
+
+                return true; // Borrado exitoso
+            } catch (SQLException e) {
+                conn.rollback(); // Deshacer transacción en caso de error
+                throw new RuntimeException(e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }*/
 
 }
 

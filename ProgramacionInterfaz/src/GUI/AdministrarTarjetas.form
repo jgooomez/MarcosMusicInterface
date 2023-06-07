@@ -3,7 +3,7 @@
   <grid id="cbd77" binding="WinAdminTarjetas" layout-manager="GridLayoutManager" row-count="3" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="48" y="54" width="540" height="400"/>
+      <xy x="48" y="54" width="552" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -16,31 +16,37 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="ca49c" class="javax.swing.JButton" binding="btnAdd">
+          <component id="e4467" class="javax.swing.JButton" binding="btnBuscar">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="30"/>
+              </grid>
             </constraints>
             <properties>
-              <icon value="iconos/tarjeta-de-credito.png"/>
-              <text value="Añadir"/>
-            </properties>
-          </component>
-          <component id="ded7d" class="javax.swing.JButton" binding="btnReturn">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <icon value="iconos/atras.png"/>
-              <text value="Volver"/>
+              <icon value="iconos/buscar (1).png"/>
+              <text value="buscar"/>
             </properties>
           </component>
           <component id="c8806" class="javax.swing.JButton" binding="btnDelete">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="30"/>
+              </grid>
             </constraints>
             <properties>
               <icon value="iconos/borrar.png"/>
               <text value="Borrar"/>
+            </properties>
+          </component>
+          <component id="ded7d" class="javax.swing.JButton" binding="btnReturn">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="30"/>
+              </grid>
+            </constraints>
+            <properties>
+              <icon value="iconos/atras.png"/>
+              <text value="Volver"/>
             </properties>
           </component>
         </children>
@@ -105,7 +111,7 @@
       </grid>
       <component id="73a68" class="javax.swing.JLabel" binding="icon">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <icon value="iconos/tarjeta-de-credito (1).png"/>

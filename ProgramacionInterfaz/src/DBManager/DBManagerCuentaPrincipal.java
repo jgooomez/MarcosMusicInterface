@@ -202,4 +202,61 @@ public class DBManagerCuentaPrincipal {
             return false;
         }
     }
+    public static boolean deleteCuentasPrincipalesUsuario(int idUsuario) {
+        try {
+            // Verificamos si existen registros en la tabla Reproduccion relacionados con el usuario
+            String checkSql = "SELECT COUNT(*) FROM Reproduccion WHERE idUsuario = " + idUsuario;
+            Statement checkStmt = conn.createStatement();
+            ResultSet checkResult = checkStmt.executeQuery(checkSql);
+            checkResult.next();
+            int count = checkResult.getInt(1);
+
+            if (count > 0) {
+                // Hay registros en la tabla Reproduccion relacionados con el usuario
+                // Mostramos un mensaje de error y no procedemos con la eliminación de las cuentas principales
+                System.out.println("No se pueden eliminar las cuentas principales del usuario " + idUsuario +
+                        " porque existen registros relacionados en la tabla Reproduccion.");
+                return false;
+            }
+
+            // No hay registros en la tabla Reproduccion relacionados con el usuario
+            // Procedemos a eliminar las cuentas principales del usuario
+            String sql = "DELETE FROM CuentaPrincipal WHERE idUsuario = " + idUsuario;
+            Statement stmt = conn.createStatement();
+            int rowsAffected = stmt.executeUpdate(sql);
+
+            if (rowsAffected > 0) {
+                System.out.println("Se eliminaron " + rowsAffected + " cuentas principales del usuario " + idUsuario);
+                return true;
+            } else {
+                System.out.println("No se encontraron cuentas principales del usuario " + idUsuario);
+                return false;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean existsUsuarioEnCuentaPrincipal(int idUsuario) {
+        try {
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT COUNT(*) FROM CuentaPrincipal WHERE idUsuario = " + idUsuario;
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+
+            rs.close();
+            return false;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

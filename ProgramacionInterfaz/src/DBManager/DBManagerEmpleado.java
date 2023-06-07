@@ -1,7 +1,6 @@
 package DBManager;
 
 import ClasePOJO.Empleado;
-import ClasePOJO.Usuario;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +19,7 @@ public class DBManagerEmpleado {
     private static final String DB_US_NOM = "nombre";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_FINC = "fechaIncorporacion";
-    private static final String DB_US_DEP = "departamento";
+    private static final String DB_US_DEP = "idDepartamento";
 
     /**
      * Obtiene toda la tabla Empleado de la base de datos
@@ -174,7 +173,7 @@ public class DBManagerEmpleado {
      * @param departamento       departamento del Empleado
      * @return verdadero si pudo insertarlo, false en caso contrario
      */
-    public static boolean insertEmpleado(String nacionalidad, String nombre, int edad, String fechaIncorporacion, String departamento) {
+    public static boolean insertEmpleado(String nacionalidad, String nombre, int edad, String fechaIncorporacion, int departamento) {
         try {
             // Obtenemos la tabla Empleado
             System.out.print("Insertando Empleado " + nombre + "...");
@@ -186,7 +185,7 @@ public class DBManagerEmpleado {
             rs.updateString(DB_US_NAC, nacionalidad);
             rs.updateInt(DB_US_ED, edad);
             rs.updateString(DB_US_FINC, fechaIncorporacion);
-            rs.updateString(DB_US_DEP, departamento);
+            rs.updateInt(DB_US_DEP, departamento);
 
             rs.insertRow();
 
@@ -249,9 +248,9 @@ public class DBManagerEmpleado {
                 int edad = rs.getInt("edad");
                 String nacionalidad = rs.getString("nacionalidad");
                 Date fechaIncorporacion = rs.getDate("fechaIncorporacion");
-                String departamento = rs.getString("departamento");
+                int departamento = rs.getInt("idDepartamento");
 
-                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, fechaIncorporacion, departamento);
+                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, String.valueOf(fechaIncorporacion), departamento);
                 empleados.add(empleado);
             }
 
