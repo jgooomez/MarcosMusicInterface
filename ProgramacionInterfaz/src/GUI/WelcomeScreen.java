@@ -33,7 +33,7 @@ public class WelcomeScreen extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
 
-        adminButton.addActionListener(new ActionListener() {
+        /*adminButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setModal(false);
@@ -43,8 +43,8 @@ public class WelcomeScreen extends JDialog {
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
-        });
-        userButton.addActionListener(new ActionListener() {
+        });*/
+        /*userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setModal(false);
@@ -54,7 +54,7 @@ public class WelcomeScreen extends JDialog {
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
-        });
+        });*/
     }
 
     private void onOK() {

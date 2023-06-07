@@ -33,7 +33,7 @@ public class MarcosMusic extends JFrame {
         frame.setSize(600, 400);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        new Login();
+        //new Login();
     }
 
     /**
@@ -100,7 +100,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Departamentos();
                 dialogo2.setTitle("Departamentos");
-                dialogo2.setSize(600, 400);
+                dialogo2.setSize(400, 400);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);

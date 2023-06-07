@@ -4,6 +4,8 @@ TODO    Eliminar metodos no usados
 
 package ClasePOJO;
 
+import java.util.Date;
+
 /**
  * Clase que representa a un empleado en una organización.
  */
@@ -25,12 +27,12 @@ public class Empleado {
      * @param fechaINC        Fecha de incorporación del empleado.
      * @param idDepartamento  ID del departamento al que pertenece el empleado.
      */
-    public Empleado(int idEmpleado, String nombre, int edad, String nacionalidad, String fechaINC, int idDepartamento) {
+    public Empleado(int idEmpleado, String nombre, int edad, String nacionalidad, Date fechaINC, int idDepartamento) {
         this.ID_EMPLEADO = idEmpleado;
         this.nombre = nombre;
         this.edad = edad;
         this.nacionalidad = nacionalidad;
-        this.FECHA_INC = fechaINC;
+        this.FECHA_INC = String.valueOf(fechaINC);
         this.idDepartamento = idDepartamento;
     }
 

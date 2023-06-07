@@ -249,7 +249,6 @@ public class DBManagerUsuarios {
                 String nombre = rs.getString(DB_US_NOM);
                 int edad = rs.getInt(DB_US_ED);
                 int numSeguidores = rs.getInt(DB_US_NUMSEG);
-                String fotoPerfil = rs.getString(DB_US_FOTO);
 
                 ClasePOJO.Usuario usuario = new ClasePOJO.Usuario(id, nacionalidad, nombre, edad, numSeguidores);
                 usuarios.add(usuario);
