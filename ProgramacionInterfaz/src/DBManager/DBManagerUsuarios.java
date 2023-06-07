@@ -263,58 +263,76 @@ public class DBManagerUsuarios {
         return usuarios;
     }
 
-    public static boolean borraTodoUsuarios(int idUsuario) {
+    /*public static boolean borraTodoUsuarios(int idUsuario) {
         try {
-            // Verificar existencia del usuario en todas las tablas
-            boolean existeEnTarjeta = DBManagerTarjetas.existsUserInTarjeta(idUsuario);
-            boolean existeEnReproduccion = DBManagerReproduccion.existsUsuarioEnReproduccion(idUsuario);
-            boolean existeEnSubscripcion = DBManagerSubscripcion.existsUsuarioEnSubscripcion(idUsuario);
-            boolean existeEnCuentaPrincipal = DBManagerCuentaPrincipal.existsUsuarioEnCuentaPrincipal(idUsuario);
-            boolean existeEnUsuario = existsUsuario(idUsuario);
+            conn.setAutoCommit(false); // Iniciar transacción
 
-            // Si el usuario existe en todas las tablas, proceder con el borrado
-            if (existeEnTarjeta && existeEnReproduccion && existeEnSubscripcion && existeEnCuentaPrincipal && existeEnUsuario) {
-                conn.setAutoCommit(false); // Iniciar transacción
+            try {
+                Statement stmt = conn.createStatement();
 
-                try {
-                    Statement stmt = conn.createStatement();
+                String eliminaTodoUsuario = "delete \n" +
+                        "FROM Tarjeta\n" +
+                        "JOIN SubscripcionUsuario ON Tarjeta.idUsuario = SubscripcionUsuario.idUsuario\n" +
+                        "JOIN CuentaPrincipal ON Tarjeta.idUsuario = CuentaPrincipal.idUsuario\n" +
+                        "JOIN Usuario ON Tarjeta.idUsuario = Usuario.idUsuario\n" +
+                        "JOIN Contenido ON Tarjeta.idUsuario = Contenido.idUsuario\n" +
+                        "JOIN Reproduccion ON Contenido.codigo = Reproduccion.codigoContenido\n" +
+                        "WHERE Tarjeta.idUsuario = " + idUsuario;
 
-                    // Borra los registros de la tabla Tarjeta
+                stmt.executeQuery(eliminaTodoUsuario);
+
+
+                // Borra los registros de la tabla Reproduccion si existe el usuario
+                if (DBManagerReproduccion.existsUsuarioEnReproduccion(idUsuario)) {
+                    // Primero, elimina los registros de Reproduccion que hacen referencia a Contenido
+                    String deleteReproduccion = "DELETE FROM Reproduccion WHERE codigoContenido IN (SELECT codigoContenido FROM Contenido WHERE idUsuario = " + idUsuario + ")";
+                    stmt.executeUpdate(deleteReproduccion);
+                }
+
+                // Borra los registros de la tabla Contenido si existe el usuario
+                if (DBManagerContenido.existsUsuarioEnContenido(idUsuario)) {
+                    String deleteContenido = "DELETE FROM Contenido WHERE idUsuario = " + idUsuario;
+                    stmt.executeUpdate(deleteContenido);
+                }
+
+                // Borra los registros de las otras tablas en el orden adecuado
+
+                // Borra los registros de la tabla Tarjeta si existe el usuario
+                if (DBManagerTarjetas.existsUserInTarjeta(idUsuario)) {
                     String deleteTarjeta = "DELETE FROM Tarjeta WHERE idUsuario = " + idUsuario;
                     stmt.executeUpdate(deleteTarjeta);
+                }
 
-                    // Borra los registros de la tabla Reproduccion
-                    String deleteReproduccion = "DELETE FROM Reproduccion WHERE idUsuario = " + idUsuario;
-                    stmt.executeUpdate(deleteReproduccion);
-
-                    // Borra los registros de la tabla SubscripcionUsuario
+                // Borra los registros de la tabla SubscripcionUsuario si existe el usuario
+                if (DBManagerSubscripcion.existsUsuarioEnSubscripcion(idUsuario)) {
                     String deleteSubscripcion = "DELETE FROM SubscripcionUsuario WHERE idUsuario = " + idUsuario;
                     stmt.executeUpdate(deleteSubscripcion);
+                }
 
-                    // Borra los registros de la tabla CuentaPrincipal
+                // Borra los registros de la tabla CuentaPrincipal si existe el usuario
+                if (DBManagerCuentaPrincipal.existsUsuarioEnCuentaPrincipal(idUsuario)) {
                     String deleteCuentaPrincipal = "DELETE FROM CuentaPrincipal WHERE idUsuario = " + idUsuario;
                     stmt.executeUpdate(deleteCuentaPrincipal);
+                }
 
-                    // Borra el registro de la tabla Usuario
+                // Borra el registro de la tabla Usuario si existe el usuario
+                if (existsUsuario(idUsuario)) {
                     String deleteUsuario = "DELETE FROM Usuario WHERE idUsuario = " + idUsuario;
                     stmt.executeUpdate(deleteUsuario);
-
-                    conn.commit(); // Confirmar transacción
-                    conn.setAutoCommit(true); // Restaurar el modo de autocommit
-
-                    return true; // Borrado exitoso
-                } catch (SQLException e) {
-                    conn.rollback(); // Deshacer transacción en caso de error
-                    throw new RuntimeException(e);
                 }
-            } else {
-                return false; // El usuario no existe en todas las tablas, no se puede borrar
+
+                conn.commit(); // Confirmar transacción
+                conn.setAutoCommit(true); // Restaurar el modo de autocommit
+
+                return true; // Borrado exitoso
+            } catch (SQLException e) {
+                conn.rollback(); // Deshacer transacción en caso de error
+                throw new RuntimeException(e);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
+    }*/
 
 }
 

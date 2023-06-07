@@ -51,8 +51,8 @@ public class MarcosMusic extends JFrame {
         frame.setIconImage(iconSpotify.getImage());
 
         configurarBotones();
-        /*DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();*/
+        DBManagerConexion.loadDriver();
+        DBManagerConexion.connect();
     }
 
     /**

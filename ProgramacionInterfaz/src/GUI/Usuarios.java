@@ -119,7 +119,7 @@ public class Usuarios extends JDialog {
         btnDeleteUsr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (DBManagerUsuarios.borraTodoUsuarios(Integer.parseInt(inpIdUsr.getText()))) {
+                if (DBManagerUsuarios.deleteUsuario(Integer.parseInt(inpIdUsr.getText()))) {
                     JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente el usuario con id: " + inpIdUsr.getText(), "Eliminacion completada", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha podido eliminar el usuario con id: " + inpIdUsr.getText(), "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);

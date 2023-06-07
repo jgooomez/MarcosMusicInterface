@@ -29,20 +29,38 @@ public class AnyadirEmpleado extends JDialog {
          */
         buttonAceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (inpNombre.getText().length() < 2) {
-                    JOptionPane.showMessageDialog(null, "El nombre debe tener tres caracteres mínimo.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (Integer.parseInt(inpEdad.getText()) < 18) {
-                    JOptionPane.showMessageDialog(null, "La edad debe ser mayor a 18 años.", "Error", JOptionPane.ERROR_MESSAGE);
-                } else if (Integer.parseInt(inpDepartamento.getText()) < 1 || Integer.parseInt(inpDepartamento.getText()) > 5) {
-                    JOptionPane.showMessageDialog(null, "El número de departamento debe estar entre 1 y 5.", "Error", JOptionPane.ERROR_MESSAGE);
+                String nombre = inpNombre.getText();
+                int edad = Integer.parseInt(inpEdad.getText());
+                int departamento = Integer.parseInt(inpDepartamento.getText());
+
+                if (nombre.length() < 2) {
+                    mostrarError("El nombre debe tener tres caracteres mínimo.");
+                } else if (edad < 18) {
+                    mostrarError("La edad debe ser mayor a 18 años.");
+                } else if (departamento < 1 || departamento > 5) {
+                    mostrarError("El número de departamento debe estar entre 1 y 5.");
                 } else {
-                    if (DBManagerEmpleado.insertEmpleado(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), inpFechaIncorporacion.getText(), Integer.parseInt(inpDepartamento.getText()))) {
-                        JOptionPane.showMessageDialog(null, "El empleado se ha insertado correctamente.");
+                    if (DBManagerEmpleado.insertEmpleado(
+                            inpNacionalidad.getText(),
+                            nombre,
+                            edad,
+                            inpFechaIncorporacion.getText(),
+                            departamento)) {
+                        mostrarMensaje("El empleado se ha insertado correctamente.");
                         dispose();
                     }
                 }
             }
+
+            private void mostrarError(String mensaje) {
+                JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+            private void mostrarMensaje(String mensaje) {
+                JOptionPane.showMessageDialog(null, mensaje);
+            }
         });
+
 
         /**
          * Configura el comportamiento del botón "Cancelar".
