@@ -47,7 +47,12 @@ public class WelcomeScreen extends JDialog {
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                setModal(false);
+                JDialog dialog = new Login();
+                dialog.setTitle("Agregar Usuario");
+                dialog.setSize(600, 500);
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
             }
         });
     }
