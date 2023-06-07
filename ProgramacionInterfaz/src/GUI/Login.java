@@ -1,5 +1,6 @@
 package GUI;
 
+import DBManager.DBManagerConexion;
 import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
@@ -45,21 +46,27 @@ public class Login extends JDialog {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                DBManagerConexion.loadDriver();
+                DBManagerConexion.connect();
                 if (DBManagerUsuarios.verificarCredenciales(inpUserName.getText(), inpPassword.getText())) {
                     JFrame frame = new MarcosMusic();
                     frame.setTitle("Bienvenido a Marcos Music");
+                    frame.setContentPane(new MarcosMusic().principal);
                     frame.setEnabled(true);
                     frame.setSize(600, 500);
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
+                    new MarcosMusic();
                     //Bloquear algunas funciones
                 } else if (inpUserName.getText().equals("ADMIN") && Integer.parseInt(inpPassword.getText()) == 1234) {
                     JFrame frame = new MarcosMusic();
                     frame.setTitle("Bienvenido a Marcos Music");
+                    frame.setContentPane(new MarcosMusic().principal);
                     frame.setEnabled(true);
                     frame.setSize(600, 500);
                     frame.setLocationRelativeTo(null);
                     frame.setVisible(true);
+                    new MarcosMusic();
                 }
             }
         });

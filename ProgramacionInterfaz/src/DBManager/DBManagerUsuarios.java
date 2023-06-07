@@ -263,12 +263,12 @@ public class DBManagerUsuarios {
         return usuarios;
     }
 
-    public static boolean verificarCredenciales(String nombreUsuario, String contraseña) {
+    public static boolean verificarCredenciales(String nombreUsuario, String contrasenya) {
         try  {
             String sql = "SELECT COUNT(*) FROM Usuario WHERE userName = ? AND password = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = DBManagerConexion.getConexion().prepareStatement(sql);
             stmt.setString(1, nombreUsuario);
-            stmt.setString(2, contraseña);
+            stmt.setString(2, contrasenya);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             int count = rs.getInt(1);

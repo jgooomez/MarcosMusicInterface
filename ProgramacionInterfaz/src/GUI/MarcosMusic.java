@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MarcosMusic extends JFrame {
-    private JPanel principal;
+    public JPanel principal;
     private JButton btnSuscripciones;
     private JButton btnVerUsuarios;
     private JButton btnDepartamento;
