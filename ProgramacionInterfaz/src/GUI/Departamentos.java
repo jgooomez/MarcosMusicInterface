@@ -43,7 +43,7 @@ public class Departamentos extends JDialog {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
         listenerAtencionCliente();
@@ -56,7 +56,11 @@ public class Departamentos extends JDialog {
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JButton> listaBtns = Arrays.asList(btnReturn, btnDisenyo, btnAtencionCliente, btnRSS, btnSonido, btnVideo);
+        List<JPanel> listaPaneles = Arrays.asList(box_content, box_botones, box_top, WinDepartamentos);
+        List<JLabel> listaTexto = Arrays.asList(txtTittle);
         MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void listenerDisenyo() {
@@ -124,6 +128,10 @@ public class Departamentos extends JDialog {
         });
     }
 
+    public void departamentosSetVisible() {
+        this.setVisible(false);
+    }
+
     private void onOK() {
         // add your code here
         dispose();
@@ -131,6 +139,8 @@ public class Departamentos extends JDialog {
 
     private void onCancel() {
         // add your code here if necessary
+        this.setVisible(false);
+        MarcosMusic.frame.setVisible(true);
         dispose();
     }
 

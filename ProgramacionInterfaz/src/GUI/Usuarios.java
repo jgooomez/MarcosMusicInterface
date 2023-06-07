@@ -72,18 +72,13 @@ public class Usuarios extends JDialog {
     }
 
     private void styles() {
-        txtTittle.setForeground(Color.WHITE);
-        txtNombre.setForeground(Color.WHITE);
-        txtEdad.setForeground(Color.WHITE);
-        txtIdUsr.setForeground(Color.WHITE);
-        txtNacionalidad.setForeground(Color.WHITE);
-        txtFotoPerfil.setForeground(Color.WHITE);
-        txtNumSeguidores.setForeground(Color.WHITE);
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtEdad, txtIdUsr, txtNacionalidad, txtFotoPerfil, txtNumSeguidores);
         List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr);
         List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinUsuarios);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void setListenersBtns() {

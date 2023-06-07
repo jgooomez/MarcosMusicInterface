@@ -50,7 +50,7 @@ public class DepartamentoAtencionCliente extends JDialog {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
     }
@@ -58,7 +58,11 @@ public class DepartamentoAtencionCliente extends JDialog {
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JButton> listaBtns = Arrays.asList(btnReturn);
+        List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinAtencionCliente);
+        List<JLabel> listaTexto = Arrays.asList(txtFechaCreacion, txtTittle, txtIdDpto, txtNombre,txtNombreEncargado, txtNumSubDpto, txtNumTrabajadores);
         MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
     }
 
     private void onOK() {

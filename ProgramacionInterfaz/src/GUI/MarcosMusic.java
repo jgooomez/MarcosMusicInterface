@@ -75,7 +75,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new Usuarios();
                 dialogo1.setTitle("Vista de usuarios");
-                dialogo1.setSize(700, 400);
+                dialogo1.setSize(700, 500);
                 dialogo1.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo1.setVisible(true);
@@ -97,8 +97,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Suscripciones();
                 dialogo2.setTitle("Tipo de suscripciones");
-                dialogo2.setSize(800, 400);
-                dialogo2.pack();
+                dialogo2.setSize(400, 300);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);
@@ -145,6 +144,13 @@ public class MarcosMusic extends JFrame {
         for (JPanel panel:
              listaPaneles) {
             panel.setBackground(getBackgroundColor());
+        }
+    }
+
+    public static void stylesTexts(List<JLabel> listaTexto) {
+        for (JLabel txt:
+                listaTexto) {
+            txt.setForeground(Color.WHITE);
         }
     }
     public static Font getFontTitle() {
