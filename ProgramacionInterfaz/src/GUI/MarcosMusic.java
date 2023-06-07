@@ -54,8 +54,8 @@ public class MarcosMusic extends JFrame {
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("iconos/Spotify_icon.png"));*/
 
         configurarBotones();
-        DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
+        /*DBManagerConexion.loadDriver();
+        DBManagerConexion.connect();*/
     }
 
     private void configurarImagenDeFondo() {

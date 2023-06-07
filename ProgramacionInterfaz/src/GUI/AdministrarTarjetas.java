@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Clase que representa la interfaz gráfica para administrar tarjetas.
+ */
 public class AdministrarTarjetas extends JDialog {
     private JPanel WinAdminTarjetas;
     private JPanel box_botones;
@@ -29,6 +32,10 @@ public class AdministrarTarjetas extends JDialog {
     private JLabel icon;
     private JButton btnBuscar;
 
+    /**
+     * Constructor de la clase AdministrarTarjetas.
+     * Inicializa la interfaz gráfica y configura los eventos de los botones.
+     */
     public AdministrarTarjetas() {
         setContentPane(WinAdminTarjetas);
         styles();
@@ -43,7 +50,10 @@ public class AdministrarTarjetas extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
+        /**
+         * Configura el comportamiento al hacer clic en la cruz de cierre.
+         * Llama al método onCancel().
+         */
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -51,14 +61,20 @@ public class AdministrarTarjetas extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
+        /**
+         * Configura el comportamiento al presionar la tecla ESCAPE.
+         * Llama al método onCancel().
+         */
         WinAdminTarjetas.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        // Añadir la funcionalidad de cada botón
+        /**
+         * Metodo que busca una tarjeta por el id de usuario y rellena los campos con la información necesaria.
+         * @param idUsuario
+         */
         setListenersBtns();
         btnBuscar.addActionListener(new ActionListener() {
             @Override
@@ -80,32 +96,45 @@ public class AdministrarTarjetas extends JDialog {
                     inpNombre.setText(tarjetaBuscada.getNombreTitular());
                     inpNumTarjeta.setText(tarjetaBuscada.getNumeroTarjeta());
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID enla BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID en la BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
                     inpIdUsr.setText("");
                 }
             }
         });
     }
 
+    /**
+     * Configura los listeners de los botones.
+     */
     private void setListenersBtns() {
+        /**
+         * Configura el comportamiento del botón "Return".
+         * Llama al método onCancel().
+         */
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         });
+
+        /**
+         * Configura el comportamiento del botón "Delete".
+         * Muestra un cuadro de diálogo de confirmación y elimina la tarjeta si se confirma.
+         * Si se cancela, cierra la ventana actual.
+         */
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar la tarjeta con número: " + inpNumTarjeta.getText(), "Confirmar",
+                int opcion = JOptionPane.showOptionDialog(null, "¿Estás seguro de que quieres borrar la tarjeta con número: " + inpNumTarjeta.getText(), "Confirmar",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                         new String[]{"Confirmar", "Cancelar"}, "Confirmar");
 
                 if (opcion == JOptionPane.YES_OPTION) {
                     if (DBManagerTarjetas.deleteTarjetasUsuario(Integer.parseInt(inpIdUsr.getText()))) {
-                        JOptionPane.showMessageDialog(null, "Se ha eliminado la tarjeta con exito.", "Operacion completada", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Se ha eliminado la tarjeta con éxito.", "Operación completada", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID enla BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID en la BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
                     }
                 } else if (opcion == JOptionPane.NO_OPTION) {
                     dispose();
@@ -114,6 +143,9 @@ public class AdministrarTarjetas extends JDialog {
         });
     }
 
+    /**
+     * Configura los estilos visuales de los elementos de la interfaz.
+     */
     private void styles() {
         txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
         txtAdminTarjetas.setForeground(Color.WHITE);
@@ -126,13 +158,19 @@ public class AdministrarTarjetas extends JDialog {
         MarcosMusic.stylesPanels(listaPaneles);
     }
 
+    /**
+     * Método invocado cuando se presiona el botón "OK".
+     * Agrega tu código aquí.
+     */
     private void onOK() {
-        // add your code here
         dispose();
     }
 
+    /**
+     * Método invocado cuando se cancela la operación.
+     * Agrega tu código aquí si es necesario.
+     */
     private void onCancel() {
-        // add your code here if necessary
         this.setVisible(false);
         MarcosMusic.frame.setVisible(true);
         dispose();

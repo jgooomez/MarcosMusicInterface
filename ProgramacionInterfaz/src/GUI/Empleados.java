@@ -33,6 +33,11 @@ public class Empleados extends JDialog {
     private JLabel txtDepartamento;
     private JButton btnAnyadir;
 
+    /**
+     * Crea una instancia de la clase Empleados.
+     * Esta clase representa una ventana de diálogo para gestionar empleados.
+     * Inicializa los componentes gráficos, aplica estilos y configura los listeners.
+     */
     public Empleados() {
         setContentPane(WinEmpleados);
         styles();
@@ -73,7 +78,6 @@ public class Empleados extends JDialog {
             }
         });
 
-        // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -81,12 +85,12 @@ public class Empleados extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
         WinEmpleados.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
         btnAnyadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,6 +103,10 @@ public class Empleados extends JDialog {
         });
     }
 
+    /**
+     * Aplica estilos a los elementos visuales.
+     * Establece la fuente y tamaño del título, aplica estilos a los botones, paneles y etiquetas de texto.
+     */
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn, btnAnyadir);
@@ -110,12 +118,10 @@ public class Empleados extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
         this.setVisible(false);
         MarcosMusic.frame.setVisible(true);
         dispose();

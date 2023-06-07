@@ -22,6 +22,11 @@ public class BorrarUsuario {
     private JPanel box_btns;
     private final JDialog dialogo;
 
+    /**
+     * Crea una instancia de la clase BorrarUsuario.
+     * Esta clase representa una ventana de diálogo para borrar un usuario.
+     * Inicializa los componentes gráficos, aplica estilos y configura los listeners.
+     */
     public BorrarUsuario() {
         dialogo = new JDialog();
         dialogo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -42,12 +47,20 @@ public class BorrarUsuario {
         });
     }
 
+    /**
+     * Aplica estilos a los elementos visuales.
+     * Establece la fuente y tamaño del título y aplica estilos a los botones.
+     */
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JButton> listaBtns = Arrays.asList(btnVolver, btnDeleteUsr);
         MarcosMusic.stylesBtns(listaBtns);
     }
 
+    /**
+     * Establece los listeners para los botones.
+     * Vuelve hacia atrás ocultando el diálogo actual.
+     */
     private void setListenersBtns() {
         btnVolver.addActionListener(new ActionListener() {
             @Override
@@ -56,10 +69,15 @@ public class BorrarUsuario {
                 dialogo.dispose();
             }
         });
+
+        /**
+         * Comprueba si existe el usuario en la BBDD, si existe lo borra
+         * @param idUsuario
+         */
         btnDeleteUsr.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar el usuario con nombre: (se muestra el numero de la tarjeta)", "Confirmar",
+                int opcion = JOptionPane.showOptionDialog(null, "¿Estas seguro de que quieres borrar el usuario con id: " + inpIdUsr.getText(), "Confirmar",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                         new String[]{"Confirmar", "Cancelar"}, "Confirmar");
 
@@ -72,13 +90,16 @@ public class BorrarUsuario {
                         JOptionPane.showConfirmDialog(null, "No se ha encontrado el usuario: " + inpIdUsr.getText());
                     }
                 } else if (opcion == JOptionPane.NO_OPTION) {
-                    // Realizar acciones si se selecciona "Salir"
                     System.out.println("Cancelar");
                 }
             }
         });
     }
 
+    /**
+     * Acción a realizar al cerrar la ventana.
+     * Cierra la ventana de diálogo.
+     */
     private void onCancel() {
         dialogo.dispose();
     }
