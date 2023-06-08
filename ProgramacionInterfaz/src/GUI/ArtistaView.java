@@ -106,16 +106,16 @@ public class ArtistaView extends JDialog {
                 dialog.setVisible(true);
             }
         });
-//        btnBorrarArtista.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                JDialog dialog = new BorrarArtista();
-//                dialog.setTitle("Agregar artista");
-//                dialog.pack();
-//                dialog.setLocationRelativeTo(null);
-//                dialog.setVisible(true);
-//            }
-//        });
+        btnBorrarArtista.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialog = new BorrarArtista();
+                dialog.setTitle("Agregar artista");
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
         btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
