@@ -1,18 +1,24 @@
 package DBManager;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import DBManager.DBManagerConexion;
 
 import static DBManager.DBManagerConexion.conn;
 
+
 public class DBManagerUsuarios {
     // Configuración de la tabla usuarios
-    private static final String DB_US = "usuarios";
+    private static final String DB_US = "usuario";
     private static final String DB_US_SELECT = "SELECT * FROM " + DB_US;
     private static final String DB_US_ID = "idUsuario";
     private static final String DB_US_NAC= "nacionalidad";
     private static final String DB_US_NOM = "nombre";
+    private static final String DB_US_USERNAME = "userName";
+    private static final String DB_US_PASSWORD = "password";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_NUMSEG = "numSeguidores";
     private static final String DB_US_FOTO = "fotoPerfil";
@@ -26,7 +32,7 @@ public class DBManagerUsuarios {
 
     public static ResultSet getTablaUsuarios(int resultSetType, int resultSetConcurrency) {
         try {
-            Statement stmt = conn.createStatement(resultSetType, resultSetConcurrency);
+            Statement stmt = DBManagerConexion.getConexion().createStatement(resultSetType, resultSetConcurrency);
             ResultSet rs = stmt.executeQuery(DB_US_SELECT);
             //stmt.close();
             return rs;
@@ -80,11 +86,9 @@ public class DBManagerUsuarios {
     public static ResultSet getUsuario(int idUsuario) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idUsuario + "';";
-            //System.out.println(sql);
             ResultSet rs = stmt.executeQuery(sql);
-            //stmt.close();
 
             // Si no hay primer registro entonces no existe el usuario.
             if (!rs.first()) {
@@ -170,35 +174,38 @@ public class DBManagerUsuarios {
          * @param nacionalidad nacionalidad del usuario
          * @param edad edad del usuario
          * @param numSeguidores numero de seguidores del usuario
-         * @param fotoPerfil ruta d ela foto de perfil del usuario
+         //* @param fotoPerfil ruta d ela foto de perfil del usuario
          * @return verdadero si pudo insertarlo, false en caso contrario
          */
-        public static boolean insertUsuario(String nacionalidad, String nombre, int edad, int numSeguidores, String fotoPerfil){
+        public static int insertUsuario(String nacionalidad, String nombre, int edad, int numSeguidores, String username, String password) {
             try {
-                // Obtenemos la tabla usuarios
                 System.out.print("Insertando usuario " + nombre + "...");
-                ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+                ResultSet rs = getTablaUsuarios(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-                // Insertamos el nuevo registro
                 rs.moveToInsertRow();
                 rs.updateString(DB_US_NOM, nombre);
                 rs.updateString(DB_US_NAC, nacionalidad);
                 rs.updateInt(DB_US_ED, edad);
                 rs.updateInt(DB_US_NUMSEG, numSeguidores);
-                rs.updateString(DB_US_FOTO, fotoPerfil);
+                rs.updateString(DB_US_USERNAME, username);
+                rs.updateString(DB_US_PASSWORD, password);
 
                 rs.insertRow();
 
-                // Todo bien, cerramos ResultSet y devolvemos true
+                rs.last();
+                int id = rs.getInt(DB_US_ID);
+
                 rs.close();
                 System.out.println("OK!");
-                return true;
-
+                return id;
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return false;
+                return 0;
             }
         }
+
+
+
 
     /**
      * Solicita a la BD eliminar un usuario
@@ -233,6 +240,67 @@ public class DBManagerUsuarios {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
+        }
+    }
+
+    public static ArrayList<ClasePOJO.Usuario> obtenerUsuarios() {
+        ArrayList<ClasePOJO.Usuario> usuarios = new ArrayList<>();
+
+        try {
+            ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+            while (rs.next()) {
+                int id = rs.getInt(DB_US_ID);
+                String nacionalidad = rs.getString(DB_US_NAC);
+                String nombre = rs.getString(DB_US_NOM);
+                int edad = rs.getInt(DB_US_ED);
+                int numSeguidores = rs.getInt(DB_US_NUMSEG);
+                String username = rs.getString(DB_US_USERNAME);
+                String password = rs.getString(DB_US_PASSWORD);
+
+                ClasePOJO.Usuario usuario = new ClasePOJO.Usuario(id, nacionalidad, nombre, edad, numSeguidores, username, password);
+                usuarios.add(usuario);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return usuarios;
+    }
+
+    public static boolean verificarCredenciales(String nombreUsuario, String contrasenya) {
+        try  {
+            String sql = "SELECT COUNT(*) FROM Usuario WHERE userName = ? AND password = ?";
+            PreparedStatement stmt = DBManagerConexion.getConexion().prepareStatement(sql);
+            stmt.setString(1, nombreUsuario);
+            stmt.setString(2, contrasenya);
+            ResultSet rs = stmt.executeQuery();
+            rs.next();
+            int count = rs.getInt(1);
+            return count > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static int getIdUser() {
+        try {
+            int id = 0;
+            Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String sql = "SELECT TOP 1 " + DB_US_ID + " FROM " + DB_US + " ORDER BY " + DB_US_ID + " ASC";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if(rs.next()) {
+                id = rs.getInt(DB_US_ID);
+            }
+
+            return id;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return 0;
         }
     }
 

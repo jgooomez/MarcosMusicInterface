@@ -12,8 +12,8 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="5102bbc7-869c-4952-a7a1-0c14e4d92280">
-      <console name="MarcosMusic" type="STANDARD" schema="" session="Main" />
+    <connection id="a8a831d1-fa3b-43a9-9430-a40456605e9e">
+      <console name="MARCOSMUSIC" type="STANDARD" schema="" session="Main"><![CDATA[select * from subscripcion]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -22,27 +22,38 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
+  <component name="DBNavigator.Project.ExecutionManager">
+    <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <argument-values-cache />
+  </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="5102bbc7-869c-4952-a7a1-0c14e4d92280" active="true" signed="true">
+      <connection id="a8a831d1-fa3b-43a9-9430-a40456605e9e" active="true" signed="true">
         <database>
-          <name value="MarcosMusic" />
+          <name value="MARCOSMUSIC" />
           <description value="" />
           <database-type value="GENERIC" />
           <config-type value="CUSTOM" />
           <database-version value="15.0" />
           <driver-source value="EXTERNAL" />
-          <driver-library value="C:\Users\aleja\Downloads\sqljdbc_12.2.0.0_enu\sqljdbc_12.2\enu\mssql-jdbc-12.2.0.jre8.jar" />
+          <driver-library value="D:\0_DAM1\Entornos de Desarrollo\MarcosMusicInterface\driver\sqljdbc_12.2\enu\mssql-jdbc-12.2.0.jre11.jar" />
           <driver value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
           <url-type value="CUSTOM" />
-          <url value="jdbc:sqlserver://DESKTOP-00LQ1SJ\SQLEXPRESS:1433;databaseName=MARCOSMUSIC;TrustServerCertificate=True;" />
+          <url value="jdbc:sqlserver://192.168.7.213:1433;databaseName=MARCOSMUSIC;TrustServerCertificate=True;" />
           <type value="USER_PASSWORD" />
           <user value="ADMIN" />
-          <deprecated-pwd value="QURNSU4=" />
+          <deprecated-pwd value="MTIzNA==" />
         </database>
         <properties>
           <auto-commit value="false" />
@@ -72,7 +83,7 @@
           <restore-workspace value="true" />
           <restore-workspace-deep value="false" />
           <environment-type value="default" />
-          <connectivity-timeout value="10" />
+          <connectivity-timeout value="30" />
           <idle-time-to-disconnect value="30" />
           <idle-time-to-disconnect-pool value="5" />
           <credential-expiry-time value="10" />
@@ -508,5 +519,8 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
   </component>
 </project>

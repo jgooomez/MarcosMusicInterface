@@ -1,8 +1,12 @@
 package DBManager;
 
+import ClasePOJO.Empleado;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 
 import static DBManager.DBManagerConexion.conn;
 
@@ -15,7 +19,7 @@ public class DBManagerEmpleado {
     private static final String DB_US_NOM = "nombre";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_FINC = "fechaIncorporacion";
-    private static final String DB_US_DEP = "departamento";
+    private static final String DB_US_DEP = "idDepartamento";
 
     /**
      * Obtiene toda la tabla Empleado de la base de datos
@@ -26,7 +30,7 @@ public class DBManagerEmpleado {
      */
     public static ResultSet getTablaEmpleado(int resultSetType, int resultSetConcurrency) {
         try {
-            Statement stmt = conn.createStatement(resultSetType, resultSetConcurrency);
+            Statement stmt =  DBManagerConexion.getConexion().createStatement(resultSetType, resultSetConcurrency);
             ResultSet rs = stmt.executeQuery(DB_US_SELECT);
             return rs;
         } catch (SQLException ex) {
@@ -79,7 +83,7 @@ public class DBManagerEmpleado {
     public static ResultSet getEmpleado(int idEmpleado) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idEmpleado + "';";
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -169,7 +173,7 @@ public class DBManagerEmpleado {
      * @param departamento       departamento del Empleado
      * @return verdadero si pudo insertarlo, false en caso contrario
      */
-    public static boolean insertEmpleado(String nacionalidad, String nombre, int edad, String fechaIncorporacion, String departamento) {
+    public static boolean insertEmpleado(String nacionalidad, String nombre, int edad, String fechaIncorporacion, int departamento) {
         try {
             // Obtenemos la tabla Empleado
             System.out.print("Insertando Empleado " + nombre + "...");
@@ -181,7 +185,7 @@ public class DBManagerEmpleado {
             rs.updateString(DB_US_NAC, nacionalidad);
             rs.updateInt(DB_US_ED, edad);
             rs.updateString(DB_US_FINC, fechaIncorporacion);
-            rs.updateString(DB_US_DEP, departamento);
+            rs.updateInt(DB_US_DEP, departamento);
 
             rs.insertRow();
 
@@ -231,4 +235,31 @@ public class DBManagerEmpleado {
             return false;
         }
     }
+
+    public static ArrayList<Empleado> obtenerEmpleados() {
+        ArrayList<Empleado> empleados = new ArrayList<>();
+
+        try {
+            ResultSet rs = getTablaEmpleado(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+
+            while (rs.next()) {
+                int id = rs.getInt("idEmpleado");
+                String nombre = rs.getString("nombre");
+                int edad = rs.getInt("edad");
+                String nacionalidad = rs.getString("nacionalidad");
+                Date fechaIncorporacion = rs.getDate("fechaIncorporacion");
+                int departamento = rs.getInt("idDepartamento");
+
+                Empleado empleado = new Empleado(id, nombre, edad, nacionalidad, fechaIncorporacion, departamento);
+                empleados.add(empleado);
+            }
+
+            rs.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return empleados;
+    }
+
 }

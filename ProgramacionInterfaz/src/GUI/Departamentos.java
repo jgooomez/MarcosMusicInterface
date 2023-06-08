@@ -1,25 +1,42 @@
 package GUI;
 
+import DBManager.DBManagerConexion;
+import DBManager.DBManagerDepartamento;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+
+import static DBManager.DBManagerDepartamento.DB_DEPARTAMENTO_SELECT;
 
 public class Departamentos extends JDialog {
     private JPanel WinDepartamentos;
     private JButton btnReturn;
     private JPanel box_top;
     private JPanel box_botones;
-    private JButton buttonAtras;
-    private JButton btnAtencionCliente;
-    private JButton btnSonido;
-    private JButton btnVideo;
-    private JButton btnRSS;
-    private JButton btnDiseño;
-    private JButton buttonCancel;
+    private JTable tableDepartamentos;
+    private JScrollPane scrollDepartamentos;
+    private JButton btnAnyadirDepartamento;
+    private JButton btnEditarDepartamento;
+    private JButton btnActualizar;
+    private JLabel txtTittle;
+    private JLabel icono;
+    private JPanel box_content;
+    private JButton btnEliminarDepartamento;
 
     public Departamentos() {
         setContentPane(WinDepartamentos);
+        styles();
         setModal(true);
+        setSize(500,500);
+        tableDepartamentos.setCellSelectionEnabled(false);
         getRootPane().setDefaultButton(btnReturn);
+        defineDataRow();
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -37,75 +54,107 @@ public class Departamentos extends JDialog {
         btnReturn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                onCancel();
             }
         });
-        btnAtencionCliente.addActionListener(new ActionListener() {
+        btnActualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoAtencionCliente();
-                dialog.setTitle("Atencion al Cliente");
-                dialog.setSize(350,500);
+                defineDataRow();
+            }
+        });
+        btnEditarDepartamento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditarDepartamento dialog = new EditarDepartamento();
+                dialog.pack();
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
-        btnSonido.addActionListener(new ActionListener() {
+        btnAnyadirDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoSonido();
-                dialog.setTitle("Sonido");
-                dialog.setSize(350,500);
+                AnyadirDepartamento dialog = new AnyadirDepartamento();
+                dialog.pack();
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
-        btnVideo.addActionListener(new ActionListener() {
+        btnEliminarDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoVideo();
-                dialog.setTitle("Video");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-        btnRSS.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoRSS();
-                dialog.setTitle("Redes Sociales");
-                dialog.setSize(350,500);
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
-        btnDiseño.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new DepartamentoDisenyo();
-                dialog.setTitle("Redes Sociales");
-                dialog.setSize(350,500);
+                EliminarDepartamento dialog = new EliminarDepartamento();
+                dialog.pack();
                 dialog.setLocationRelativeTo(null);
                 dialog.setVisible(true);
             }
         });
     }
 
+    private void styles() {
+        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        List<JLabel> listaTexto = Arrays.asList(txtTittle);
+        List<JButton> listaBtns = Arrays.asList(btnActualizar, btnReturn, btnAnyadirDepartamento, btnEditarDepartamento, btnEliminarDepartamento);
+        List<JPanel> listaPaneles = Arrays.asList(WinDepartamentos, box_botones, box_top, box_content);
+        MarcosMusic.stylesBtns(listaBtns);
+        MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
+    }
+
+    private void defineDataRow(){
+        // Obtener los nombres de las columnas de la base de datos
+        List<String> columnNames = defineColumnName();
+
+        // Crear el modelo de tabla con los nombres de las columnas
+        DefaultTableModel model = new DefaultTableModel();
+        for (String columnName : columnNames) {
+            model.addColumn(columnName);
+        }
+        try{
+            ResultSet rs = DBManagerConexion.getConexion().createStatement().executeQuery(DB_DEPARTAMENTO_SELECT);
+            Object[] row = new Object[6];
+            while (rs.next()) {
+                row[0] = rs.getInt("idDepartamento");
+                row[1] = rs.getString("nombre");
+                row[2] = rs.getDate("fechaCreacion");
+                row[3] = rs.getString("nombreEncargado");
+                row[4] = rs.getInt("numTrabajadores");
+                row[5] = rs.getInt("numSubDpto");
+                model.addRow(row);
+            }
+        } catch (
+                SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        tableDepartamentos = new JTable(model);
+        scrollDepartamentos.setViewportView(tableDepartamentos);
+    }
+
+    // Método para obtener los nombres de las columnas desde la base de datos
+    private List<String> defineColumnName() {
+
+        return DBManagerDepartamento.defineColumnName();
+    }
+
     private void onOK() {
-        // add your code here
         dispose();
     }
 
     private void onCancel() {
-        // add your code here if necessary
+        this.setVisible(false);
+        MarcosMusic.frame.setVisible(true);
         dispose();
     }
 
     public static void main(String[] args) {
+        DBManagerConexion.connect();
         Departamentos dialog = new Departamentos();
-        dialog.pack();
+        dialog.setSize(600,600);
         dialog.setVisible(true);
-        System.exit(0);
+        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
     }
 }
+
