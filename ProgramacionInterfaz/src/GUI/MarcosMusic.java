@@ -5,8 +5,6 @@ import DBManager.DBManagerConexion;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -85,12 +83,12 @@ public class MarcosMusic {
         btnTarjetas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-//                JDialog dialogo2 = new AdministrarTarjetas();
-//                dialogo2.setTitle("Administración de tarjetas");
-//                dialogo2.setSize(500, 400);
-//                dialogo2.setLocationRelativeTo(null);
-//                frame.setVisible(false);
-//                dialogo2.setVisible(true);
+                JDialog dialogo2 = new AdministrarTarjetas();
+                dialogo2.setTitle("Administración de tarjetas");
+                dialogo2.setSize(500, 400);
+                dialogo2.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo2.setVisible(true);
             }
         });
 
