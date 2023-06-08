@@ -10,7 +10,6 @@ public class AnyadirDepartamento extends JDialog {
     private JPanel contentPane;
     private JButton btnAnyadir;
     private JButton btnCancelar;
-    private JTextField idDepartamentoTextField;
     private JTextField nombreDptoTextField;
     private JTextField fechaCreacionTextField;
     private JTextField jefeDptoTextField;
@@ -21,7 +20,6 @@ public class AnyadirDepartamento extends JDialog {
     private JLabel nombreEncargadoLabel;
     private JLabel fechaCreacionLabel;
     private JLabel nombreDptoLabel;
-    private JLabel idDptoLabel;
 
     public AnyadirDepartamento() {
         setContentPane(contentPane);
@@ -56,7 +54,7 @@ public class AnyadirDepartamento extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     private void newDepartamento(){
-        Departamento departamento= new Departamento(Integer.parseInt(idDepartamentoTextField.getText()),
+        Departamento departamento= new Departamento(
                 nombreDptoTextField.getText(), fechaCreacionTextField.getText(), jefeDptoTextField.getText(),
                 numEmpleadosTextField.getText(), numSubDptoTextField.getText());
         if (DBManagerDepartamento.createDpto(departamento)){

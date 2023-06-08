@@ -101,15 +101,41 @@ public class EditarDepartamento extends JDialog {
     }
     private void modificarDepartamento() {
         // Obtener los datos del departamento a modificar de los JTextField
+        String nombreDepartamento;
+        String fechaCreacion;
+        String nombreEncargado;
+        String numTrabajadores;
+        String numSubDpto;
+        if (nombreDepartamentotextField.getText().isBlank())
+        {
+            nombreDepartamento = "null";
+        }else{
+            nombreDepartamento = nombreDepartamentotextField.getText();
+        }if (fechaDepartamentoTextField.getText().isBlank()){
+             fechaCreacion = "2000-01-01";
+        }else {
+            fechaCreacion = fechaDepartamentoTextField.getText();
+        }if (jefeDepTextField.getText().isBlank()){
+            nombreEncargado = "null";
+        }else{
+            nombreEncargado = jefeDepTextField.getText();
+        }if (numEmpleadosTextField.getText().isEmpty()){
+            numTrabajadores = "0";
+        }else {
+            numTrabajadores = numEmpleadosTextField.getText();
+        }if (numSubDptoTextField.getText().isBlank()){
+            numSubDpto = "0";
+        }else{
+            numSubDpto = numSubDptoTextField.getText();
+        }
         int idDepartamento = Integer.parseInt(idDepartamentoTextField.getText());
-        String nombreDepartamento = nombreDepartamentotextField.getText();
-        String fechaCreacion = fechaDepartamentoTextField.getText();
-        String nombreEncargado = jefeDepTextField.getText();
-        int numTrabajadores = Integer.parseInt(numEmpleadosTextField.getText());
-        int numSubDpto = Integer.parseInt(numSubDptoTextField.getText());
+
+
+
+
 
         // Crear un objeto Departamento con los datos actualizados
-        Departamento departamento = new Departamento(idDepartamento, nombreDepartamento, fechaCreacion, nombreEncargado, String.valueOf(numTrabajadores), String.valueOf(numSubDpto));
+        Departamento departamento = new Departamento(idDepartamento, nombreDepartamento, fechaCreacion, nombreEncargado, numTrabajadores, numSubDpto);
 
         // Actualizar el departamento en la base de datos
         DBManagerDepartamento dbManager = new DBManagerDepartamento();

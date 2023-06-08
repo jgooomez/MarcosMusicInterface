@@ -38,6 +38,7 @@ public class EliminarDepartamento extends JDialog {
                     }
 
                 }
+                loadDepartamentos();
             }
         });
 

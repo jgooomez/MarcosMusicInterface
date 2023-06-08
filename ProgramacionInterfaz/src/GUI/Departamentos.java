@@ -34,6 +34,7 @@ public class Departamentos extends JDialog {
         styles();
         setModal(true);
         setSize(500,500);
+        tableDepartamentos.setCellSelectionEnabled(false);
         getRootPane().setDefaultButton(btnReturn);
         defineDataRow();
         // call onCancel() when cross is clicked
@@ -80,12 +81,21 @@ public class Departamentos extends JDialog {
                 dialog.setVisible(true);
             }
         });
+        btnEliminarDepartamento.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EliminarDepartamento dialog = new EliminarDepartamento();
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
+            }
+        });
     }
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         List<JLabel> listaTexto = Arrays.asList(txtTittle);
-        List<JButton> listaBtns = Arrays.asList(btnActualizar, btnReturn, btnAnyadirDepartamento, btnEditarDepartamento);
+        List<JButton> listaBtns = Arrays.asList(btnActualizar, btnReturn, btnAnyadirDepartamento, btnEditarDepartamento, btnEliminarDepartamento);
         List<JPanel> listaPaneles = Arrays.asList(WinDepartamentos, box_botones, box_top, box_content);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);

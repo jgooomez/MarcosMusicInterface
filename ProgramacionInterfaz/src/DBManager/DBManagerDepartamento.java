@@ -336,16 +336,15 @@ public class DBManagerDepartamento {
 
     public static boolean createDpto(Departamento departamento) {
         try {
-            CallableStatement statement = DBManagerConexion.getConexion().prepareCall("{CALL CrearDepartamento(?, ?, ?, ?, ?, ?, ?)}");
-            statement.setInt(1, departamento.getIdDepartamento());
-            statement.setString(2, departamento.getNombre());
-            statement.setString(3, departamento.getFechaCreacion());
-            statement.setString(4, departamento.getNombreEncargado());
-            statement.setInt(5, Integer.parseInt(departamento.getNumTrabajadores()));
-            statement.setInt(6, Integer.parseInt(departamento.getNumSubDpto()));
-            statement.registerOutParameter(7, Types.INTEGER); // Parámetro de salida para el resultado del procedimiento
+            CallableStatement statement = DBManagerConexion.getConexion().prepareCall("{CALL CrearDepartamento(?, ?, ?, ?, ?, ?)}");
+            statement.setString(1, departamento.getNombre());
+            statement.setString(2, departamento.getFechaCreacion());
+            statement.setString(3, departamento.getNombreEncargado());
+            statement.setInt(4, Integer.parseInt(departamento.getNumTrabajadores()));
+            statement.setInt(5, Integer.parseInt(departamento.getNumSubDpto()));
+            statement.registerOutParameter(6, Types.INTEGER); // Parámetro de salida para el resultado del procedimiento
             statement.execute();
-            int resultado = statement.getInt(7); // Obtiene el valor del parámetro de salida
+            int resultado = statement.getInt(6); // Obtiene el valor del parámetro de salida
             if (resultado == 0) {
                 return true;
             } else if (resultado == 1) {
