@@ -7,6 +7,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class AnyadirEmpleado extends JDialog {
     private JPanel winAddEmpleado;
@@ -42,6 +47,7 @@ public class AnyadirEmpleado extends JDialog {
                 String nombre = inpNombre.getText();
                 int edad = Integer.parseInt(inpEdad.getText());
                 int departamento = Integer.parseInt(inpDepartamento.getText());
+                String nacionalidad = inpNacionalidad.getText();
 
                 if (nombre.length() < 2) {
                     mostrarError("El nombre debe tener tres caracteres mínimo.");
@@ -50,16 +56,48 @@ public class AnyadirEmpleado extends JDialog {
                 } else if (departamento < 1 || departamento > 5) {
                     mostrarError("El número de departamento debe estar entre 1 y 5.");
                 } else {
-                    if (DBManagerEmpleado.insertEmpleado(
-                            inpNacionalidad.getText(),
-                            nombre,
-                            edad,
-                            inpFechaIncorporacion.getText(),
-                            departamento)) {
-                        mostrarMensaje("El empleado se ha insertado correctamente.");
-                        dispose();
+                    if (!verificarNacionalidad(nacionalidad)) {
+                        mostrarError("La nacionalidad ingresada no es válida.");
+                    } else {
+                        if (DBManagerEmpleado.insertEmpleado(
+                                nacionalidad,
+                                nombre,
+                                edad,
+                                inpFechaIncorporacion.getText(),
+                                departamento)) {
+                            mostrarMensaje("El empleado se ha insertado correctamente.");
+                            dispose();
+                        }
                     }
                 }
+            }
+
+            private boolean verificarNacionalidad(String nacionalidad) {
+                try {
+                    String apiUrl = "https://restcountries.com/v2/name/" + nacionalidad;
+                    URL url = new URL(apiUrl);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                        String inputLine;
+                        StringBuilder response = new StringBuilder();
+
+                        while ((inputLine = in.readLine()) != null) {
+                            response.append(inputLine);
+                        }
+                        in.close();
+
+                        // Si la respuesta contiene datos, significa que la nacionalidad existe
+                        return response.length() > 0;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                return false;
             }
 
             private void mostrarError(String mensaje) {
