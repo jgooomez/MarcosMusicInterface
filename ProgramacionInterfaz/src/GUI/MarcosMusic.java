@@ -1,15 +1,14 @@
 package GUI;
 
-import DBManager.DBManagerConexion;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 
-public class MarcosMusic {
-    public JPanel principal;
+public class MarcosMusic extends JFrame {
+    private JPanel principal;
     private JButton btnSuscripciones;
     private JButton btnVerUsuarios;
     private JButton btnDepartamento;
@@ -20,54 +19,68 @@ public class MarcosMusic {
     private JPanel box_tittle;
     private JPanel box_btns;
     private JPanel emptyBox;
-    static JDialog frame;
+    private JButton btnConciertos;
+    private JButton btnArtistas;
+    static JFrame frame = new JFrame("MarcosMusic");
     private List<JButton> listaBtns;
     private List<JPanel> listaPaneles;
+
+    public static void main(String[] args) {
+        frame.setContentPane(new MarcosMusic().principal);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        //new Login();
+    }
 
     /**
      * Crea una instancia de la clase MarcosMusic.
      * Esta clase representa la ventana principal de la aplicación.
      * Inicializa los componentes gráficos, aplica estilos y configura los listeners de los botones.
      */
-    public MarcosMusic(JDialog dialogo) {
-
-        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
+    public MarcosMusic() {
+        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas, btnConciertos,btnArtistas);
         listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
         stylesBtns(listaBtns);
         stylesPanels(listaPaneles);
         txtTituloPantallaPrincipal.setFont(getFontTitle());
-
-        frame = new JDialog();
-        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.setTitle("Bienvenido a Marcos Music");
-        frame.setContentPane(principal);
-        frame.setSize(600, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setEnabled(true);
-        dialogo.setVisible(false);
-        frame.setVisible(true);
-        frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-        principal.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        ImageIcon iconSpotify = new ImageIcon("iconos/Spotify_icon.png");
+        frame.setIconImage(iconSpotify.getImage());
 
         configurarBotones();
-        DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
+        //DBManagerConexion.loadDriver();
+        //DBManagerConexion.connect();
+
+
     }
-
-
 
     /**
      * Configura los listeners de los botones.
      */
     private void configurarBotones() {
+        btnArtistas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialogo1 = new Artista();
+                dialogo1.setTitle("Vista de conciertos");
+                dialogo1.setSize(500, 500);
+                dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo1.setVisible(true);
+            }
+        });
+        btnConciertos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialogo1 = new Conciertos();
+                dialogo1.setTitle("Vista de conciertos");
+                dialogo1.setSize(500, 500);
+                dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo1.setVisible(true);
+            }
+        });
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,7 +110,7 @@ public class MarcosMusic {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Suscripciones();
                 dialogo2.setTitle("Tipo de suscripciones");
-                dialogo2.setSize(400, 500);
+                dialogo2.setSize(400, 300);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);
@@ -109,7 +122,7 @@ public class MarcosMusic {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Departamentos();
                 dialogo2.setTitle("Departamentos");
-                dialogo2.setSize(600, 400);
+                dialogo2.setSize(400, 400);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);
@@ -186,10 +199,5 @@ public class MarcosMusic {
      */
     public static Color getBackgroundColor() {
         return new Color(40, 40, 40);
-    }
-
-    private void onCancel() {
-        WelcomeScreen.frame.setVisible(true);
-        frame.setVisible(false);
     }
 }
