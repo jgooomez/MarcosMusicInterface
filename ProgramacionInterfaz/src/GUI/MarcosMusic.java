@@ -59,9 +59,9 @@ public class MarcosMusic {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        configurarBotones();
+        configurarBotones();/*
         DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
+        DBManagerConexion.connect();*/
     }
 
 

@@ -52,25 +52,6 @@ public class Login {
         });
     }
 
-    public static void bloquearBotones(boolean isAdmin, JButton... botones) {
-        for (JButton boton : botones) {
-            if (isAdmin) {
-                // Si es admin, todos los botones están habilitados
-                boton.setEnabled(true);
-            } else {
-                // Si no es admin, bloquear ciertos botones específicos
-                String nombreBoton = boton.getName();
-                if (nombreBoton.equals("botonAdmin")) {
-                    // Bloquear el botón "Admin"
-                    boton.setEnabled(false);
-                } else {
-                    // Habilitar los demás botones
-                    boton.setEnabled(true);
-                }
-            }
-        }
-    }
-
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
         java.util.List<JLabel> listaTexto = Arrays.asList(txtTittle, txtPsswd, txtUser);
