@@ -40,7 +40,7 @@ public class DBManagerConcierto {
         }
     }
 
-    public static void addConcierto(Concierto concierto) {
+    public static boolean addConcierto(Concierto concierto) {
         try {
             String insertQuery = "INSERT INTO " + TB_NAME + " (" +
                     TB_LUGAR + ", " +
@@ -60,12 +60,14 @@ public class DBManagerConcierto {
             stmt.setDouble(6, concierto.getDineroRecaudado());
 
             stmt.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
         }
     }
 
-    public static void deleteConcierto(int codigo) {
+    public static boolean deleteConcierto(int codigo) {
         try {
             String deleteQuery = "DELETE FROM " + TB_NAME + " WHERE " + TB_CODIGO + " = ?";
 
@@ -73,8 +75,37 @@ public class DBManagerConcierto {
             stmt.setInt(1, codigo);
 
             stmt.executeUpdate();
+
+            return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
+            return false;
+        }
+    }
+    public static Concierto buscarConciertoPorCodigo(int codigo) {
+        try {
+            String selectQuery = "SELECT * FROM " + TB_NAME + " WHERE " + TB_CODIGO + " = ?";
+
+            PreparedStatement stmt = DBManagerConexion.conn.prepareStatement(selectQuery);
+            stmt.setInt(1, codigo);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String lugar = rs.getString(TB_LUGAR);
+                Date fecha = rs.getDate(TB_FECHA);
+                String ciudad = rs.getString(TB_CIUDAD);
+                String pais = rs.getString(TB_PAIS);
+                int capacidad = rs.getInt(TB_CAPACIDAD);
+                double dineroRecaudado = rs.getDouble(TB_DINERO_RECAUDADO);
+
+                return new Concierto(codigo, lugar, fecha, ciudad, pais, capacidad, dineroRecaudado);
+            } else {
+                return null; // No se encontró ningún concierto con el código especificado
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
         }
     }
 }

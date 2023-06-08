@@ -23,6 +23,15 @@ public class Concierto {
         this.dineroRecaudado = dineroRecaudado;
     }
 
+    public Concierto(String lugar, Date fecha, String ciudad, String pais, int capacidad, double dineroRecaudado) {
+        this.lugar = lugar;
+        this.fecha = fecha;
+        this.ciudad = ciudad;
+        this.pais = pais;
+        this.capacidad = capacidad;
+        this.dineroRecaudado = dineroRecaudado;
+    }
+
     public int getCodigo() {
         return codigo;
     }
