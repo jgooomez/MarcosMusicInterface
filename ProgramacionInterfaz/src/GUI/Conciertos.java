@@ -72,30 +72,7 @@ public class Conciertos extends JDialog {
     }
 
     private void setListenersBtns() {
-        btnBuscar.addActionListener(e -> {
-            int codigo = Integer.parseInt(inpCodConcierto.getText());
-            Concierto concierto = DBManagerConcierto.buscarConciertoPorCodigo(codigo);
-
-            if (concierto != null) {
-                outpLugar.setText(concierto.getLugar());
-                outpFecha.setText(String.valueOf(concierto.getFecha()));
-                outpCiudad.setText(concierto.getCiudad());
-                outpPais.setText(concierto.getPais());
-                outpCapacidad.setText(String.valueOf(concierto.getCapacidad()));
-                outpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No se ha encontrado el concierto.");
-            }
-
-            outpLugar.setText(concierto.getLugar());
-            outpFecha.setText(String.valueOf(concierto.getFecha()));
-            outpCiudad.setText(concierto.getCiudad());
-            outpPais.setText(concierto.getPais());
-            outpCapacidad.setText(String.valueOf(concierto.getCapacidad()));
-            outpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
-
-        });
+        listenerBtnBuscar();
         btnAddConcierto.addActionListener(e -> {
             JDialog dialog = new AnyadirConcierto();
             dialog.setTitle("Agregar concierto");
@@ -103,6 +80,16 @@ public class Conciertos extends JDialog {
             dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
         });
+        listenerBtnBorrar();
+        btnVolver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        });
+    }
+
+    private void listenerBtnBorrar() {
         btnBorrarConcierto.addActionListener(e -> {
             String codigo = inpCodConcierto.getText();
             if (!codigo.isEmpty()) {
@@ -128,11 +115,32 @@ public class Conciertos extends JDialog {
                 JOptionPane.showMessageDialog(null, "Por favor, ingrese el código del concierto a borrar.", "Campo Vacío", JOptionPane.WARNING_MESSAGE);
             }
         });
-        btnVolver.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
+    }
+
+    private void listenerBtnBuscar() {
+        btnBuscar.addActionListener(e -> {
+            int codigo = Integer.parseInt(inpCodConcierto.getText());
+            Concierto concierto = DBManagerConcierto.buscarConciertoPorCodigo(codigo);
+
+            if (concierto != null) {
+                outpLugar.setText(concierto.getLugar());
+                outpFecha.setText(String.valueOf(concierto.getFecha()));
+                outpCiudad.setText(concierto.getCiudad());
+                outpPais.setText(concierto.getPais());
+                outpCapacidad.setText(String.valueOf(concierto.getCapacidad()));
+                outpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No se ha encontrado el concierto.");
             }
+
+            outpLugar.setText(concierto.getLugar());
+            outpFecha.setText(String.valueOf(concierto.getFecha()));
+            outpCiudad.setText(concierto.getCiudad());
+            outpPais.setText(concierto.getPais());
+            outpCapacidad.setText(String.valueOf(concierto.getCapacidad()));
+            outpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
+
         });
     }
 
