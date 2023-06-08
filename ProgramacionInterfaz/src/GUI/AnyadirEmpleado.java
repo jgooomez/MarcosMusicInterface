@@ -165,11 +165,4 @@ public class AnyadirEmpleado extends JDialog {
     private void onCancel() {
         dispose();
     }
-
-    public static void main(String[] args) {
-        AnyadirEmpleado dialog = new AnyadirEmpleado();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

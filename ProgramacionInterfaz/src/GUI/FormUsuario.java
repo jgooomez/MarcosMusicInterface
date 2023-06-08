@@ -14,6 +14,8 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FormUsuario extends JDialog {
     public JPanel winFormUsr;
@@ -39,6 +41,8 @@ public class FormUsuario extends JDialog {
     private JPasswordField inpPassword;
     private JLabel txtPassword;
     private JLabel txtUsername;
+
+    private static final String DNI_REGEX = "\\d{8}[A-HJ-NP-TV-Z]";
 
     /**
      * Crea una instancia de la clase FormUsuario.
@@ -77,27 +81,31 @@ public class FormUsuario extends JDialog {
 
         btnAddUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (compruebaUsuario()) {
-                    int idUser = DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()), inpUsername.getText(), inpPassword.getText());
-
-                    if (idUser != 0) {
-                        JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
-
-                        int opcion = JOptionPane.showOptionDialog(null, "¿Desea vincular una tarjeta de crédito?", "Tarjeta",
-                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                                new String[]{"Sí", "No"}, "Sí");
-
-                        if (opcion == 0) {
-                            // Aquí puedes usar el ID del usuario para vincularlo con la tarjeta
-                            JDialog anyadirTarjeta = new AnyadirTarjeta(idUser);
-                            anyadirTarjeta.setTitle("Vista de usuarios");
-                            anyadirTarjeta.setSize(700, 500);
-                            anyadirTarjeta.setLocationRelativeTo(null);
-                            anyadirTarjeta.setVisible(true);
+                if (validateDNI()){
+                    if (compruebaUsuario()) {
+                        int idUser = DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()), inpUsername.getText(), inpPassword.getText());
+    
+                        if (idUser != 0) {
+                            JOptionPane.showMessageDialog(null, "El usuario se ha creado correctamente.");
+    
+                            int opcion = JOptionPane.showOptionDialog(null, "¿Desea vincular una tarjeta de crédito?", "Tarjeta",
+                                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                                    new String[]{"Sí", "No"}, "Sí");
+    
+                            if (opcion == 0) {
+                                // Aquí puedes usar el ID del usuario para vincularlo con la tarjeta
+                                JDialog anyadirTarjeta = new AnyadirTarjeta(idUser);
+                                anyadirTarjeta.setTitle("Vista de usuarios");
+                                anyadirTarjeta.setSize(700, 500);
+                                anyadirTarjeta.setLocationRelativeTo(null);
+                                anyadirTarjeta.setVisible(true);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                     }
+                } else {
+                    JOptionPane.showMessageDialog(FormUsuario.this, "DNI inválido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -143,6 +151,7 @@ public class FormUsuario extends JDialog {
             isValid = false;
         } else if (!verificarNacionalidad(inpNacionalidad.getText())) {
             JOptionPane.showMessageDialog(null, "La nacionalidad no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            inpNacionalidad.setText("");
             isValid = false;
         }
 
@@ -176,6 +185,12 @@ public class FormUsuario extends JDialog {
 
         return false;
     }
+    private boolean validateDNI() {
+        String dni = inpDNI.getText();
+        Pattern pattern = Pattern.compile(DNI_REGEX);
+        Matcher matcher = pattern.matcher(dni);
+        return matcher.matches();
+    }
 
 
     private void onOK() {
@@ -184,12 +199,5 @@ public class FormUsuario extends JDialog {
 
     private void onCancel() {
         dispose();
-    }
-
-    public static void main(String[] args) {
-        FormUsuario dialog = new FormUsuario();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }

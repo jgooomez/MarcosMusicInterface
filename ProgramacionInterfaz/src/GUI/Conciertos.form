@@ -23,6 +23,7 @@
               </grid>
             </constraints>
             <properties>
+              <icon value="iconos/concierto (2).png"/>
               <text value="Añadir"/>
             </properties>
           </component>
@@ -33,6 +34,7 @@
               </grid>
             </constraints>
             <properties>
+              <icon value="iconos/papelera-de-reciclaje.png"/>
               <text value="Borrar"/>
             </properties>
           </component>
@@ -121,7 +123,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="31927" class="javax.swing.JTextField" binding="inpLugarConcierto">
+          <component id="31927" class="javax.swing.JTextField" binding="outpLugar">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -132,7 +134,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="2abf3" class="javax.swing.JTextField" binding="inpFechaConcierto">
+          <component id="2abf3" class="javax.swing.JTextField" binding="outpFecha">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -143,7 +145,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="565e1" class="javax.swing.JTextField" binding="inpCiudadConcierto">
+          <component id="565e1" class="javax.swing.JTextField" binding="outpCiudad">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -154,7 +156,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="8ce2b" class="javax.swing.JTextField" binding="inpPaisConcierto">
+          <component id="8ce2b" class="javax.swing.JTextField" binding="outpPais">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -165,7 +167,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="57b5" class="javax.swing.JTextField" binding="inpCapacidadConcierto">
+          <component id="57b5" class="javax.swing.JTextField" binding="outpCapacidad">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -176,7 +178,7 @@
               <enabled value="false"/>
             </properties>
           </component>
-          <component id="2691d" class="javax.swing.JTextField" binding="inpDineroRecaudado">
+          <component id="2691d" class="javax.swing.JTextField" binding="outpDineroRecaudado">
             <constraints>
               <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -190,7 +192,7 @@
           <component id="345e0" class="javax.swing.JButton" binding="btnBuscar">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="-1" height="30"/>
+                <preferred-size width="50" height="30"/>
               </grid>
             </constraints>
             <properties>

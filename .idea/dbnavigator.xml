@@ -13,7 +13,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="a8a831d1-fa3b-43a9-9430-a40456605e9e">
-      <console name="MARCOSMUSIC" type="STANDARD" schema="" session="Main"><![CDATA[select * from subscripcion]]></console>
+      <console name="MARCOSMUSIC" type="STANDARD" schema="database" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -49,7 +49,6 @@
           <driver-source value="EXTERNAL" />
           <driver-library value="D:\0_DAM1\Entornos de Desarrollo\MarcosMusicInterface\driver\sqljdbc_12.2\enu\mssql-jdbc-12.2.0.jre11.jar" />
           <driver value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
-          <url-type value="CUSTOM" />
           <url value="jdbc:sqlserver://192.168.7.213:1433;databaseName=MARCOSMUSIC;TrustServerCertificate=True;" />
           <type value="USER_PASSWORD" />
           <user value="ADMIN" />

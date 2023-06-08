@@ -7,7 +7,6 @@ import DBManager.DBManagerConexion;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,12 +15,12 @@ public class Conciertos extends JDialog {
     private JPanel box_botones;
     private JPanel box_top;
     private JTextField inpCodConcierto;
-    private JTextField inpLugarConcierto;
-    private JTextField inpFechaConcierto;
-    private JTextField inpCiudadConcierto;
-    private JTextField inpPaisConcierto;
-    private JTextField inpCapacidadConcierto;
-    private JTextField inpDineroRecaudado;
+    private JTextField outpLugar;
+    private JTextField outpFecha;
+    private JTextField outpCiudad;
+    private JTextField outpPais;
+    private JTextField outpCapacidad;
+    private JTextField outpDineroRecaudado;
     private JButton btnAddConcierto;
     private JButton btnBorrarConcierto;
     private JButton btnVolver;
@@ -65,9 +64,11 @@ public class Conciertos extends JDialog {
         java.util.List<JLabel> listaTexto = Arrays.asList(txtTittle, txtCodigo, txtLugar, txtFecha, txtCapacidad, txtCiudad, txtDineroRecaudado, txtPais);
         java.util.List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddConcierto, btnVolver, btnBorrarConcierto);
         List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinConcierto);
+        List<JTextField> listaOutPuts = Arrays.asList(outpCapacidad, outpCiudad, outpFecha, outpLugar, outpPais, outpDineroRecaudado);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
+        MarcosMusic.stylesOutPutText(listaOutPuts);
     }
 
     private void setListenersBtns() {
@@ -76,23 +77,23 @@ public class Conciertos extends JDialog {
             Concierto concierto = DBManagerConcierto.buscarConciertoPorCodigo(codigo);
 
             if (concierto != null) {
-                inpLugarConcierto.setText(concierto.getLugar());
-                inpFechaConcierto.setText(String.valueOf(concierto.getFecha()));
-                inpCiudadConcierto.setText(concierto.getCiudad());
-                inpPaisConcierto.setText(concierto.getPais());
-                inpCapacidadConcierto.setText(String.valueOf(concierto.getCapacidad()));
-                inpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
+                outpLugar.setText(concierto.getLugar());
+                outpFecha.setText(String.valueOf(concierto.getFecha()));
+                outpCiudad.setText(concierto.getCiudad());
+                outpPais.setText(concierto.getPais());
+                outpCapacidad.setText(String.valueOf(concierto.getCapacidad()));
+                outpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
 
             } else {
                 JOptionPane.showMessageDialog(null, "No se ha encontrado el concierto.");
             }
 
-            inpLugarConcierto.setText(concierto.getLugar());
-            inpFechaConcierto.setText(String.valueOf(concierto.getFecha()));
-            inpCiudadConcierto.setText(concierto.getCiudad());
-            inpPaisConcierto.setText(concierto.getPais());
-            inpCapacidadConcierto.setText(String.valueOf(concierto.getCapacidad()));
-            inpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
+            outpLugar.setText(concierto.getLugar());
+            outpFecha.setText(String.valueOf(concierto.getFecha()));
+            outpCiudad.setText(concierto.getCiudad());
+            outpPais.setText(concierto.getPais());
+            outpCapacidad.setText(String.valueOf(concierto.getCapacidad()));
+            outpDineroRecaudado.setText(String.valueOf(concierto.getDineroRecaudado()));
 
         });
         btnAddConcierto.addActionListener(e -> {
@@ -113,12 +114,12 @@ public class Conciertos extends JDialog {
                     if (DBManagerConcierto.deleteConcierto(codigoConcierto)) {
                         JOptionPane.showMessageDialog(null, "Concierto eliminado correctamente.", "Eliminación Exitosa", JOptionPane.INFORMATION_MESSAGE);
                         inpCodConcierto.setText("");
-                        inpLugarConcierto.setText("");
-                        inpFechaConcierto.setText("");
-                        inpCiudadConcierto.setText("");
-                        inpPaisConcierto.setText("");
-                        inpCapacidadConcierto.setText("");
-                        inpDineroRecaudado.setText("");
+                        outpLugar.setText("");
+                        outpFecha.setText("");
+                        outpCiudad.setText("");
+                        outpPais.setText("");
+                        outpCapacidad.setText("");
+                        outpDineroRecaudado.setText("");
                     } else {
                         JOptionPane.showMessageDialog(null, "ERROR AL BORRAR", "Eliminación Errónea", JOptionPane.ERROR_MESSAGE);
                     }

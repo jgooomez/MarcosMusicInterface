@@ -290,7 +290,7 @@ public class DBManagerUsuarios {
         try {
             int id = 0;
             Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT TOP 1 " + DB_US_ID + " FROM " + DB_US + " ORDER BY " + DB_US_ID + " ASC";
+            String sql = "SELECT TOP 1 " + DB_US_ID + " FROM " + DB_US + " ORDER BY " + DB_US_ID + " DESC";
             ResultSet rs = stmt.executeQuery(sql);
 
             if(rs.next()) {

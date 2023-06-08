@@ -216,11 +216,4 @@ public class Suscripciones extends JDialog {
         dispose();
     }
 
-    public static void main(String[] args) {
-
-        Suscripciones dialog = new Suscripciones();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

@@ -22,7 +22,7 @@ public class WelcomeScreen extends JFrame {
         frame.setVisible(true);
     }
 
-    public WelcomeScreen() {
+    public WelcomeScreen(){
         styles();
 
         // call onCancel() on ESCAPE

@@ -95,10 +95,4 @@ public class EliminarDepartamento extends JDialog {
             eliminarDepartamentoComboBox.addItem(departamento.getIdDepartamento() + " - " + departamento.getNombre());
         }
     }
-    public static void main(String[] args) {
-        EliminarDepartamento dialog = new EliminarDepartamento();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }
