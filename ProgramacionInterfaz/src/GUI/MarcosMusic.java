@@ -66,7 +66,9 @@ public class MarcosMusic {
         DBManagerConexion.connect();
     }
 
-
+    public void quitarBoton() {
+        btnArtistas.setVisible(false);
+    }
 
     /**
      * Configura los listeners de los botones.
