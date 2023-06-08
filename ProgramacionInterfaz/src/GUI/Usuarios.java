@@ -108,7 +108,7 @@ public class Usuarios extends JDialog {
     private void styles() {
         txtTittle.setFont(new Font("Arial", Font.BOLD, 30));
         List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtEdad, txtIdUsr, txtNacionalidad, txtNumSeguidores, txtUsername, txtPassword);
-        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr, btnAddTarjeta, btnAddSuscripcion);
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr, btnAddTarjeta);
         List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinUsuarios);
         List<JTextField> listaOutPuts = Arrays.asList(outpEdad, outpNacionalidad, outpNombre, outpPassword, outpUsername, outpNumSeguidores);
         MarcosMusic.stylesBtns(listaBtns);

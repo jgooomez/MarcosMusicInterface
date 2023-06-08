@@ -39,6 +39,7 @@ public class Artista {
         this.numPremios = numPremios;
         this.generoMusical = generoMusical;
     }
+
     public Artista(String nombre, String fechaInicio, String nacionalidad, int numPremios, String generoMusical) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;

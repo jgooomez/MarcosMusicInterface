@@ -1,9 +1,7 @@
 package GUI;
 
 import ClasePOJO.Tarjeta;
-import ClasePOJO.Usuario;
 import DBManager.DBManagerTarjetas;
-import DBManager.DBManagerUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +18,8 @@ public class AdministrarTarjetas extends JDialog {
     private JPanel box_botones;
     private JPanel box_inputs;
     private JTextField inpIdUsr;
-    private JTextField inpNombre;
-    private JTextField inpNumTarjeta;
+    private JTextField outpNombre;
+    private JTextField outpNumTarjeta;
     private JButton btnDelete;
     private JButton btnAdd;
     private JButton btnReturn;
@@ -41,8 +39,8 @@ public class AdministrarTarjetas extends JDialog {
         styles();
         setModal(true);
         getRootPane().setDefaultButton(btnDelete);
-        inpNombre.setEnabled(false);
-        inpNumTarjeta.setEnabled(false);
+        outpNombre.setEnabled(false);
+        outpNumTarjeta.setEnabled(false);
 
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -71,11 +69,15 @@ public class AdministrarTarjetas extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        /**
-         * Metodo que busca una tarjeta por el id de usuario y rellena los campos con la información necesaria.
-         * @param idUsuario
-         */
         setListenersBtns();
+        setListenerBtnBuscar();
+    }
+
+    /**
+     * Metodo que busca una tarjeta por el id de usuario y rellena los campos con la información necesaria.
+     * @param idUsuario
+     */
+    private void setListenerBtnBuscar() {
         btnBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,8 +95,8 @@ public class AdministrarTarjetas extends JDialog {
 
                 if (tarjetaBuscada != null) {
                     // Mostrar los datos del usuario
-                    inpNombre.setText(tarjetaBuscada.getNombreTitular());
-                    inpNumTarjeta.setText(tarjetaBuscada.getNumeroTarjeta());
+                    outpNombre.setText(tarjetaBuscada.getNombreTitular());
+                    outpNumTarjeta.setText(tarjetaBuscada.getNumeroTarjeta());
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha encontrado ninguna tarjeta con ese ID en la BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
                     inpIdUsr.setText("");
@@ -126,7 +128,7 @@ public class AdministrarTarjetas extends JDialog {
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int opcion = JOptionPane.showOptionDialog(null, "¿Estás seguro de que quieres borrar la tarjeta con número: " + inpNumTarjeta.getText(), "Confirmar",
+                int opcion = JOptionPane.showOptionDialog(null, "¿Estás seguro de que quieres borrar la tarjeta con número: " + outpNumTarjeta.getText(), "Confirmar",
                         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                         new String[]{"Confirmar", "Cancelar"}, "Confirmar");
 
@@ -148,14 +150,14 @@ public class AdministrarTarjetas extends JDialog {
      */
     private void styles() {
         txtAdminTarjetas.setFont(new Font("Calibri", Font.BOLD, 30));
-        txtAdminTarjetas.setForeground(Color.WHITE);
-        txtNombre.setForeground(Color.WHITE);
-        txtIdUsr.setForeground(Color.WHITE);
-        txtNumTarjeta.setForeground(Color.WHITE);
+        List<JLabel> listaTexto = Arrays.asList(txtAdminTarjetas, txtNombre, txtIdUsr, txtNumTarjeta);
         List<JButton> listaBtns = Arrays.asList(btnDelete, btnReturn, btnBuscar);
         List<JPanel> listaPaneles = Arrays.asList(WinAdminTarjetas, box_botones, box_inputs);
+        List<JTextField> listaOutPuts = Arrays.asList(outpNumTarjeta, outpNombre);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
+        MarcosMusic.stylesTexts(listaTexto);
+        MarcosMusic.stylesOutPutText(listaOutPuts);
     }
 
     /**
