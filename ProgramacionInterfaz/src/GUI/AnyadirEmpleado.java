@@ -49,27 +49,32 @@ public class AnyadirEmpleado extends JDialog {
                 int departamento = Integer.parseInt(inpDepartamento.getText());
                 String nacionalidad = inpNacionalidad.getText();
 
-                if (nombre.length() < 2) {
-                    mostrarError("El nombre debe tener tres caracteres mínimo.");
-                } else if (edad < 18) {
-                    mostrarError("La edad debe ser mayor a 18 años.");
-                } else if (departamento < 1 || departamento > 5) {
-                    mostrarError("El número de departamento debe estar entre 1 y 5.");
+                if (inpNombre.getText().isEmpty() || inpNacionalidad.getText().isEmpty() || inpDepartamento.getText().isEmpty() ||inpEdad.getText().isEmpty() || inpFechaIncorporacion.getText().isEmpty() ) {
+                    JOptionPane.showMessageDialog(null, "Todos los campos deben ser rellenados", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    if (!verificarNacionalidad(nacionalidad)) {
-                        mostrarError("La nacionalidad ingresada no es válida.");
+                    if (nombre.length() < 2) {
+                        mostrarError("El nombre debe tener tres caracteres mínimo.");
+                    } else if (edad < 18) {
+                        mostrarError("La edad debe ser mayor a 18 años.");
+                    } else if (departamento < 1 || departamento > 5) {
+                        mostrarError("El número de departamento debe estar entre 1 y 5.");
                     } else {
-                        if (DBManagerEmpleado.insertEmpleado(
-                                nacionalidad,
-                                nombre,
-                                edad,
-                                inpFechaIncorporacion.getText(),
-                                departamento)) {
-                            mostrarMensaje("El empleado se ha insertado correctamente.");
-                            dispose();
+                        if (!verificarNacionalidad(nacionalidad)) {
+                            mostrarError("La nacionalidad ingresada no es válida.");
+                        } else {
+                            if (DBManagerEmpleado.insertEmpleado(
+                                    nacionalidad,
+                                    nombre,
+                                    edad,
+                                    inpFechaIncorporacion.getText(),
+                                    departamento)) {
+                                mostrarMensaje("El empleado se ha insertado correctamente.");
+                                dispose();
+                            }
                         }
                     }
                 }
+
             }
 
             private boolean verificarNacionalidad(String nacionalidad) {
