@@ -1,12 +1,16 @@
 package GUI;
 
+import ClasePOJO.Artista;
+import DBManager.DBManagerArtista;
+import DBManager.DBManagerConexion;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class Artista extends JDialog {
+public class ArtistaView extends JDialog {
     private JPanel WinCanciones;
     private JPanel box_botones;
     private JPanel box_top;
@@ -25,10 +29,13 @@ public class Artista extends JDialog {
     private JLabel txtNacionalidad;
     private JLabel txtPremios;
     private JLabel txtGeneroMusical;
+    private JButton btnBuscar;
+    private JLabel txtId;
+    private JTextField inpId;
     private JButton buttonOK;
     private JButton buttonCancel;
 
-    public Artista() {
+    public ArtistaView() {
         setContentPane(WinCanciones);
         styles();
         setModal(true);
@@ -53,8 +60,8 @@ public class Artista extends JDialog {
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        java.util.List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtNacionalidad, txtPremios, txtFechaInicio, txtGeneroMusical);
-        java.util.List<JButton> listaBtns = Arrays.asList(btnAddArtista, btnVolver, btnBorrarArtista);
+        java.util.List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtNacionalidad, txtPremios, txtFechaInicio, txtGeneroMusical, txtId);
+        java.util.List<JButton> listaBtns = Arrays.asList(btnAddArtista, btnVolver, btnBorrarArtista, btnBuscar);
         List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinCanciones);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
@@ -62,6 +69,33 @@ public class Artista extends JDialog {
     }
 
     private void setListenersBtns() {
+        btnBuscar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String idArtistaText = inpId.getText();
+
+                try {
+                    int idArtista = Integer.parseInt(idArtistaText);
+                    Artista artista = DBManagerArtista.getArtistaPorId(idArtista);
+
+                    if (artista != null) {
+                        // Rellenar los campos de texto con los datos del artista
+                        inpNombreArtis.setText(artista.getNombre());
+                        inpFechaInicioArtis.setText(artista.getFechaInicio());
+                        inpNacionalidadArtis.setText(artista.getNacionalidad());
+                        inpPremiosArtis.setText(String.valueOf(artista.getNumPremios()));
+                        inpGeneroMusiArtis.setText(artista.getGeneroMusical());
+                    } else {
+                        // El artista no fue encontrado, puedes mostrar un mensaje de error o limpiar los campos
+                        JOptionPane.showMessageDialog(null, "No se encontró ningún artista con el ID especificado", "ArtistaView no encontrado", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException ex) {
+                    // El valor proporcionado no es un entero válido
+                    JOptionPane.showMessageDialog(null, "El ID del artista debe ser un número entero", "Valor no válido", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         btnAddArtista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,16 +106,16 @@ public class Artista extends JDialog {
                 dialog.setVisible(true);
             }
         });
-        btnBorrarArtista.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JDialog dialog = new BorrarArtista();
-                dialog.setTitle("Agregar artista");
-                dialog.pack();
-                dialog.setLocationRelativeTo(null);
-                dialog.setVisible(true);
-            }
-        });
+//        btnBorrarArtista.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                JDialog dialog = new BorrarArtista();
+//                dialog.setTitle("Agregar artista");
+//                dialog.pack();
+//                dialog.setLocationRelativeTo(null);
+//                dialog.setVisible(true);
+//            }
+//        });
         btnVolver.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,7 +136,10 @@ public class Artista extends JDialog {
     }
 
     public static void main(String[] args) {
-        Artista dialog = new Artista();
+        DBManagerConexion.loadDriver();
+        DBManagerConexion.connect();
+
+        ArtistaView dialog = new ArtistaView();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
