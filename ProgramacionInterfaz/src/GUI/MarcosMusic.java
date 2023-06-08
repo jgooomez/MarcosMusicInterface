@@ -23,6 +23,8 @@ public class MarcosMusic {
     private JPanel box_btns;
     private JPanel emptyBox;
     static JDialog frame;
+    private JButton btnConciertos;
+    private JButton btnArtistas;
     private List<JButton> listaBtns;
     private List<JPanel> listaPaneles;
 
@@ -70,6 +72,28 @@ public class MarcosMusic {
      * Configura los listeners de los botones.
      */
     private void configurarBotones() {
+        btnArtistas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialogo1 = new Artista();
+                dialogo1.setTitle("Vista de conciertos");
+                dialogo1.setSize(500, 500);
+                dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo1.setVisible(true);
+            }
+        });
+        btnConciertos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog dialogo1 = new Conciertos();
+                dialogo1.setTitle("Vista de conciertos");
+                dialogo1.setSize(500, 500);
+                dialogo1.setLocationRelativeTo(null);
+                frame.setVisible(false);
+                dialogo1.setVisible(true);
+            }
+        });
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,7 +123,7 @@ public class MarcosMusic {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Suscripciones();
                 dialogo2.setTitle("Tipo de suscripciones");
-                dialogo2.setSize(400, 300);
+                dialogo2.setSize(400, 500);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);

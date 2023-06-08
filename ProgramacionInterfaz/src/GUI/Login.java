@@ -1,4 +1,5 @@
 package GUI;
+import DBManager.DBManagerConexion;
 import DBManager.DBManagerUsuarios;
 import javax.swing.*;
 import java.awt.*;
@@ -47,28 +48,17 @@ public class Login {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MarcosMusic(dialogo);
-            }
-        });
-    }
-
-    public static void bloquearBotones(boolean isAdmin, JButton... botones) {
-        for (JButton boton : botones) {
-            if (isAdmin) {
-                // Si es admin, todos los botones están habilitados
-                boton.setEnabled(true);
-            } else {
-                // Si no es admin, bloquear ciertos botones específicos
-                String nombreBoton = boton.getName();
-                if (nombreBoton.equals("botonAdmin")) {
-                    // Bloquear el botón "Admin"
-                    boton.setEnabled(false);
+                DBManagerConexion.loadDriver();
+                DBManagerConexion.connect();
+                if (DBManagerUsuarios.verificarCredenciales(inpUserName.getText(), inpPassword.getText())) {
+                    //Abrir las canciones
+                } else if (inpUserName.getText().equals("ADMIN") && Integer.parseInt(inpPassword.getText()) == 1234) {
+                    new MarcosMusic(dialogo);
                 } else {
-                    // Habilitar los demás botones
-                    boton.setEnabled(true);
+                    JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error en el login", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        }
+        });
     }
 
     private void styles() {
