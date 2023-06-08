@@ -151,7 +151,7 @@ public class EditarDepartamento extends JDialog {
     }
     private void loadDepartamentos() {
 
-        List<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento(); // Reemplaza por tu lógica para obtener los departamentos
+        List<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento();
 
         // Limpiar el JComboBox
         editarDepartamentoComboBox.removeAllItems();

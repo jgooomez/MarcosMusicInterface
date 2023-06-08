@@ -10,7 +10,6 @@ public class Artista extends JDialog {
     private JPanel WinCanciones;
     private JPanel box_botones;
     private JPanel box_top;
-    private JTextField inpIDArtis;
     private JTextField inpNombreArtis;
     private JTextField inpFechaInicioArtis;
     private JTextField inpNacionalidadArtis;
@@ -54,7 +53,7 @@ public class Artista extends JDialog {
 
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        java.util.List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtID, txtNacionalidad, txtPremios, txtFechaInicio, txtGeneroMusical);
+        java.util.List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtNacionalidad, txtPremios, txtFechaInicio, txtGeneroMusical);
         java.util.List<JButton> listaBtns = Arrays.asList(btnAddArtista, btnVolver, btnBorrarArtista);
         List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinCanciones);
         MarcosMusic.stylesBtns(listaBtns);
@@ -76,7 +75,11 @@ public class Artista extends JDialog {
         btnBorrarArtista.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JDialog dialog = new BorrarArtista();
+                dialog.setTitle("Agregar artista");
+                dialog.pack();
+                dialog.setLocationRelativeTo(null);
+                dialog.setVisible(true);
             }
         });
         btnVolver.addActionListener(new ActionListener() {
