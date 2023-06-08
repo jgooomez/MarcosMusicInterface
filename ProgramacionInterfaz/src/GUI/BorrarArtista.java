@@ -1,25 +1,52 @@
 package GUI;
 
 import ClasePOJO.Artista;
-import ClasePOJO.Departamento;
 import DBManager.DBManagerArtista;
-import DBManager.DBManagerDepartamento;
 
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 public class BorrarArtista extends JDialog {
-    private JPanel contentPane;
+    private JPanel winDeleteArtista;
     private JButton btnBorrar;
     private JButton btnCancelar;
     private JComboBox borrarArtistaComboBox;
+    private JPanel box_btns;
 
     public BorrarArtista() {
-        setContentPane(contentPane);
+        setContentPane(winDeleteArtista);
         setModal(true);
         getRootPane().setDefaultButton(btnBorrar);
         loadArtistas();
+        listenerBtnBorrar();
+        listenerCerrrarVentana();
+    }
+
+    private void listenerCerrrarVentana() {
+        btnCancelar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        });
+
+        // call onCancel() when cross is clicked
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
+
+        // call onCancel() on ESCAPE
+        winDeleteArtista.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void listenerBtnBorrar() {
         btnBorrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Obtener el departamento seleccionado del JComboBox
@@ -41,28 +68,8 @@ public class BorrarArtista extends JDialog {
                 loadArtistas();
             }
         });
-
-        btnCancelar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
+
     //Coger el id del item comboBox seleccionado
     private int getIdFromSelectedItem(String selectedItem) {
         // Extraer el ID del departamento seleccionado del texto en el JComboBox
