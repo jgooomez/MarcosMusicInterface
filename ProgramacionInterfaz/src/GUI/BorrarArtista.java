@@ -10,6 +10,8 @@ public class BorrarArtista extends JDialog {
     private JButton btnBorrar;
     private JButton btnCancelar;
     private JTextField inpId;
+    private JPanel winDeleteArtista;
+    private JPanel box_btns;
     private JComboBox borrarArtistaComboBox;
 
     public BorrarArtista() {
