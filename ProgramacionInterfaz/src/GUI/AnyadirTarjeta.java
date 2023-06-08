@@ -65,9 +65,8 @@ public class AnyadirTarjeta extends JDialog {
         });
 
         /**
-         * Método que tras comprobar que los datos del usuario sean válidos, inserta el usuario en la BBDD.
+         * Método que tras comprobar que los datos de la tarjeta sean válidos, inserta la tarjeta en la BBDD.
          */
-
         btnAddTarjeta.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String tipo = "";
@@ -79,9 +78,10 @@ public class AnyadirTarjeta extends JDialog {
 
                 int idUser = DBManagerTarjetas.getIdUserTarjeta();
 
-                if (compruebaTarjeta()) {
+                if (compruebaTarjeta(idUser)) {
                     if (DBManagerTarjetas.insertTarjeta(inpNumTarjeta.getText(), Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()), inpCaducidad.getText(), idUser)) {
                         JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
+                        onCancel();
                     } else {
                         JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                     }
@@ -111,7 +111,7 @@ public class AnyadirTarjeta extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    public boolean compruebaTarjeta() {
+    public boolean compruebaTarjeta(int idUser) {
         boolean isValid = true;
         if (!(inpNumTarjeta.getText().matches("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$"))) {
             JOptionPane.showMessageDialog(null, "El número de tarjeta debe seguir el siguiente formato XXXX-XXXX-XXXX-XXXX.", "Error en el formato", JOptionPane.ERROR_MESSAGE);
@@ -129,6 +129,9 @@ public class AnyadirTarjeta extends JDialog {
             isValid = false;
         } else if (!(inpCaducidad.getText().matches("^(0[1-9]|1[0-2])/(0[1-9]|1[0-9]|2[0-9]|3[01])$"))) {
             JOptionPane.showMessageDialog(null, "Fecha de caducidad incorrecta, formato correcto MM/DD.");
+            isValid = false;
+        } else if (idUser == 0) {
+            JOptionPane.showMessageDialog(null, "Error. No se ha podido encontrar el ID del usuario.");
             isValid = false;
         }
         return isValid;
@@ -151,12 +154,14 @@ public class AnyadirTarjeta extends JDialog {
     }
 
     private void onCancel() {
+
         dispose();
     }
 
     public static void main(String[] args) {
         AnyadirTarjeta dialog = new AnyadirTarjeta();
-        dialog.pack();
+        dialog.setSize(600, 400);
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         System.exit(0);
     }

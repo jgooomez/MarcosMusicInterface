@@ -1,14 +1,17 @@
 package GUI;
 
+import DBManager.DBManagerConexion;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
-public class MarcosMusic extends JFrame {
-    private JPanel principal;
+public class MarcosMusic {
+    public JPanel principal;
     private JButton btnSuscripciones;
     private JButton btnVerUsuarios;
     private JButton btnDepartamento;
@@ -19,41 +22,51 @@ public class MarcosMusic extends JFrame {
     private JPanel box_tittle;
     private JPanel box_btns;
     private JPanel emptyBox;
+    static JDialog frame;
     private JButton btnConciertos;
     private JButton btnArtistas;
-    static JFrame frame = new JFrame("MarcosMusic");
     private List<JButton> listaBtns;
     private List<JPanel> listaPaneles;
-
-    public static void main(String[] args) {
-        frame.setContentPane(new MarcosMusic().principal);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        //new Login();
-    }
 
     /**
      * Crea una instancia de la clase MarcosMusic.
      * Esta clase representa la ventana principal de la aplicación.
      * Inicializa los componentes gráficos, aplica estilos y configura los listeners de los botones.
      */
-    public MarcosMusic() {
-        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas, btnConciertos,btnArtistas);
+    public MarcosMusic(JDialog dialogo) {
+
+        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
         listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
         stylesBtns(listaBtns);
         stylesPanels(listaPaneles);
         txtTituloPantallaPrincipal.setFont(getFontTitle());
-        ImageIcon iconSpotify = new ImageIcon("iconos/Spotify_icon.png");
-        frame.setIconImage(iconSpotify.getImage());
+
+        frame = new JDialog();
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setTitle("Bienvenido a Marcos Music");
+        frame.setContentPane(principal);
+        frame.setSize(600, 500);
+        frame.setLocationRelativeTo(null);
+        frame.setEnabled(true);
+        dialogo.setVisible(false);
+        frame.setVisible(true);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
+        principal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         configurarBotones();
-        //DBManagerConexion.loadDriver();
-        //DBManagerConexion.connect();
-
-
+        DBManagerConexion.loadDriver();
+        DBManagerConexion.connect();
     }
+
+
 
     /**
      * Configura los listeners de los botones.
@@ -110,7 +123,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Suscripciones();
                 dialogo2.setTitle("Tipo de suscripciones");
-                dialogo2.setSize(400, 300);
+                dialogo2.setSize(400, 500);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);
@@ -122,7 +135,7 @@ public class MarcosMusic extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo2 = new Departamentos();
                 dialogo2.setTitle("Departamentos");
-                dialogo2.setSize(400, 400);
+                dialogo2.setSize(600, 400);
                 dialogo2.setLocationRelativeTo(null);
                 frame.setVisible(false);
                 dialogo2.setVisible(true);
@@ -199,5 +212,10 @@ public class MarcosMusic extends JFrame {
      */
     public static Color getBackgroundColor() {
         return new Color(40, 40, 40);
+    }
+
+    private void onCancel() {
+        WelcomeScreen.frame.setVisible(true);
+        frame.setVisible(false);
     }
 }

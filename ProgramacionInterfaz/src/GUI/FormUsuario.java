@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FormUsuario extends JDialog {
-    private JPanel winFormUsr;
+    public JPanel winFormUsr;
     private JPanel box_datosUsr;
     private JLabel txtNombre;
     private JLabel txtEdad;
@@ -66,19 +66,23 @@ public class FormUsuario extends JDialog {
 
         btnAddUsr.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (compruebaUsuario()) {
+                /*if (compruebaUsuario()) {
                     if (DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()))) {
                         JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
-
-                        JDialog anyadirTarjeta = new AnyadirTarjeta();
-                        anyadirTarjeta.setTitle("Vista de usuarios");
-                        anyadirTarjeta.setSize(700, 500);
-                        anyadirTarjeta.setLocationRelativeTo(null);
-                        anyadirTarjeta.setVisible(true);
+                        */int opcion = JOptionPane.showOptionDialog(null, "¿Desea vinvular una tarjeta de crédito?", "Tarjeta",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                                new String[]{"Sí", "No"}, "Sí");
+                        if (opcion == 0) {
+                            JDialog anyadirTarjeta = new AnyadirTarjeta();
+                            anyadirTarjeta.setTitle("Vista de usuarios");
+                            anyadirTarjeta.setSize(700, 500);
+                            anyadirTarjeta.setLocationRelativeTo(null);
+                            anyadirTarjeta.setVisible(true);
+                        }/*
                     } else {
                         JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
                     }
-                }
+                }*/
             }
         });
 
