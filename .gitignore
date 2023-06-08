@@ -1,5 +1,4 @@
-*.class
+out/
 *.log
-
 
 DBManagerConnection.java
