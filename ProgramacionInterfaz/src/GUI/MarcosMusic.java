@@ -72,7 +72,7 @@ public class MarcosMusic {
      * Configura los listeners de los botones.
      */
     private void configurarBotones() {
-        btnArtistas.addActionListener(new ActionListener() {
+        /*btnArtistas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new Artista();
@@ -93,7 +93,7 @@ public class MarcosMusic {
                 frame.setVisible(false);
                 dialogo1.setVisible(true);
             }
-        });
+        });*/
         btnVerUsuarios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

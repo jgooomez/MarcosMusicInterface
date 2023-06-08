@@ -19,7 +19,7 @@ public class DBManagerEmpleado {
     private static final String DB_US_NOM = "nombre";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_FINC = "fechaIncorporacion";
-    private static final String DB_US_DEP = "departamento";
+    private static final String DB_US_DEP = "idDepartamento";
 
     /**
      * Obtiene toda la tabla Empleado de la base de datos

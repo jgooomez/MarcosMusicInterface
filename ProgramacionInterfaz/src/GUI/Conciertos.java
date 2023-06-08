@@ -31,7 +31,7 @@ public class Conciertos extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
 
-    public Conciertos() {
+    /*public Conciertos() {
         setContentPane(WinConcierto);
         styles();
         setModal(true);
@@ -85,7 +85,7 @@ public class Conciertos extends JDialog {
                 onCancel();
             }
         });
-    }
+    }*/
 
     private void onOK() {
         // add your code here
