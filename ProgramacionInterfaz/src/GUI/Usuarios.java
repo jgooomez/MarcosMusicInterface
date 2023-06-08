@@ -98,8 +98,6 @@ public class Usuarios extends JDialog {
                 anyadirTarjeta.setSize(700, 500);
                 anyadirTarjeta.setLocationRelativeTo(null);
                 anyadirTarjeta.setVisible(true);
-
-
             }
         });
     }
