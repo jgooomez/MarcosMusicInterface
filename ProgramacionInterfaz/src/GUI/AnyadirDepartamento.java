@@ -10,16 +10,18 @@ public class AnyadirDepartamento extends JDialog {
     private JPanel contentPane;
     private JButton btnAnyadir;
     private JButton btnCancelar;
-    private JTextField nombreDptoTextField;
-    private JTextField fechaCreacionTextField;
-    private JTextField jefeDptoTextField;
-    private JTextField numSubDptoTextField;
-    private JTextField numEmpleadosTextField;
-    private JLabel numSubDptoLabel;
-    private JLabel numEmpleadosLabel;
-    private JLabel nombreEncargadoLabel;
-    private JLabel fechaCreacionLabel;
-    private JLabel nombreDptoLabel;
+    private JTextField inpNombreDpto;
+    private JTextField inpFechaCreacion;
+    private JTextField inpJefeDpto;
+    private JTextField inpNumSubDpto;
+    private JTextField inpNumEmpleados;
+    private JLabel txtNumSubDpto;
+    private JLabel txtNumEmpleados;
+    private JLabel txtNombreEncargado;
+    private JLabel txtFechaCreacion;
+    private JLabel txtNombreDpto;
+    private JPanel box_btns;
+    private JPanel box_DatosDpto;
 
     public AnyadirDepartamento() {
         setContentPane(contentPane);
@@ -56,16 +58,16 @@ public class AnyadirDepartamento extends JDialog {
 
 
     private void newDepartamento() {
-        if (nombreDptoTextField.getText().isBlank()){
+        if (inpNombreDpto.getText().isBlank()){
 
         }
-        fechaCreacionTextField.getText();
-        jefeDptoTextField.getText();
-        numEmpleadosTextField.getText();
-        numSubDptoTextField.getText();
+        inpFechaCreacion.getText();
+        inpJefeDpto.getText();
+        inpNumEmpleados.getText();
+        inpNumSubDpto.getText();
         Departamento departamento = new Departamento(
-                nombreDptoTextField.getText(), fechaCreacionTextField.getText(), jefeDptoTextField.getText(),
-                numEmpleadosTextField.getText(), numSubDptoTextField.getText());
+                inpNombreDpto.getText(), inpFechaCreacion.getText(), inpJefeDpto.getText(),
+                inpNumEmpleados.getText(), inpNumSubDpto.getText());
         if (DBManagerDepartamento.createDpto(departamento)) {
             JOptionPane.showMessageDialog(null, "Se ha añadido correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
