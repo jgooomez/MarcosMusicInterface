@@ -191,15 +191,6 @@
           </component>
         </children>
       </grid>
-      <component id="61d0f" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <icon value="iconos/concierto.png"/>
-          <text value=""/>
-        </properties>
-      </component>
       <component id="ea83c" class="javax.swing.JLabel" binding="txtTittle">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
