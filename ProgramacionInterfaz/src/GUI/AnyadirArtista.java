@@ -84,11 +84,4 @@ public class AnyadirArtista extends JDialog {
         // add your code here if necessary
         dispose();
     }
-
-    public static void main(String[] args) {
-        AnyadirArtista dialog = new AnyadirArtista();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

@@ -232,11 +232,4 @@ public class Usuarios extends JDialog {
         MarcosMusic.frame.setVisible(true);
         dispose();
     }
-
-    public static void main(String[] args) {
-        Usuarios dialog = new Usuarios();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

@@ -161,10 +161,5 @@ public class EditarDepartamento extends JDialog {
             editarDepartamentoComboBox.addItem(departamento.getIdDepartamento() + " - " + departamento.getNombre());
         }
     }
-    public static void main(String[] args) {
-        EditarDepartamento dialog = new EditarDepartamento();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
+
 }

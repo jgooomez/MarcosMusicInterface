@@ -35,7 +35,7 @@ public class MarcosMusic {
      */
     public MarcosMusic(JDialog dialogo) {
 
-        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
+        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas, btnConciertos, btnArtistas);
         listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
         stylesBtns(listaBtns);
         stylesPanels(listaPaneles);
@@ -81,7 +81,7 @@ public class MarcosMusic {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JDialog dialogo1 = new Artista();
-                dialogo1.setTitle("Vista de conciertos");
+                dialogo1.setTitle("Vista de artistas");
                 dialogo1.setSize(500, 500);
                 dialogo1.setLocationRelativeTo(null);
                 frame.setVisible(false);

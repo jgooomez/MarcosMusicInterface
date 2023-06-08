@@ -187,11 +187,4 @@ public class Empleados extends JDialog {
         MarcosMusic.frame.setVisible(true);
         dispose();
     }
-
-    public static void main(String[] args) {
-        Empleados dialog = new Empleados();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

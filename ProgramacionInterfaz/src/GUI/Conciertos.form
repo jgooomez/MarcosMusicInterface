@@ -23,6 +23,7 @@
               </grid>
             </constraints>
             <properties>
+              <icon value="iconos/concierto (2).png"/>
               <text value="Añadir"/>
             </properties>
           </component>
@@ -33,6 +34,7 @@
               </grid>
             </constraints>
             <properties>
+              <icon value="iconos/papelera-de-reciclaje.png"/>
               <text value="Borrar"/>
             </properties>
           </component>

@@ -145,14 +145,4 @@ public class AnyadirConcierto extends JDialog {
         // add your code here if necessary
         dispose();
     }
-
-    public static void main(String[] args) {
-        DBManagerConexion.loadDriver();
-        DBManagerConexion.connect();
-
-        AnyadirConcierto dialog = new AnyadirConcierto();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }

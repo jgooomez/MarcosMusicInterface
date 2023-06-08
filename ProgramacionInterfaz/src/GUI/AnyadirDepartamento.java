@@ -82,12 +82,4 @@ public class AnyadirDepartamento extends JDialog {
         // add your code here if necessary
         dispose();
     }
-
-    public static void main(String[] args) {
-        AnyadirDepartamento dialog = new AnyadirDepartamento();
-        dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        dialog.pack();
-        dialog.setVisible(true);
-    }
-
 }

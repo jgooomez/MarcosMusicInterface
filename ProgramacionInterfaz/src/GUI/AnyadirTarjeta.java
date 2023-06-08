@@ -166,12 +166,12 @@ public class AnyadirTarjeta extends JDialog {
 
     public int idUsuario;
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int idUser = DBManagerUsuarios.getIdUser();
         AnyadirTarjeta dialog = new AnyadirTarjeta(idUser);
         dialog.setSize(600, 400);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
         System.exit(0);
-    }
+    }*/
 }

@@ -175,11 +175,4 @@ public class AdministrarTarjetas extends JDialog {
         MarcosMusic.frame.setVisible(true);
         dispose();
     }
-
-    public static void main(String[] args) {
-        AdministrarTarjetas dialog = new AdministrarTarjetas();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
-    }
 }
