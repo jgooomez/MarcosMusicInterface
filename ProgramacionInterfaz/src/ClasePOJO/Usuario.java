@@ -13,6 +13,8 @@ public class Usuario {
     private int edad;
     private int numSeguidores;
     private String fotoPerfil;
+    private String username;
+    private String password;
 
     /**
      * Constructor de la clase Usuario.
@@ -22,13 +24,16 @@ public class Usuario {
      * @param nombre        Nombre del usuario.
      * @param edad          Edad del usuario.
      * @param numSeguidores Número de seguidores del usuario.
+     * @param username username del usuario.
      */
-    public Usuario(int id, String nacionalidad, String nombre, int edad, int numSeguidores) {
+    public Usuario(int id, String nacionalidad, String nombre, int edad, int numSeguidores, String username, String password) {
         this.id = id;
         this.nacionalidad = nacionalidad;
         this.nombre = nombre;
         this.edad = edad;
         this.numSeguidores = numSeguidores;
+        this.username = username;
+        this.password = password;
     }
 
     /**
@@ -137,5 +142,21 @@ public class Usuario {
      */
     public void setFotoPerfil(String fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

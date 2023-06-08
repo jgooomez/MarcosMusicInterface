@@ -105,7 +105,7 @@ public class DBManagerTarjetas {
         try {
             int id = 0;
             Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            String sql = "SELECT TOP 1 " + DB_TARJETA_IDUSUARIO + " FROM " + DB_TARJETA + " ORDER BY " + DB_TARJETA_IDUSUARIO + " ASC";
+            String sql = "SELECT TOP 1 " + DB_TARJETA_IDUSUARIO + " FROM " + DB_TARJETA + " ORDER BY " + DB_TARJETA_IDUSUARIO + " DESC";
             ResultSet rs = stmt.executeQuery(sql);
 
             if(rs.next()) {
@@ -118,6 +118,7 @@ public class DBManagerTarjetas {
             return 0;
         }
     }
+
 
 
     /**
@@ -259,7 +260,7 @@ public class DBManagerTarjetas {
                 String telefono = rs.getString(DB_TARJETA_TELEFONO);
                 String tipo = rs.getString(DB_TARJETA_TIPO);
                 int cvv = rs.getInt(DB_TARJETA_CVV);
-                Date caducidad = rs.getDate(DB_TARJETA_CADUCIDAD);
+                String caducidad = rs.getString(DB_TARJETA_CADUCIDAD);
                 int idUsuario = rs.getInt(DB_TARJETA_IDUSUARIO);
 
                 ClasePOJO.Tarjeta tarjeta = new ClasePOJO.Tarjeta(numero, telefono, tipo, nombre, cvv, caducidad, idUsuario);

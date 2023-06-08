@@ -14,7 +14,7 @@ public class Tarjeta {
     private String tipo;
     private String nombreTitular;
     private int cvv;
-    private Date caducidad;
+    private String caducidad;
     private int idUsuario;
 
     /**
@@ -28,7 +28,7 @@ public class Tarjeta {
      * @param caducidad       Fecha de caducidad de la tarjeta.
      * @param idUsuario       ID del usuario al que está asociada la tarjeta.
      */
-    public Tarjeta(String numeroTarjeta, String telefono, String tipo, String nombreTitular, int cvv, Date caducidad, int idUsuario) {
+    public Tarjeta(String numeroTarjeta, String telefono, String tipo, String nombreTitular, int cvv, String caducidad, int idUsuario) {
         this.numeroTarjeta = numeroTarjeta;
         this.telefono = telefono;
         this.tipo = tipo;
@@ -133,7 +133,7 @@ public class Tarjeta {
      *
      * @return La fecha de caducidad de la tarjeta.
      */
-    public Date getCaducidad() {
+    public String getCaducidad() {
         return caducidad;
     }
 
@@ -142,7 +142,7 @@ public class Tarjeta {
      *
      * @param caducidad La fecha de caducidad de la tarjeta a establecer.
      */
-    public void setCaducidad(Date caducidad) {
+    public void setCaducidad(String caducidad) {
         this.caducidad = caducidad;
     }
 

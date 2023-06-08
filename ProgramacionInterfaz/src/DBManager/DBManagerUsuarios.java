@@ -17,6 +17,8 @@ public class DBManagerUsuarios {
     private static final String DB_US_ID = "idUsuario";
     private static final String DB_US_NAC= "nacionalidad";
     private static final String DB_US_NOM = "nombre";
+    private static final String DB_US_USERNAME = "userName";
+    private static final String DB_US_PASSWORD = "password";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_NUMSEG = "numSeguidores";
     private static final String DB_US_FOTO = "fotoPerfil";
@@ -175,32 +177,35 @@ public class DBManagerUsuarios {
          //* @param fotoPerfil ruta d ela foto de perfil del usuario
          * @return verdadero si pudo insertarlo, false en caso contrario
          */
-        public static boolean insertUsuario(String nacionalidad, String nombre, int edad, int numSeguidores){
+        public static int insertUsuario(String nacionalidad, String nombre, int edad, int numSeguidores, String username, String password) {
             try {
-                // Obtenemos la tabla usuarios
                 System.out.print("Insertando usuario " + nombre + "...");
-                ResultSet rs = getTablaUsuarios(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+                ResultSet rs = getTablaUsuarios(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 
-                // Insertamos el nuevo registro
                 rs.moveToInsertRow();
                 rs.updateString(DB_US_NOM, nombre);
                 rs.updateString(DB_US_NAC, nacionalidad);
                 rs.updateInt(DB_US_ED, edad);
                 rs.updateInt(DB_US_NUMSEG, numSeguidores);
-                //rs.updateString(DB_US_FOTO, fotoPerfil);
+                rs.updateString(DB_US_USERNAME, username);
+                rs.updateString(DB_US_PASSWORD, password);
 
                 rs.insertRow();
 
-                // Todo bien, cerramos ResultSet y devolvemos true
+                rs.last();
+                int id = rs.getInt(DB_US_ID);
+
                 rs.close();
                 System.out.println("OK!");
-                return true;
-
+                return id;
             } catch (SQLException ex) {
                 ex.printStackTrace();
-                return false;
+                return 0;
             }
         }
+
+
+
 
     /**
      * Solicita a la BD eliminar un usuario
@@ -250,8 +255,10 @@ public class DBManagerUsuarios {
                 String nombre = rs.getString(DB_US_NOM);
                 int edad = rs.getInt(DB_US_ED);
                 int numSeguidores = rs.getInt(DB_US_NUMSEG);
+                String username = rs.getString(DB_US_USERNAME);
+                String password = rs.getString(DB_US_PASSWORD);
 
-                ClasePOJO.Usuario usuario = new ClasePOJO.Usuario(id, nacionalidad, nombre, edad, numSeguidores);
+                ClasePOJO.Usuario usuario = new ClasePOJO.Usuario(id, nacionalidad, nombre, edad, numSeguidores, username, password);
                 usuarios.add(usuario);
             }
 
@@ -276,6 +283,24 @@ public class DBManagerUsuarios {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public static int getIdUser() {
+        try {
+            int id = 0;
+            Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+            String sql = "SELECT TOP 1 " + DB_US_ID + " FROM " + DB_US + " ORDER BY " + DB_US_ID + " ASC";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            if(rs.next()) {
+                id = rs.getInt(DB_US_ID);
+            }
+
+            return id;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return 0;
         }
     }
 

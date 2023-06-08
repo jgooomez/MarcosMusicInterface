@@ -33,6 +33,11 @@ public class Usuarios extends JDialog {
     private JLabel txtNombre;
     private JLabel txtNacionalidad;
     private JLabel txtIdUsr;
+    private JTextField outpUsername;
+    private JPasswordField outpPassword;
+    private JLabel txtUsername;
+    private JLabel txtPassword;
+
     public JButton getBtnAddUser() {
         return btnAddUser;
     }
@@ -48,6 +53,8 @@ public class Usuarios extends JDialog {
         // Desactivar el JTextField al inicio
         inpIdUsr.setEnabled(false);
         btnBuscar.setEnabled(false);
+        outpPassword.setEnabled(false);
+        outpUsername.setEnabled(false);
 
         // Agregar el MouseListener al JTextField
         inpIdUsr.addMouseListener(new MouseAdapter() {
@@ -88,7 +95,7 @@ public class Usuarios extends JDialog {
      */
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtEdad, txtIdUsr, txtNacionalidad, txtFotoPerfil, txtNumSeguidores);
+        List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtEdad, txtIdUsr, txtNacionalidad, txtNumSeguidores, txtUsername, txtPassword);
         List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr);
         List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinUsuarios);
         MarcosMusic.stylesBtns(listaBtns);
@@ -178,6 +185,9 @@ public class Usuarios extends JDialog {
                     outpNombre.setText(usuarioBuscado.getNombre());
                     outpEdad.setText(Integer.toString(usuarioBuscado.getEdad()));
                     outpNumSeguidores.setText(Integer.toString(usuarioBuscado.getNumSeguidores()));
+                    outpUsername.setText(usuarioBuscado.getUsername());
+                    outpPassword.setText(usuarioBuscado.getPassword());
+
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha encontrado ningún usuario con ese ID en la BBDD", "Error en el ID", JOptionPane.ERROR_MESSAGE);
                     inpIdUsr.setText("");
