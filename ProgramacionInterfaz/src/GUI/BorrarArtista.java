@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class BorrarArtista extends JDialog {
-    private JPanel contentPane;
     private JButton btnBorrar;
     private JButton btnCancelar;
     private JTextField inpId;
@@ -15,7 +14,7 @@ public class BorrarArtista extends JDialog {
     private JComboBox borrarArtistaComboBox;
 
     public BorrarArtista() {
-        setContentPane(contentPane);
+        setContentPane(winDeleteArtista);
         setModal(true);
         getRootPane().setDefaultButton(btnBorrar);
 
@@ -42,13 +41,11 @@ public class BorrarArtista extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new
-
-                                                   ActionListener() {
-                                                       public void actionPerformed(ActionEvent e) {
-                                                           onCancel();
-                                                       }
-                                                   }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        winDeleteArtista.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void onOK() {
