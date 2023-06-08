@@ -32,6 +32,7 @@ public class Empleados extends JDialog {
     private JLabel txtTittle;
     private JLabel txtDepartamento;
     private JButton btnAnyadir;
+    private JButton btnBorrar;
 
     /**
      * Crea una instancia de la clase Empleados.
@@ -43,6 +44,21 @@ public class Empleados extends JDialog {
         styles();
         setModal(true);
         getRootPane().setDefaultButton(btnBuscar);
+
+        // Desactivar el JTextField al inicio
+        inpIDEmpleado.setEnabled(false);
+        btnBorrar.setEnabled(false);
+
+        // Agregar el MouseListener al JTextField
+        inpIDEmpleado.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                inpIDEmpleado.setEnabled(true);  // Habilitar el JTextField al hacer click
+            }
+        });
+
+        // Establecer el texto de pista y el color inicial del JTextField
+        setTextInToinpIDEmpleado();
 
         /**
          * Busca un empleado por id y rellena los campos con la información necesaria.
@@ -110,6 +126,42 @@ public class Empleados extends JDialog {
                 dialog.setVisible(true);
             }
         });
+        btnBorrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (DBManagerEmpleado.existsEmpleado(Integer.parseInt(inpIDEmpleado.getText()))) {
+                    if (DBManagerEmpleado.deleteEmpleado(Integer.parseInt(inpIDEmpleado.getText()))) {
+                        JOptionPane.showMessageDialog(null, "Se ha despedido al empleado correctamente");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se ha podido despedir al empleado porque no existe.");
+                }
+            }
+        });
+    }
+
+    private void setTextInToinpIDEmpleado() {
+        String textoPista = "Introduzca el ID";
+        inpIDEmpleado.setText(textoPista);
+        inpIDEmpleado.setForeground(Color.GRAY);
+        inpIDEmpleado.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (inpIDEmpleado.getText().equals(textoPista)) {
+                    inpIDEmpleado.setText("");
+                    inpIDEmpleado.setForeground(Color.BLACK);
+                    btnBorrar.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (inpIDEmpleado.getText().isEmpty()) {
+                    inpIDEmpleado.setText(textoPista);
+                    inpIDEmpleado.setForeground(Color.GRAY);
+                }
+            }
+        });
     }
 
     /**
@@ -118,7 +170,7 @@ public class Empleados extends JDialog {
      */
     private void styles() {
         txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
-        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn, btnAnyadir);
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn, btnAnyadir, btnBorrar);
         List<JPanel> listaPaneles = Arrays.asList(box_top, box_botones, WinEmpleados);
         List<JLabel> listaTexto = Arrays.asList(txtDepartamento, txtEdad, txtIdEmpleado, txtNacionalidad, txtFechaCreacion, txtNombre, txtTittle);
         MarcosMusic.stylesBtns(listaBtns);
