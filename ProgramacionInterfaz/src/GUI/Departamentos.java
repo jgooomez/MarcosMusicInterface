@@ -45,18 +45,7 @@ public class Departamentos extends JDialog {
             }
         });
 
-        // call onCancel() on ESCAPE
-        WinDepartamentos.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        btnReturn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+        listenersCerrarVentana();
         btnActualizar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,6 +61,24 @@ public class Departamentos extends JDialog {
                 dialog.setVisible(true);
             }
         });
+        listenersBtnsAnyadirBorrarDpto();
+    }
+
+    private void listenersCerrarVentana() {
+        WinDepartamentos.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        btnReturn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        });
+    }
+
+    private void listenersBtnsAnyadirBorrarDpto() {
         btnAnyadirDepartamento.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
