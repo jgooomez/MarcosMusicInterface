@@ -37,36 +37,7 @@ public class DBManagerDepartamento {
         }
     }
 
-    /**
-     * Obtiene toda la tabla Departamento de la base de datos
-     *
-     * @return ResultSet (por defecto) con la tabla, null en caso de error
-     */
-    public static ResultSet getTablaDepartamento() {
-        return getTablaDepartamento(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-    }
 
-    /**
-     * Imprime por pantalla el contenido de la tabla Departamento
-     */
-    public static void printTablaDepartamento() {
-        try {
-            ResultSet rs = getTablaDepartamento(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-            while (rs.next()) {
-                int idDepartamento = rs.getInt(DB_DEPARTAMENTO_ID);
-                String nombre = rs.getString(DB_DEPARTAMENTO_NOMBRE);
-                String fechaCreacion = rs.getString(DB_DEPARTAMENTO_FECHA_CREACION);
-                String nombreEncargado = rs.getString(DB_DEPARTAMENTO_NOMBRE_ENCARGADO);
-                int numTrabajadores = rs.getInt(DB_DEPARTAMENTO_NUM_TRABAJADORES);
-                int numSubDpto = rs.getInt(DB_DEPARTAMENTO_NUM_SUBDPTO);
-
-                System.out.println(idDepartamento + "\t" + nombre + "\t" + fechaCreacion + "\t" + nombreEncargado + "\t" + numTrabajadores + "\t" + numSubDpto);
-            }
-            rs.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     //////////////////////////////////////////////////
     // MÉTODOS DE UN SOLO DEPARTAMENTO
@@ -96,96 +67,6 @@ public class DBManagerDepartamento {
         }
     }
 
-    /**
-     * Comprueba si en la BD existe el departamento con el ID indicado
-     *
-     * @param idDepartamento ID del departamento
-     * @return verdadero si existe, falso en caso contrario
-     */
-    public static boolean existsDepartamento(int idDepartamento) {
-        try {
-            ResultSet rs = getDepartamento(idDepartamento);
-
-            if (rs == null) {
-                return false;
-            }
-
-            if (!rs.first()) {
-                rs.close();
-                return false;
-            }
-
-            rs.close();
-            return true;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * Imprime los datos del departamento con el ID indicado
-     *
-     * @param idDepartamento ID del departamento
-     */
-    public static void printDepartamento(int idDepartamento) {
-        try {
-            ResultSet rs = getDepartamento(idDepartamento);
-            if (rs == null || !rs.first()) {
-                System.out.println("Departamento con ID " + idDepartamento + " NO EXISTE");
-                return;
-            }
-
-            String nombre = rs.getString(DB_DEPARTAMENTO_NOMBRE);
-            String fechaCreacion = rs.getString(DB_DEPARTAMENTO_FECHA_CREACION);
-            String nombreEncargado = rs.getString(DB_DEPARTAMENTO_NOMBRE_ENCARGADO);
-            int numTrabajadores = rs.getInt(DB_DEPARTAMENTO_NUM_TRABAJADORES);
-            int numSubDpto = rs.getInt(DB_DEPARTAMENTO_NUM_SUBDPTO);
-
-            System.out.println(idDepartamento + "\t" + nombre + "\t" + fechaCreacion + "\t" + nombreEncargado + "\t" + numTrabajadores + "\t" + numSubDpto);
-
-        } catch (SQLException ex) {
-            System.out.println("Error al solicitar el departamento con ID " + idDepartamento);
-            ex.printStackTrace();
-        }
-    }
-
-    /**
-     * Solicita a la BD insertar un nuevo registro de departamento
-     *
-     * @param idDepartamento  ID del departamento
-     * @param nombre          Nombre del departamento
-     * @param fechaCreacion   Fecha de creación del departamento
-     * @param nombreEncargado Nombre del encargado del departamento
-     * @param numTrabajadores Número de trabajadores del departamento
-     * @param numSubDpto      Número de subdepartamentos del departamento
-     * @return verdadero si pudo insertarlo, falso en caso contrario
-     */
-    public static boolean insertDepartamento(int idDepartamento, String nombre, String fechaCreacion, String nombreEncargado, int numTrabajadores, int numSubDpto) {
-        try {
-            System.out.print("Insertando departamento...");
-            ResultSet rs = getTablaDepartamento(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
-
-            rs.moveToInsertRow();
-            rs.updateInt(DB_DEPARTAMENTO_ID, idDepartamento);
-            rs.updateString(DB_DEPARTAMENTO_NOMBRE, nombre);
-            rs.updateString(DB_DEPARTAMENTO_FECHA_CREACION, fechaCreacion);
-            rs.updateString(DB_DEPARTAMENTO_NOMBRE_ENCARGADO, nombreEncargado);
-            rs.updateInt(DB_DEPARTAMENTO_NUM_TRABAJADORES, numTrabajadores);
-            rs.updateInt(DB_DEPARTAMENTO_NUM_SUBDPTO, numSubDpto);
-
-            rs.insertRow();
-
-            rs.close();
-            System.out.println("OK!");
-            return true;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
 
     /**
      * Solicita a la BD eliminar un departamento
@@ -279,7 +160,6 @@ public class DBManagerDepartamento {
      * @param id le damos el id del departamentoq que queremos buscar
      * @return Instancia de Departamento o null en caso de no existir ese departamento en la base de datos
      */
-    //
     public Departamento getDepartamentoById(int id) {
         String query = "SELECT * FROM departamento WHERE idDepartamento = ?";
         DBManagerConexion.connect();

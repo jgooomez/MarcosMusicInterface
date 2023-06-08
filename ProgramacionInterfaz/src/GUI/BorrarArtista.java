@@ -1,48 +1,48 @@
 package GUI;
 
+import ClasePOJO.Artista;
 import ClasePOJO.Departamento;
+import DBManager.DBManagerArtista;
 import DBManager.DBManagerDepartamento;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
+import java.util.ArrayList;
 
-public class EliminarDepartamento extends JDialog {
+public class BorrarArtista extends JDialog {
     private JPanel contentPane;
-    private JButton btnEliminar;
-    private JButton buttonCancel;
-    private JComboBox eliminarDepartamentoComboBox;
+    private JButton btnBorrar;
+    private JButton btnCancelar;
+    private JComboBox borrarArtistaComboBox;
 
-    public EliminarDepartamento() {
+    public BorrarArtista() {
         setContentPane(contentPane);
         setModal(true);
-        getRootPane().setDefaultButton(btnEliminar);
-        loadDepartamentos();
-
-        btnEliminar.addActionListener(new ActionListener() {
+        getRootPane().setDefaultButton(btnBorrar);
+        loadArtistas();
+        btnBorrar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Obtener el departamento seleccionado del JComboBox
-                String selectedItem = (String) eliminarDepartamentoComboBox.getSelectedItem();
+                String selectedItem = (String) borrarArtistaComboBox.getSelectedItem();
                 if (selectedItem != null) {
                     // Obtener el ID del departamento seleccionado
                     int selectedId = getIdFromSelectedItem(selectedItem);
 
                     // Obtener los datos del departamento seleccionado
-                    Departamento departamento = getDepartamentoById(selectedId);
+                    Artista artista = getArtistaById(selectedId);
 
-                    if (DBManagerDepartamento.deleteDepartamento(departamento.getIdDepartamento())){
-                        JOptionPane.showMessageDialog(btnEliminar, "Departamento eliminado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    if (DBManagerArtista.deleteArtista(artista.getIdArtista())){
+                        JOptionPane.showMessageDialog(btnBorrar, "Artista eliminado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                     }else{
-                        JOptionPane.showMessageDialog(btnEliminar, "Error al eliminar el departamento", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(btnBorrar, "Error al eliminar el artista", "Error", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }
-                loadDepartamentos();
+                loadArtistas();
             }
         });
 
-        buttonCancel.addActionListener(new ActionListener() {
+        btnCancelar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -63,6 +63,28 @@ public class EliminarDepartamento extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
+    //Coger el id del item comboBox seleccionado
+    private int getIdFromSelectedItem(String selectedItem) {
+        // Extraer el ID del departamento seleccionado del texto en el JComboBox
+        String[] parts = selectedItem.split(" - ");
+        return Integer.parseInt(parts[0]);
+    }
+    private Artista getArtistaById(int id) {
+        DBManagerArtista dbManager = new DBManagerArtista();
+        return dbManager.getArtistaById(id);
+    }
+    private void loadArtistas() {
+
+        ArrayList<ClasePOJO.Artista> artistas = DBManagerArtista.obtenerDatosArtista();
+
+        // Limpiar el JComboBox
+        borrarArtistaComboBox.removeAllItems();
+
+        // Agregar los departamentos al JComboBox
+        for (Artista artista : artistas) {
+            borrarArtistaComboBox.addItem(artista.getIdArtista() + " - " + artista.getNombre());
+        }
+    }
 
     private void onOK() {
         // add your code here
@@ -73,30 +95,9 @@ public class EliminarDepartamento extends JDialog {
         // add your code here if necessary
         dispose();
     }
-    //Coger el id del item comboBox seleccionado
-    private int getIdFromSelectedItem(String selectedItem) {
-        // Extraer el ID del departamento seleccionado del texto en el JComboBox
-        String[] parts = selectedItem.split(" - ");
-        return Integer.parseInt(parts[0]);
-    }
-    private Departamento getDepartamentoById(int id) {
-        DBManagerDepartamento dbManager = new DBManagerDepartamento();
-        return dbManager.getDepartamentoById(id);
-    }
-    private void loadDepartamentos() {
 
-        List<Departamento> departamentos = DBManagerDepartamento.obtenerDatosDepartamento();
-
-        // Limpiar el JComboBox
-        eliminarDepartamentoComboBox.removeAllItems();
-
-        // Agregar los departamentos al JComboBox
-        for (Departamento departamento : departamentos) {
-            eliminarDepartamentoComboBox.addItem(departamento.getIdDepartamento() + " - " + departamento.getNombre());
-        }
-    }
     public static void main(String[] args) {
-        EliminarDepartamento dialog = new EliminarDepartamento();
+        BorrarArtista dialog = new BorrarArtista();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

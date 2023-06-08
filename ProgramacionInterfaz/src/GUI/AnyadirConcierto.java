@@ -1,8 +1,15 @@
 package GUI;
 
+import ClasePOJO.Concierto;
+import DBManager.DBManagerConcierto;
+import DBManager.DBManagerConexion;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +38,6 @@ public class AnyadirConcierto extends JDialog {
     public AnyadirConcierto() {
         setContentPane(WinAddConcierto);
         styles();
-
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -67,12 +73,13 @@ public class AnyadirConcierto extends JDialog {
         btnAceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                onOK();
             }
         });
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                onCancel();
                 dispose();
             }
         });
@@ -80,9 +87,59 @@ public class AnyadirConcierto extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        String lugar = inpLugar.getText();
+        String fechaStr = inpFecha.getText();
+        String ciudad = inpCiudad.getText();
+        String pais = inpPais.getText();
+        String capacidadStr = inpCapacidad.getText();
+        String dineroRecaudadoStr = inpDineroRecaudado.getText();
+
+        // Verificar que no haya campos vacíos
+        if (lugar.isEmpty() || fechaStr.isEmpty() || ciudad.isEmpty() || pais.isEmpty() || capacidadStr.isEmpty() || dineroRecaudadoStr.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos.", "Campos Incompletos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Verificar formato de fecha (yyyy/MM/dd)
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            dateFormat.setLenient(false);
+            java.util.Date utilDate = dateFormat.parse(fechaStr);
+            java.sql.Date fecha = new java.sql.Date(utilDate.getTime());
+
+            // Verificar que la capacidad sea un número válido
+            int capacidad;
+            try {
+                capacidad = Integer.parseInt(capacidadStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "La capacidad debe ser un número entero válido.", "Capacidad Inválida", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Verificar que el dinero recaudado sea un número válido
+            double dineroRecaudado;
+            try {
+                dineroRecaudado = Double.parseDouble(dineroRecaudadoStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "El dinero recaudado debe ser un número válido.", "Dinero Recaudado Inválido", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Concierto concierto = new Concierto(lugar, fecha, ciudad, pais, capacidad, dineroRecaudado);
+
+            if (DBManagerConcierto.addConcierto(concierto)) {
+                JOptionPane.showMessageDialog(null, "Concierto agregado correctamente.", "Agregado Exitoso", JOptionPane.INFORMATION_MESSAGE);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al agregar el concierto.", "Error de Agregado", JOptionPane.ERROR_MESSAGE);
+            }
+
+            dispose();
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, "Fecha en formato incorrecto. Use el formato yyyy/MM/dd.", "Formato de Fecha Incorrecto", JOptionPane.ERROR_MESSAGE);
+        }
     }
+
 
     private void onCancel() {
         // add your code here if necessary
@@ -90,6 +147,9 @@ public class AnyadirConcierto extends JDialog {
     }
 
     public static void main(String[] args) {
+        DBManagerConexion.loadDriver();
+        DBManagerConexion.connect();
+
         AnyadirConcierto dialog = new AnyadirConcierto();
         dialog.pack();
         dialog.setVisible(true);
