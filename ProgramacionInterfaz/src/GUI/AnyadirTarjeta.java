@@ -46,6 +46,58 @@ public class AnyadirTarjeta extends JDialog {
     }
 
     private void setListenersBtns() {
+        listenerRadioBtns();
+        addTarjeta();
+        btnReturn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        });
+
+        // call onCancel() when cross is clicked
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                onCancel();
+            }
+        });
+
+        // call onCancel() on ESCAPE
+        winAddTarjeta.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    /**
+     * Método que tras comprobar que los datos de la tarjeta sean válidos, inserta la tarjeta en la BBDD.
+     */
+    private void addTarjeta() {
+        btnAddTarjeta.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String tipo = "";
+                if (rbtnMastercardRadio.isSelected()) {
+                    tipo = "Mastercard";
+                } else {
+                    tipo = "Visa";
+                }
+
+                if (compruebaTarjeta(idUser)) {
+                    String numeroSinGuiones = inpNumTarjeta.getText().replace("-", "");
+                    reescribirTarjeta();
+                    if (DBManagerTarjetas.insertTarjeta(numeroSinGuiones, Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()),inpCaducidad.getText(), idUser)) {
+                        JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
+                        onCancel();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+    }
+
+    private void listenerRadioBtns() {
         rbtnVisaRadio.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,53 +121,6 @@ public class AnyadirTarjeta extends JDialog {
                 }
             }
         });
-
-        /**
-         * Método que tras comprobar que los datos de la tarjeta sean válidos, inserta la tarjeta en la BBDD.
-         */
-        btnAddTarjeta.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String tipo = "";
-                if (rbtnMastercardRadio.isSelected()) {
-                    tipo = "Mastercard";
-                } else {
-                    tipo = "Visa";
-                }
-
-                if (compruebaTarjeta(idUser)) {
-                    String numeroSinGuiones = inpNumTarjeta.getText().replace("-", "");
-                    reescribirTarjeta();
-                    if (DBManagerTarjetas.insertTarjeta(numeroSinGuiones, Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()),inpCaducidad.getText(), idUser)) {
-                        JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
-                        onCancel();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El insert no se ha podido realizar.", "Insert incorrecto", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
-        });
-
-
-        btnReturn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        winAddTarjeta.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void reescribirTarjeta() {
@@ -169,7 +174,6 @@ public class AnyadirTarjeta extends JDialog {
     }
 
     private void onCancel() {
-
         dispose();
     }
 
