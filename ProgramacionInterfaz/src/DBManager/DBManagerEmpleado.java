@@ -19,7 +19,7 @@ public class DBManagerEmpleado {
     private static final String DB_US_NOM = "nombre";
     private static final String DB_US_ED = "edad";
     private static final String DB_US_FINC = "fechaIncorporacion";
-    private static final String DB_US_DEP = "departamento";
+    private static final String DB_US_DEP = "idDepartamento";
 
     /**
      * Obtiene toda la tabla Empleado de la base de datos
@@ -30,7 +30,7 @@ public class DBManagerEmpleado {
      */
     public static ResultSet getTablaEmpleado(int resultSetType, int resultSetConcurrency) {
         try {
-            Statement stmt = conn.createStatement(resultSetType, resultSetConcurrency);
+            Statement stmt =  DBManagerConexion.getConexion().createStatement(resultSetType, resultSetConcurrency);
             ResultSet rs = stmt.executeQuery(DB_US_SELECT);
             return rs;
         } catch (SQLException ex) {
@@ -83,7 +83,7 @@ public class DBManagerEmpleado {
     public static ResultSet getEmpleado(int idEmpleado) {
         try {
             // Realizamos la consulta SQL
-            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
             String sql = DB_US_SELECT + " WHERE " + DB_US_ID + "='" + idEmpleado + "';";
             ResultSet rs = stmt.executeQuery(sql);
 

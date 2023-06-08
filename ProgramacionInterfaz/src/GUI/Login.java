@@ -17,6 +17,7 @@ public class Login {
     private JLabel txtUser;
     private JLabel txtPsswd;
     private JDialog dialogo;
+    private MarcosMusic panelMarcos;
 
     public Login(JFrame frame) {
         styles();
@@ -51,9 +52,10 @@ public class Login {
                 DBManagerConexion.loadDriver();
                 DBManagerConexion.connect();
                 if (DBManagerUsuarios.verificarCredenciales(inpUserName.getText(), inpPassword.getText())) {
-                    //Abrir las canciones
+                    panelMarcos = new MarcosMusic(dialogo);
+                    panelMarcos.quitarBoton();
                 } else if (inpUserName.getText().equals("ADMIN") && Integer.parseInt(inpPassword.getText()) == 1234) {
-                    new MarcosMusic(dialogo);
+                    panelMarcos = new MarcosMusic(dialogo);
                 } else {
                     JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error en el login", JOptionPane.ERROR_MESSAGE);
                 }
