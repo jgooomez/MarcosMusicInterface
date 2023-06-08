@@ -221,8 +221,11 @@ public class DBManagerDepartamento {
         }
     }
 
-    //Crea un arraylist de los Objetos POJO Departamento
-    //Este metodo se usa en setDepartamentoData para sacar los datos posteriormente en sus FORMS
+    /**
+     * Crea un arraylist de los Objetos POJO Departamento
+     * Este metodo se usa en setDepartamentoData para sacar los datos posteriormente en sus FORMS
+     * @return departamentos como Arraylist
+     */
     public static ArrayList<Departamento> obtenerDatosDepartamento() {
         ArrayList<Departamento> departamentos = new ArrayList<>();
         DBManagerConexion.connect();
@@ -250,7 +253,10 @@ public class DBManagerDepartamento {
         return departamentos;
     }
 
-    //Método para añadir el numero de columnas de una tabla y el nomrbe de cada una
+    /**
+     * Método para añadir el numero de columnas de una tabla y el nomrbe de cada una
+     * @return List con el nombre de columnas
+     */
     public static List<String> defineColumnName() {
         DBManagerConexion.connect();
         List<String> columnNames = new ArrayList<>();
@@ -268,7 +274,12 @@ public class DBManagerDepartamento {
         return columnNames;
     }
 
-    //selecciona un departamento proporcionando un id y saca los datos de ese departamento
+    /**
+     * Selecciona un departamento proporcionando un id y saca los datos de ese departamento
+     * @param id le damos el id del departamentoq que queremos buscar
+     * @return Instancia de Departamento o null en caso de no existir ese departamento en la base de datos
+     */
+    //
     public Departamento getDepartamentoById(int id) {
         String query = "SELECT * FROM departamento WHERE idDepartamento = ?";
         DBManagerConexion.connect();
@@ -295,6 +306,11 @@ public class DBManagerDepartamento {
         return null; // Si no se encuentra el departamento, devuelve null o lanza una excepción según tus necesidades
     }
 
+    /**
+     *
+     * @param departamento Le damos como variable una instancia de la clase POJO Departamento
+     * @return devuelve true en caso de actualizar el departamento o false en caso de no actualizarse
+     */
     public boolean actualizarDepartamento(Departamento departamento) {
         DBManagerConexion.connect();
         boolean success = false;

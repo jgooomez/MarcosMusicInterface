@@ -53,16 +53,26 @@ public class AnyadirDepartamento extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
-    private void newDepartamento(){
-        Departamento departamento= new Departamento(
+
+
+    private void newDepartamento() {
+        if (nombreDptoTextField.getText().isBlank()){
+
+        }
+        fechaCreacionTextField.getText();
+        jefeDptoTextField.getText();
+        numEmpleadosTextField.getText();
+        numSubDptoTextField.getText();
+        Departamento departamento = new Departamento(
                 nombreDptoTextField.getText(), fechaCreacionTextField.getText(), jefeDptoTextField.getText(),
                 numEmpleadosTextField.getText(), numSubDptoTextField.getText());
-        if (DBManagerDepartamento.createDpto(departamento)){
+        if (DBManagerDepartamento.createDpto(departamento)) {
             JOptionPane.showMessageDialog(null, "Se ha añadido correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Ocurrió un error", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void onOK() {
         // add your code here
         dispose();
