@@ -31,7 +31,6 @@ public class AnyadirConcierto extends JDialog {
     public AnyadirConcierto() {
         setContentPane(WinAddConcierto);
         styles();
-
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
