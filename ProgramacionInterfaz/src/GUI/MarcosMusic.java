@@ -68,6 +68,9 @@ public class MarcosMusic {
 
     public void quitarBoton() {
         btnArtistas.setVisible(false);
+        btnConciertos.setVisible(false);
+        btnTarjetas.setVisible(false);
+        btnSuscripciones.setVisible(false);
     }
 
     /**
