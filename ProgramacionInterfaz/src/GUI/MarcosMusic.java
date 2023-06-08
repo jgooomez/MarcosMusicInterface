@@ -80,7 +80,7 @@ public class MarcosMusic {
         btnArtistas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JDialog dialogo1 = new Artista();
+                JDialog dialogo1 = new ArtistaView();
                 dialogo1.setTitle("Vista de artistas");
                 dialogo1.setSize(500, 500);
                 dialogo1.setLocationRelativeTo(null);
