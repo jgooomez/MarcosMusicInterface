@@ -55,13 +55,63 @@ public class Departamento {
     public void setNumSubDpto(String numSubDpto) {
         this.numSubDpto = numSubDpto;
     }
-
+    //Este constructor se usa para generar objetos POJO para administrar la tabla donde se muestran los Departamentos
+    //También se usa para mostrar los departamentos en los ComboBox de EliminarDepartamento y EditarDepartamento
     public Departamento(int idDepartamento, String nombre, String fechaCreacion, String nombreEncargado, String numTrabajadores, String numSubDpto) {
-        this.idDepartamento = idDepartamento;
-        this.nombre = nombre;
-        this.fechaCreacion = fechaCreacion;
-        this.nombreEncargado = nombreEncargado;
-        this.numTrabajadores = numTrabajadores;
-        this.numSubDpto = numSubDpto;
+        this.idDepartamento=idDepartamento;
+        if (nombre == null){
+            this.nombre="null";
+        }else{
+            this.nombre = nombre;
+        }
+        if (fechaCreacion==null){
+            this.fechaCreacion = "2000-01-01";
+        }else {
+            this.fechaCreacion = fechaCreacion;
+        }
+        if(nombreEncargado==null){
+            this.nombreEncargado = "null";
+        }else{
+            this.nombreEncargado = nombreEncargado;
+        }
+        if (numTrabajadores==null){
+            this.numTrabajadores = "0";
+        }else {
+            this.numTrabajadores = numTrabajadores;
+        }
+        if (numSubDpto==null){
+            this.numSubDpto = "0";
+        }else {
+            this.numSubDpto = numSubDpto;
+        }
+    }
+    //Este constructor sirve para crear un nuevo departamento en AnyadirDepartamento
+    //El ID en la base de datos es autoincremental y no es necesario proporcionarlo
+    public Departamento(String nombre, String fechaCreacion, String nombreEncargado, String numTrabajadores, String numSubDpto) {
+        if (nombre == null){
+            this.nombre="null";
+        }else{
+            this.nombre = nombre;
+        }
+        if (fechaCreacion==null){
+            this.fechaCreacion = "2000-01-01";
+        }else {
+            this.fechaCreacion = fechaCreacion;
+        }
+        if(nombreEncargado==null){
+            this.nombreEncargado = "null";
+        }else{
+            this.nombreEncargado = nombreEncargado;
+        }
+        if (numTrabajadores==null){
+            this.numTrabajadores = "0";
+        }else {
+            this.numTrabajadores = numTrabajadores;
+        }
+        if (numSubDpto==null){
+            this.numSubDpto = "0";
+        }else {
+            this.numSubDpto = numSubDpto;
+        }
     }
 }
