@@ -79,9 +79,9 @@ public class FormUsuario extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 if (compruebaUsuario()) {
                     int idUser = DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()), inpUsername.getText(), inpPassword.getText());
-
+                    System.out.println(idUser);
                     if (idUser != 0) {
-                        JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
+                        JOptionPane.showMessageDialog(null, "El usuario se ha creado correctamente.");
 
                         int opcion = JOptionPane.showOptionDialog(null, "¿Desea vincular una tarjeta de crédito?", "Tarjeta",
                                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
@@ -143,6 +143,7 @@ public class FormUsuario extends JDialog {
             isValid = false;
         } else if (!verificarNacionalidad(inpNacionalidad.getText())) {
             JOptionPane.showMessageDialog(null, "La nacionalidad no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            inpNacionalidad.setText("");
             isValid = false;
         }
 

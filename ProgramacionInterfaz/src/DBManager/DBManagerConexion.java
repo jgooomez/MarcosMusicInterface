@@ -12,8 +12,8 @@ public class DBManagerConexion {
     }
 
     //CONEXIÓN
-    private static final String DB_HOST = "192.168.7.213";
-//    private static final String DB_HOST = "192.168.1.45";
+    //private static final String DB_HOST = "192.168.7.213";
+    private static final String DB_HOST = "192.168.1.200";
     //private static final String DB_HOST = "localhost";
     private static final String DB_PORT = "1433";
     private static final String DB_NAME = "MARCOSMUSIC";

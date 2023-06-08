@@ -35,7 +35,7 @@ public class MarcosMusic {
      */
     public MarcosMusic(JDialog dialogo) {
 
-        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas);
+        listaBtns = Arrays.asList(btnDepartamento, btnEmpleados, btnVerUsuarios, btnSuscripciones, btnTarjetas, btnConciertos, btnArtistas);
         listaPaneles = Arrays.asList(panelGeneral, principal, box_btns, box_tittle, emptyBox);
         stylesBtns(listaBtns);
         stylesPanels(listaPaneles);
@@ -192,6 +192,14 @@ public class MarcosMusic {
     public static void stylesTexts(List<JLabel> listaTexto) {
         for (JLabel txt : listaTexto) {
             txt.setForeground(Color.WHITE);
+        }
+    }
+
+    public static void stylesOutPutText(List<JTextField> listaOutPuts) {
+        for (JTextField txt:
+             listaOutPuts) {
+            txt.setDisabledTextColor(getBackgroundColor());
+            txt.setFont(new Font("Calibri", Font.BOLD, 15));
         }
     }
 
