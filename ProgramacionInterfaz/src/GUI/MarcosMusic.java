@@ -195,6 +195,14 @@ public class MarcosMusic {
         }
     }
 
+    public static void stylesOutPutText(List<JTextField> listaOutPuts) {
+        for (JTextField txt:
+             listaOutPuts) {
+            txt.setDisabledTextColor(getBackgroundColor());
+            txt.setFont(new Font("Calibri", Font.BOLD, 15));
+        }
+    }
+
     /**
      * Obtiene la fuente de título utilizada en la interfaz gráfica.
      * @return La fuente de título.

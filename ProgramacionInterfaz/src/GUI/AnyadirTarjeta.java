@@ -6,6 +6,8 @@ import DBManager.DBManagerUsuarios;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class AnyadirTarjeta extends JDialog {
         styles();
         setModal(true);
         getRootPane().setDefaultButton(btnAddTarjeta);
+
         setListenersBtns();
     }
 
@@ -79,11 +82,9 @@ public class AnyadirTarjeta extends JDialog {
                     tipo = "Visa";
                 }
 
-                int idUser = DBManagerUsuarios.getIdUser();
-                System.out.println("Valor de idUser: " + idUser);
-
                 if (compruebaTarjeta(idUser)) {
                     String numeroSinGuiones = inpNumTarjeta.getText().replace("-", "");
+                    reescribirTarjeta();
                     if (DBManagerTarjetas.insertTarjeta(numeroSinGuiones, Integer.parseInt(inpTlf.getText()), tipo, inpNombreTitular.getText(), Integer.parseInt(inpCVV.getText()),inpCaducidad.getText(), idUser)) {
                         JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
                         onCancel();
@@ -115,6 +116,14 @@ public class AnyadirTarjeta extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    }
+
+    private void reescribirTarjeta() {
+        if (DBManagerTarjetas.deleteTarjetasUsuario(idUser)) {
+            System.out.println("Se ha eliminado la tarjeta");
+        } else {
+            System.out.println("No tiene tarjeta asociada");
+        }
     }
 
     public boolean compruebaTarjeta(int idUser) {

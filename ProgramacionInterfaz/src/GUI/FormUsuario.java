@@ -84,14 +84,14 @@ public class FormUsuario extends JDialog {
                 if (validateDNI()){
                     if (compruebaUsuario()) {
                         int idUser = DBManagerUsuarios.insertUsuario(inpNacionalidad.getText(), inpNombre.getText(), Integer.parseInt(inpEdad.getText()), Integer.parseInt(inpNumSeguidores.getText()), inpUsername.getText(), inpPassword.getText());
-
+    
                         if (idUser != 0) {
-                            JOptionPane.showMessageDialog(null, "El insert se realizó correctamente.");
-
+                            JOptionPane.showMessageDialog(null, "El usuario se ha creado correctamente.");
+    
                             int opcion = JOptionPane.showOptionDialog(null, "¿Desea vincular una tarjeta de crédito?", "Tarjeta",
                                     JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null,
                                     new String[]{"Sí", "No"}, "Sí");
-
+    
                             if (opcion == 0) {
                                 // Aquí puedes usar el ID del usuario para vincularlo con la tarjeta
                                 JDialog anyadirTarjeta = new AnyadirTarjeta(idUser);
@@ -107,7 +107,6 @@ public class FormUsuario extends JDialog {
                 } else {
                     JOptionPane.showMessageDialog(FormUsuario.this, "DNI inválido", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-
             }
         });
 
@@ -137,7 +136,6 @@ public class FormUsuario extends JDialog {
      * Verifica si los campos de usuario son válidos.
      * @return true si los campos son válidos, false en caso contrario.
      */
-
     public boolean compruebaUsuario() {
         boolean isValid = true;
         String dni = inpDNI.getText();
@@ -153,6 +151,7 @@ public class FormUsuario extends JDialog {
             isValid = false;
         } else if (!verificarNacionalidad(inpNacionalidad.getText())) {
             JOptionPane.showMessageDialog(null, "La nacionalidad no es válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            inpNacionalidad.setText("");
             isValid = false;
         }
 

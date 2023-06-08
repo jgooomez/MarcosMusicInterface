@@ -17,11 +17,11 @@ public class Empleados extends JDialog {
     private JPanel box_botones;
     private JPanel box_top;
     private JTextField inpIDEmpleado;
-    private JTextField inpNacionalidad;
-    private JTextField inpNombre;
-    private JTextField inpEdad;
-    private JTextField inpDepartamento;
-    private JTextField inpFechaIncorporacion;
+    private JTextField outpNacionalidad;
+    private JTextField outpNombre;
+    private JTextField outpEdad;
+    private JTextField outpDepartamento;
+    private JTextField outpFechaIncorporacion;
     private JLabel txtDepartamiento;
     private JLabel txtFechaCreacion;
     private JLabel txtEdad;
@@ -81,11 +81,11 @@ public class Empleados extends JDialog {
 
                 if (empleadoBuscado != null) {
                     // Mostrar los datos del usuario
-                    inpNacionalidad.setText(empleadoBuscado.getNacionalidad());
-                    inpNombre.setText(empleadoBuscado.getNombre());
-                    inpEdad.setText(Integer.toString(empleadoBuscado.getEdad()));
-                    inpDepartamento.setText(Integer.toString(empleadoBuscado.getIdDepartamento()));
-                    inpFechaIncorporacion.setText(empleadoBuscado.getFechaINC());
+                    outpNacionalidad.setText(empleadoBuscado.getNacionalidad());
+                    outpNombre.setText(empleadoBuscado.getNombre());
+                    outpEdad.setText(Integer.toString(empleadoBuscado.getEdad()));
+                    outpDepartamento.setText(Integer.toString(empleadoBuscado.getIdDepartamento()));
+                    outpFechaIncorporacion.setText(empleadoBuscado.getFechaINC());
                 } else {
                     JOptionPane.showMessageDialog(null,"No se encuentra ningun empleado con ese ID en la BBDD", "Error id", JOptionPane.ERROR_MESSAGE);
                     inpIDEmpleado.setText("");
@@ -173,9 +173,11 @@ public class Empleados extends JDialog {
         List<JButton> listaBtns = Arrays.asList(btnBuscar, btnReturn, btnAnyadir, btnBorrar);
         List<JPanel> listaPaneles = Arrays.asList(box_top, box_botones, WinEmpleados);
         List<JLabel> listaTexto = Arrays.asList(txtDepartamento, txtEdad, txtIdEmpleado, txtNacionalidad, txtFechaCreacion, txtNombre, txtTittle);
+        List<JTextField> listaOutPuts = Arrays.asList(outpDepartamento, outpEdad, outpNacionalidad, outpNombre, outpFechaIncorporacion);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
+        MarcosMusic.stylesOutPutText(listaOutPuts);
     }
 
     private void onOK() {

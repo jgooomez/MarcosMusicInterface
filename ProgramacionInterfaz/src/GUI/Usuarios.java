@@ -37,6 +37,8 @@ public class Usuarios extends JDialog {
     private JPasswordField outpPassword;
     private JLabel txtUsername;
     private JLabel txtPassword;
+    private JButton btnAddTarjeta;
+    private JButton btnAddSuscripcion;
 
     public JButton getBtnAddUser() {
         return btnAddUser;
@@ -88,19 +90,31 @@ public class Usuarios extends JDialog {
 
         // Añadir la funcionalidad de cada botón
         setListenersBtns();
+        btnAddTarjeta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JDialog anyadirTarjeta = new AnyadirTarjeta(Integer.parseInt(inpIdUsr.getText()));
+                anyadirTarjeta.setTitle("Vista de usuarios");
+                anyadirTarjeta.setSize(700, 500);
+                anyadirTarjeta.setLocationRelativeTo(null);
+                anyadirTarjeta.setVisible(true);
+            }
+        });
     }
 
     /**
      * Aplica estilos a los componentes gráficos de la ventana de diálogo.
      */
     private void styles() {
-        txtTittle.setFont(new Font("Calibri", Font.BOLD, 30));
+        txtTittle.setFont(new Font("Arial", Font.BOLD, 30));
         List<JLabel> listaTexto = Arrays.asList(txtTittle, txtNombre, txtEdad, txtIdUsr, txtNacionalidad, txtNumSeguidores, txtUsername, txtPassword);
-        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr);
+        List<JButton> listaBtns = Arrays.asList(btnBuscar, btnAddUser, btnCancel, btnDeleteUsr, btnAddTarjeta, btnAddSuscripcion);
         List<JPanel> listaPaneles = Arrays.asList(box_botones, box_top, WinUsuarios);
+        List<JTextField> listaOutPuts = Arrays.asList(outpEdad, outpNacionalidad, outpNombre, outpPassword, outpUsername, outpNumSeguidores);
         MarcosMusic.stylesBtns(listaBtns);
         MarcosMusic.stylesPanels(listaPaneles);
         MarcosMusic.stylesTexts(listaTexto);
+        MarcosMusic.stylesOutPutText(listaOutPuts);
     }
 
     /**
@@ -139,6 +153,13 @@ public class Usuarios extends JDialog {
                         if (eliminaReproduccionesUsuarios) {
                             if (DBManagerUsuarios.deleteUsuario(idUsuario)) {
                                 JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente el usuario con id: " + idUsuario, "Eliminacion completada", JOptionPane.INFORMATION_MESSAGE);
+                                inpIdUsr.setText("");
+                                outpEdad.setText("");
+                                outpNacionalidad.setText("");
+                                outpNombre.setText("");
+                                outpPassword.setText("");
+                                outpUsername.setText("");
+                                outpPassword.setText("");
                             } else {
                                 JOptionPane.showMessageDialog(null, "No se ha podido eliminar el usuario con id: " + idUsuario, "Error en la eliminacion", JOptionPane.ERROR_MESSAGE);
                             }

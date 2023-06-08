@@ -221,11 +221,11 @@ public class DBManagerTarjetas {
      * @param numeroTarjeta número de tarjeta a eliminar
      * @return verdadero si pudo eliminarla, falso en caso contrario
      */
-    public static boolean deleteTarjeta(int numeroTarjeta) {
+    public static boolean deleteTarjeta(String numeroTarjeta) {
         try {
             System.out.print("Eliminando tarjeta " + numeroTarjeta + "... ");
 
-            ResultSet rs = getTarjeta(numeroTarjeta);
+            ResultSet rs = getTarjeta(Integer.parseInt(numeroTarjeta));
 
             if (rs == null) {
                 System.out.println("ERROR. ResultSet null.");
